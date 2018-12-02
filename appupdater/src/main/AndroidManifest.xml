@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="ir.heydarii.appupdater"/>
+<manifest package="ir.heydarii.appupdater"/>
