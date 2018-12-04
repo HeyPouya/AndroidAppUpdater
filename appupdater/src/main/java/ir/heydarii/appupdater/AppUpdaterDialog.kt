@@ -11,8 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.heydarii.appupdater.pojomodel.Store
 import ir.heydarii.appupdater.pojomodel.UpdaterFragmentModel
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
-import ir.heydarii.appupdater.pojomodel.Utils
 import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
+import java.lang.Exception
+
 
 const val TITLE = "TITLE"
 const val DATA_LIST = "DATA_LIST"
@@ -62,14 +66,37 @@ class AppUpdaterDialog : DialogFragment() {
                 //TODO : download app
             }
             Store.GOOGLE_PLAY -> {
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${item.packageName}")))
+                } catch (e: Exception) {
+                    showUrlOrException(item, Store.GOOGLE_PLAY)
+                }
+
             }
             Store.CAFE_BAZAAR -> {
+
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("bazaar://details?id=${item.packageName}")
+                intent.setPackage("com.farsitel.bazaar")
+                try {
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    showUrlOrException(item, Store.CAFE_BAZAAR)
+                }
+
             }
             Store.MYKET -> {
             }
             Store.IRAN_APPS -> {
             }
         }
+    }
+
+    private fun showUrlOrException(item: UpdaterStoreList, store: Store) {
+        if (item.url.isNotEmpty())
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.url)))
+        else
+            Toast.makeText(context, "Please install ${store.name.toLowerCase()}", Toast.LENGTH_LONG).show()
     }
 
     companion object {

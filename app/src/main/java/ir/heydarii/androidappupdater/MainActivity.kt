@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val list = ArrayList<UpdaterStoreList>()
-        list.add(UpdaterStoreList(Store.CAFE_BAZAAR, "کافه بازار", R.mipmap.ic_launcher, "https://heydarii.ir", "Salam"))
+        list.add(UpdaterStoreList(Store.CAFE_BAZAAR, "کافه بازار", R.mipmap.ic_launcher, "", "Salam"))
         AppUpdaterDialog.getInstance("آپدیت جدید!", "کلی فیچر های جدید به اپ اضافه شده", list, true).show(supportFragmentManager, "tagz")
 
 

@@ -1,6 +1,7 @@
 package ir.heydarii.appupdater.pojomodel
 
 import android.os.Parcelable
+import ir.heydarii.appupdater.R
 import kotlinx.android.parcel.Parcelize
 
 
@@ -15,9 +16,9 @@ data class UpdaterFragmentModel(
 
 @Parcelize
 data class UpdaterStoreList(
-    val store: Store,
-    val title: String,
-    val icon: Int,
-    val url: String,
-    val packageName: String
+    val store: Store = Store.DIRECT_URL,
+    val title: String = "Store",
+    val icon: Int = R.drawable.ic_download,
+    val url: String = "",
+    val packageName: String = ""
 ) : Parcelable
