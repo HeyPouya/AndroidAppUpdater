@@ -6,7 +6,7 @@ import java.io.Serializable
 
 
 @Parcelize
-data class UpdaterFragmentModel(val title: String, val description: String, val list: List<UpdaterStoreList>) :
+data class UpdaterFragmentModel(val title: String, val description: String, val list: List<UpdaterStoreList>, val isForceUpdate: Boolean) :
     Parcelable
 
 @Parcelize

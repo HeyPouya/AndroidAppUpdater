@@ -18,6 +18,11 @@ const val DATA_LIST = "DATA_LIST"
 class AppUpdaterDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        val data = arguments?.getParcelable<UpdaterFragmentModel>(DATA_LIST)
+        val cancelableMode = data?.isForceUpdate
+        setDialogCancelable(cancelableMode)
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_app_updater_dialog, container, false)
     }
@@ -35,8 +40,11 @@ class AppUpdaterDialog : DialogFragment() {
         val title = data?.title
         val description = data?.description
         val list = data?.list
-
         setUpProperties(title, description, list)
+    }
+
+    private fun setDialogCancelable(cancelableMode: Boolean?) {
+        cancelableMode?.let { isCancelable = it }
     }
 
     private fun setUpProperties(title: String?, description: String?, list: List<UpdaterStoreList>?) {
@@ -49,11 +57,12 @@ class AppUpdaterDialog : DialogFragment() {
     companion object {
         private val fragment = AppUpdaterDialog()
 
-        fun getInstance(title: String = "", description: String = "", list: List<UpdaterStoreList>) {
+        fun getInstance(title: String = "", description: String = "", list: List<UpdaterStoreList>, isForce: Boolean = false): AppUpdaterDialog {
             val bundle = Bundle()
-            val data = UpdaterFragmentModel(title, description, list)
+            val data = UpdaterFragmentModel(title, description, list, !isForce)
             bundle.putParcelable(DATA_LIST, data)
             fragment.arguments = bundle
+            return fragment
         }
     }
 }
