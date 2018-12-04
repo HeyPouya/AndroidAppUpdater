@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ir.heydarii.appupdater.pojomodel.Store
 import ir.heydarii.appupdater.pojomodel.UpdaterFragmentModel
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
+import ir.heydarii.appupdater.pojomodel.Utils
 import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
 
 const val TITLE = "TITLE"
@@ -50,8 +52,24 @@ class AppUpdaterDialog : DialogFragment() {
     private fun setUpProperties(title: String?, description: String?, list: List<UpdaterStoreList>?) {
         txtTitle.text = title
         txtDescription.text = description
-        recycler.adapter = StoresRecyclerAdapter(list.orEmpty())
+        recycler.adapter = StoresRecyclerAdapter(list.orEmpty()) { onListListener(it) }
         recycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+    }
+
+    private fun onListListener(item: UpdaterStoreList) {
+        when (item.store) {
+            Store.DIRECT_URL -> {
+                //TODO : download app
+            }
+            Store.GOOGLE_PLAY -> {
+            }
+            Store.CAFE_BAZAAR -> {
+            }
+            Store.MYKET -> {
+            }
+            Store.IRAN_APPS -> {
+            }
+        }
     }
 
     companion object {

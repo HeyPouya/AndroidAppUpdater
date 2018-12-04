@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
 import kotlinx.android.synthetic.main.download_options_item.view.*
 
-class StoresRecyclerAdapter(private val list: List<UpdaterStoreList>) : RecyclerView.Adapter<StoresRecyclerAdapter.SoresViewHolder>() {
+class StoresRecyclerAdapter(private val list: List<UpdaterStoreList>, val listener: (UpdaterStoreList) -> Unit) : RecyclerView.Adapter<StoresRecyclerAdapter.SoresViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoresViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.download_options_item, parent, false)
-        return SoresViewHolder(view)
+        return SoresViewHolder(view, listener)
     }
 
     override fun getItemCount(): Int = list.size
@@ -20,10 +20,11 @@ class StoresRecyclerAdapter(private val list: List<UpdaterStoreList>) : Recycler
     }
 
 
-    class SoresViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class SoresViewHolder(val view: View, val listener: (UpdaterStoreList) -> Unit) : RecyclerView.ViewHolder(view) {
         fun onBind(item: UpdaterStoreList) {
             view.txtStoreTitle.text = item.title
             view.imgStore.setImageResource(item.icon)
+            view.setOnClickListener { listener(item) }
         }
 
     }

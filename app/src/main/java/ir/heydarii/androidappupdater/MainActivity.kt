@@ -3,6 +3,7 @@ package ir.heydarii.androidappupdater
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ir.heydarii.appupdater.AppUpdaterDialog
+import ir.heydarii.appupdater.pojomodel.Store
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +14,8 @@ class MainActivity : AppCompatActivity() {
 
 
         val list = ArrayList<UpdaterStoreList>()
-        AppUpdaterDialog.getInstance("Please Update", "This is the description", list, true).show(supportFragmentManager, "tagz")
+        list.add(UpdaterStoreList(Store.CAFE_BAZAAR, "کافه بازار", R.mipmap.ic_launcher, "https://heydarii.ir", "Salam"))
+        AppUpdaterDialog.getInstance("آپدیت جدید!", "کلی فیچر های جدید به اپ اضافه شده", list, true).show(supportFragmentManager, "tagz")
 
 
     }
