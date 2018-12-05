@@ -11,8 +11,7 @@ data class UpdaterFragmentModel(
     val description: String,
     val list: List<UpdaterStoreList>,
     val isForceUpdate: Boolean
-) :
-    Parcelable
+) : Parcelable
 
 @Parcelize
 data class UpdaterStoreList(
