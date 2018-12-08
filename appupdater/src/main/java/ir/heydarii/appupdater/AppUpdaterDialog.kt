@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import ir.heydarii.appupdater.directlink.DirectLinkDownload
 import ir.heydarii.appupdater.stores.CafeBazaarStore
 import ir.heydarii.appupdater.stores.GooglePlayStore
 import ir.heydarii.appupdater.stores.IranAppsStore
@@ -82,7 +83,7 @@ class AppUpdaterDialog : DialogFragment() {
     private fun onListListener(item: UpdaterStoreList) {
         when (item.store) {
             Store.DIRECT_URL -> {
-                //TODO : download app
+                DirectLinkDownload().getApk(item.url, context,fragmentManager)
             }
             Store.GOOGLE_PLAY -> {
                 GooglePlayStore().setStoreData(context, item)
@@ -100,14 +101,16 @@ class AppUpdaterDialog : DialogFragment() {
     }
 
     companion object {
+
+        // fragment variable to make this dialog singleton
         private val fragment = AppUpdaterDialog()
 
-        fun getInstance(
-            title: String = "",
-            description: String = "",
-            list: List<UpdaterStoreList>,
-            isForce: Boolean = false
-        ): AppUpdaterDialog {
+        /**
+         * get Instance method
+         */
+        fun getInstance(title: String = "", description: String = "", list: List<UpdaterStoreList>, isForce: Boolean = false): AppUpdaterDialog {
+
+            // bundle to add data to our dialog
             val bundle = Bundle()
             val data = UpdaterFragmentModel(title, description, list, !isForce)
             bundle.putParcelable(DATA_LIST, data)
