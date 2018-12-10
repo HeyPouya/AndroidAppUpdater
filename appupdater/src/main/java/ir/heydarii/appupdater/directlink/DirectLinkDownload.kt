@@ -15,6 +15,7 @@ import java.io.File
 
 var REQUEST_ID = -10L
 val DESTINATION = Environment.getExternalStorageDirectory().toString() + "/shahrdad/" + "shahrdad.apk"
+const val UPDATE_DOALOG_TAG = "UpdateDialog"
 
 class DirectLinkDownload() : BroadcastReceiver() {
 
@@ -45,7 +46,7 @@ class DirectLinkDownload() : BroadcastReceiver() {
             install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(install)
-        }else{
+        } else {
             val apkUri = Uri.fromFile(File(DESTINATION))
             val intent = Intent(Intent.ACTION_VIEW)
             intent.setDataAndType(apkUri, "application/vnd.android.package-archive")
@@ -89,7 +90,7 @@ class DirectLinkDownload() : BroadcastReceiver() {
 
     private fun showAlertDialog(fm: FragmentManager?) {
 
-        UpdateInProgressDialog().show(fm, "UpdateDialog")
+        UpdateInProgressDialog().show(fm, UPDATE_DOALOG_TAG)
     }
 
 }

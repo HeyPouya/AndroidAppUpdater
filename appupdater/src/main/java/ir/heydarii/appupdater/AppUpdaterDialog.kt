@@ -24,7 +24,6 @@ import java.lang.Exception
 
 
 //consts to use in this dialog
-const val TITLE = "TITLE"
 const val DATA_LIST = "DATA_LIST"
 
 class AppUpdaterDialog : DialogFragment() {
