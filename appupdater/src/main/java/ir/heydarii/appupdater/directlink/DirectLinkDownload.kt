@@ -53,9 +53,6 @@ class DirectLinkDownload() : BroadcastReceiver() {
      */
     private fun installApk(context: Context) {
 
-
-        Log.d("POUYA","${BuildConfig.APPLICATION_ID}.fileProvider.GenericFileProvider")
-
         // In android 7 and above
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val uri = FileProvider.getUriForFile(context, "${BuildConfig.APPLICATION_ID}.fileProvider.GenericFileProvider", File(DESTINATION))

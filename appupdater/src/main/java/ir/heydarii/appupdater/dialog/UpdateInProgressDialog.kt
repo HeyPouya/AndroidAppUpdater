@@ -9,6 +9,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
 import ir.heydarii.appupdater.R
 
+/**
+ * Dialog to show download progress to user
+ */
 class UpdateInProgressDialog : DialogFragment() {
 
     override fun onCreateView(
@@ -19,8 +22,9 @@ class UpdateInProgressDialog : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
 
+        //making width of dialog to match_parent
+        dialog?.window?.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
     }
 
 }
