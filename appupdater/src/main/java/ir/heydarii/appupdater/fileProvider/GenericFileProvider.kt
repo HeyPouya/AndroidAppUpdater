@@ -1,4 +1,4 @@
-package ir.heydarii.fileProvider
+package ir.heydarii.appupdater.fileProvider
 
 import androidx.core.content.FileProvider
 
