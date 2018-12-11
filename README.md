@@ -3,10 +3,10 @@
 
 [![](https://jitpack.io/v/SirLordPouya/LoadingFragment.svg)](https://jitpack.io/#SirLordPouya/LoadingFragment)
 [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
-[![Build Status](https://travis-ci.org/SirLordPouya/LoadingFragment.svg?branch=master)](https://travis-ci.org/SirLordPouya/LoadingFragment)
+[![Build Status](https://travis-ci.org/SirLordPouya/AndroidAppUpdater.svg?branch=master)](https://travis-ci.org/SirLordPouya/AndroidAppUpdater)
 
-
-A Simple LoadingFragment completely compatible with Kotlin and androidX
+App Updater is an library to show update dialog to your users, whenever a new version of your application is available.
+It is really simple and fully customizable.
 
 
 <img src="https://github.com/SirLordPouya/LoadingFragment/blob/master/loading_fragment.gif" width="400">
