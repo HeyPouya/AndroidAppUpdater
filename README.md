@@ -83,17 +83,16 @@ Users can download that apk directly on their phone, and after downloading finis
 
 ```
  AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade yo the new version.", list, true, font).show(supportFragmentManager, "TAG")
-
 ```
 parameters as the order you see in above line :
 
-1. Update Dialog Title
+1. Update dialog title
 
-2. Update Dialog Desciption
+2. Update dialog desciption
 
 3. List of stores you created in last step
 
-4. Is it a force update (is dialog cancelable or not)
+4. Is it a force update? (should dialog be cancelable or not)
 
 5. Typeface to customize font style
 
