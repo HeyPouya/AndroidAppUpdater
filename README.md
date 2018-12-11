@@ -5,8 +5,8 @@
 [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
 [![Build Status](https://travis-ci.org/SirLordPouya/AndroidAppUpdater.svg?branch=master)](https://travis-ci.org/SirLordPouya/AndroidAppUpdater)
 
-App Updater is an library to show update dialog to your users, whenever a new version of your application is available.
-It is really simple and fully customizable.
+App Updater is a library to show update dialog to your users, whenever a new version of your application is available.
+It is really easy-to-use and fully customizable.
 
 ##### It is fully integrated with Kotlin and androidX.
 
