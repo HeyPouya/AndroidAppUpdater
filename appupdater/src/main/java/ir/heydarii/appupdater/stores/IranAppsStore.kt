@@ -6,8 +6,11 @@ import android.net.Uri
 import ir.heydarii.appupdater.pojomodel.Store
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
 
-class IranAppsStore : Stores() {
 
+/**
+ * shows apk in bazaar store
+ */
+class IranAppsStore : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.setPackage("ir.tgbs.android.iranapp")

@@ -6,8 +6,10 @@ import android.net.Uri
 import ir.heydarii.appupdater.pojomodel.Store
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
 
+/**
+ * shows apk in bazaar store
+ */
 class CafeBazaarStore : Stores() {
-
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse("bazaar://details?id=${item.packageName}")

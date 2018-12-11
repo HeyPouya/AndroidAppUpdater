@@ -6,8 +6,10 @@ import android.net.Uri
 import ir.heydarii.appupdater.pojomodel.Store
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
 
+/**
+ * shows apk in bazaar store
+ */
 class MyketStore : Stores() {
-
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {
         val intent = Intent()
         intent.action = Intent.ACTION_VIEW
