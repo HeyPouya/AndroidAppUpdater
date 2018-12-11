@@ -1,8 +1,8 @@
 # Android App Updater [ specially for Iranian App Markets] 
 
 
-[![](https://jitpack.io/v/SirLordPouya/LoadingFragment.svg)](https://jitpack.io/#SirLordPouya/LoadingFragment)
-[![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
+[![](https://jitpack.io/v/SirLordPouya/AndroidAppUpdater.svg)](https://jitpack.io/#SirLordPouya/AndroidAppUpdater)
+[![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 [![Build Status](https://travis-ci.org/SirLordPouya/AndroidAppUpdater.svg?branch=master)](https://travis-ci.org/SirLordPouya/AndroidAppUpdater)
 
 App Updater is an library to show update dialog to your users, whenever a new version of your application is available.
@@ -14,7 +14,7 @@ It is really simple and fully customizable.
 
 ## Releases:
 
-#### Current release: [![](https://jitpack.io/v/SirLordPouya/LoadingFragment.svg)](https://jitpack.io/#SirLordPouya/LoadingFragment)
+#### Current release: [![](https://jitpack.io/v/SirLordPouya/AndroidAppUpdater.svg)](https://jitpack.io/#SirLordPouya/AndroidAppUpdater)
 
 
 ## Usage:
@@ -90,7 +90,7 @@ allprojects {
 Now add the dependency to your app build.gradle file:
 
 ```groovy
-   implementation 'com.github.SirLordPouya:LoadingFragment:1.0.0'
+	        implementation 'com.github.SirLordPouya:AndroidAppUpdater:1.0.0'
 ```
 
 ## License
