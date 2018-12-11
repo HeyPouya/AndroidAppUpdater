@@ -25,12 +25,12 @@ It is really easy-to-use and fully customizable.
 you can show users as many stores as you need, to download your application from there. to make a new store :
 
 ```
-  val list = ArrayList<UpdaterStoreList>()
+ val list = ArrayList<UpdaterStoreList>()
         
-  list.add(UpdaterStoreList(Store.DIRECT_URL, "Store Title", R.mipmap.ic_launcher , "https://url/app.apk", BuildConfig.APPLICATION_ID))
+ list.add(UpdaterStoreList(Store.DIRECT_URL, "Store Title", R.mipmap.ic_launcher , "https://url/app.apk", BuildConfig.APPLICATION_ID))
 ```
 
-parameters as the order you see in above line :
+parameters of UpdaterStoreList, as the order you see in above line :
 
 1. Store Type
 
@@ -77,12 +77,12 @@ Users can download that apk directly on their phone, and after downloading finis
 ##### Remember to get WRITE_EXTERNAL_STORAGE in runtime
 
 ```
-        list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launcher , "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
+ list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launcher , "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
 ```
 ### To Show UpdateDialog
 
 ```
-        AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade yo the new version.", list, true, font).show(supportFragmentManager, "TAG")
+ AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade yo the new version.", list, true, font).show(supportFragmentManager, "TAG")
 
 ```
 parameters as the order you see in above line :
@@ -116,7 +116,7 @@ allprojects {
 Now add the dependency to your app build.gradle file:
 
 ```groovy
-	    implementation 'com.github.SirLordPouya:AndroidAppUpdater:1.0.0'
+ implementation 'com.github.SirLordPouya:AndroidAppUpdater:1.0.0'
 ```
 
 ## License
