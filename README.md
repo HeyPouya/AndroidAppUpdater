@@ -50,7 +50,7 @@ parameters of UpdaterStoreList, as the order you see in above line :
 ```
 
 ### Stores
-currently library supports these markets to show your app update in them :
+this library currently supports only these markets :
 
 [Google Play](https://play.google.com)
 
