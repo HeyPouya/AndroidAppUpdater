@@ -1,35 +1,37 @@
 package ir.heydarii.androidappupdater
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Typeface
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import ir.heydarii.appupdater.AppUpdaterDialog
 import ir.heydarii.appupdater.pojomodel.Store
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
-import android.graphics.Typeface
 
-
+const val TAG = "showUpdateDialogTag"
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val font = Typeface.createFromAsset(getAssets(), "fonts/iran_sans_mobile.ttf")
 
+        //typeface to use in dialog
+        val font = Typeface.createFromAsset(assets, "fonts/iran_sans_mobile.ttf")
+
+        //make a list of stores
         val list = ArrayList<UpdaterStoreList>()
-        list.add(
-            UpdaterStoreList(
-                Store.DIRECT_URL,
-                "دانلود مستقیم",
-                url = "https://cafebazaar.ir/download/bazaar.apk",
-                packageName = "Salam"
-            )
-        )
-        list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "گوگل پلی", packageName = "Salam"))
-        list.add(UpdaterStoreList(Store.CAFE_BAZAAR, "کافه بازار", packageName = "Salam"))
-        list.add(UpdaterStoreList(Store.MYKET, "مایکت", packageName = "Salam"))
-        list.add(UpdaterStoreList(Store.IRAN_APPS, "ایران اپس", packageName = "Salam"))
-        AppUpdaterDialog.getInstance("آپدیت جدید!", "کلی فیچر های جدید به اپ اضافه شده", list, true, font)
-            .show(supportFragmentManager, "tagz")
+
+        //direct download
+        list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launcher , "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
+
+        //stores
+        list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Google Play", packageName = BuildConfig.APPLICATION_ID))
+        list.add(UpdaterStoreList(Store.CAFE_BAZAAR, "Cafe Bazaar", packageName = BuildConfig.APPLICATION_ID))
+        list.add(UpdaterStoreList(Store.MYKET, "MyKet", packageName = BuildConfig.APPLICATION_ID))
+        list.add(UpdaterStoreList(Store.IRAN_APPS, "Iran Apps", packageName = BuildConfig.APPLICATION_ID))
+
+
+        //creating update dialog
+        AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade yo the new version.", list, true, font).show(supportFragmentManager, "")
 
 
     }
