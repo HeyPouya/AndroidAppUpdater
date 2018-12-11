@@ -8,7 +8,7 @@
 App Updater is an library to show update dialog to your users, whenever a new version of your application is available.
 It is really simple and fully customizable.
 
-#### It is fully integrated with Kotlin and androidX.
+##### It is fully integrated with Kotlin and androidX.
 
 
 <img src="https://github.com/SirLordPouya/LoadingFragment/blob/master/loading_fragment.gif" width="400">
@@ -20,57 +20,82 @@ It is really simple and fully customizable.
 
 ## Usage:
 
-### To show loading
+### Stores
+
+you can show users as many stores as you need, to download your application from there. to make a new store :
 
 ```
-    private fun showLoading() {
-        LoadingFragment.getInstance()?.show(supportFragmentManager, "TAG")
-    }
-```
-### To hide loading dialog
-
-```
-    private fun hideLoading() {
-      LoadingFragment.getInstance()?.dismissDialog()
-    }
+  val list = ArrayList<UpdaterStoreList>()
+        
+  list.add(UpdaterStoreList(Store.DIRECT_URL, "Store Title", R.mipmap.ic_launcher , "https://url/app.apk", BuildConfig.APPLICATION_ID))
 ```
 
-### To change the animation
+parameters as the order you see in above line :
 
-LoadingFragment uses [lottie](https://github.com/airbnb/lottie-android) to show beatiful animations.
-to change the default animation:
+1. Store Type
 
-1- put your json file in assets folder
+2. Store Title That user Sees
 
-2- follow this code :
-```
-    private fun showLoading() {
-        LoadingFragment.getInstance(fileName = "your_file_name.json")?.show(supportFragmentManager, "TAG")
-    }
-```
-### To change cancelable
+3. Icon of Store that user sees
 
-```
-    private fun showLoading() {
-        LoadingFragment.getInstance(isCancelable = true)?.show(supportFragmentManager, "TAG")
-    }
-```
+4. An url to show the user if the store is not installed in user's device
+
+5. Package name of your application
 
 
-## Note : to use this library with java
+##### or you can ommit adding some properties in Kotlin.  like :
 
 ```
-    private void showLoading() {
-        LoadingFragment.Companion.getInstance("loading.json",false).show(getSupportFragmentManager(),"TAG");
-    }
+  list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Download From Google Play", packageName = BuildConfig.APPLICATION_ID))
 ```
 
+### Stores
+currently library supports these markets to show your app update in them :
+
+[Google Play](https://play.google.com)
+
+[CafeBazaar](https://cafebazaar.ir)
+
+[IranApps](https://iranapps.ir)
+
+[Myket](https://myket.ir/)
+
+To Select an Store you should use :
+
 ```
-    private void hideLoading() {
-        LoadingFragment.Companion.getInstance("loading.json",false).dismissDialog();
-    }
+ Store.GOOGLE_PLAY
+ Store.CAFE_BAZAAR
+ Store.MYKET
+ Store.IRAN_APPS
 ```
 
+### Direct Download
+
+you can also make as many direct apk download link as you need to show to your user.
+Users can download that apk directly on their phone, and after downloading finished, the install page will be shown to the user.
+
+##### Remember to get WRITE_EXTERNAL_STORAGE in runtime
+
+```
+        list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launcher , "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
+```
+### To Show UpdateDialog
+
+```
+        AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade yo the new version.", list, true, font).show(supportFragmentManager, "TAG")
+
+```
+parameters as the order you see in above line :
+
+1. Update Dialog Title
+
+2. Update Dialog Desciption
+
+3. List of stores you created in last step
+
+4. Is it a force update (is dialog cancelable or not)
+
+5. Typeface to customize font style
 
 
 ## Download
