@@ -13,6 +13,7 @@ import ir.heydarii.appupdater.pojomodel.UpdaterFragmentModel
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
 import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.widget.Toast
 import ir.heydarii.appupdater.directlink.DirectLinkDownload
@@ -20,6 +21,7 @@ import ir.heydarii.appupdater.stores.CafeBazaarStore
 import ir.heydarii.appupdater.stores.GooglePlayStore
 import ir.heydarii.appupdater.stores.IranAppsStore
 import ir.heydarii.appupdater.stores.MyketStore
+import ir.heydarii.appupdater.utils.Utils
 import java.lang.Exception
 
 
@@ -28,6 +30,7 @@ const val DATA_LIST = "DATA_LIST"
 
 class AppUpdaterDialog : DialogFragment() {
 
+    var typeface: Typeface? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         //setting isCancelable
@@ -70,6 +73,10 @@ class AppUpdaterDialog : DialogFragment() {
      * sets title , description and stores list
      */
     private fun setUpProperties(title: String?, description: String?, list: List<UpdaterStoreList>?) {
+        if (Utils.typeface != null) {
+            txtTitle.typeface = Utils.typeface
+            txtDescription.typeface = Utils.typeface
+        }
         txtTitle.text = title
         txtDescription.text = description
         recycler.adapter = StoresRecyclerAdapter(list.orEmpty()) { onListListener(it) }
@@ -82,7 +89,7 @@ class AppUpdaterDialog : DialogFragment() {
     private fun onListListener(item: UpdaterStoreList) {
         when (item.store) {
             Store.DIRECT_URL -> {
-                DirectLinkDownload().getApk(item.url, context,fragmentManager)
+                DirectLinkDownload().getApk(item.url, context, fragmentManager)
             }
             Store.GOOGLE_PLAY -> {
                 GooglePlayStore().setStoreData(context, item)
@@ -107,7 +114,18 @@ class AppUpdaterDialog : DialogFragment() {
         /**
          * get Instance method
          */
-        fun getInstance(title: String = "", description: String = "", list: List<UpdaterStoreList>, isForce: Boolean = false): AppUpdaterDialog {
+        fun getInstance(
+            title: String? = "",
+            description: String? = "",
+            list: List<UpdaterStoreList>,
+            isForce: Boolean = false,
+            typeface: Typeface? = null
+        ): AppUpdaterDialog {
+
+
+            //set typeface in utils class to use later in application
+            Utils.typeface = typeface
+
 
             // bundle to add data to our dialog
             val bundle = Bundle()

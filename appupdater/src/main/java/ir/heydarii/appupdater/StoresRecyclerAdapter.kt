@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
+import ir.heydarii.appupdater.utils.Utils
 import kotlinx.android.synthetic.main.download_options_item.view.*
 
 class StoresRecyclerAdapter(private val list: List<UpdaterStoreList>, val listener: (UpdaterStoreList) -> Unit) :
@@ -23,6 +24,8 @@ class StoresRecyclerAdapter(private val list: List<UpdaterStoreList>, val listen
     class SoresViewHolder(val view: View, val listener: (UpdaterStoreList) -> Unit) : RecyclerView.ViewHolder(view) {
         fun onBind(item: UpdaterStoreList) {
             view.txtStoreTitle.text = item.title
+            if (Utils.typeface != null)
+                view.txtStoreTitle.typeface = Utils.typeface
             view.imgStore.setImageResource(item.icon)
             view.setOnClickListener { listener(item) }
         }
