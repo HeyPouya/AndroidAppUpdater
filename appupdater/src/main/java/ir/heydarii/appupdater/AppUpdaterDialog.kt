@@ -16,6 +16,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import ir.heydarii.appupdater.directlink.DirectLinkDownload
 import ir.heydarii.appupdater.stores.CafeBazaarStore
 import ir.heydarii.appupdater.stores.GooglePlayStore
@@ -42,6 +43,12 @@ class AppUpdaterDialog : DialogFragment() {
         return inflater.inflate(R.layout.fragment_app_updater_dialog, container, false)
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        //make dialog's width matchParent
+        dialog?.window?.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -114,18 +121,10 @@ class AppUpdaterDialog : DialogFragment() {
         /**
          * get Instance method
          */
-        fun getInstance(
-            title: String? = "",
-            description: String? = "",
-            list: List<UpdaterStoreList>,
-            isForce: Boolean = false,
-            typeface: Typeface? = null
-        ): AppUpdaterDialog {
-
+        fun getInstance(title: String? = "", description: String? = "", list: List<UpdaterStoreList>, isForce: Boolean = false, typeface: Typeface? = null): AppUpdaterDialog {
 
             //set typeface in utils class to use later in application
             Utils.typeface = typeface
-
 
             // bundle to add data to our dialog
             val bundle = Bundle()
