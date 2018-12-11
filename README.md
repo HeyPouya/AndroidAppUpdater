@@ -115,7 +115,7 @@ allprojects {
 Now add the dependency to your app build.gradle file:
 
 ```groovy
- implementation 'com.github.SirLordPouya:AndroidAppUpdater:1.0.0'
+ implementation 'com.github.SirLordPouya:AndroidAppUpdater:1.1.0'
 ```
 
 ## License
