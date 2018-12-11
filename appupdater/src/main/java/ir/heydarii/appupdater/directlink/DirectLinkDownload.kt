@@ -1,5 +1,6 @@
 package ir.heydarii.appupdater.directlink
 
+import android.Manifest
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentManager
 import ir.heydarii.appupdater.BuildConfig
 import ir.heydarii.appupdater.R
 import ir.heydarii.appupdater.dialog.UpdateInProgressDialog
+import ir.heydarii.appupdater.utils.Utils
 import java.io.File
 
 
@@ -55,7 +57,11 @@ class DirectLinkDownload() : BroadcastReceiver() {
 
         // In android 7 and above
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            val uri = FileProvider.getUriForFile(context, "${BuildConfig.APPLICATION_ID}.fileProvider.GenericFileProvider", File(DESTINATION))
+            val uri = FileProvider.getUriForFile(
+                context,
+                "${BuildConfig.APPLICATION_ID}.fileProvider.GenericFileProvider",
+                File(DESTINATION)
+            )
             val install = Intent(Intent.ACTION_INSTALL_PACKAGE)
             install.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             install.data = uri
@@ -75,8 +81,8 @@ class DirectLinkDownload() : BroadcastReceiver() {
 
     fun getApk(url: String, context: Context?, fm: FragmentManager?) {
 
-//        if (Utils.isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE, context))
-        downloadApk(url, context, fm)
+        if (Utils.isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE, context))
+            downloadApk(url, context, fm)
     }
 
     /**
