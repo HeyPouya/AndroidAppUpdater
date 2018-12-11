@@ -1,2 +1,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="ir.heydarii.appupdater"/>
+    package="ir.heydarii.appupdater">
+
+    <application>
+        <receiver
+            android:name=".directlink.DirectLinkDownload"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+        <provider
+            android:name="ir.heydarii.appupdater.fileProvider.GenericFileProvider"
+            android:authorities="ir.heydarii.appupdater.fileProvider.GenericFileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
+    </application>
+</manifest>

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">App Updater</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_wait">Please wait</string>
+    <string name="downloading_new_version">Downloading new version...</string>
+    <string name="download_notification_title">Downloading...</string>
+    <string name="download_notification_description">Downloading new version</string>
+    <string name="please_install">Please install</string>
 </resources>
