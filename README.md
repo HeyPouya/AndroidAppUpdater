@@ -71,10 +71,10 @@ To Select an Store you should use :
 
 ### Direct Download
 
-you can also make as many direct apk download link as you need to show to your user.
-Users can download that apk directly on their phone, and after downloading finished, the install page will be shown to the user.
+you can also make as many direct apk download links as you need.
+Users can download that apk directly on their phone, and after downloading finishes, the install page will be shown to the user.
 
-##### Remember to get WRITE_EXTERNAL_STORAGE in runtime
+##### Remember to get WRITE_EXTERNAL_STORAGE premission in runtime
 
 ```
  list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launcher , "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
