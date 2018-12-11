@@ -6,6 +6,7 @@
 [![Build Status](https://travis-ci.org/SirLordPouya/AndroidAppUpdater.svg?branch=master)](https://travis-ci.org/SirLordPouya/AndroidAppUpdater)
 
 App Updater is an library to show update dialog to your users, whenever a new version of your application is available.
+
 It is really simple and fully customizable.
 
 
