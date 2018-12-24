@@ -1,4 +1,4 @@
-# Android App Updater [ specially for Iranian App Markets] 
+# Android App Updater [specially for Iranian App markets] 
 
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Easy%20App%20Updater-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7388)
@@ -116,7 +116,7 @@ allprojects {
 Now add the dependency to your app build.gradle file:
 
 ```groovy
- implementation 'com.github.SirLordPouya:AndroidAppUpdater:1.1.0'
+ implementation 'com.github.SirLordPouya:AndroidAppUpdater:1.2.0'
 ```
 
 ## License
