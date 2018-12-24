@@ -83,6 +83,9 @@ class DirectLinkDownload() : BroadcastReceiver() {
 
         if (Utils.isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE, context))
             downloadApk(url, context, fm)
+        else
+            Log.e("AndroidAppUpdater","Please provide WRITE_EXTERNAL_STORAGE first")
+
     }
 
     /**
