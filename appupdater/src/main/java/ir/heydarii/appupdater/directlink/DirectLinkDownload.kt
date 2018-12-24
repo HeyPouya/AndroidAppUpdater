@@ -59,7 +59,7 @@ class DirectLinkDownload() : BroadcastReceiver() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val uri = FileProvider.getUriForFile(
                 context,
-                "${BuildConfig.APPLICATION_ID}.fileProvider.GenericFileProvider",
+                "${context.packageName}.fileProvider.GenericFileProvider",
                 File(DESTINATION)
             )
             val install = Intent(Intent.ACTION_INSTALL_PACKAGE)
