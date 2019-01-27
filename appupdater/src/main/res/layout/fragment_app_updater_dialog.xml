@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -26,7 +25,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
-        android:textColor="#4d4d4d"
+        android:textColor="@color/appupdater_text_colors"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +39,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
-        android:textColor="#4d4d4d"
+        android:textColor="@color/appupdater_text_colors"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
@@ -66,29 +65,29 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerDirect">
 
         <View
-            android:alpha="0.3"
             android:layout_width="100dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:background="#4d4d4d" />
+            android:alpha="0.3"
+            android:background="@color/appupdater_text_colors" />
 
         <TextView
             android:id="@+id/txtOr"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:gravity="center"
             android:text="@string/or"
-            android:textColor="#4d4d4d" />
+            android:textColor="@color/appupdater_text_colors"
+            android:textSize="16sp" />
 
         <View
-            android:alpha="0.3"
             android:layout_width="100dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
+            android:alpha="0.3"
             android:background="#4d4d4d" />
     </LinearLayout>
 

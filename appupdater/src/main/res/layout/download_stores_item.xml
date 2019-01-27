@@ -5,8 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="48dp"
-    android:layout_marginEnd="48dp"
     android:layout_marginTop="32dp"
+    android:layout_marginEnd="48dp"
     android:minHeight="64dp">
 
 
@@ -20,13 +20,13 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:textSize="14sp"
         android:id="@+id/txtStoreTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:textColor="#4d4d4d"
+        android:textColor="@color/appupdater_text_colors"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgStore" />

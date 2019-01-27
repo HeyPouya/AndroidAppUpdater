@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
 import android.graphics.Typeface
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import ir.heydarii.appupdater.directlink.DirectLinkDownload
 import ir.heydarii.appupdater.stores.CafeBazaarStore
 import ir.heydarii.appupdater.stores.GooglePlayStore
@@ -76,6 +77,10 @@ class AppUpdaterDialog : DialogFragment() {
      */
     private fun setUpProperties(title: String?, description: String?, list: List<UpdaterStoreList>?) {
 
+        txtTitle.text = title
+        txtDescription.text = description
+
+
         //setting typefaces for text views
         if (Utils.typeface != null) {
             txtTitle.typeface = Utils.typeface
@@ -86,12 +91,31 @@ class AppUpdaterDialog : DialogFragment() {
         val isStoreAndDirectAvailable = checkIfDirectAndStoreAvailable(list)
         hideOrLayoutIfNeeded(isStoreAndDirectAvailable)
 
-        txtTitle.text = title
-        txtDescription.text = description
-        recyclerStores.adapter = StoresRecyclerAdapter(list.orEmpty()) { onListListener(it) }
-        recyclerStores.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+        setUpBothRecyclers(list)
     }
 
+    private fun setUpBothRecyclers(list: List<UpdaterStoreList>?) {
+        val directLinks = ArrayList<UpdaterStoreList>()
+        val storeLinks = ArrayList<UpdaterStoreList>()
+
+        list?.forEach {
+            if (it.store == Store.DIRECT_URL)
+                directLinks.add(it)
+            else
+                storeLinks.add(it)
+        }
+
+        recyclerDirect.adapter = DirectRecyclerAdapter(directLinks.orEmpty()) { onListListener(it) }
+        recyclerDirect.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+
+        recyclerStores.adapter = StoresRecyclerAdapter(storeLinks.orEmpty()) { onListListener(it) }
+        recyclerStores.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+
+    }
+
+    /**
+     * hide OrLayout if needed
+     */
     private fun hideOrLayoutIfNeeded(storeAndDirectAvailable: Boolean) {
         if (storeAndDirectAvailable)
             linearLayout.visibility = View.VISIBLE
@@ -101,7 +125,7 @@ class AppUpdaterDialog : DialogFragment() {
 
     /**
      * check if there is no direct link or there is no stores,
-     * hide Or layout
+     *
      */
     private fun checkIfDirectAndStoreAvailable(list: List<UpdaterStoreList>?): Boolean {
         var isDirectDownloadAvailable = false
