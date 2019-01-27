@@ -17,6 +17,7 @@ import android.graphics.Typeface
 import android.net.Uri
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.GridLayoutManager
 import ir.heydarii.appupdater.directlink.DirectLinkDownload
 import ir.heydarii.appupdater.stores.CafeBazaarStore
 import ir.heydarii.appupdater.stores.GooglePlayStore
@@ -31,7 +32,6 @@ const val DATA_LIST = "DATA_LIST"
 
 class AppUpdaterDialog : DialogFragment() {
 
-    var typeface: Typeface? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         //setting isCancelable
@@ -87,7 +87,7 @@ class AppUpdaterDialog : DialogFragment() {
         txtTitle.text = title
         txtDescription.text = description
         recycler.adapter = StoresRecyclerAdapter(list.orEmpty()) { onListListener(it) }
-        recycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recycler.layoutManager = GridLayoutManager(context, 2,RecyclerView.VERTICAL, false)
     }
 
     /**
