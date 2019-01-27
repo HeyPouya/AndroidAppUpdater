@@ -83,19 +83,27 @@ class AppUpdaterDialog : DialogFragment() {
             txtOr.typeface = Utils.typeface
         }
 
-        checkOrLayout(list)
+        val isStoreAndDirectAvailable = checkIfDirectAndStoreAvailable(list)
+        hideOrLayoutIfNeeded(isStoreAndDirectAvailable)
 
         txtTitle.text = title
         txtDescription.text = description
         recycler.adapter = StoresRecyclerAdapter(list.orEmpty()) { onListListener(it) }
-        recycler.layoutManager = GridLayoutManager(context, 2,RecyclerView.VERTICAL, false)
+        recycler.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+    }
+
+    private fun hideOrLayoutIfNeeded(storeAndDirectAvailable: Boolean) {
+        if (storeAndDirectAvailable)
+            linearLayout.visibility = View.VISIBLE
+        else
+            linearLayout.visibility = View.INVISIBLE
     }
 
     /**
      * check if there is no direct link or there is no stores,
      * hide Or layout
      */
-    private fun checkOrLayout(list: List<UpdaterStoreList>?) {
+    private fun checkIfDirectAndStoreAvailable(list: List<UpdaterStoreList>?): Boolean {
         var isDirectDownloadAvailable = false
         var isStoreDownloadAvailable = false
 
@@ -113,11 +121,7 @@ class AppUpdaterDialog : DialogFragment() {
 
         }
 
-        if (isDirectDownloadAvailable && isStoreDownloadAvailable)
-            linearLayout.visibility = View.VISIBLE
-        else
-            linearLayout.visibility = View.INVISIBLE
-
+        return isDirectDownloadAvailable && isStoreDownloadAvailable
 
     }
 
