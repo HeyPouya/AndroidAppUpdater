@@ -83,6 +83,7 @@ class AppUpdaterDialog : DialogFragment() {
         if (Utils.typeface != null) {
             txtTitle.typeface = Utils.typeface
             txtDescription.typeface = Utils.typeface
+            txtOr.typeface = Utils.typeface
         }
         txtTitle.text = title
         txtDescription.text = description

@@ -5,4 +5,5 @@
     <string name="download_notification_title">Downloading...</string>
     <string name="download_notification_description">Downloading new version</string>
     <string name="please_install">Please install </string>
+    <string name="or">or</string>
 </resources>
