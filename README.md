@@ -7,7 +7,7 @@
 [![Build Status](https://travis-ci.org/SirLordPouya/AndroidAppUpdater.svg?branch=master)](https://travis-ci.org/SirLordPouya/AndroidAppUpdater)
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/mobile-phone.png" width="250">
+<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/icon.png" width="250">
 </p>
 
 App Updater is a library to show update dialog to your users, whenever a new version of your application is available.
@@ -131,4 +131,4 @@ LoadingFragment is released under the Apache License 2.0. See LICENSE for detail
 Copyright (c) 2018 Pouya Heydari
 
 ```
-<div>Library's Icon is made by<a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+<div>Designed by <a href="https://dribbble.com/Amir-G" title="Amir Gerdakane">Amir Gerdakane</a>
