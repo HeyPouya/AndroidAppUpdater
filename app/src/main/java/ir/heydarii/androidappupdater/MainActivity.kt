@@ -23,19 +23,19 @@ class MainActivity : AppCompatActivity() {
         val list = ArrayList<UpdaterStoreList>()
 
         //direct download
-        list.add(UpdaterStoreList(Store.DIRECT_URL, "دانلود مستقیم ۱", R.mipmap.ic_launcher, "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
-        list.add(UpdaterStoreList(Store.DIRECT_URL, "دانلود مستقیم ۲", R.mipmap.ic_launcher, "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
+        list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download 1", R.mipmap.ic_launcher, "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
+        list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download 2", R.mipmap.ic_launcher, "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
 
 
         //stores
-        list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "گوگل پلی", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_google_play))
-        list.add(UpdaterStoreList(Store.CAFE_BAZAAR, "کافه بازار", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_bazar))
-        list.add(UpdaterStoreList(Store.MYKET, "مایکت", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_myket))
-        list.add(UpdaterStoreList(Store.IRAN_APPS, "ایران اپس", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_iran_apps))
+        list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Play", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_google_play))
+        list.add(UpdaterStoreList(Store.CAFE_BAZAAR, "Bazaar", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_bazar))
+        list.add(UpdaterStoreList(Store.MYKET, "Myket", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_myket))
+        list.add(UpdaterStoreList(Store.IRAN_APPS, "Iran apps", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_iran_apps))
 
 
         //creating update dialog
-        AppUpdaterDialog.getInstance("آپدیت جدید", "یه عالمه فیچرهای جدید تو اپمون گذاشتیم. اپت رو آپدیت کن!", list, true, font).show(supportFragmentManager, TAG)
+        AppUpdaterDialog.getInstance("New Update !", "Lots of new features! Update right now", list, true, font).show(supportFragmentManager, TAG)
 
 
     }

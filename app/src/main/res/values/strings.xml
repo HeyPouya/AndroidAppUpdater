@@ -2,5 +2,5 @@
     <string name="app_name">Android App Updater</string>
     <string name="please_wait">لطفا صبر کنید</string>
     <string name="downloading_new_version">درحال دانلود آخرین نسخه...</string>
-    <string name="or">یا</string>
+    <string name="or">or</string>
 </resources>
