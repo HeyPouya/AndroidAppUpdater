@@ -15,9 +15,13 @@ class Utils {
          * Check if application has a permission or not
          */
         fun isPermissionGranted(permission: String, context: Context?): Boolean {
-            context?.let { return ContextCompat.checkSelfPermission(it, permission) == PackageManager.PERMISSION_GRANTED }
+            return if (context != null) {
+                ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
+            } else
+                return false
         }
 
-        var typeface : Typeface? = null
+        var typeface: Typeface? = null
     }
+
 }
