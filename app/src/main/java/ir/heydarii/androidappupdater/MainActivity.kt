@@ -23,10 +23,9 @@ class MainActivity : AppCompatActivity() {
         val list = ArrayList<UpdaterStoreList>()
 
         //direct download
-        list.add(UpdaterStoreList(Store.DIRECT_URL, "دانلود مستقیم", R.mipmap.ic_launcher, "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
-        list.add(UpdaterStoreList(Store.DIRECT_URL, "دانلود مستقیم", R.mipmap.ic_launcher, "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
-        list.add(UpdaterStoreList(Store.DIRECT_URL, "دانلود مستقیم", R.mipmap.ic_launcher, "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
-        list.add(UpdaterStoreList(Store.DIRECT_URL, "دانلود مستقیم", R.mipmap.ic_launcher, "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
+        list.add(UpdaterStoreList(Store.DIRECT_URL, "دانلود مستقیم ۱", R.mipmap.ic_launcher, "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
+        list.add(UpdaterStoreList(Store.DIRECT_URL, "دانلود مستقیم ۲", R.mipmap.ic_launcher, "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
+
 
         //stores
         list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "گوگل پلی", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_google_play))
