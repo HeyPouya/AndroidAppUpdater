@@ -6,16 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ir.heydarii.appupdater.pojomodel.Store
 import ir.heydarii.appupdater.pojomodel.UpdaterFragmentModel
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
 import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
-import android.content.Intent
 import android.graphics.Typeface
-import android.net.Uri
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import ir.heydarii.appupdater.directlink.DirectLinkDownload
@@ -24,7 +20,6 @@ import ir.heydarii.appupdater.stores.GooglePlayStore
 import ir.heydarii.appupdater.stores.IranAppsStore
 import ir.heydarii.appupdater.stores.MyketStore
 import ir.heydarii.appupdater.utils.Utils
-import java.lang.Exception
 
 
 //consts to use in this dialog
@@ -80,15 +75,50 @@ class AppUpdaterDialog : DialogFragment() {
      * sets title , description and stores list
      */
     private fun setUpProperties(title: String?, description: String?, list: List<UpdaterStoreList>?) {
+
+        //setting typefaces for text views
         if (Utils.typeface != null) {
             txtTitle.typeface = Utils.typeface
             txtDescription.typeface = Utils.typeface
             txtOr.typeface = Utils.typeface
         }
+
+        checkOrLayout(list)
+
         txtTitle.text = title
         txtDescription.text = description
         recycler.adapter = StoresRecyclerAdapter(list.orEmpty()) { onListListener(it) }
         recycler.layoutManager = GridLayoutManager(context, 2,RecyclerView.VERTICAL, false)
+    }
+
+    /**
+     * check if there is no direct link or there is no stores,
+     * hide Or layout
+     */
+    private fun checkOrLayout(list: List<UpdaterStoreList>?) {
+        var isDirectDownloadAvailable = false
+        var isStoreDownloadAvailable = false
+
+        //check if direct download is included in the list
+        list?.forEach {
+            if (it.store == Store.DIRECT_URL)
+                isDirectDownloadAvailable = true
+        }
+
+        //check if the store download is included in the list
+        list?.forEach {
+            for (i in Store.values())
+                if (it.store == i && i != Store.DIRECT_URL)
+                    isStoreDownloadAvailable = true
+
+        }
+
+        if (isDirectDownloadAvailable && isStoreDownloadAvailable)
+            linearLayout.visibility = View.VISIBLE
+        else
+            linearLayout.visibility = View.INVISIBLE
+
+
     }
 
     /**
