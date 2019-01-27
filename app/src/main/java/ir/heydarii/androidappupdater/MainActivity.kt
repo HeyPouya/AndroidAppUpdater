@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //creating update dialog
-        AppUpdaterDialog.getInstance("آپدیت جدید!!!!", "یه عالمه عیچرهای جدید تو اپمون گذاشتیم. اپت رو آپدیت کن!", list, true, font).show(supportFragmentManager, TAG)
+        AppUpdaterDialog.getInstance("آپدیت جدید", "یه عالمه فیچرهای جدید تو اپمون گذاشتیم. اپت رو آپدیت کن!", list, true, font).show(supportFragmentManager, TAG)
 
 
     }
