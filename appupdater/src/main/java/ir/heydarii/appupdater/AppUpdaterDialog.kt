@@ -88,8 +88,8 @@ class AppUpdaterDialog : DialogFragment() {
 
         txtTitle.text = title
         txtDescription.text = description
-        recycler.adapter = StoresRecyclerAdapter(list.orEmpty()) { onListListener(it) }
-        recycler.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+        recyclerStores.adapter = StoresRecyclerAdapter(list.orEmpty()) { onListListener(it) }
+        recyclerStores.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
     }
 
     private fun hideOrLayoutIfNeeded(storeAndDirectAvailable: Boolean) {
