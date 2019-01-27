@@ -17,7 +17,7 @@ data class UpdaterFragmentModel(
 data class UpdaterStoreList(
     val store: Store = Store.DIRECT_URL,
     val title: String = "Store",
-    val icon: Int = R.drawable.ic_download,
+    val icon: Int = R.drawable.appupdater_ic_cloud,
     val url: String = "",
     val packageName: String = ""
 ) : Parcelable
