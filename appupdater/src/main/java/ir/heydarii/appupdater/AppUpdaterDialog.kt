@@ -2,29 +2,28 @@ package ir.heydarii.appupdater
 
 
 import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ir.heydarii.appupdater.directlink.DirectLinkDownload
 import ir.heydarii.appupdater.pojomodel.Store
 import ir.heydarii.appupdater.pojomodel.UpdaterFragmentModel
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
-import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
-import android.graphics.Typeface
-import android.graphics.drawable.ColorDrawable
-import android.view.Window
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import ir.heydarii.appupdater.directlink.DirectLinkDownload
 import ir.heydarii.appupdater.stores.CafeBazaarStore
 import ir.heydarii.appupdater.stores.GooglePlayStore
 import ir.heydarii.appupdater.stores.IranAppsStore
 import ir.heydarii.appupdater.stores.MyketStore
 import ir.heydarii.appupdater.utils.Utils
+import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
 
 
 //consts to use in this dialog
@@ -94,6 +93,7 @@ class AppUpdaterDialog : DialogFragment() {
             txtTitle.typeface = Utils.typeface
             txtDescription.typeface = Utils.typeface
             txtOr.typeface = Utils.typeface
+            txtStore.typeface = Utils.typeface
         }
 
         val isStoreAndDirectAvailable = checkIfDirectAndStoreAvailable(list)

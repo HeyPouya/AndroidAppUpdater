@@ -102,10 +102,11 @@
                         android:layout_height="1dp"
                         android:layout_gravity="center"
                         android:alpha="0.3"
-                        android:background="#4d4d4d" />
+                        android:background="@color/appupdater_text_colors" />
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/txtStore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
