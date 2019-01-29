@@ -107,6 +107,19 @@ In strings file, add these lines :
     <string name="download_from_store">Download from store</string>
 ```
 
+### To use default icons
+
+I have added default icons of iranian store in the app.
+if you like to use them, you can find them like :
+
+```
+R.drawable.appupdater_ic_google_play
+R.drawable.appupdater_ic_bazar
+R.drawable.appupdater_ic_myket
+R.drawable.appupdater_ic_iran_apps
+```
+
+
 ## Download
 
 #### Adding the depencency
