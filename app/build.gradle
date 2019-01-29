@@ -10,8 +10,8 @@ android {
         applicationId "ir.heydarii.androidappupdater"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 120
-        versionName "1.2.0"
+        versionCode 200
+        versionName "2.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -29,7 +29,7 @@ dependencies {
     implementation project(':appupdater')
 
     //kotlin dependency
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //support dependency
     implementation 'com.google.android.material:material:1.0.0'
