@@ -136,4 +136,4 @@ LoadingFragment is released under the Apache License 2.0. See LICENSE for detail
 Copyright (c) 2018 Pouya Heydari
 
 ```
-<div>Library's icon and style has designed by <a href="https://dribbble.com/Amir-G" title="Amir Gerdakane">Amir Gerdakane</a>
+#### <div>Library's icon and style has designed by <a href="https://dribbble.com/Amir-G" title="Amir Gerdakane">Amir Gerdakane</a>
