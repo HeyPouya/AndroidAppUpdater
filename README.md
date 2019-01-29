@@ -109,7 +109,8 @@ In strings file, add these lines :
 
 ### To use default icons
 
-I have added default icons of iranian store in the app.
+I have added default icons of iranian stores in the app.
+
 if you like to use them, you can find them like :
 
 ```
