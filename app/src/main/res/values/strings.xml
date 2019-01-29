@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Android App Updater</string>
-    <string name="please_wait">لطفا صبر کنید</string>
-    <string name="downloading_new_version">درحال دانلود آخرین نسخه...</string>
-    <string name="or">یا</string>
-    <string name="download_from_store">دانلود از طریق فروشگاه</string>
+    <!--<string name="please_wait">لطفا صبر کنید</string>-->
+    <!--<string name="downloading_new_version">درحال دانلود آخرین نسخه...</string>-->
+    <!--<string name="or">یا</string>-->
+    <!--<string name="download_from_store">دانلود از طریق فروشگاه</string>-->
 </resources>
