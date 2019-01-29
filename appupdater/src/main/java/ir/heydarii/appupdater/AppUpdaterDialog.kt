@@ -1,6 +1,7 @@
 package ir.heydarii.appupdater
 
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,9 @@ import ir.heydarii.appupdater.pojomodel.UpdaterFragmentModel
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
 import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
 import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
+import android.view.Window
+import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,6 +39,10 @@ class AppUpdaterDialog : DialogFragment() {
         val cancelableMode = data?.isForceUpdate
         setDialogCancelable(cancelableMode)
 
+        // Set transparent background and no title
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_app_updater_dialog, container, false)
     }
@@ -43,7 +51,7 @@ class AppUpdaterDialog : DialogFragment() {
         super.onStart()
 
         //make dialog's width matchParent
-        dialog?.window?.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -44,7 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center"
                 android:textColor="@color/appupdater_text_colors"
@@ -54,7 +55,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerDirect"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -63,40 +64,57 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerDirect">
 
-                <View
-                    android:layout_width="100dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:alpha="0.3"
-                    android:background="@color/appupdater_text_colors" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:alpha="0.3"
+                        android:background="@color/appupdater_text_colors" />
+
+                    <TextView
+                        android:id="@+id/txtOr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center"
+                        android:text="@string/or"
+                        android:textColor="@color/appupdater_text_colors"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:alpha="0.3"
+                        android:background="#4d4d4d" />
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/txtOr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="16dp"
                     android:gravity="center"
-                    android:text="@string/or"
+                    android:text="@string/download_from_store"
                     android:textColor="@color/appupdater_text_colors"
                     android:textSize="16sp" />
-
-                <View
-                    android:layout_width="100dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:alpha="0.3"
-                    android:background="#4d4d4d" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
