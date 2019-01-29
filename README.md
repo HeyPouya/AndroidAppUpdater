@@ -38,15 +38,10 @@ you can show users as many stores as you need, to download your application from
 parameters of UpdaterStoreList, as the order you see in above line :
 
 1. Store Type
-
 2. Store Title That user Sees
-
 3. Icon of Store that user sees
-
 4. An url to show the user if the store is not installed in user's device
-
 5. Package name of your application
-
 
 ##### or you can ommit adding some properties in Kotlin.  like :
 
@@ -84,6 +79,7 @@ Users can download that apk directly on their phone, and after downloading finis
 ```
  list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launcher , "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
 ```
+
 ### To Show UpdateDialog
 
 ```
@@ -92,15 +88,24 @@ Users can download that apk directly on their phone, and after downloading finis
 parameters as the order you see in above line :
 
 1. Update dialog title
-
 2. Update dialog desciption
-
 3. List of stores you created in last step
-
 4. Is it a force update? (should dialog be cancelable or not)
-
 5. Typeface to customize font style
 
+### To change library's texts
+
+In strings file, add these lines :
+
+```
+    <string name="please_wait">Please wait</string>
+    <string name="downloading_new_version">Downloading new version...</string>
+    <string name="download_notification_title">Downloading...</string>
+    <string name="download_notification_description">Downloading new version</string>
+    <string name="please_install">Please install</string>
+    <string name="or">or</string>
+    <string name="download_from_store">Download from store</string>
+```
 
 ## Download
 
