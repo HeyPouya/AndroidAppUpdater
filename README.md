@@ -30,9 +30,9 @@ It is really easy-to-use and fully customizable.
 you can show users as many stores as you need, to download your application from there. to make a new store :
 
 ```
- val list = ArrayList<UpdaterStoreList>()
+    val list = ArrayList<UpdaterStoreList>()
         
- list.add(UpdaterStoreList(Store.DIRECT_URL, "Store Title", R.mipmap.ic_launcher , "https://url/app.apk", BuildConfig.APPLICATION_ID))
+    list.add(UpdaterStoreList(Store.DIRECT_URL, "Store Title", R.mipmap.ic_launcher , "https://url/app.apk", BuildConfig.APPLICATION_ID))
 ```
 
 parameters of UpdaterStoreList, as the order you see in above line :
@@ -46,7 +46,7 @@ parameters of UpdaterStoreList, as the order you see in above line :
 ##### or you can ommit adding some properties in Kotlin.  like :
 
 ```
-  list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Download From Google Play", packageName = BuildConfig.APPLICATION_ID))
+    list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Download From Google Play", packageName = BuildConfig.APPLICATION_ID))
 ```
 
 ### Stores
@@ -63,10 +63,10 @@ this library currently supports only these markets :
 To Select an Store you should use :
 
 ```
- Store.GOOGLE_PLAY
- Store.CAFE_BAZAAR
- Store.MYKET
- Store.IRAN_APPS
+    Store.GOOGLE_PLAY
+    Store.CAFE_BAZAAR
+    Store.MYKET
+    Store.IRAN_APPS
 ```
 
 ### Direct Download
@@ -77,13 +77,13 @@ Users can download that apk directly on their phone, and after downloading finis
 ##### Remember to get WRITE_EXTERNAL_STORAGE premission in runtime
 
 ```
- list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launcher , "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
+    list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launcher , "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
 ```
 
 ### To Show UpdateDialog
 
 ```
- AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade yo the new version.", list, true, font).show(supportFragmentManager, "TAG")
+    AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade yo the new version.", list, true, font).show(supportFragmentManager, "TAG")
 ```
 parameters as the order you see in above line :
 
@@ -107,6 +107,19 @@ In strings file, add these lines :
     <string name="download_from_store">Download from store</string>
 ```
 
+### To use default icons
+
+I have added default icons of iranian stores in the app.
+if you like to use them, you can find them like :
+
+```
+    R.drawable.appupdater_ic_google_play
+    R.drawable.appupdater_ic_bazar
+    R.drawable.appupdater_ic_myket
+    R.drawable.appupdater_ic_iran_apps
+```
+
+
 ## Download
 
 #### Adding the depencency
@@ -125,7 +138,7 @@ allprojects {
 Now add the dependency to your app build.gradle file:
 
 ```groovy
- implementation 'com.github.SirLordPouya:AndroidAppUpdater:2.0.0'
+    implementation 'com.github.SirLordPouya:AndroidAppUpdater:2.0.0'
 ```
 
 ## License
