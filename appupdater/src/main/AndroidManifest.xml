@@ -1,12 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ir.heydarii.appupdater">
+          package="ir.heydarii.appupdater">
 
     <application>
         <receiver
             android:name=".directlink.DirectLinkDownload"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
             </intent-filter>
         </receiver>
         <provider
