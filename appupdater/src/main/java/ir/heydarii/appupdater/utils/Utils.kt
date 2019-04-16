@@ -6,7 +6,7 @@ import android.graphics.Typeface
 import androidx.core.content.ContextCompat
 
 /**
- * SOme utilities to use in library
+ * Some utilities to use in library
  */
 class Utils {
 

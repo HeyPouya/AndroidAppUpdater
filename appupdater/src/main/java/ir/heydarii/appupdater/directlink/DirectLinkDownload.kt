@@ -8,21 +8,21 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.util.Log
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
-import ir.heydarii.appupdater.BuildConfig
 import ir.heydarii.appupdater.R
 import ir.heydarii.appupdater.dialog.UpdateInProgressDialog
+import ir.heydarii.appupdater.exception.PermissionNotGrantedException
 import ir.heydarii.appupdater.utils.Utils
 import java.io.File
+import java.io.FileNotFoundException
 
 
 //Constants
 var REQUEST_ID = -10L
 const val UPDATE_DIALOG_TAG = "UpdateDialog"
-const val FOLDER_NAME = "shahrdad"
-const val APK_NAME = "shahrdad"
+const val FOLDER_NAME = "ApkUpdate"
+const val APK_NAME = "NewAPK"
 val DESTINATION = Environment.getExternalStorageDirectory().toString() + "/$FOLDER_NAME/" + "$APK_NAME.apk"
 
 
@@ -31,7 +31,7 @@ val DESTINATION = Environment.getExternalStorageDirectory().toString() + "/$FOLD
     also shows a loading indicator showing the apk is downloading
     after download finishes , opens install page
  */
-class DirectLinkDownload() : BroadcastReceiver() {
+class DirectLinkDownload : BroadcastReceiver() {
 
     /**
      * To show install page when apk got downloaded successfully
@@ -55,8 +55,11 @@ class DirectLinkDownload() : BroadcastReceiver() {
      */
     private fun installApk(context: Context) {
 
+        if (!File(DESTINATION).exists()) {
+            throw FileNotFoundException("Couldn't find downloaded file.")
+        }
         // In android 7 and above
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val uri = FileProvider.getUriForFile(
                 context,
                 "${context.packageName}.fileProvider.GenericFileProvider",
@@ -80,11 +83,10 @@ class DirectLinkDownload() : BroadcastReceiver() {
     }
 
     fun getApk(url: String, context: Context?, fm: FragmentManager?) {
-
         if (Utils.isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE, context))
             downloadApk(url, context, fm)
         else
-            Log.e("AndroidAppUpdater","Please provide WRITE_EXTERNAL_STORAGE first")
+            throw PermissionNotGrantedException()
 
     }
 
