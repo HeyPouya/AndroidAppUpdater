@@ -13,21 +13,23 @@ import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
  */
 abstract class Stores {
 
-   abstract  fun setStoreData(context: Context?,item: UpdaterStoreList)
+    abstract fun setStoreData(context: Context?, item: UpdaterStoreList)
 
-   protected fun showStore(context: Context?, intent: Intent, item: UpdaterStoreList, store: Store) {
-       try {
-           context?.startActivity(intent)
-       } catch (e: Exception) {
-           showUrlOrException(context, item, store)
-       }
-   }
+    protected fun showStore(context: Context?, intent: Intent, item: UpdaterStoreList, store: Store) {
+        try {
+            context?.startActivity(intent)
+        } catch (e: Exception) {
+            showUrlOrErrorToast(context, item, store)
+        }
+    }
 
-    private fun showUrlOrException(context: Context?, item: UpdaterStoreList, store: Store) {
+    private fun showUrlOrErrorToast(context: Context?, item: UpdaterStoreList, store: Store) {
         if (item.url.isNotEmpty())
             context?.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.url)))
-        else
-            Toast.makeText(context, context?.getString(R.string.please_install) + store.name.toLowerCase(), Toast.LENGTH_LONG).show()
+        else {
+            val storeName = " ${store.name.toLowerCase().replace("_", " ")}"
+            Toast.makeText(context, context?.getString(R.string.please_install) + storeName, Toast.LENGTH_LONG).show()
+        }
     }
 
 }

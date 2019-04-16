@@ -1,8 +1,10 @@
 package ir.heydarii.appupdater.utils
 
+import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Typeface
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 /**
@@ -21,6 +23,17 @@ class Utils {
                 return false
         }
 
+        /**
+         * shows get permission page to user
+         */
+        fun getPermission(activity: Activity?, permission: Array<String>) {
+            if (activity != null)
+                ActivityCompat.requestPermissions(activity, permission, 2000)
+            else
+                NullPointerException("Provided activity is null")
+        }
+
+        //to use typeface while using the dialog
         var typeface: Typeface? = null
     }
 

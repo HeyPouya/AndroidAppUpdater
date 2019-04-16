@@ -163,7 +163,7 @@ class AppUpdaterDialog : DialogFragment() {
     private fun onListListener(item: UpdaterStoreList) {
         when (item.store) {
             Store.DIRECT_URL -> {
-                DirectLinkDownload().getApk(item.url, context, fragmentManager)
+                DirectLinkDownload().getApk(item.url, activity, fragmentManager)
             }
             Store.GOOGLE_PLAY -> {
                 GooglePlayStore().setStoreData(context, item)

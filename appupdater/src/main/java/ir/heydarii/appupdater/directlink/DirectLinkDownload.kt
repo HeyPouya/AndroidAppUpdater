@@ -1,6 +1,7 @@
 package ir.heydarii.appupdater.directlink
 
 import android.Manifest
+import android.app.Activity
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -12,7 +13,6 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
 import ir.heydarii.appupdater.R
 import ir.heydarii.appupdater.dialog.UpdateInProgressDialog
-import ir.heydarii.appupdater.exception.PermissionNotGrantedException
 import ir.heydarii.appupdater.utils.Utils
 import java.io.File
 import java.io.FileNotFoundException
@@ -82,11 +82,12 @@ class DirectLinkDownload : BroadcastReceiver() {
         }
     }
 
-    fun getApk(url: String, context: Context?, fm: FragmentManager?) {
-        if (Utils.isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE, context))
+    fun getApk(url: String, context: Activity?, fm: FragmentManager?) {
+        val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
+        if (Utils.isPermissionGranted(permission, context))
             downloadApk(url, context, fm)
         else
-            throw PermissionNotGrantedException()
+            Utils.getPermission(context, arrayOf(permission))
 
     }
 
