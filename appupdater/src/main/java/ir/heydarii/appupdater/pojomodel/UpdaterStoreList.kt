@@ -1,6 +1,5 @@
 package ir.heydarii.appupdater.pojomodel
 
-import android.graphics.Typeface
 import android.os.Parcelable
 import ir.heydarii.appupdater.R
 import kotlinx.android.parcel.Parcelize

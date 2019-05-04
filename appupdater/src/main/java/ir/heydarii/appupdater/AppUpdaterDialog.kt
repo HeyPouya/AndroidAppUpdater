@@ -39,8 +39,8 @@ class AppUpdaterDialog : DialogFragment() {
         setDialogCancelable(cancelableMode)
 
         // Set transparent background and no title
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE);
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_app_updater_dialog, container, false)

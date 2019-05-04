@@ -9,7 +9,7 @@ import ir.heydarii.appupdater.utils.Utils
 import kotlinx.android.synthetic.main.download_direct_item.view.*
 import kotlinx.android.synthetic.main.download_stores_item.view.*
 
-class DirectRecyclerAdapter(private val list: List<UpdaterStoreList>, val listener: (UpdaterStoreList) -> Unit) :
+class DirectRecyclerAdapter(private val list: List<UpdaterStoreList>, private val listener: (UpdaterStoreList) -> Unit) :
     RecyclerView.Adapter<DirectRecyclerAdapter.SoresViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoresViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.download_direct_item, parent, false)
@@ -22,7 +22,7 @@ class DirectRecyclerAdapter(private val list: List<UpdaterStoreList>, val listen
         holder.onBind(list[position])
     }
 
-    class SoresViewHolder(val view: View, val listener: (UpdaterStoreList) -> Unit) : RecyclerView.ViewHolder(view) {
+    class SoresViewHolder(private val view: View, val listener: (UpdaterStoreList) -> Unit) : RecyclerView.ViewHolder(view) {
         fun onBind(item: UpdaterStoreList) {
             view.txtDirect.text = item.title
             if (Utils.typeface != null)

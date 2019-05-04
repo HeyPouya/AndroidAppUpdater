@@ -60,7 +60,7 @@ class DirectLinkDownload : BroadcastReceiver() {
 
 
         if (!File(DESTINATION).exists()) {
-            Log.d(Utils.TAG, "Couldn't find downloaded file.")
+            Log.d(Utils.TAG, context.getString(R.string.couldnt_find_downloaded_file))
         }
 
         // In android 7 and above

@@ -7,4 +7,5 @@
     <string name="please_install">Please install</string>
     <string name="or">or</string>
     <string name="download_from_store">Download from store</string>
+    <string name="couldnt_find_downloaded_file">Couldn\'t find downloaded file.</string>
 </resources>

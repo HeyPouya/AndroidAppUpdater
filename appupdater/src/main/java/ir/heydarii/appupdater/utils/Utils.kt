@@ -35,7 +35,7 @@ class Utils {
 
         //to use typeface while using the dialog
         var typeface: Typeface? = null
-        val TAG = "AndroidAppUpdater"
+        const val TAG = "AndroidAppUpdater"
     }
 
 }
