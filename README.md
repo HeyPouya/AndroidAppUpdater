@@ -74,7 +74,7 @@ To Select an Store you should use :
 you can also make as many direct apk download links as you need.
 Users can download that apk directly on their phone, and after downloading finishes, the install page will be shown to the user.
 
-##### Remember to get WRITE_EXTERNAL_STORAGE premission in runtime
+##### Remember to get WRITE_EXTERNAL_STORAGE premission in runtime (the library trys to get it if you forget ;) )
 
 ```
     list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launcher , "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
@@ -138,7 +138,7 @@ allprojects {
 Now add the dependency to your app build.gradle file:
 
 ```groovy
-    implementation 'com.github.SirLordPouya:AndroidAppUpdater:2.0.0'
+    implementation 'com.github.SirLordPouya:AndroidAppUpdater:3.0.0'
 ```
 
 ## License
