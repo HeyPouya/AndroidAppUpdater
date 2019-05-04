@@ -9,13 +9,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.util.Log
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
 import ir.heydarii.appupdater.R
 import ir.heydarii.appupdater.dialog.UpdateInProgressDialog
 import ir.heydarii.appupdater.utils.Utils
 import java.io.File
-import java.io.FileNotFoundException
 
 
 //Constants
@@ -53,11 +53,16 @@ class DirectLinkDownload : BroadcastReceiver() {
     /**
      * Shows install apk page in all versions of android devices
      */
-    private fun installApk(context: Context) {
+    fun installApk(context: Context) {
+
+        //To dismiss the download in progress dialog
+        dismissAlertDialog()
+
 
         if (!File(DESTINATION).exists()) {
-            throw FileNotFoundException("Couldn't find downloaded file.")
+            Log.d(Utils.TAG, "Couldn't find downloaded file.")
         }
+
         // In android 7 and above
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val uri = FileProvider.getUriForFile(
@@ -135,7 +140,12 @@ class DirectLinkDownload : BroadcastReceiver() {
      * shows a progress dialog for user to show download is in progress
      */
     private fun showAlertDialog(fm: FragmentManager?) {
-        UpdateInProgressDialog().show(fm, UPDATE_DIALOG_TAG)
+        UpdateInProgressDialog.instance.show(fm, UPDATE_DIALOG_TAG)
+    }
+
+    private fun dismissAlertDialog() {
+        if (UpdateInProgressDialog.instance.isAdded)
+            UpdateInProgressDialog.instance.dismiss()
     }
 
 }

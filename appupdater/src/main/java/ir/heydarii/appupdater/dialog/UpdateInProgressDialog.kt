@@ -16,8 +16,15 @@ import kotlinx.android.synthetic.main.fragment_update_in_progress_dialog.*
  */
 class UpdateInProgressDialog : DialogFragment() {
 
+    companion object {
+
+        var instance = UpdateInProgressDialog()
+
+    }
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_update_in_progress_dialog, container, false)
@@ -31,7 +38,10 @@ class UpdateInProgressDialog : DialogFragment() {
             txtDescription.typeface = Utils.typeface
         }
         //making width of dialog to match_parent
-        dialog?.window?.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT,ConstraintLayout.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setLayout(
+            ConstraintLayout.LayoutParams.MATCH_PARENT,
+            ConstraintLayout.LayoutParams.WRAP_CONTENT
+        )
     }
 
 }
