@@ -6,10 +6,10 @@ android:
     - tools
     - platform-tools
     - build-tools-28.0.3
-    - android-28
+    - android-29
 
 before_install:
-  - yes | sdkmanager "platforms;android-28"
+  - yes | sdkmanager "platforms;android-29"
 
 script:
 - ./gradlew check
