@@ -10,6 +10,9 @@ import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
 const val TAG = "showUpdateDialogTag"
 const val FONT_PATH = "fonts/iran_sans_mobile.ttf"
 
+/**
+ * Main activity of the sample application
+ */
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,10 +31,10 @@ class MainActivity : AppCompatActivity() {
 
 
         //stores
-        list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Play", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_google_play))
-        list.add(UpdaterStoreList(Store.CAFE_BAZAAR, "Bazaar", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_bazar))
-        list.add(UpdaterStoreList(Store.MYKET, "Myket", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_myket))
-        list.add(UpdaterStoreList(Store.IRAN_APPS, "Iran apps", packageName = BuildConfig.APPLICATION_ID,icon = R.drawable.appupdater_ic_iran_apps))
+        list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Play", packageName = BuildConfig.APPLICATION_ID, icon = R.drawable.appupdater_ic_google_play))
+        list.add(UpdaterStoreList(Store.CAFE_BAZAAR, "Bazaar", packageName = BuildConfig.APPLICATION_ID, icon = R.drawable.appupdater_ic_bazar))
+        list.add(UpdaterStoreList(Store.MYKET, "Myket", packageName = BuildConfig.APPLICATION_ID, icon = R.drawable.appupdater_ic_myket))
+        list.add(UpdaterStoreList(Store.IRAN_APPS, "Iran apps", packageName = BuildConfig.APPLICATION_ID, icon = R.drawable.appupdater_ic_iran_apps))
 
 
         //creating update dialog
