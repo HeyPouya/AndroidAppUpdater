@@ -8,10 +8,10 @@ import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
 import ir.heydarii.appupdater.utils.Utils
 import kotlinx.android.synthetic.main.download_stores_item.view.*
 
-class StoresRecyclerAdapter(
-    private val list: List<UpdaterStoreList>,
-    private val listener: (UpdaterStoreList) -> Unit
-) :
+/**
+ * Adapter to show stores on dialog page
+ */
+class StoresRecyclerAdapter(private val list: List<UpdaterStoreList>, private val listener: (UpdaterStoreList) -> Unit) :
     RecyclerView.Adapter<StoresRecyclerAdapter.SoresViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoresViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.download_stores_item, parent, false)
@@ -24,8 +24,15 @@ class StoresRecyclerAdapter(
         holder.onBind(list[position])
     }
 
+    /**
+     * ViewHolder for stores adapter
+     */
     class SoresViewHolder(private val view: View, val listener: (UpdaterStoreList) -> Unit) :
         RecyclerView.ViewHolder(view) {
+
+        /**
+         * Binds data to view
+         */
         fun onBind(item: UpdaterStoreList) {
             view.txtStoreTitle.text = item.title
             if (Utils.typeface != null)

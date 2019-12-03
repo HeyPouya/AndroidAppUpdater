@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
 import ir.heydarii.appupdater.utils.Utils
 import kotlinx.android.synthetic.main.download_direct_item.view.*
-import kotlinx.android.synthetic.main.download_stores_item.view.*
 
+/**
+ * Adapter to show Direct download links
+ */
 class DirectRecyclerAdapter(private val list: List<UpdaterStoreList>, private val listener: (UpdaterStoreList) -> Unit) :
     RecyclerView.Adapter<DirectRecyclerAdapter.SoresViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoresViewHolder {
@@ -22,7 +24,14 @@ class DirectRecyclerAdapter(private val list: List<UpdaterStoreList>, private va
         holder.onBind(list[position])
     }
 
+    /**
+     * Direct download ViewHolder
+     */
     class SoresViewHolder(private val view: View, val listener: (UpdaterStoreList) -> Unit) : RecyclerView.ViewHolder(view) {
+
+        /**
+         * Binds data to layout
+         */
         fun onBind(item: UpdaterStoreList) {
             view.txtDirect.text = item.title
             if (Utils.typeface != null)

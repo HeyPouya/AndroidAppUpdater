@@ -26,10 +26,10 @@ const val APK_NAME = "NewAPK"
 val DESTINATION = Environment.getExternalStorageDirectory().toString() + "/$FOLDER_NAME/" + "$APK_NAME.apk"
 
 
-/*
-    starts a download manager and downloads apk
-    also shows a loading indicator showing the apk is downloading
-    after download finishes , opens install page
+/**
+ * starts a download manager and downloads apk
+ * also shows a loading indicator showing the apk is downloading
+ * after download finishes , opens install page
  */
 class DirectLinkDownload : BroadcastReceiver() {
 
@@ -108,10 +108,8 @@ class DirectLinkDownload : BroadcastReceiver() {
         downloadManager.setDescription(context?.getString(R.string.download_notification_description))
 
         //setting up download manager's properties
-        downloadManager.allowScanningByMediaScanner()
         downloadManager.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
         downloadManager.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
-        downloadManager.setVisibleInDownloadsUi(true)
 
         //setting the destination of the downloaded file
         downloadManager.setDestinationInExternalPublicDir("/$FOLDER_NAME", "$APK_NAME.apk");
@@ -140,7 +138,7 @@ class DirectLinkDownload : BroadcastReceiver() {
      * shows a progress dialog for user to show download is in progress
      */
     private fun showAlertDialog(fm: FragmentManager?) {
-        UpdateInProgressDialog.instance.show(fm, UPDATE_DIALOG_TAG)
+        fm?.let { UpdateInProgressDialog.instance.show(it, UPDATE_DIALOG_TAG) }
     }
 
     private fun dismissAlertDialog() {

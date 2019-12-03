@@ -30,7 +30,7 @@ class Utils {
             if (activity != null)
                 ActivityCompat.requestPermissions(activity, permission, 2000)
             else
-                NullPointerException("Provided activity is null")
+                throw NullPointerException("Provided activity is null")
         }
 
         //to use typeface while using the dialog

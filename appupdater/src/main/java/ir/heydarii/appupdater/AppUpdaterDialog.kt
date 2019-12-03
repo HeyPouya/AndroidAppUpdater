@@ -29,6 +29,9 @@ import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
 //consts to use in this dialog
 const val DATA_LIST = "DATA_LIST"
 
+/**
+ * Shows ForceUpdate Dialog Fragment
+ */
 class AppUpdaterDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
