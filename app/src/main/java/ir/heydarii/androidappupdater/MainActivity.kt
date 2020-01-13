@@ -4,8 +4,8 @@ import android.graphics.Typeface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ir.heydarii.appupdater.AppUpdaterDialog
-import ir.heydarii.appupdater.pojomodel.Store
-import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
+import ir.heydarii.appupdater.pojo.Store
+import ir.heydarii.appupdater.pojo.UpdaterStoreList
 
 const val TAG = "showUpdateDialogTag"
 const val FONT_PATH = "fonts/iran_sans_mobile.ttf"

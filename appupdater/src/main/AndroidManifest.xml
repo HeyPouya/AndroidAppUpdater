@@ -10,7 +10,7 @@
             </intent-filter>
         </receiver>
         <provider
-            android:name="ir.heydarii.appupdater.fileProvider.GenericFileProvider"
+            android:name="ir.heydarii.appupdater.fileprovider.GenericFileProvider"
             android:authorities="${applicationId}.fileProvider.GenericFileProvider"
             android:exported="false"
             android:grantUriPermissions="true">

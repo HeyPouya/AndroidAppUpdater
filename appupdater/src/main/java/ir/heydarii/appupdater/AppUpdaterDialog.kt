@@ -15,14 +15,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ir.heydarii.appupdater.directlink.DirectLinkDownload
-import ir.heydarii.appupdater.pojomodel.Store
-import ir.heydarii.appupdater.pojomodel.UpdaterFragmentModel
-import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
+import ir.heydarii.appupdater.pojo.Store
+import ir.heydarii.appupdater.pojo.UpdaterFragmentModel
+import ir.heydarii.appupdater.pojo.UpdaterStoreList
 import ir.heydarii.appupdater.stores.CafeBazaarStore
 import ir.heydarii.appupdater.stores.GooglePlayStore
 import ir.heydarii.appupdater.stores.IranAppsStore
 import ir.heydarii.appupdater.stores.MyketStore
-import ir.heydarii.appupdater.utils.Utils
+import ir.heydarii.appupdater.utils.Constants
 import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
 
 
@@ -34,7 +34,11 @@ const val DATA_LIST = "DATA_LIST"
  */
 class AppUpdaterDialog : DialogFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         //setting isCancelable
         val data = arguments?.getParcelable<UpdaterFragmentModel>(DATA_LIST)
@@ -53,7 +57,10 @@ class AppUpdaterDialog : DialogFragment() {
         super.onStart()
 
         //make dialog's width matchParent
-        dialog?.window?.setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setLayout(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -85,18 +92,22 @@ class AppUpdaterDialog : DialogFragment() {
     /**
      * sets title , description and stores list
      */
-    private fun setUpProperties(title: String?, description: String?, list: List<UpdaterStoreList>?) {
+    private fun setUpProperties(
+        title: String?,
+        description: String?,
+        list: List<UpdaterStoreList>?
+    ) {
 
         txtTitle.text = title
         txtDescription.text = description
 
 
         //setting typefaces for text views
-        if (Utils.typeface != null) {
-            txtTitle.typeface = Utils.typeface
-            txtDescription.typeface = Utils.typeface
-            txtOr.typeface = Utils.typeface
-            txtStore.typeface = Utils.typeface
+        if (Constants.typeface != null) {
+            txtTitle.typeface = Constants.typeface
+            txtDescription.typeface = Constants.typeface
+            txtOr.typeface = Constants.typeface
+            txtStore.typeface = Constants.typeface
         }
 
         val isStoreAndDirectAvailable = checkIfDirectAndStoreAvailable(list)
@@ -191,10 +202,16 @@ class AppUpdaterDialog : DialogFragment() {
         /**
          * get Instance method
          */
-        fun getInstance(title: String? = "", description: String? = "", list: List<UpdaterStoreList>, isForce: Boolean = false, typeface: Typeface? = null): AppUpdaterDialog {
+        fun getInstance(
+            title: String? = "",
+            description: String? = "",
+            list: List<UpdaterStoreList>,
+            isForce: Boolean = false,
+            typeface: Typeface? = null
+        ): AppUpdaterDialog {
 
             //set typeface in utils class to use later in application
-            Utils.typeface = typeface
+            Constants.typeface = typeface
 
             // bundle to add data to our dialog
             val bundle = Bundle()

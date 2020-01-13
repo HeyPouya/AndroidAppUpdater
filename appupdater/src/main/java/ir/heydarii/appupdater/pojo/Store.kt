@@ -1,4 +1,4 @@
-package ir.heydarii.appupdater.pojomodel
+package ir.heydarii.appupdater.pojo
 
 /*
 Enum class to select type of market

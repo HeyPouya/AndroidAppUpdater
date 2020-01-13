@@ -14,7 +14,8 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
 import ir.heydarii.appupdater.R
 import ir.heydarii.appupdater.dialog.UpdateInProgressDialog
-import ir.heydarii.appupdater.utils.Utils
+import ir.heydarii.appupdater.utils.Constants
+import ir.heydarii.appupdater.utils.PermissionUtils
 import java.io.File
 
 
@@ -23,7 +24,8 @@ var REQUEST_ID = -10L
 const val UPDATE_DIALOG_TAG = "UpdateDialog"
 const val FOLDER_NAME = "ApkUpdate"
 const val APK_NAME = "NewAPK"
-val DESTINATION = Environment.getExternalStorageDirectory().toString() + "/$FOLDER_NAME/" + "$APK_NAME.apk"
+val DESTINATION =
+    Environment.getExternalStorageDirectory().toString() + "/$FOLDER_NAME/" + "$APK_NAME.apk"
 
 
 /**
@@ -60,7 +62,7 @@ class DirectLinkDownload : BroadcastReceiver() {
 
 
         if (!File(DESTINATION).exists()) {
-            Log.d(Utils.TAG, context.getString(R.string.couldnt_find_downloaded_file))
+            Log.d(Constants.TAG, context.getString(R.string.couldnt_find_downloaded_file))
         }
 
         // In android 7 and above
@@ -89,10 +91,11 @@ class DirectLinkDownload : BroadcastReceiver() {
 
     fun getApk(url: String, context: Activity?, fm: FragmentManager?) {
         val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
-        if (Utils.isPermissionGranted(permission, context))
+        val permissionChecker = PermissionUtils()
+        if (permissionChecker.isPermissionGranted(permission, context))
             downloadApk(url, context, fm)
         else
-            Utils.getPermission(context, arrayOf(permission))
+            permissionChecker.getPermission(context, arrayOf(permission))
 
     }
 

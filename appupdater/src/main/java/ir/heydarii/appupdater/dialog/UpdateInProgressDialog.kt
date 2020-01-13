@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
 import ir.heydarii.appupdater.R
-import ir.heydarii.appupdater.utils.Utils
+import ir.heydarii.appupdater.utils.Constants
 import kotlinx.android.synthetic.main.fragment_update_in_progress_dialog.*
 
 /**
@@ -17,23 +17,21 @@ import kotlinx.android.synthetic.main.fragment_update_in_progress_dialog.*
 class UpdateInProgressDialog : DialogFragment() {
 
     companion object {
-
         var instance = UpdateInProgressDialog()
-
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_update_in_progress_dialog, container, false)
     }
 
     override fun onStart() {
         super.onStart()
 
-        if (Utils.typeface != null) {
-            txtTitle.typeface = Utils.typeface
-            txtDescription.typeface = Utils.typeface
+        if (Constants.typeface != null) {
+            txtTitle.typeface = Constants.typeface
+            txtDescription.typeface = Constants.typeface
         }
         //making width of dialog to match_parent
         dialog?.window?.setLayout(

@@ -4,17 +4,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
-import ir.heydarii.appupdater.utils.Utils
+import ir.heydarii.appupdater.pojo.UpdaterStoreList
+import ir.heydarii.appupdater.utils.Constants
 import kotlinx.android.synthetic.main.download_stores_item.view.*
 
 /**
  * Adapter to show stores on dialog page
  */
-class StoresRecyclerAdapter(private val list: List<UpdaterStoreList>, private val listener: (UpdaterStoreList) -> Unit) :
+class StoresRecyclerAdapter(
+    private val list: List<UpdaterStoreList>,
+    private val listener: (UpdaterStoreList) -> Unit
+) :
     RecyclerView.Adapter<StoresRecyclerAdapter.SoresViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoresViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.download_stores_item, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.download_stores_item, parent, false)
         return SoresViewHolder(view, listener)
     }
 
@@ -35,8 +39,8 @@ class StoresRecyclerAdapter(private val list: List<UpdaterStoreList>, private va
          */
         fun onBind(item: UpdaterStoreList) {
             view.txtStoreTitle.text = item.title
-            if (Utils.typeface != null)
-                view.txtStoreTitle.typeface = Utils.typeface
+            if (Constants.typeface != null)
+                view.txtStoreTitle.typeface = Constants.typeface
             view.imgStore.setImageResource(item.icon)
             view.setOnClickListener { listener(item) }
         }

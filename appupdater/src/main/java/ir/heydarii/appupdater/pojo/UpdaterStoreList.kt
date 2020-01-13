@@ -1,4 +1,4 @@
-package ir.heydarii.appupdater.pojomodel
+package ir.heydarii.appupdater.pojo
 
 import android.os.Parcelable
 import ir.heydarii.appupdater.R

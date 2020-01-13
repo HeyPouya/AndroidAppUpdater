@@ -3,9 +3,8 @@ package ir.heydarii.appupdater.stores
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import ir.heydarii.appupdater.pojomodel.Store
-import ir.heydarii.appupdater.pojomodel.UpdaterStoreList
-
+import ir.heydarii.appupdater.pojo.Store
+import ir.heydarii.appupdater.pojo.UpdaterStoreList
 
 /**
  * shows apk in bazaar store
