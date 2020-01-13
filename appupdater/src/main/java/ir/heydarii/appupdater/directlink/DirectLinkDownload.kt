@@ -9,24 +9,19 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.provider.Settings
 import android.util.Log
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
 import ir.heydarii.appupdater.R
 import ir.heydarii.appupdater.dialog.UpdateInProgressDialog
-import ir.heydarii.appupdater.utils.Constants
+import ir.heydarii.appupdater.utils.Constants.Companion.APK_NAME
+import ir.heydarii.appupdater.utils.Constants.Companion.REQUEST_ID
+import ir.heydarii.appupdater.utils.Constants.Companion.TAG
+import ir.heydarii.appupdater.utils.Constants.Companion.UPDATE_DIALOG_TAG
 import ir.heydarii.appupdater.utils.PermissionUtils
+import ir.heydarii.appupdater.utils.installAPKForQ
 import java.io.File
-
-
-//Constants
-var REQUEST_ID = -10L
-const val UPDATE_DIALOG_TAG = "UpdateDialog"
-const val FOLDER_NAME = "ApkUpdate"
-const val APK_NAME = "NewAPK"
-val DESTINATION =
-    Environment.getExternalStorageDirectory().toString() + "/$FOLDER_NAME/" + "$APK_NAME.apk"
-
 
 /**
  * starts a download manager and downloads apk
@@ -48,29 +43,30 @@ class DirectLinkDownload : BroadcastReceiver() {
             if (referenceId == REQUEST_ID) {
                 installApk(context!!)
             }
-
         }
     }
 
     /**
      * Shows install apk page in all versions of android devices
      */
-    fun installApk(context: Context) {
+    private fun installApk(context: Context) {
 
         //To dismiss the download in progress dialog
         dismissAlertDialog()
 
-
-        if (!File(DESTINATION).exists()) {
-            Log.d(Constants.TAG, context.getString(R.string.couldnt_find_downloaded_file))
+        if (!File(getDestination(context)).exists()) {
+            Log.d(TAG, context.getString(R.string.couldnt_find_downloaded_file))
         }
-
+        // In android 9 and above
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            installAPKForQ(context, getDestination(context))
+        }
         // In android 7 and above
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val uri = FileProvider.getUriForFile(
                 context,
                 "${context.packageName}.fileProvider.GenericFileProvider",
-                File(DESTINATION)
+                File(getDestination(context))
             )
             val install = Intent(Intent.ACTION_INSTALL_PACKAGE)
             install.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -81,7 +77,7 @@ class DirectLinkDownload : BroadcastReceiver() {
         }
         // in android 6 and bellow
         else {
-            val apkUri = Uri.fromFile(File(DESTINATION))
+            val apkUri = Uri.fromFile(File(getDestination(context)))
             val intent = Intent(Intent.ACTION_VIEW)
             intent.setDataAndType(apkUri, "application/vnd.android.package-archive")
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -90,13 +86,26 @@ class DirectLinkDownload : BroadcastReceiver() {
     }
 
     fun getApk(url: String, context: Activity?, fm: FragmentManager?) {
+
+        checkNotNull(context)
+
         val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
         val permissionChecker = PermissionUtils()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && !context.packageManager.canRequestPackageInstalls()) {
+            context.startActivity(
+                Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).setData(
+                    Uri.parse(
+                        String.format("package:%s", context.packageName)
+                    )
+                )
+            )
+        }
+
         if (permissionChecker.isPermissionGranted(permission, context))
             downloadApk(url, context, fm)
         else
             permissionChecker.getPermission(context, arrayOf(permission))
-
     }
 
     /**
@@ -115,10 +124,14 @@ class DirectLinkDownload : BroadcastReceiver() {
         downloadManager.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
 
         //setting the destination of the downloaded file
-        downloadManager.setDestinationInExternalPublicDir("/$FOLDER_NAME", "$APK_NAME.apk");
+        downloadManager.setDestinationInExternalFilesDir(
+            context,
+            Environment.DIRECTORY_DOWNLOADS,
+            "$APK_NAME.apk"
+        )
 
         //delete APK if user downloaded the apk before
-        deleteExistingFile()
+        deleteExistingFile(getDestination(context))
 
         //enqueue the file to start download
         val manager = context?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
@@ -131,8 +144,8 @@ class DirectLinkDownload : BroadcastReceiver() {
     /**
      * Delete Downloaded APK if previously downloaded
      */
-    private fun deleteExistingFile() {
-        val file = File(DESTINATION)
+    private fun deleteExistingFile(destination: String) {
+        val file = File(destination)
         if (file.exists())
             file.delete()
     }
@@ -148,5 +161,8 @@ class DirectLinkDownload : BroadcastReceiver() {
         if (UpdateInProgressDialog.instance.isAdded)
             UpdateInProgressDialog.instance.dismiss()
     }
+
+    private fun getDestination(context: Context?) =
+        "${context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)}/$APK_NAME.apk"
 
 }
