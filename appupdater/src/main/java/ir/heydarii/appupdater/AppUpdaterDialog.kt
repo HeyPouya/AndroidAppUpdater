@@ -167,6 +167,11 @@ class AppUpdaterDialog : DialogFragment() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Constants.typeface = null
+    }
+
     companion object {
 
         // fragment variable to make this dialog singleton
