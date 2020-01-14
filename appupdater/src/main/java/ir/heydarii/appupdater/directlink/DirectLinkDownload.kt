@@ -6,7 +6,6 @@ import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.util.Log
@@ -17,6 +16,7 @@ import ir.heydarii.appupdater.utils.Constants.Companion.APK_NAME
 import ir.heydarii.appupdater.utils.Constants.Companion.REQUEST_ID
 import ir.heydarii.appupdater.utils.Constants.Companion.TAG
 import ir.heydarii.appupdater.utils.Constants.Companion.UPDATE_DIALOG_TAG
+import ir.heydarii.appupdater.utils.DownloadAPKUtil
 import ir.heydarii.appupdater.utils.InstallAPKUtil
 import ir.heydarii.appupdater.utils.PermissionUtils
 import ir.heydarii.appupdater.utils.RequestForAppInstallUtil
@@ -79,32 +79,13 @@ class DirectLinkDownload : BroadcastReceiver() {
     /**
      * sets a download manager and enqueues the download request
      */
-    private fun downloadApk(url: String, context: Context?, fm: FragmentManager?) {
-
-        val downloadManager = DownloadManager.Request(Uri.parse(url))
-
-        // setting title and description to be shown on download notification
-        downloadManager.setTitle(context?.getString(R.string.download_notification_title))
-        downloadManager.setDescription(context?.getString(R.string.download_notification_description))
-
-        //setting up download manager's properties
-        downloadManager.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-        downloadManager.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
-
-        //setting the destination of the downloaded file
-        downloadManager.setDestinationInExternalFilesDir(
-            context,
-            Environment.DIRECTORY_DOWNLOADS,
-            "$APK_NAME.apk"
-        )
+    private fun downloadApk(url: String, context: Context, fm: FragmentManager?) {
 
         //delete APK if user downloaded the apk before
         deleteExistingFile(getDestination(context))
 
-        //enqueue the file to start download
-        val manager = context?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        REQUEST_ID = manager.enqueue(downloadManager)
-
+        //downloads the apk
+        DownloadAPKUtil().download(url, context)
         //show alert dialog to user
         showAlertDialog(fm)
     }
