@@ -11,9 +11,6 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import ir.heydarii.appupdater.directlink.DirectLinkDownload
 import ir.heydarii.appupdater.pojo.Store
 import ir.heydarii.appupdater.pojo.UpdaterFragmentModel
@@ -75,6 +72,7 @@ class AppUpdaterDialog : DialogFragment() {
         val title = data?.title
         val description = data?.description
         val list = data?.list
+        checkNotNull(list)
         setUpProperties(title, description, list)
     }
 
@@ -91,7 +89,7 @@ class AppUpdaterDialog : DialogFragment() {
     private fun setUpProperties(
         title: String?,
         description: String?,
-        list: List<UpdaterStoreList>?
+        list: List<UpdaterStoreList>
     ) {
 
         txtTitle.text = title
@@ -105,8 +103,7 @@ class AppUpdaterDialog : DialogFragment() {
             txtStore.typeface = Constants.typeface
         }
 
-        val isStoreAndDirectAvailable = checkIfDirectAndStoreAvailable(list)
-        hideOrLayoutIfNeeded(isStoreAndDirectAvailable)
+        hideOrLayoutIfNeeded(checkIfDirectAndStoreAvailable(list))
 
         setUpBothRecyclers(list)
     }
@@ -142,27 +139,10 @@ class AppUpdaterDialog : DialogFragment() {
      * check if there is no direct link or there is no stores,
      *
      */
-    private fun checkIfDirectAndStoreAvailable(list: List<UpdaterStoreList>?): Boolean {
-        var isDirectDownloadAvailable = false
-        var isStoreDownloadAvailable = false
-
-        //check if direct download is included in the list
-        list?.forEach {
-            if (it.store == Store.DIRECT_URL)
-                isDirectDownloadAvailable = true
-        }
-
-        //check if the store download is included in the list
-        list?.forEach {
-            for (i in Store.values())
-                if (it.store == i && i != Store.DIRECT_URL)
-                    isStoreDownloadAvailable = true
-
-        }
-
-        return isDirectDownloadAvailable && isStoreDownloadAvailable
-
-    }
+    private fun checkIfDirectAndStoreAvailable(list: List<UpdaterStoreList>) =
+        list.distinctBy {
+            it.store
+        }.count() > 1
 
     /**
      * listener to react to user, when user clicks on a store
