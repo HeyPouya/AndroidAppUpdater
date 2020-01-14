@@ -22,7 +22,6 @@ import ir.heydarii.appupdater.utils.Constants
 import ir.heydarii.appupdater.utils.Constants.Companion.DATA_LIST
 import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
 
-
 /**
  * Shows ForceUpdate Dialog Fragment
  */
@@ -162,21 +161,16 @@ class AppUpdaterDialog : DialogFragment() {
      */
     private fun onListListener(item: UpdaterStoreList) {
         when (item.store) {
-            Store.DIRECT_URL -> {
+            Store.DIRECT_URL ->
                 DirectLinkDownload().getApk(item.url, activity, fragmentManager)
-            }
-            Store.GOOGLE_PLAY -> {
+            Store.GOOGLE_PLAY ->
                 GooglePlayStore().setStoreData(context, item)
-            }
-            Store.CAFE_BAZAAR -> {
+            Store.CAFE_BAZAAR ->
                 CafeBazaarStore().setStoreData(context, item)
-            }
-            Store.MYKET -> {
+            Store.MYKET ->
                 MyketStore().setStoreData(context, item)
-            }
-            Store.IRAN_APPS -> {
+            Store.IRAN_APPS ->
                 IranAppsStore().setStoreData(context, item)
-            }
         }
     }
 
