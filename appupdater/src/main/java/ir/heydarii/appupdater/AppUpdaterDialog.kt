@@ -1,15 +1,14 @@
 package ir.heydarii.appupdater
 
 
-import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import ir.heydarii.appupdater.directlink.DirectLinkDownload
 import ir.heydarii.appupdater.pojo.Store
@@ -23,10 +22,12 @@ import ir.heydarii.appupdater.utils.Constants
 import ir.heydarii.appupdater.utils.Constants.Companion.DATA_LIST
 import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
 
+
 /**
  * Shows ForceUpdate Dialog Fragment
  */
 class AppUpdaterDialog : DialogFragment() {
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,8 +40,13 @@ class AppUpdaterDialog : DialogFragment() {
         val cancelableMode = data?.isForceUpdate
         setDialogCancelable(cancelableMode)
 
-        // Set transparent background and no title
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        // Set background for the dialog
+        dialog?.window?.setBackgroundDrawable(
+            ContextCompat.getDrawable(
+                context!!,
+                R.drawable.dialog_background
+            )
+        )
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
         // Inflate the layout for this fragment
@@ -52,7 +58,7 @@ class AppUpdaterDialog : DialogFragment() {
 
         //make dialog's width matchParent
         dialog?.window?.setLayout(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
     }
