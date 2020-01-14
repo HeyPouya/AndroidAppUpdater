@@ -23,7 +23,7 @@ class DownloadAPKUtil {
         downloadManager.setDestinationInExternalFilesDir(
             context,
             Environment.DIRECTORY_DOWNLOADS,
-            "${Constants.APK_NAME}.apk"
+            Constants.APK_NAME
         )
 
         //enqueue the file to start download

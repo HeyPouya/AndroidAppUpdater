@@ -103,6 +103,6 @@ class DirectLinkDownload : BroadcastReceiver() {
     }
 
     private fun getDestination(context: Context?) =
-        "${context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)}/$APK_NAME.apk"
+        "${context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)}/$APK_NAME"
 
 }
