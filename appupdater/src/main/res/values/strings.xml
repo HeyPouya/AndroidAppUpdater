@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">App Updater</string>
     <string name="please_wait">Please wait</string>
-    <string name="downloading_new_version">Downloading new version...</string>
-    <string name="download_notification_title">Downloading...</string>
+    <string name="downloading_new_version">Downloading new version…</string>
+    <string name="download_notification_title">Downloading…</string>
     <string name="download_notification_description">Downloading new version</string>
-    <string name="please_install">Please install</string>
+    <string name="please_install">Please install %s</string>
     <string name="or">or</string>
     <string name="download_from_store">Download from store</string>
     <string name="couldnt_find_downloaded_file">Couldn\'t find downloaded file.</string>

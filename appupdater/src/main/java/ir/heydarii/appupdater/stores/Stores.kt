@@ -7,6 +7,7 @@ import android.widget.Toast
 import ir.heydarii.appupdater.R
 import ir.heydarii.appupdater.pojo.Store
 import ir.heydarii.appupdater.pojo.UpdaterStoreList
+import java.util.*
 
 /**
  * this super class has some functions to use them in child classes
@@ -32,13 +33,11 @@ abstract class Stores {
         if (item.url.isNotEmpty())
             context?.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.url)))
         else {
-            val storeName = " ${store.name.toLowerCase().replace("_", " ")}"
+            val storeName = store.name.toLowerCase(Locale.ROOT).replace("_", " ")
             Toast.makeText(
-                context,
-                context?.getString(R.string.please_install) + storeName,
+                context, context?.getString(R.string.please_install, storeName),
                 Toast.LENGTH_LONG
             ).show()
         }
     }
-
 }
