@@ -51,7 +51,6 @@ class InstallAPKUtil {
         } else {
             Log.d(Constants.TAG, "Don't call this method on Android version bellow P (9)")
         }
-
     }
 
     private fun installAPKForNtoO(context: Context, path: String) {
@@ -74,6 +73,5 @@ class InstallAPKUtil {
         intent.setDataAndType(apkUri, "application/vnd.android.package-archive")
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         context.startActivity(intent)
-
     }
 }

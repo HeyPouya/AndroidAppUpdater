@@ -13,8 +13,7 @@ class Constants {
         const val APK_NAME = "NewAPK.apk"
         const val DATA_LIST = "DATA_LIST"
 
-        //to use typeface while using the dialog
+        // to use typeface while using the dialog
         var typeface: Typeface? = null
-
     }
 }

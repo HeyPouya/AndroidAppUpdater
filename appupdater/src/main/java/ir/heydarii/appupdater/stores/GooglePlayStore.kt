@@ -11,7 +11,10 @@ import ir.heydarii.appupdater.pojo.UpdaterStoreList
  */
 class GooglePlayStore : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${item.packageName}"))
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("market://details?id=${item.packageName}")
+        )
         showStore(context, intent, item, Store.GOOGLE_PLAY)
     }
 }

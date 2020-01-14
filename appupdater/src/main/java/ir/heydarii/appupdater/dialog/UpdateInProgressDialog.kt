@@ -1,6 +1,5 @@
 package ir.heydarii.appupdater.dialog
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +20,9 @@ class UpdateInProgressDialog : DialogFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_update_in_progress_dialog, container, false)
     }
@@ -33,11 +34,10 @@ class UpdateInProgressDialog : DialogFragment() {
             txtTitle.typeface = Constants.typeface
             txtDescription.typeface = Constants.typeface
         }
-        //making width of dialog to match_parent
+        // making width of dialog to match_parent
         dialog?.window?.setLayout(
             ConstraintLayout.LayoutParams.MATCH_PARENT,
             ConstraintLayout.LayoutParams.WRAP_CONTENT
         )
     }
-
 }

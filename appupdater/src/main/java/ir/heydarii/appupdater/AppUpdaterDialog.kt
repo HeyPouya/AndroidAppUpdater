@@ -1,6 +1,5 @@
 package ir.heydarii.appupdater
 
-
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,14 +26,13 @@ import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
  */
 class AppUpdaterDialog : DialogFragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        //setting isCancelable
+        // setting isCancelable
         val data = arguments?.getParcelable<UpdaterFragmentModel>(DATA_LIST)
         val cancelableMode = data?.isForceUpdate
         setDialogCancelable(cancelableMode)
@@ -55,7 +53,7 @@ class AppUpdaterDialog : DialogFragment() {
     override fun onStart() {
         super.onStart()
 
-        //make dialog's width matchParent
+        // make dialog's width matchParent
         dialog?.window?.setLayout(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
@@ -65,7 +63,7 @@ class AppUpdaterDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //getData that user set's via constructor
+        // getData that user set's via constructor
         getData()
     }
 
@@ -100,7 +98,7 @@ class AppUpdaterDialog : DialogFragment() {
         txtTitle.text = title
         txtDescription.text = description
 
-        //setting typefaces for text views
+        // setting typefaces for text views
         if (Constants.typeface != null) {
             txtTitle.typeface = Constants.typeface
             txtDescription.typeface = Constants.typeface
@@ -127,7 +125,6 @@ class AppUpdaterDialog : DialogFragment() {
         recyclerDirect.adapter = DirectRecyclerAdapter(directLinks) { onListListener(it) }
 
         recyclerStores.adapter = StoresRecyclerAdapter(storeLinks) { onListListener(it) }
-
     }
 
     /**
@@ -195,7 +192,7 @@ class AppUpdaterDialog : DialogFragment() {
             typeface: Typeface? = null
         ): AppUpdaterDialog {
 
-            //set typeface in utils class to use later in application
+            // set typeface in utils class to use later in application
             Constants.typeface = typeface
 
             // bundle to add data to our dialog

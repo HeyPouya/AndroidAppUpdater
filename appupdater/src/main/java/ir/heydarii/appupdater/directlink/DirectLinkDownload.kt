@@ -47,7 +47,7 @@ class DirectLinkDownload : BroadcastReceiver() {
 
     private fun installApk(context: Context) {
 
-        //To dismiss the download in progress dialog
+        // To dismiss the download in progress dialog
         dismissAlertDialog()
 
         if (!File(getDestination(context)).exists())
@@ -66,7 +66,9 @@ class DirectLinkDownload : BroadcastReceiver() {
         val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
         val permissionChecker = PermissionUtils()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && !context.packageManager.canRequestPackageInstalls()) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P &&
+            !context.packageManager.canRequestPackageInstalls()
+        ) {
             UnknownSourceInstallRequest().showRequest(context)
         }
 
@@ -78,12 +80,12 @@ class DirectLinkDownload : BroadcastReceiver() {
 
     private fun downloadApk(url: String, context: Context, fm: FragmentManager?) {
 
-        //delete APK if user downloaded the apk before
+        // delete APK if user downloaded the apk before
         deleteExistingFile(getDestination(context))
 
-        //downloads the apk
+        // downloads the apk
         DownloadAPKUtil().download(url, context)
-        //show alert dialog to user
+        // show alert dialog to user
         showAlertDialog(fm)
     }
 
@@ -104,5 +106,4 @@ class DirectLinkDownload : BroadcastReceiver() {
 
     private fun getDestination(context: Context?) =
         "${context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)}/$APK_NAME"
-
 }

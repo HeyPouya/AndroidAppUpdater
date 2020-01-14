@@ -19,22 +19,24 @@ class DownloadAPKUtil {
 
         // setting title and description to be shown on download notification
         downloadManager.setTitle(context.getString(R.string.download_notification_title))
-        downloadManager.setDescription(context.getString(R.string.download_notification_description))
+        downloadManager.setDescription(context.getString(R.string.download_notification_desc))
 
-        //setting up download manager's properties
+        // setting up download manager's properties
         downloadManager.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-        downloadManager.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+        downloadManager.setAllowedNetworkTypes(
+            DownloadManager.Request.NETWORK_WIFI or
+                DownloadManager.Request.NETWORK_MOBILE
+        )
 
-        //setting the destination of the downloaded file
+        // setting the destination of the downloaded file
         downloadManager.setDestinationInExternalFilesDir(
             context,
             Environment.DIRECTORY_DOWNLOADS,
             Constants.APK_NAME
         )
 
-        //enqueue the file to start download
+        // enqueue the file to start download
         val manager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         Constants.REQUEST_ID = manager.enqueue(downloadManager)
-
     }
 }

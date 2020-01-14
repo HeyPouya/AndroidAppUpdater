@@ -12,7 +12,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
 class TestUtils {
     lateinit var appContext: Context
@@ -22,15 +21,21 @@ class TestUtils {
         appContext = InstrumentationRegistry.getInstrumentation().context
     }
 
-
     @Test
     fun testCheckPermission() {
         val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
-        val permissionCheck = PermissionUtils.isPermissionGranted(permission, appContext)
-        if (ContextCompat.checkSelfPermission(appContext, permission) == PackageManager.PERMISSION_GRANTED)
-            Assert.assertTrue("The permission is granted but the function is returning false", permissionCheck)
+        val permissionCheck = PermissionUtils().isPermissionGranted(permission, appContext)
+        if (ContextCompat.checkSelfPermission(appContext, permission)
+            == PackageManager.PERMISSION_GRANTED
+        )
+            Assert.assertTrue(
+                "The permission is granted but the function is returning false",
+                permissionCheck
+            )
         else
-            Assert.assertFalse("The permission is not granted but the function is returning true", permissionCheck)
-
+            Assert.assertFalse(
+                "The permission is not granted but the function is returning true",
+                permissionCheck
+            )
     }
 }

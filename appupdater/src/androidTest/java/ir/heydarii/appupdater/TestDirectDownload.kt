@@ -23,6 +23,4 @@ class TestDirectDownload {
     fun testInstallApk() {
         directDownload.installApk(context)
     }
-
-
 }

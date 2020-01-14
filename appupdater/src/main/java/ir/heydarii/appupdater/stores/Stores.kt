@@ -7,7 +7,7 @@ import android.widget.Toast
 import ir.heydarii.appupdater.R
 import ir.heydarii.appupdater.pojo.Store
 import ir.heydarii.appupdater.pojo.UpdaterStoreList
-import java.util.*
+import java.util.* // ktlint-disable no-wildcard-imports
 
 /**
  * this super class has some functions to use them in child classes

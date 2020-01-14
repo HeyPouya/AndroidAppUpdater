@@ -32,5 +32,4 @@ class PermissionUtils {
         else
             throw NullPointerException("Provided activity is null")
     }
-
 }

@@ -43,6 +43,5 @@ class DirectRecyclerAdapter(
                 view.txtDirect.typeface = Constants.typeface
             view.setOnClickListener { listener(item) }
         }
-
     }
 }
