@@ -11,7 +11,6 @@ import android.os.Build
 import android.os.Environment
 import android.provider.Settings
 import android.util.Log
-import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
 import ir.heydarii.appupdater.R
 import ir.heydarii.appupdater.dialog.UpdateInProgressDialog
@@ -19,8 +18,8 @@ import ir.heydarii.appupdater.utils.Constants.Companion.APK_NAME
 import ir.heydarii.appupdater.utils.Constants.Companion.REQUEST_ID
 import ir.heydarii.appupdater.utils.Constants.Companion.TAG
 import ir.heydarii.appupdater.utils.Constants.Companion.UPDATE_DIALOG_TAG
+import ir.heydarii.appupdater.utils.InstallAPK
 import ir.heydarii.appupdater.utils.PermissionUtils
-import ir.heydarii.appupdater.utils.installAPKForQ
 import java.io.File
 
 /**
@@ -36,12 +35,12 @@ class DirectLinkDownload : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
 
         val action = intent?.action
-        if (DownloadManager.ACTION_DOWNLOAD_COMPLETE == action) {
+        if (action == DownloadManager.ACTION_DOWNLOAD_COMPLETE) {
             val referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
             // if downloaded file is our apk
             if (referenceId == REQUEST_ID) {
-                installApk(context!!)
+                context?.let { installApk(it) }
             }
         }
     }
@@ -54,35 +53,10 @@ class DirectLinkDownload : BroadcastReceiver() {
         //To dismiss the download in progress dialog
         dismissAlertDialog()
 
-        if (!File(getDestination(context)).exists()) {
+        if (!File(getDestination(context)).exists())
             Log.d(TAG, context.getString(R.string.couldnt_find_downloaded_file))
-        }
-        // In android 9 and above
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            installAPKForQ(context, getDestination(context))
-        }
-        // In android 7 and above
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            val uri = FileProvider.getUriForFile(
-                context,
-                "${context.packageName}.fileProvider.GenericFileProvider",
-                File(getDestination(context))
-            )
-            val install = Intent(Intent.ACTION_INSTALL_PACKAGE)
-            install.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            install.data = uri
-            install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(install)
-        }
-        // in android 6 and bellow
-        else {
-            val apkUri = Uri.fromFile(File(getDestination(context)))
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.setDataAndType(apkUri, "application/vnd.android.package-archive")
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            context.startActivity(intent)
-        }
+        else
+            InstallAPK().installAPK(context, getDestination(context), Build.VERSION.SDK_INT)
     }
 
     fun getApk(url: String, context: Activity?, fm: FragmentManager?) {
