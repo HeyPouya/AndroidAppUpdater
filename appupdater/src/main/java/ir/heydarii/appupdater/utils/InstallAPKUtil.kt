@@ -1,5 +1,6 @@
 package ir.heydarii.appupdater.utils
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -42,7 +43,7 @@ class InstallAPKUtil {
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     context.startActivity(intent)
-                } catch (e: Exception) {
+                } catch (e: ActivityNotFoundException) {
                     Log.d(Constants.TAG, e.message.orEmpty())
                 }
             } else {

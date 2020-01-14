@@ -1,5 +1,6 @@
 package ir.heydarii.appupdater.stores
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -14,6 +15,9 @@ import java.util.* // ktlint-disable no-wildcard-imports
  */
 abstract class Stores {
 
+    /**
+     * Sets intent of the store
+     */
     abstract fun setStoreData(context: Context?, item: UpdaterStoreList)
 
     protected fun showStore(
@@ -24,7 +28,7 @@ abstract class Stores {
     ) {
         try {
             context?.startActivity(intent)
-        } catch (e: Exception) {
+        } catch (e: ActivityNotFoundException) {
             showUrlOrErrorToast(context, item, store)
         }
     }

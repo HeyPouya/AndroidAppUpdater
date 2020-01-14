@@ -67,9 +67,6 @@ class AppUpdaterDialog : DialogFragment() {
         getData()
     }
 
-    /**
-     * User sets this data via constructor
-     */
     private fun getData() {
         val data = arguments?.getParcelable<UpdaterFragmentModel>(DATA_LIST)
         val title = data?.title
