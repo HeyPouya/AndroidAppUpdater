@@ -122,10 +122,10 @@ class AppUpdaterDialog : DialogFragment() {
                 storeLinks.add(it)
         }
 
-        recyclerDirect.adapter = DirectRecyclerAdapter(directLinks.orEmpty()) { onListListener(it) }
+        recyclerDirect.adapter = DirectRecyclerAdapter(directLinks) { onListListener(it) }
         recyclerDirect.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-        recyclerStores.adapter = StoresRecyclerAdapter(storeLinks.orEmpty()) { onListListener(it) }
+        recyclerStores.adapter = StoresRecyclerAdapter(storeLinks) { onListListener(it) }
         recyclerStores.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
 
     }
