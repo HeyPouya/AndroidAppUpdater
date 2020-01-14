@@ -1,10 +1,11 @@
-# Android App Updater (specially for Iranian App markets)
+# Android App Updater (specially for Iranian Android markets)
 
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Easy%20App%20Updater-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7388)
 [![](https://jitpack.io/v/SirLordPouya/AndroidAppUpdater.svg)](https://jitpack.io/#SirLordPouya/AndroidAppUpdater)
 [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
 [![Build Status](https://travis-ci.org/SirLordPouya/AndroidAppUpdater.svg?branch=master)](https://travis-ci.org/SirLordPouya/AndroidAppUpdater)
+[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/icon.png" width="250">
@@ -13,7 +14,7 @@
 App Updater is a library to show update dialog to your users, whenever a new version of your application is available.
 It is really easy-to-use and fully customizable.
 
-##### It is fully integrated with Kotlin and androidX
+##### It is built with Kotlin and androidX
 
 
 <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/Screenshot_1.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/Screenshot_2.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/Screenshot_3.png" width="250">
@@ -29,7 +30,7 @@ It is really easy-to-use and fully customizable.
 
 you can show users as many stores as you need, to download your application from there. to make a new store :
 
-```java
+```kotlin
     val list = ArrayList<UpdaterStoreList>()
 
     list.add(UpdaterStoreList(Store.DIRECT_URL, "Store Title", R.mipmap.ic_launcher , "https://url/app.apk", BuildConfig.APPLICATION_ID))
@@ -45,7 +46,7 @@ parameters of UpdaterStoreList, as the order you see in above line :
 
 ##### or you can omit adding some properties in Kotlin
 
-```java
+```kotlin
     list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Download From Google Play", packageName = BuildConfig.APPLICATION_ID))
 ```
 
@@ -62,7 +63,7 @@ this library currently supports only these markets :
 
 To Select an Store you should use :
 
-```java
+```kotlin
     Store.GOOGLE_PLAY
     Store.CAFE_BAZAAR
     Store.MYKET
@@ -82,7 +83,7 @@ Users can download that APK directly on their phone, and after downloading finis
 
 ### To Show UpdateDialog
 
-```java
+```kotlin
     AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade yo the new version.", list, true, font).show(supportFragmentManager, "TAG")
 ```
 parameters as the order you see in above line :
@@ -98,6 +99,7 @@ parameters as the order you see in above line :
 In strings file, add these lines :
 
 ```xml
+    <resources>
     <string name="please_wait">Please wait</string>
     <string name="downloading_new_version">Downloading new version...</string>
     <string name="download_notification_title">Downloading...</string>
@@ -105,6 +107,7 @@ In strings file, add these lines :
     <string name="please_install">Please install</string>
     <string name="or">or</string>
     <string name="download_from_store">Download from store</string>
+    </resources>
 ```
 
 ### To use default icons
@@ -112,7 +115,7 @@ In strings file, add these lines :
 I have added default icons of Iranian stores in the app.
 if you like to use them, you can find them like :
 
-```java
+```
     R.drawable.appupdater_ic_google_play
     R.drawable.appupdater_ic_bazar
     R.drawable.appupdater_ic_myket
@@ -129,7 +132,7 @@ Add this to your root *build.gradle* file:
 ```groovy
 allprojects {
     repositories {
-        ...
+        
         maven { url 'https://jitpack.io' }
     }
 }
@@ -138,7 +141,7 @@ allprojects {
 Now add the dependency to your app build.gradle file:
 
 ```groovy
-    implementation 'com.github.SirLordPouya:AndroidAppUpdater:3.0.0'
+    implementation 'com.github.SirLordPouya:AndroidAppUpdater:4.0.0'
 ```
 
 ## License
