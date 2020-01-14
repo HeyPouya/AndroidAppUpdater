@@ -4,13 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import android.provider.Settings
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import java.io.File
 
-class InstallAPK {
+class InstallAPKUtil {
 
     fun installAPK(context: Context, path: String, androidVersion: Int) {
         when (androidVersion) {
@@ -39,13 +38,7 @@ class InstallAPK {
                 Log.d(Constants.TAG, e.message.orEmpty())
             }
         } else {
-            context.startActivity(
-                Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).setData(
-                    Uri.parse(
-                        String.format("package:%s", context.packageName)
-                    )
-                )
-            )
+            RequestForAppInstallUtil().showRequest(context)
         }
     }
 

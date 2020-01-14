@@ -9,7 +9,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.provider.Settings
 import android.util.Log
 import androidx.fragment.app.FragmentManager
 import ir.heydarii.appupdater.R
@@ -18,8 +17,9 @@ import ir.heydarii.appupdater.utils.Constants.Companion.APK_NAME
 import ir.heydarii.appupdater.utils.Constants.Companion.REQUEST_ID
 import ir.heydarii.appupdater.utils.Constants.Companion.TAG
 import ir.heydarii.appupdater.utils.Constants.Companion.UPDATE_DIALOG_TAG
-import ir.heydarii.appupdater.utils.InstallAPK
+import ir.heydarii.appupdater.utils.InstallAPKUtil
 import ir.heydarii.appupdater.utils.PermissionUtils
+import ir.heydarii.appupdater.utils.RequestForAppInstallUtil
 import java.io.File
 
 /**
@@ -56,7 +56,7 @@ class DirectLinkDownload : BroadcastReceiver() {
         if (!File(getDestination(context)).exists())
             Log.d(TAG, context.getString(R.string.couldnt_find_downloaded_file))
         else
-            InstallAPK().installAPK(context, getDestination(context), Build.VERSION.SDK_INT)
+            InstallAPKUtil().installAPK(context, getDestination(context), Build.VERSION.SDK_INT)
     }
 
     fun getApk(url: String, context: Activity?, fm: FragmentManager?) {
@@ -67,13 +67,7 @@ class DirectLinkDownload : BroadcastReceiver() {
         val permissionChecker = PermissionUtils()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && !context.packageManager.canRequestPackageInstalls()) {
-            context.startActivity(
-                Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).setData(
-                    Uri.parse(
-                        String.format("package:%s", context.packageName)
-                    )
-                )
-            )
+            RequestForAppInstallUtil().showRequest(context)
         }
 
         if (permissionChecker.isPermissionGranted(permission, context))
