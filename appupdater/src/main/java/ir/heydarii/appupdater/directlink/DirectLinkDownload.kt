@@ -45,9 +45,6 @@ class DirectLinkDownload : BroadcastReceiver() {
         }
     }
 
-    /**
-     * Shows install apk page in all versions of android devices
-     */
     private fun installApk(context: Context) {
 
         //To dismiss the download in progress dialog
@@ -59,6 +56,9 @@ class DirectLinkDownload : BroadcastReceiver() {
             InstallAPKUtil().installAPK(context, getDestination(context), Build.VERSION.SDK_INT)
     }
 
+    /**
+     * Checks for needed permissions and tries to download the apk
+     */
     fun getApk(url: String, context: Activity?, fm: FragmentManager?) {
 
         checkNotNull(context)
@@ -76,9 +76,6 @@ class DirectLinkDownload : BroadcastReceiver() {
             permissionChecker.getPermission(context, arrayOf(permission))
     }
 
-    /**
-     * sets a download manager and enqueues the download request
-     */
     private fun downloadApk(url: String, context: Context, fm: FragmentManager?) {
 
         //delete APK if user downloaded the apk before
@@ -90,18 +87,12 @@ class DirectLinkDownload : BroadcastReceiver() {
         showAlertDialog(fm)
     }
 
-    /**
-     * Delete Downloaded APK if previously downloaded
-     */
     private fun deleteExistingFile(destination: String) {
         val file = File(destination)
         if (file.exists())
             file.delete()
     }
 
-    /**
-     * shows a progress dialog for user to show download is in progress
-     */
     private fun showAlertDialog(fm: FragmentManager?) {
         fm?.let { UpdateInProgressDialog.instance.show(it, UPDATE_DIALOG_TAG) }
     }
