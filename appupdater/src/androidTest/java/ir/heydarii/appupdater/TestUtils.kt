@@ -12,15 +12,24 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * Some sample tests
+ */
 @RunWith(AndroidJUnit4::class)
 class TestUtils {
     lateinit var appContext: Context
 
+    /**
+     * Providing context
+     */
     @Before
     fun setup() {
         appContext = InstrumentationRegistry.getInstrumentation().context
     }
 
+    /**
+     * Checks permission checker
+     */
     @Test
     fun testCheckPermission() {
         val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
