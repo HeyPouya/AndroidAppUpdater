@@ -23,11 +23,8 @@ import ir.heydarii.appupdater.stores.GooglePlayStore
 import ir.heydarii.appupdater.stores.IranAppsStore
 import ir.heydarii.appupdater.stores.MyketStore
 import ir.heydarii.appupdater.utils.Constants
+import ir.heydarii.appupdater.utils.Constants.Companion.DATA_LIST
 import kotlinx.android.synthetic.main.fragment_app_updater_dialog.*
-
-
-//consts to use in this dialog
-const val DATA_LIST = "DATA_LIST"
 
 /**
  * Shows ForceUpdate Dialog Fragment
@@ -68,7 +65,6 @@ class AppUpdaterDialog : DialogFragment() {
 
         //getData that user set's via constructor
         getData()
-
     }
 
     /**
@@ -101,7 +97,6 @@ class AppUpdaterDialog : DialogFragment() {
         txtTitle.text = title
         txtDescription.text = description
 
-
         //setting typefaces for text views
         if (Constants.typeface != null) {
             txtTitle.typeface = Constants.typeface
@@ -117,8 +112,8 @@ class AppUpdaterDialog : DialogFragment() {
     }
 
     private fun setUpBothRecyclers(list: List<UpdaterStoreList>?) {
-        val directLinks = ArrayList<UpdaterStoreList>()
-        val storeLinks = ArrayList<UpdaterStoreList>()
+        val directLinks by lazy { ArrayList<UpdaterStoreList>() }
+        val storeLinks by lazy { ArrayList<UpdaterStoreList>() }
 
         list?.forEach {
             if (it.store == Store.DIRECT_URL)

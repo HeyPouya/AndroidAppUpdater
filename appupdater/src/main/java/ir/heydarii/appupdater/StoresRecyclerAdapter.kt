@@ -44,6 +44,5 @@ class StoresRecyclerAdapter(
             view.imgStore.setImageResource(item.icon)
             view.setOnClickListener { listener(item) }
         }
-
     }
 }
