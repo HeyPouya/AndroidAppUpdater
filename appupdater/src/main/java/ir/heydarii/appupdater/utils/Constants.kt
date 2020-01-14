@@ -2,6 +2,9 @@ package ir.heydarii.appupdater.utils
 
 import android.graphics.Typeface
 
+/**
+ * A class to store constants of the project
+ */
 class Constants {
     companion object {
         const val TAG = "AndroidAppUpdater"

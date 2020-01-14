@@ -6,8 +6,14 @@ import android.net.Uri
 import android.os.Environment
 import ir.heydarii.appupdater.R
 
+/**
+ * A class to download the apk via Android's download manager
+ */
 class DownloadAPKUtil {
 
+    /**
+     * Downloads the given file via download manager
+     */
     fun download(url: String, context: Context) {
         val downloadManager = DownloadManager.Request(Uri.parse(url))
 

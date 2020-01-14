@@ -19,7 +19,7 @@ import ir.heydarii.appupdater.utils.Constants.Companion.UPDATE_DIALOG_TAG
 import ir.heydarii.appupdater.utils.DownloadAPKUtil
 import ir.heydarii.appupdater.utils.InstallAPKUtil
 import ir.heydarii.appupdater.utils.PermissionUtils
-import ir.heydarii.appupdater.utils.RequestForAppInstallUtil
+import ir.heydarii.appupdater.utils.UnknownSourceInstallRequest
 import java.io.File
 
 /**
@@ -67,7 +67,7 @@ class DirectLinkDownload : BroadcastReceiver() {
         val permissionChecker = PermissionUtils()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && !context.packageManager.canRequestPackageInstalls()) {
-            RequestForAppInstallUtil().showRequest(context)
+            UnknownSourceInstallRequest().showRequest(context)
         }
 
         if (permissionChecker.isPermissionGranted(permission, context))

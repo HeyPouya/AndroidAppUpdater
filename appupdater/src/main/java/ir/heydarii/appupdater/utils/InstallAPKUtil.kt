@@ -9,8 +9,14 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import java.io.File
 
+/**
+ * A class to request apk installation in different Android apis
+ */
 class InstallAPKUtil {
 
+    /**
+     * Uses different methods to install the apk depending the user's Android version
+     */
     fun installAPK(context: Context, path: String, androidVersion: Int) {
         when (androidVersion) {
             in 0..Build.VERSION_CODES.M -> installAPKForMAndBellow(context, path)
@@ -38,7 +44,7 @@ class InstallAPKUtil {
                 Log.d(Constants.TAG, e.message.orEmpty())
             }
         } else {
-            RequestForAppInstallUtil().showRequest(context)
+            UnknownSourceInstallRequest().showRequest(context)
         }
     }
 
