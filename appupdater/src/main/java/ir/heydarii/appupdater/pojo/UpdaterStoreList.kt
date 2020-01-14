@@ -4,6 +4,9 @@ import android.os.Parcelable
 import ir.heydarii.appupdater.R
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * User has to pass this model to the library
+ */
 @Parcelize
 data class UpdaterFragmentModel(
     val title: String?,
@@ -12,6 +15,9 @@ data class UpdaterFragmentModel(
     val isForceUpdate: Boolean
 ) : Parcelable
 
+/**
+ * The model that we are using for list of stores
+ */
 @Parcelize
 data class UpdaterStoreList(
     val store: Store = Store.DIRECT_URL,

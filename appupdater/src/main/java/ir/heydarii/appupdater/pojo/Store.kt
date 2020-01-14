@@ -1,7 +1,7 @@
 package ir.heydarii.appupdater.pojo
 
-/*
-Enum class to select type of market
+/**
+ * Enum class to select type of market
  */
 enum class Store {
     DIRECT_URL,

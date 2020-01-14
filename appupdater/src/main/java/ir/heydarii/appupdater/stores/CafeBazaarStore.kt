@@ -7,7 +7,7 @@ import ir.heydarii.appupdater.pojo.Store
 import ir.heydarii.appupdater.pojo.UpdaterStoreList
 
 /**
- * shows apk in bazaar store
+ * shows apk in CafeBazaar store
  */
 class CafeBazaarStore : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {

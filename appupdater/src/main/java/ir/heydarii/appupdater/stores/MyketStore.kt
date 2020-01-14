@@ -7,7 +7,7 @@ import ir.heydarii.appupdater.pojo.Store
 import ir.heydarii.appupdater.pojo.UpdaterStoreList
 
 /**
- * shows apk in bazaar store
+ * shows apk in Myket store
  */
 class MyketStore : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {

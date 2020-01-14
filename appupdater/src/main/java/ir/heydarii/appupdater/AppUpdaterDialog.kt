@@ -79,16 +79,10 @@ class AppUpdaterDialog : DialogFragment() {
         setUpProperties(title, description, list)
     }
 
-    /**
-     * set's isCancelable functionality
-     */
     private fun setDialogCancelable(cancelableMode: Boolean?) {
         cancelableMode?.let { isCancelable = it }
     }
 
-    /**
-     * sets title , description and stores list
-     */
     private fun setUpProperties(
         title: String?,
         description: String?,
@@ -127,9 +121,6 @@ class AppUpdaterDialog : DialogFragment() {
         recyclerStores.adapter = StoresRecyclerAdapter(storeLinks) { onListListener(it) }
     }
 
-    /**
-     * hide OrLayout if needed
-     */
     private fun hideOrLayoutIfNeeded(storeAndDirectAvailable: Boolean) {
         if (storeAndDirectAvailable)
             linearLayout.visibility = View.VISIBLE
@@ -137,10 +128,6 @@ class AppUpdaterDialog : DialogFragment() {
             linearLayout.visibility = View.GONE
     }
 
-    /**
-     * check if there is no direct link or there is no stores,
-     *
-     */
     private fun checkIfDirectAndStoreAvailable(list: List<UpdaterStoreList>) =
         list.map {
             it.store
@@ -153,9 +140,6 @@ class AppUpdaterDialog : DialogFragment() {
                 first.isNotEmpty() && second.isNotEmpty()
             }
 
-    /**
-     * listener to react to user, when user clicks on a store
-     */
     private fun onListListener(item: UpdaterStoreList) {
         when (item.store) {
             Store.DIRECT_URL ->
