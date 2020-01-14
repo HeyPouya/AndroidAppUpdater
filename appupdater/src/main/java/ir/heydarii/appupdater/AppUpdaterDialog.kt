@@ -138,7 +138,7 @@ class AppUpdaterDialog : DialogFragment() {
         if (storeAndDirectAvailable)
             linearLayout.visibility = View.VISIBLE
         else
-            linearLayout.visibility = View.INVISIBLE
+            linearLayout.visibility = View.GONE
     }
 
     /**
@@ -146,9 +146,16 @@ class AppUpdaterDialog : DialogFragment() {
      *
      */
     private fun checkIfDirectAndStoreAvailable(list: List<UpdaterStoreList>) =
-        list.distinctBy {
+        list.map {
             it.store
-        }.count() > 1
+        }
+            .distinct()
+            .toList()
+            .partition {
+                it == Store.DIRECT_URL
+            }.run {
+                first.isNotEmpty() && second.isNotEmpty()
+            }
 
     /**
      * listener to react to user, when user clicks on a store
