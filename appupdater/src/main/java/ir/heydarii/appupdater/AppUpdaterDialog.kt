@@ -123,10 +123,8 @@ class AppUpdaterDialog : DialogFragment() {
         }
 
         recyclerDirect.adapter = DirectRecyclerAdapter(directLinks) { onListListener(it) }
-        recyclerDirect.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         recyclerStores.adapter = StoresRecyclerAdapter(storeLinks) { onListListener(it) }
-        recyclerStores.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
 
     }
 
