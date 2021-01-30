@@ -1,7 +1,6 @@
 package ir.heydarii.appupdater.pojo
 
 import android.graphics.Typeface
-import ir.heydarii.appupdater.AppUpdaterDialog
 import ir.heydarii.appupdater.R
 import java.io.Serializable
 
@@ -26,20 +25,3 @@ data class UpdaterStoreList(
     var url: String = "",
     var packageName: String = ""
 ) : Serializable
-
-inline fun store(block: UpdaterStoreList.() -> Unit): UpdaterStoreList {
-    return UpdaterStoreList().apply(block)
-}
-
-inline fun updateDialogBuilder(block: UpdaterFragmentModel.() -> Unit): AppUpdaterDialog {
-    val updaterModel = UpdaterFragmentModel().apply(block)
-    with(updaterModel) {
-        return AppUpdaterDialog.getInstance(
-            title,
-            description,
-            list ?: listOf(),
-            isForceUpdate ?: false,
-            typeface
-        )
-    }
-}

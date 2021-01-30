@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import ir.heydarii.appupdater.AppUpdaterDialog
 import ir.heydarii.appupdater.pojo.Store
 import ir.heydarii.appupdater.pojo.UpdaterStoreList
-import ir.heydarii.appupdater.pojo.store
-import ir.heydarii.appupdater.pojo.updateDialogBuilder
+import ir.heydarii.appupdater.utils.store
+import ir.heydarii.appupdater.utils.updateDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val TAG = "showUpdateDialogTag"
@@ -16,6 +16,9 @@ const val FONT_PATH = "fonts/iran_sans_mobile.ttf"
 /**
  * Main activity of the sample application
  */
+
+const val customUrl = "https://cafebazaar.ir/download/bazaar.apk"
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,46 +36,46 @@ class MainActivity : AppCompatActivity() {
 
     private fun dslSample() {
         updateDialogBuilder {
-            title = "New Update !"
-            description = "Lots of new features! Update right now"
+            title = getString(R.string.library_title)
+            description = getString(R.string.library_description)
             isForceUpdate = false
             typeface = Typeface.createFromAsset(assets, FONT_PATH)
             list = listOf(
                 store {
                     store = Store.DIRECT_URL
-                    title = "Direct Download 1"
+                    title = getString(R.string.direct_download, "1")
                     icon = R.mipmap.ic_launcher
-                    url = "https://cafebazaar.ir/download/bazaar.apk"
+                    url = customUrl
                     packageName = BuildConfig.APPLICATION_ID
                 },
                 store {
                     store = Store.DIRECT_URL
-                    title = "Direct Download 2"
+                    title = getString(R.string.direct_download, "2")
                     icon = R.mipmap.ic_launcher
-                    url = "https://cafebazaar.ir/download/bazaar.apk"
+                    url = customUrl
                     packageName = BuildConfig.APPLICATION_ID
                 },
                 store {
                     store = Store.GOOGLE_PLAY
-                    title = "Play"
+                    title = getString(R.string.play)
                     icon = R.drawable.appupdater_ic_google_play
                     packageName = BuildConfig.APPLICATION_ID
                 },
                 store {
                     store = Store.CAFE_BAZAAR
-                    title = "Bazaar"
+                    title = getString(R.string.bazaar)
                     icon = R.drawable.appupdater_ic_bazar
                     packageName = BuildConfig.APPLICATION_ID
                 },
                 store {
                     store = Store.MYKET
-                    title = "Myket"
+                    title = getString(R.string.myket)
                     icon = R.drawable.appupdater_ic_myket
                     packageName = BuildConfig.APPLICATION_ID
                 },
                 store {
                     store = Store.IRAN_APPS
-                    title = "Iran apps"
+                    title = getString(R.string.iran_apps)
                     icon = R.drawable.appupdater_ic_iran_apps
                     packageName = BuildConfig.APPLICATION_ID
                 }
@@ -92,18 +95,18 @@ class MainActivity : AppCompatActivity() {
         list.add(
             UpdaterStoreList(
                 Store.DIRECT_URL,
-                "Direct Download 1",
+                getString(R.string.direct_download, "1"),
                 R.mipmap.ic_launcher,
-                "https://cafebazaar.ir/download/bazaar.apk",
+                customUrl,
                 BuildConfig.APPLICATION_ID
             )
         )
         list.add(
             UpdaterStoreList(
                 Store.DIRECT_URL,
-                "Direct Download 2",
+                getString(R.string.direct_download, "2"),
                 R.mipmap.ic_launcher,
-                "https://cafebazaar.ir/download/bazaar.apk",
+                customUrl,
                 BuildConfig.APPLICATION_ID
             )
         )
@@ -112,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         list.add(
             UpdaterStoreList(
                 Store.GOOGLE_PLAY,
-                "Play",
+                getString(R.string.play),
                 packageName = BuildConfig.APPLICATION_ID,
                 icon = R.drawable.appupdater_ic_google_play
             )
@@ -120,7 +123,7 @@ class MainActivity : AppCompatActivity() {
         list.add(
             UpdaterStoreList(
                 Store.CAFE_BAZAAR,
-                "Bazaar",
+                getString(R.string.bazaar),
                 packageName = BuildConfig.APPLICATION_ID,
                 icon = R.drawable.appupdater_ic_bazar
             )
@@ -128,7 +131,7 @@ class MainActivity : AppCompatActivity() {
         list.add(
             UpdaterStoreList(
                 Store.MYKET,
-                "Myket",
+                getString(R.string.myket),
                 packageName = BuildConfig.APPLICATION_ID,
                 icon = R.drawable.appupdater_ic_myket
             )
@@ -136,7 +139,7 @@ class MainActivity : AppCompatActivity() {
         list.add(
             UpdaterStoreList(
                 Store.IRAN_APPS,
-                "Iran apps",
+                getString(R.string.iran_apps),
                 packageName = BuildConfig.APPLICATION_ID,
                 icon = R.drawable.appupdater_ic_iran_apps
             )
@@ -144,8 +147,8 @@ class MainActivity : AppCompatActivity() {
 
         // creating update dialog
         AppUpdaterDialog.getInstance(
-            "New Update !",
-            "Lots of new features! Update right now",
+            getString(R.string.library_title),
+            getString(R.string.library_description),
             list,
             true,
             font
