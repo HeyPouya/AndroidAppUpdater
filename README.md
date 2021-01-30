@@ -31,11 +31,11 @@ list.add(UpdaterStoreList(Store.DIRECT_URL, "Store Title", R.mipmap.ic_launcher 
 
 parameters of UpdaterStoreList, as the order you see in above line:
 
-1. Store type
-2. Store title that user sees
-3. Icon of store that user sees
-4. An url to show the user if the store is not installed in user's device
-5. Package name of your application
+1.  Store type
+2.  Store title that user sees
+3.  Icon of store that user sees
+4.  An url to show the user if the store is not installed in user's device
+5.  Package name of your application
 
 #### or you can omit adding some properties in Kotlin
 
@@ -83,11 +83,11 @@ AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade y
 
 parameters as the order you see in above line:
 
-1. Update dialog title
-2. Update dialog description
-3. List of stores you created in last step
-4. Is it a force update? (should dialog be cancelable or not)
-5. Typeface to customize font style
+1.  Update dialog title
+2.  Update dialog description
+3.  List of stores you created in last step
+4.  Is it a force update? (should dialog be cancelable or not)
+5.  Typeface to customize font style
 
 ### To change library's texts
 
