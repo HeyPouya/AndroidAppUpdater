@@ -29,14 +29,14 @@ It is really easy-to-use and fully customizable.
 
 ### Stores
 
-you can show users as many stores as you need, to download your application from there. to make a new store :
+you can show users as many stores as you need, to download your application from there. to make a new store:
 
 ```kotlin
 val list = ArrayList<UpdaterStoreList>()
 list.add(UpdaterStoreList(Store.DIRECT_URL, "Store Title", R.mipmap.ic_launcher , "https://url/app.apk", BuildConfig.APPLICATION_ID))
 ```
 
-parameters of UpdaterStoreList, as the order you see in above line :
+parameters of UpdaterStoreList, as the order you see in above line:
 
 1.  Store type
 2.  Store title that user sees
@@ -51,14 +51,17 @@ list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Download From Google Play", packag
 ```
 
 ### Available stores
-this library currently supports only these markets :
+this library currently supports only these markets:
 
 [Google Play](https://play.google.com)
+
 [CafeBazaar](https://cafebazaar.ir)
+
 [IranApps](https://iranapps.ir)
+
 [Myket](https://myket.ir/)
 
-To Select an Store you should use :
+To Select an Store you should use:
 
 ```kotlin
 Store.GOOGLE_PLAY
@@ -83,7 +86,7 @@ list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launch
 ```kotlin
 AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade yo the new version.", list, true, font).show(supportFragmentManager, "TAG")
 ```
-parameters as the order you see in above line :
+parameters as the order you see in above line:
 
 1.  Update dialog title
 2.  Update dialog description
@@ -93,7 +96,7 @@ parameters as the order you see in above line :
 
 ### To change library's texts
 
-In strings file, add these lines :
+In strings file, add these lines:
 
 ```xml
 <resources>
@@ -121,9 +124,9 @@ R.drawable.appupdater_ic_iran_apps
 
 ## Kotlin DSL
 
-### Stores
+### Adding Stores in DSL
 
-you can show users as many stores as you need, to download your application from there. to make a new store :
+you can show users as many stores as you need, to download your application from there. to make a new store:
 
 ```kotlin
 store {
@@ -135,7 +138,7 @@ store {
         }
 ```
 
-### To Show UpdateDialog
+### Showing UpdateDialog in DSL
 
 ```kotlin
  updateDialogBuilder {
@@ -172,7 +175,7 @@ allprojects {
 Now add the dependency to your app build.gradle file:
 
 ```groovy
-    implementation 'com.github.SirLordPouya:AndroidAppUpdater:latest_version'
+implementation 'com.github.SirLordPouya:AndroidAppUpdater:latest_version'
 ```
 
 ## License
