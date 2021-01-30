@@ -12,14 +12,7 @@ import android.util.Log
 import androidx.fragment.app.FragmentManager
 import ir.heydarii.appupdater.R
 import ir.heydarii.appupdater.dialog.UpdateInProgressDialog
-import ir.heydarii.appupdater.utils.Constants.Companion.APK_NAME
-import ir.heydarii.appupdater.utils.Constants.Companion.REQUEST_ID
-import ir.heydarii.appupdater.utils.Constants.Companion.TAG
-import ir.heydarii.appupdater.utils.Constants.Companion.UPDATE_DIALOG_TAG
-import ir.heydarii.appupdater.utils.DownloadAPKUtil
-import ir.heydarii.appupdater.utils.InstallAPKUtil
-import ir.heydarii.appupdater.utils.PermissionUtils
-import ir.heydarii.appupdater.utils.UnknownSourceInstallRequest
+import ir.heydarii.appupdater.utils.*
 import java.io.File
 
 /**

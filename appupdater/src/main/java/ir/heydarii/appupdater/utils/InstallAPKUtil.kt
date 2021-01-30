@@ -44,13 +44,13 @@ class InstallAPKUtil {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     context.startActivity(intent)
                 } catch (e: ActivityNotFoundException) {
-                    Log.d(Constants.TAG, e.message.orEmpty())
+                    Log.d(TAG, e.message.orEmpty())
                 }
             } else {
                 UnknownSourceInstallRequest().showRequest(context)
             }
         } else {
-            Log.d(Constants.TAG, "Don't call this method on Android version bellow P (9)")
+            Log.d(TAG, "Don't call this method on Android version bellow P (9)")
         }
     }
 

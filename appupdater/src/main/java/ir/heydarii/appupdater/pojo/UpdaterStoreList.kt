@@ -1,28 +1,45 @@
 package ir.heydarii.appupdater.pojo
 
-import android.os.Parcelable
+import android.graphics.Typeface
+import ir.heydarii.appupdater.AppUpdaterDialog
 import ir.heydarii.appupdater.R
-import kotlinx.android.parcel.Parcelize
+import java.io.Serializable
 
 /**
  * User has to pass this model to the library
  */
-@Parcelize
 data class UpdaterFragmentModel(
-    val title: String?,
-    val description: String?,
-    val list: List<UpdaterStoreList>,
-    val isForceUpdate: Boolean
-) : Parcelable
+    var title: String? = "",
+    var description: String? = "",
+    var list: List<UpdaterStoreList>? = listOf(),
+    var isForceUpdate: Boolean? = false,
+    var typeface: Typeface? = null
+) : Serializable
 
 /**
  * The model that we are using for list of stores
  */
-@Parcelize
 data class UpdaterStoreList(
-    val store: Store = Store.DIRECT_URL,
-    val title: String = "Store",
-    val icon: Int = R.drawable.appupdater_ic_cloud,
-    val url: String = "",
-    val packageName: String = ""
-) : Parcelable
+    var store: Store = Store.DIRECT_URL,
+    var title: String = "Store",
+    var icon: Int = R.drawable.appupdater_ic_cloud,
+    var url: String = "",
+    var packageName: String = ""
+) : Serializable
+
+inline fun store(block: UpdaterStoreList.() -> Unit): UpdaterStoreList {
+    return UpdaterStoreList().apply(block)
+}
+
+inline fun updateDialogBuilder(block: UpdaterFragmentModel.() -> Unit): AppUpdaterDialog {
+    val updaterModel = UpdaterFragmentModel().apply(block)
+    with(updaterModel) {
+        return AppUpdaterDialog.getInstance(
+            title,
+            description,
+            list ?: listOf(),
+            isForceUpdate ?: false,
+            typeface
+        )
+    }
+}

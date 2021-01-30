@@ -3,10 +3,10 @@ package ir.heydarii.appupdater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ir.heydarii.appupdater.pojo.UpdaterStoreList
-import ir.heydarii.appupdater.utils.Constants
-import kotlinx.android.synthetic.main.download_direct_item.view.*
+import ir.heydarii.appupdater.utils.typeface
 
 /**
  * Adapter to show Direct download links
@@ -38,9 +38,10 @@ class DirectRecyclerAdapter(
          * Binds data to layout
          */
         fun onBind(item: UpdaterStoreList) {
-            view.txtDirect.text = item.title
-            if (Constants.typeface != null)
-                view.txtDirect.typeface = Constants.typeface
+            val txtDirect = view.findViewById<TextView>(R.id.txtDirect)
+            txtDirect.text = item.title
+            if (typeface != null)
+                txtDirect.typeface = typeface
             view.setOnClickListener { listener(item) }
         }
     }

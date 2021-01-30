@@ -3,10 +3,11 @@ package ir.heydarii.appupdater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ir.heydarii.appupdater.pojo.UpdaterStoreList
-import ir.heydarii.appupdater.utils.Constants
-import kotlinx.android.synthetic.main.download_stores_item.view.*
+import ir.heydarii.appupdater.utils.typeface
 
 /**
  * Adapter to show stores on dialog page
@@ -38,10 +39,12 @@ class StoresRecyclerAdapter(
          * Binds data to view
          */
         fun onBind(item: UpdaterStoreList) {
-            view.txtStoreTitle.text = item.title
-            if (Constants.typeface != null)
-                view.txtStoreTitle.typeface = Constants.typeface
-            view.imgStore.setImageResource(item.icon)
+            val txtStoreTitle = view.findViewById<TextView>(R.id.txtStoreTitle)
+            val imgStore = view.findViewById<ImageView>(R.id.imgStore)
+            txtStoreTitle.text = item.title
+            if (typeface != null)
+                txtStoreTitle.typeface = typeface
+            imgStore.setImageResource(item.icon)
             view.setOnClickListener { listener(item) }
         }
     }

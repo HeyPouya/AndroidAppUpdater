@@ -32,11 +32,11 @@ class DownloadAPKUtil {
         downloadManager.setDestinationInExternalFilesDir(
             context,
             Environment.DIRECTORY_DOWNLOADS,
-            Constants.APK_NAME
+            APK_NAME
         )
 
         // enqueue the file to start download
         val manager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        Constants.REQUEST_ID = manager.enqueue(downloadManager)
+        REQUEST_ID = manager.enqueue(downloadManager)
     }
 }
