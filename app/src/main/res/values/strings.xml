@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Android App Updater</string>
+    <string name="kotlin_dsl_sample">Kotlin DSL Sample</string>
+    <string name="kotlin_sample">Kotlin Sample</string>
     <!--<string name="please_wait">لطفا صبر کنید</string>-->
     <!--<string name="downloading_new_version">درحال دانلود آخرین نسخه...</string>-->
     <!--<string name="or">یا</string>-->

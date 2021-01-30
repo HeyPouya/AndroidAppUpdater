@@ -22,9 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // typeface to use in dialog
-        val font = Typeface.createFromAsset(assets, FONT_PATH)
-
         btnKotlin.setOnClickListener {
             kotlinSample()
         }
