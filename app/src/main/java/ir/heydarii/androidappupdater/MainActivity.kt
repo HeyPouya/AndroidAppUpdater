@@ -13,12 +13,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 const val TAG = "showUpdateDialogTag"
 const val FONT_PATH = "fonts/iran_sans_mobile.ttf"
 
-/**
- * Main activity of the sample application
- */
 
 const val customUrl = "https://cafebazaar.ir/download/bazaar.apk"
 
+/**
+ * Main activity of the sample application
+ */
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
