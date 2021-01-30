@@ -8,8 +8,8 @@ android {
         applicationId "ir.heydarii.androidappupdater"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 401
-        versionName "4.0.1"
+        versionCode 500
+        versionName "5.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -30,7 +30,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //support dependency
-    implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
