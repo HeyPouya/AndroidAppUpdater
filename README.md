@@ -18,10 +18,6 @@ It is really easy-to-use and fully customizable.
 
 <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/Screenshot_1.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/Screenshot_2.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/Screenshot_3.png" width="250">
 
-## Releases
-
-#### Current release: [![](https://jitpack.io/v/SirLordPouya/AndroidAppUpdater.svg)](https://jitpack.io/#SirLordPouya/AndroidAppUpdater)
-
 ## Kotlin Usage
 
 ### Stores
@@ -35,19 +31,20 @@ list.add(UpdaterStoreList(Store.DIRECT_URL, "Store Title", R.mipmap.ic_launcher 
 
 parameters of UpdaterStoreList, as the order you see in above line:
 
-1.  Store type
-2.  Store title that user sees
-3.  Icon of store that user sees
-4.  An url to show the user if the store is not installed in user's device
-5.  Package name of your application
+1. Store type
+2. Store title that user sees
+3. Icon of store that user sees
+4. An url to show the user if the store is not installed in user's device
+5. Package name of your application
 
-##### or you can omit adding some properties in Kotlin
+#### or you can omit adding some properties in Kotlin
 
 ```kotlin
 list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Download From Google Play", packageName = BuildConfig.APPLICATION_ID))
 ```
 
 ### Available stores
+
 this library currently supports only these markets:
 
 [Google Play](https://play.google.com)
@@ -72,7 +69,7 @@ Store.IRAN_APPS
 you can also make as many direct APK download links as you need.
 Users can download that APK directly on their phone, and after downloading finishes, the install page will be shown to the user.
 
-##### Remember to put WRITE_EXTERNAL_STORAGE, INTERNET and REQUEST_INSTALL_PACKAGES permissions in your manifest. The library asks these permissions at runtime if needed.
+#### Remember to put WRITE_EXTERNAL_STORAGE, INTERNET and REQUEST_INSTALL_PACKAGES permissions in your manifest. The library asks these permissions at runtime if needed
 
 ```kotlin
 list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launcher , "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
@@ -83,13 +80,14 @@ list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launch
 ```kotlin
 AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade yo the new version.", list, true, font).show(supportFragmentManager, "TAG")
 ```
+
 parameters as the order you see in above line:
 
-1.  Update dialog title
-2.  Update dialog description
-3.  List of stores you created in last step
-4.  Is it a force update? (should dialog be cancelable or not)
-5.  Typeface to customize font style
+1. Update dialog title
+2. Update dialog description
+3. List of stores you created in last step
+4. Is it a force update? (should dialog be cancelable or not)
+5. Typeface to customize font style
 
 ### To change library's texts
 
@@ -112,7 +110,7 @@ In strings file, add these lines:
 I have added default icons of Iranian stores in the app.
 if you like to use them, you can find them like :
 
-```
+```text
 R.drawable.appupdater_ic_google_play
 R.drawable.appupdater_ic_bazar
 R.drawable.appupdater_ic_myket
@@ -155,9 +153,10 @@ store {
 ```
 
 You can see the demo application to learn more about the usage.
+
 ## Download
 
-#### Adding the dependency
+### Adding the dependency
 
 Add this to your root *build.gradle* file:
 
@@ -177,8 +176,9 @@ implementation 'com.github.SirLordPouya:AndroidAppUpdater:latest_version'
 
 ## License
 
-```
+```text
 LoadingFragment is released under the Apache License 2.0. See LICENSE for details.
 Copyright (c) 2018 Pouya Heydari
 ```
-#### <div>Library's icon and style is designed by <a href="https://dribbble.com/Amirgk" title="Amir Gerdakane">Amir Gerdakane</a>
+
+### <div>Library's icon and style is designed by <a href="https://dribbble.com/Amirgk" title="Amir Gerdakane">Amir Gerdakane</a>
