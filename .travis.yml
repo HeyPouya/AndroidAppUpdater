@@ -14,3 +14,4 @@ before_install:
 
 script:
 - ./gradlew check
+- chmod +x ./gradlew build connectedCheck
