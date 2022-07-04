@@ -37,7 +37,7 @@ abstract class Stores {
         if (item.url.isNotEmpty())
             context?.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.url)))
         else {
-            val storeName = store.name.toLowerCase(Locale.ROOT).replace("_", " ")
+            val storeName = store.name.lowercase(Locale.ROOT).replace("_", " ")
             Toast.makeText(
                 context, context?.getString(R.string.please_install, storeName),
                 Toast.LENGTH_LONG

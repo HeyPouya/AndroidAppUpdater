@@ -15,9 +15,9 @@ import ir.heydarii.appupdater.utils.typeface
 class StoresRecyclerAdapter(
     private val list: List<UpdaterStoreList>,
     private val listener: (UpdaterStoreList) -> Unit
-) :
-    RecyclerView.Adapter<StoresRecyclerAdapter.SoresViewHolder>() {
+) : RecyclerView.Adapter<StoresRecyclerAdapter.SoresViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoresViewHolder {
+
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.download_stores_item, parent, false)
         return SoresViewHolder(view, listener)
@@ -25,9 +25,7 @@ class StoresRecyclerAdapter(
 
     override fun getItemCount(): Int = list.size
 
-    override fun onBindViewHolder(holder: SoresViewHolder, position: Int) {
-        holder.onBind(list[position])
-    }
+    override fun onBindViewHolder(holder: SoresViewHolder, position: Int) = holder.onBind(list[position])
 
     /**
      * ViewHolder for stores adapter

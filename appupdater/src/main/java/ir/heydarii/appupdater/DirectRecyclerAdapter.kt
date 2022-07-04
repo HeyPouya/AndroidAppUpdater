@@ -14,8 +14,8 @@ import ir.heydarii.appupdater.utils.typeface
 class DirectRecyclerAdapter(
     private val list: List<UpdaterStoreList>,
     private val listener: (UpdaterStoreList) -> Unit
-) :
-    RecyclerView.Adapter<DirectRecyclerAdapter.SoresViewHolder>() {
+) : RecyclerView.Adapter<DirectRecyclerAdapter.SoresViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoresViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.download_direct_item, parent, false)
@@ -24,9 +24,7 @@ class DirectRecyclerAdapter(
 
     override fun getItemCount(): Int = list.size
 
-    override fun onBindViewHolder(holder: SoresViewHolder, position: Int) {
-        holder.onBind(list[position])
-    }
+    override fun onBindViewHolder(holder: SoresViewHolder, position: Int) = holder.onBind(list[position])
 
     /**
      * Direct download ViewHolder

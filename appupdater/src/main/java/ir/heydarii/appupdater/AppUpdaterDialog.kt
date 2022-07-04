@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
+import android.widget.LinearLayout.LayoutParams.MATCH_PARENT
+import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import ir.heydarii.appupdater.directlink.DirectLinkDownload
 import ir.heydarii.appupdater.pojo.Store
+import ir.heydarii.appupdater.pojo.Store.*
 import ir.heydarii.appupdater.pojo.UpdaterFragmentModel
 import ir.heydarii.appupdater.pojo.UpdaterStoreList
 import ir.heydarii.appupdater.stores.CafeBazaarStore
@@ -31,7 +34,7 @@ class AppUpdaterDialog : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         // setting isCancelable
         val data = arguments?.getSerializable(DATA_LIST) as UpdaterFragmentModel
@@ -39,10 +42,7 @@ class AppUpdaterDialog : DialogFragment() {
 
         // Set background for the dialog
         dialog?.window?.setBackgroundDrawable(
-            ContextCompat.getDrawable(
-                context!!,
-                R.drawable.dialog_background
-            )
+            ContextCompat.getDrawable(requireContext(), R.drawable.dialog_background)
         )
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
@@ -61,14 +61,11 @@ class AppUpdaterDialog : DialogFragment() {
         super.onStart()
 
         // make dialog's width matchParent
-        dialog?.window?.setLayout(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
+        dialog?.window?.setLayout(MATCH_PARENT, WRAP_CONTENT)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         // getData that user set's via constructor
         getData()
     }
@@ -91,8 +88,8 @@ class AppUpdaterDialog : DialogFragment() {
         description: String?,
         list: List<UpdaterStoreList>
     ) {
-        view?.findViewById<TextView>(R.id.txtTitle)?.text = title
-        view?.findViewById<TextView>(R.id.txtDescription)?.text = description
+        requireView().findViewById<TextView>(R.id.txtTitle)?.text = title
+        requireView().findViewById<TextView>(R.id.txtDescription)?.text = description
 
         hideOrLayoutIfNeeded(checkIfDirectAndStoreAvailable(list))
 
@@ -104,47 +101,45 @@ class AppUpdaterDialog : DialogFragment() {
         val storeLinks by lazy { ArrayList<UpdaterStoreList>() }
 
         list?.forEach {
-            if (it.store == Store.DIRECT_URL)
+            if (it.store == DIRECT_URL)
                 directLinks.add(it)
             else
                 storeLinks.add(it)
         }
 
-        view?.findViewById<RecyclerView>(R.id.recyclerDirect)?.adapter =
+        requireView().findViewById<RecyclerView>(R.id.recyclerDirect)?.adapter =
             DirectRecyclerAdapter(directLinks) { onListListener(it) }
 
-        view?.findViewById<RecyclerView>(R.id.recyclerStores)?.adapter =
+        requireView().findViewById<RecyclerView>(R.id.recyclerStores)?.adapter =
             StoresRecyclerAdapter(storeLinks) { onListListener(it) }
     }
 
     private fun hideOrLayoutIfNeeded(storeAndDirectAvailable: Boolean) {
-        view?.findViewById<LinearLayout>(R.id.linearLayout)?.visibility =
+        requireView().findViewById<LinearLayout>(R.id.linearLayout).visibility =
             if (storeAndDirectAvailable) View.VISIBLE else View.GONE
     }
 
     private fun checkIfDirectAndStoreAvailable(list: List<UpdaterStoreList>) =
-        list.map {
-            it.store
-        }
+        list.map { it.store }
             .distinct()
             .toList()
             .partition {
-                it == Store.DIRECT_URL
+                it == DIRECT_URL
             }.run {
                 first.isNotEmpty() && second.isNotEmpty()
             }
 
     private fun onListListener(item: UpdaterStoreList) {
         when (item.store) {
-            Store.DIRECT_URL ->
-                DirectLinkDownload().getApk(item.url, activity, fragmentManager)
-            Store.GOOGLE_PLAY ->
+            DIRECT_URL ->
+                DirectLinkDownload().getApk(item.url, activity, parentFragmentManager)
+            GOOGLE_PLAY ->
                 GooglePlayStore().setStoreData(context, item)
-            Store.CAFE_BAZAAR ->
+            CAFE_BAZAAR ->
                 CafeBazaarStore().setStoreData(context, item)
-            Store.MYKET ->
+            MYKET ->
                 MyketStore().setStoreData(context, item)
-            Store.IRAN_APPS ->
+            IRAN_APPS ->
                 IranAppsStore().setStoreData(context, item)
         }
     }

@@ -2,7 +2,7 @@
     <string name="app_name">Android App Updater</string>
     <string name="kotlin_dsl_sample">Kotlin DSL Sample</string>
     <string name="kotlin_sample">Kotlin Sample</string>
-    <string name="library_title">New Update !</string>
+    <string name="library_title">New Update!</string>
     <string name="library_description">Lots of new features! Update right now</string>
     <string name="direct_download">Direct Download %s</string>
     <string name="play">Play</string>

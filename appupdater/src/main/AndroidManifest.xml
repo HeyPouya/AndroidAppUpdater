@@ -1,14 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ir.heydarii.appupdater">
 
-    <application>
-        <receiver
-            android:name=".directlink.DirectLinkDownload"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
-            </intent-filter>
-        </receiver>
+    <application tools:ignore="MissingApplicationIcon">
         <provider
             android:name="ir.heydarii.appupdater.fileprovider.GenericFileProvider"
             android:authorities="${applicationId}.fileProvider.GenericFileProvider"
@@ -18,6 +12,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+        <receiver
+            android:name=".directlink.DirectLinkDownload"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
 
     </application>
 </manifest>

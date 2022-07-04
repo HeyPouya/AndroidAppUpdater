@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.MATCH_PARENT
+import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.WRAP_CONTENT
 import androidx.fragment.app.DialogFragment
 import ir.heydarii.appupdater.R
 import ir.heydarii.appupdater.utils.typeface
@@ -36,9 +37,6 @@ class UpdateInProgressDialog : DialogFragment() {
     override fun onStart() {
         super.onStart()
         // making width of dialog to match_parent
-        dialog?.window?.setLayout(
-            ConstraintLayout.LayoutParams.MATCH_PARENT,
-            ConstraintLayout.LayoutParams.WRAP_CONTENT
-        )
+        dialog?.window?.setLayout(MATCH_PARENT, WRAP_CONTENT)
     }
 }
