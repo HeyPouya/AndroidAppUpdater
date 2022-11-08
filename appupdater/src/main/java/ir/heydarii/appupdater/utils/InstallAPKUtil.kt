@@ -20,10 +20,8 @@ class InstallAPKUtil {
     fun installAPK(context: Context, path: String, androidVersion: Int) {
         when {
             androidVersion in 0..Build.VERSION_CODES.M -> installAPKForMAndBellow(context, path)
-            androidVersion in Build.VERSION_CODES.N..Build.VERSION_CODES.O -> installAPKForNtoO(
-                context,
-                path
-            )
+            androidVersion in Build.VERSION_CODES.N..Build.VERSION_CODES.O ->
+                installAPKForNtoO(context, path)
             androidVersion >= Build.VERSION_CODES.P -> installAPKForPAndAbove(context, path)
         }
     }
@@ -49,11 +47,10 @@ class InstallAPKUtil {
             } else {
                 UnknownSourceInstallRequest().showRequest(context)
             }
-        } else {
-            Log.d(TAG, "Don't call this method on Android version bellow P (9)")
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun installAPKForNtoO(context: Context, path: String) {
         val uri = FileProvider.getUriForFile(
             context,

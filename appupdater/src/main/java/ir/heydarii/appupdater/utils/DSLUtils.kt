@@ -7,9 +7,8 @@ import ir.heydarii.appupdater.pojo.UpdaterStoreList
 /**
  * This inline function helps building stores in DSL way
  */
-inline fun store(block: UpdaterStoreList.() -> Unit): UpdaterStoreList {
-    return UpdaterStoreList().apply(block)
-}
+inline fun store(block: UpdaterStoreList.() -> Unit): UpdaterStoreList =
+    UpdaterStoreList().apply(block)
 
 /**
  * This inline function helps building UpdateDialog in DSL way

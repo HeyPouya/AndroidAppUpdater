@@ -16,12 +16,10 @@ class StoresRecyclerAdapter(
     private val list: List<UpdaterStoreList>,
     private val listener: (UpdaterStoreList) -> Unit
 ) : RecyclerView.Adapter<StoresRecyclerAdapter.SoresViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoresViewHolder {
 
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.download_stores_item, parent, false)
-        return SoresViewHolder(view, listener)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        LayoutInflater.from(parent.context).inflate(R.layout.download_stores_item, parent, false)
+            .run { SoresViewHolder(this) }
 
     override fun getItemCount(): Int = list.size
 
@@ -30,8 +28,7 @@ class StoresRecyclerAdapter(
     /**
      * ViewHolder for stores adapter
      */
-    class SoresViewHolder(private val view: View, val listener: (UpdaterStoreList) -> Unit) :
-        RecyclerView.ViewHolder(view) {
+    inner class SoresViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         /**
          * Binds data to view

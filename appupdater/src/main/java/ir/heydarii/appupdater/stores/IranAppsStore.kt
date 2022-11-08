@@ -9,11 +9,13 @@ import ir.heydarii.appupdater.pojo.UpdaterStoreList
 /**
  * shows apk in IranApps store
  */
+private const val IRAN_APPS_URL = "iranapps://app/"
+private const val IRAN_APPS_PACKAGE = "ir.tgbs.android.iranapp"
 class IranAppsStore : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.setPackage("ir.tgbs.android.iranapp")
-        intent.data = Uri.parse("iranapps://app/${item.packageName}")
+        intent.data = Uri.parse("$IRAN_APPS_URL${item.packageName}")
+        intent.setPackage(IRAN_APPS_PACKAGE)
         showStore(context, intent, item, Store.IRAN_APPS)
     }
 }

@@ -11,7 +11,7 @@ import ir.heydarii.appupdater.utils.updateDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val TAG = "showUpdateDialogTag"
-const val FONT_PATH = "fonts/iran_sans_mobile.ttf"
+const val FONT_PATH = "fonts/vazir.ttf"
 const val customUrl = "https://cafebazaar.ir/download/bazaar.apk"
 
 /**
@@ -79,7 +79,6 @@ class MainActivity : AppCompatActivity() {
                 }
             )
         }.show(supportFragmentManager, TAG)
-
     }
 
     private fun kotlinSample() {
@@ -148,9 +147,8 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.library_title),
             getString(R.string.library_description),
             list,
-            true,
+            false,
             font
         ).show(supportFragmentManager, TAG)
-
     }
 }

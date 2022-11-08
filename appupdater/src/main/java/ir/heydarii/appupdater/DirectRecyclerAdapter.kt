@@ -16,11 +16,9 @@ class DirectRecyclerAdapter(
     private val listener: (UpdaterStoreList) -> Unit
 ) : RecyclerView.Adapter<DirectRecyclerAdapter.SoresViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoresViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.download_direct_item, parent, false)
-        return SoresViewHolder(view, listener)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoresViewHolder =
+        LayoutInflater.from(parent.context).inflate(R.layout.download_direct_item, parent, false)
+            .run { SoresViewHolder(this) }
 
     override fun getItemCount(): Int = list.size
 
@@ -29,8 +27,7 @@ class DirectRecyclerAdapter(
     /**
      * Direct download ViewHolder
      */
-    class SoresViewHolder(private val view: View, val listener: (UpdaterStoreList) -> Unit) :
-        RecyclerView.ViewHolder(view) {
+    inner class SoresViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         /**
          * Binds data to layout

@@ -20,12 +20,7 @@ abstract class Stores {
      */
     abstract fun setStoreData(context: Context?, item: UpdaterStoreList)
 
-    protected fun showStore(
-        context: Context?,
-        intent: Intent,
-        item: UpdaterStoreList,
-        store: Store
-    ) {
+    protected fun showStore(context: Context?, intent: Intent, item: UpdaterStoreList, store: Store) {
         try {
             context?.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
@@ -39,7 +34,8 @@ abstract class Stores {
         else {
             val storeName = store.name.lowercase(Locale.ROOT).replace("_", " ")
             Toast.makeText(
-                context, context?.getString(R.string.please_install, storeName),
+                context,
+                context?.getString(R.string.please_install, storeName),
                 Toast.LENGTH_LONG
             ).show()
         }

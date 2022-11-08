@@ -24,15 +24,13 @@ class UpdateInProgressDialog : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val view = inflater.inflate(R.layout.fragment_update_in_progress_dialog, container, false)
-        return view.apply {
+    ): View = inflater.inflate(R.layout.fragment_update_in_progress_dialog, container, false)
+        .apply {
             typeface?.let {
                 findViewById<TextView>(R.id.txtTitle).typeface = it
                 findViewById<TextView>(R.id.txtDescription).typeface = it
             }
         }
-    }
 
     override fun onStart() {
         super.onStart()

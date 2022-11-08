@@ -20,6 +20,9 @@ import java.io.File
  * also shows a loading indicator showing the apk is downloading
  * after download finishes , opens install page
  */
+
+private const val UPDATE_DIALOG_TAG = "UpdateDialog"
+
 class DirectLinkDownload : BroadcastReceiver() {
 
     /**
@@ -65,7 +68,7 @@ class DirectLinkDownload : BroadcastReceiver() {
             UnknownSourceInstallRequest().showRequest(context)
         }
 
-        if (permissionChecker.isPermissionGranted(permission, context))
+        if (permissionChecker.isPermissionGranted(permission, context) || Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
             downloadApk(url, context, fm)
         else
             permissionChecker.getPermission(context, arrayOf(permission))

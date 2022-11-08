@@ -9,12 +9,11 @@ import ir.heydarii.appupdater.pojo.UpdaterStoreList
 /**
  * shows apk in GooglePlay store
  */
+private const val PLAY_URL = "market://details?id="
+
 class GooglePlayStore : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {
-        val intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("market://details?id=${item.packageName}")
-        )
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("$PLAY_URL${item.packageName}"))
         showStore(context, intent, item, Store.GOOGLE_PLAY)
     }
 }

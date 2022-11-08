@@ -14,7 +14,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import ir.heydarii.appupdater.directlink.DirectLinkDownload
-import ir.heydarii.appupdater.pojo.Store
 import ir.heydarii.appupdater.pojo.Store.*
 import ir.heydarii.appupdater.pojo.UpdaterFragmentModel
 import ir.heydarii.appupdater.pojo.UpdaterStoreList
@@ -22,12 +21,15 @@ import ir.heydarii.appupdater.stores.CafeBazaarStore
 import ir.heydarii.appupdater.stores.GooglePlayStore
 import ir.heydarii.appupdater.stores.IranAppsStore
 import ir.heydarii.appupdater.stores.MyketStore
-import ir.heydarii.appupdater.utils.DATA_LIST
+import ir.heydarii.appupdater.utils.serializable
 import ir.heydarii.appupdater.utils.typeface
 
 /**
  * Shows ForceUpdate Dialog Fragment
  */
+
+private const val DATA_LIST = "DATA_LIST"
+
 class AppUpdaterDialog : DialogFragment() {
 
     override fun onCreateView(
@@ -37,8 +39,8 @@ class AppUpdaterDialog : DialogFragment() {
     ): View {
 
         // setting isCancelable
-        val data = arguments?.getSerializable(DATA_LIST) as UpdaterFragmentModel
-        setDialogCancelable(data.isForceUpdate)
+        val data = arguments?.serializable<UpdaterFragmentModel>(DATA_LIST)
+        setDialogCancelable(data?.isForceUpdate)
 
         // Set background for the dialog
         dialog?.window?.setBackgroundDrawable(
@@ -71,10 +73,10 @@ class AppUpdaterDialog : DialogFragment() {
     }
 
     private fun getData() {
-        val data = arguments?.getSerializable(DATA_LIST) as UpdaterFragmentModel
-        val title = data.title
-        val description = data.description
-        val list = data.list
+        val data = arguments?.serializable<UpdaterFragmentModel>(DATA_LIST)
+        val title = data?.title
+        val description = data?.description
+        val list = data?.list
         checkNotNull(list)
         setUpProperties(title, description, list)
     }
