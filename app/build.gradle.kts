@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         applicationId = "ir.heydarii.androidappupdater"
         minSdk = 16
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 500
         versionName = "5.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -22,6 +22,7 @@ android {
             )
         }
     }
+    namespace = "ir.heydarii.androidappupdater"
 }
 
 dependencies {
@@ -30,7 +31,7 @@ dependencies {
     implementation(project(":appupdater"))
 
     //support dependency
-    implementation("androidx.appcompat:appcompat:1.4.2")
+    implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     //testing dependency

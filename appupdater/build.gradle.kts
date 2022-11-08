@@ -3,10 +3,10 @@ plugins {
     id("kotlin-android")
 }
 android {
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         minSdk = 16
-        targetSdk = 32
+        targetSdk = 33
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -18,12 +18,13 @@ android {
             )
         }
     }
+    namespace = "ir.heydarii.appupdater"
 
 }
 dependencies {
 
     //support dependency
-    implementation("androidx.appcompat:appcompat:1.4.2")
+    implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
 
