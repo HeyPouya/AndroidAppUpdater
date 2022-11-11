@@ -3,10 +3,10 @@ plugins {
     id("kotlin-android")
 }
 android {
-    compileSdk = 33
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
     defaultConfig {
-        minSdk = 16
-        targetSdk = 33
+        minSdk = libs.versions.minSdkVersion.get().toInt()
+        targetSdk = libs.versions.targetSdkVersion.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -18,19 +18,61 @@ android {
             )
         }
     }
+    publishing {
+        multipleVariants("release") {
+            includeBuildTypeValues("release")
+        }
+    }
     namespace = "ir.heydarii.appupdater"
+    group = "com.github.sirlordpouya.androidappupdater"
+    version = libs.versions.appVersion.get()
 
+    flavorDimensions.add("type")
+
+    productFlavors {
+        create("kotlin")
+        create("kotlinDSL")
+    }
 }
+
+tasks.register("sourcesJar", Jar::class.java) {
+    archiveClassifier.set("sources")
+    from("android.sourceSets.main.javaDirectories")
+}
+
+artifacts {
+    archives(tasks["sourcesJar"])
+}
+
 dependencies {
 
     //support dependency
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation(libs.appcompat)
+    implementation(libs.constraintLayout)
+    implementation(libs.recyclerView)
 
     //testing dependency
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test:rules:1.4.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation(libs.junit4)
+    androidTestImplementation(libs.androidTestJUnit)
+    androidTestImplementation(libs.androidTestRules)
+    androidTestImplementation(libs.androidTestEspresso)
+}
+
+if (android.productFlavors.size > 0) {
+    android.libraryVariants.all { variant ->
+        if (variant.name.toLowerCase().contains("debug").not()) {
+
+            val bundleTask = tasks["bundle${variant.name.capitalize()}"]
+
+            artifacts {
+                archives(bundleTask.path) {
+                    classifier = variant.flavorName
+                    builtBy(bundleTask)
+                    name = project.name
+                }
+            }
+            return@all true
+        }
+        false
+    }
 }

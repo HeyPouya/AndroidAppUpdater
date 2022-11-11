@@ -1,13 +1,16 @@
-package ir.heydarii.androidappupdater
+package ir.heydarii.androidappupdater.dsl
 
 import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import ir.heydarii.androidappupdater.BuildConfig
+import ir.heydarii.androidappupdater.R
 import ir.heydarii.appupdater.AppUpdaterDialog
 import ir.heydarii.appupdater.pojo.Store
 import ir.heydarii.appupdater.pojo.UpdaterStoreList
+import ir.heydarii.appupdater.utils.store
+import ir.heydarii.appupdater.utils.updateDialogBuilder
 
 private const val TAG = "showUpdateDialogTag"
 private const val FONT_PATH = "fonts/vazir.ttf"
@@ -25,9 +28,59 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnKotlin).setOnClickListener {
             kotlinSample()
         }
+
         findViewById<Button>(R.id.btnDSL).setOnClickListener {
-            Toast.makeText(this, "Change to kotlinDSL build variant to see this option", Toast.LENGTH_LONG).show()
+            dslSample()
         }
+    }
+
+    private fun dslSample() {
+        updateDialogBuilder {
+            title = getString(R.string.library_title)
+            description = getString(R.string.library_description)
+            isForceUpdate = false
+            typeface = Typeface.createFromAsset(assets, FONT_PATH)
+            list = listOf(
+                store {
+                    store = Store.DIRECT_URL
+                    title = getString(R.string.direct_download, "1")
+                    icon = R.mipmap.ic_launcher
+                    url = CUSTOM_URL
+                    packageName = BuildConfig.APPLICATION_ID
+                },
+                store {
+                    store = Store.DIRECT_URL
+                    title = getString(R.string.direct_download, "2")
+                    icon = R.mipmap.ic_launcher
+                    url = CUSTOM_URL
+                    packageName = BuildConfig.APPLICATION_ID
+                },
+                store {
+                    store = Store.GOOGLE_PLAY
+                    title = getString(R.string.play)
+                    icon = R.drawable.appupdater_ic_google_play
+                    packageName = BuildConfig.APPLICATION_ID
+                },
+                store {
+                    store = Store.CAFE_BAZAAR
+                    title = getString(R.string.bazaar)
+                    icon = R.drawable.appupdater_ic_bazar
+                    packageName = BuildConfig.APPLICATION_ID
+                },
+                store {
+                    store = Store.MYKET
+                    title = getString(R.string.myket)
+                    icon = R.drawable.appupdater_ic_myket
+                    packageName = BuildConfig.APPLICATION_ID
+                },
+                store {
+                    store = Store.IRAN_APPS
+                    title = getString(R.string.iran_apps)
+                    icon = R.drawable.appupdater_ic_iran_apps
+                    packageName = BuildConfig.APPLICATION_ID
+                }
+            )
+        }.show(supportFragmentManager, TAG)
     }
 
     private fun kotlinSample() {

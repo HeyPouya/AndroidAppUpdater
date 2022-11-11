@@ -1,17 +1,16 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-android-extensions")
 }
 
 android {
-    compileSdk = 33
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
     defaultConfig {
         applicationId = "ir.heydarii.androidappupdater"
-        minSdk = 16
-        targetSdk = 33
-        versionCode = 500
-        versionName = "5.0.0"
+        minSdk = libs.versions.minSdkVersion.get().toInt()
+        targetSdk = libs.versions.targetSdkVersion.get().toInt()
+        versionCode = libs.versions.appVersion.get().toInt()
+        versionName = libs.versions.appVersion.get()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -23,6 +22,14 @@ android {
         }
     }
     namespace = "ir.heydarii.androidappupdater"
+    flavorDimensions.add("type")
+
+    productFlavors {
+        create("kotlin")
+        create("kotlinDSL"){
+            applicationIdSuffix = ".dsl"
+        }
+    }
 }
 
 dependencies {
@@ -31,12 +38,12 @@ dependencies {
     implementation(project(":appupdater"))
 
     //support dependency
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(libs.appcompat)
+    implementation(libs.constraintLayout)
 
     //testing dependency
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test:rules:1.4.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation(libs.junit4)
+    androidTestImplementation(libs.androidTestJUnit)
+    androidTestImplementation(libs.androidTestRules)
+    androidTestImplementation(libs.androidTestEspresso)
 }
