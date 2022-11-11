@@ -24,7 +24,7 @@ android {
         }
     }
     namespace = "ir.heydarii.appupdater"
-    group = "com.github.sirlordpouya.androidappupdater"
+//    group = "com.github.sirlordpouya.androidappupdater"
     version = libs.versions.appVersion.get()
 
     flavorDimensions.add("type")
