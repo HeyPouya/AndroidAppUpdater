@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    `maven-publish`
 }
 android {
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
@@ -21,6 +22,7 @@ android {
     publishing {
         multipleVariants("release") {
             includeBuildTypeValues("release")
+            includeFlavorDimensionAndValues("type", "kotlin", "kotlinDSL")
         }
     }
     namespace = "ir.heydarii.appupdater"
@@ -56,6 +58,19 @@ dependencies {
     androidTestImplementation(libs.androidTestJUnit)
     androidTestImplementation(libs.androidTestRules)
     androidTestImplementation(libs.androidTestEspresso)
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.pouyaheydari"
+            artifactId = "androidappupdater"
+            version = libs.versions.appVersion.get()
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
 }
 
 if (android.productFlavors.size > 0) {
