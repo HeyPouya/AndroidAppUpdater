@@ -21,8 +21,7 @@ android {
     }
     publishing {
         multipleVariants("release") {
-            includeBuildTypeValues("release")
-            includeFlavorDimensionAndValues("type", "kotlin", "kotlinDSL")
+            allVariants()
         }
     }
     namespace = "ir.heydarii.appupdater"
