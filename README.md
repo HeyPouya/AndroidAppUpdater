@@ -11,8 +11,7 @@
 <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/icon.png" width="250">
 </p>
 
-App Updater is a library to show update dialog to your users, whenever a new version of your application is available.
-It is really easy-to-use and fully customizable.
+App Updater is an  easy-to-use and fully customizable library to show update dialog to users.
 
 ##### It is built with Kotlin and androidX and also supports DSL
 
@@ -22,7 +21,8 @@ It is really easy-to-use and fully customizable.
 
 ### Stores
 
-you can show users as many stores as you need, to download your application from there. to make a new store:
+If you provide your application on stores (other than  Google Play), you can list all of them in the update dialog.
+To create a new store:
 
 ```kotlin
 val list = ArrayList<UpdaterStoreList>()
