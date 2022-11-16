@@ -36,15 +36,6 @@ android {
     }
 }
 
-tasks.register("sourcesJar", Jar::class.java) {
-    archiveClassifier.set("sources")
-    from("android.sourceSets.main.javaDirectories")
-}
-
-artifacts {
-    archives(tasks["sourcesJar"])
-}
-
 dependencies {
 
     //support dependency
@@ -69,24 +60,5 @@ publishing {
                 from(components["release"])
             }
         }
-    }
-}
-
-if (android.productFlavors.size > 0) {
-    android.libraryVariants.all { variant ->
-        if (variant.name.toLowerCase().contains("debug").not()) {
-
-            val bundleTask = tasks["bundle${variant.name.capitalize()}"]
-
-            artifacts {
-                archives(bundleTask.path) {
-                    classifier = variant.flavorName
-                    builtBy(bundleTask)
-                    name = project.name
-                }
-            }
-            return@all true
-        }
-        false
     }
 }
