@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import ir.heydarii.appupdater.utils.PermissionUtils
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -33,7 +32,8 @@ class TestUtils {
     @Test
     fun testCheckPermission() {
         val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
-        val permissionCheck = PermissionUtils().isPermissionGranted(permission, appContext)
+        val permissionCheck = com.pouyaheydari.appupdater.core.utils.PermissionUtils()
+            .isPermissionGranted(permission, appContext)
         if (ContextCompat.checkSelfPermission(appContext, permission)
             == PackageManager.PERMISSION_GRANTED
         )

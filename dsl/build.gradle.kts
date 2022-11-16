@@ -1,35 +1,47 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
+    `maven-publish`
 }
-
 android {
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
     defaultConfig {
-        applicationId = "com.pouyaheydari.androidappupdater"
         minSdk = libs.versions.minSdkVersion.get().toInt()
         targetSdk = libs.versions.targetSdkVersion.get().toInt()
-        versionCode = libs.versions.appVersion.get().toInt()
-        versionName = libs.versions.appVersion.get()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    namespace = "com.pouyaheydari.androidappupdater"
+
+    publishing {
+        multipleVariants("release") {
+            allVariants()
+        }
+    }
+    namespace = "com.pouyaheydari.appupdater.dsl"
+    group = "com.github.sirlordpouya.androidappupdater"
+    version = libs.versions.appVersion.get()
 }
 
 dependencies {
-
     //library dependency
     implementation(project(":core"))
-    implementation(project(":dsl"))
     implementation(project(":appupdater"))
-
-    //support dependency
-    implementation(libs.appcompat)
-    implementation(libs.constraintLayout)
 
     //testing dependency
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidTestJUnit)
     androidTestImplementation(libs.androidTestRules)
     androidTestImplementation(libs.androidTestEspresso)
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.pouyaheydari.updater"
+            artifactId = "dsl"
+            version = libs.versions.appVersion.get()
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
 }

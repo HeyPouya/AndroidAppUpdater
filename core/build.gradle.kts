@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     `maven-publish`
 }
+
 android {
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
     defaultConfig {
@@ -16,18 +17,14 @@ android {
             allVariants()
         }
     }
-    namespace = "com.pouyaheydari.appupdater"
+    namespace = "com.pouyaheydari.updater.core"
     group = "com.github.sirlordpouya.androidappupdater"
     version = libs.versions.appVersion.get()
 }
+dependencies{
 
-dependencies {
-
-    implementation(project(":core"))
     //support dependency
     implementation(libs.appcompat)
-    implementation(libs.constraintLayout)
-    implementation(libs.recyclerView)
 
     //testing dependency
     testImplementation(libs.junit4)
@@ -35,12 +32,11 @@ dependencies {
     androidTestImplementation(libs.androidTestRules)
     androidTestImplementation(libs.androidTestEspresso)
 }
-
 publishing {
     publications {
         register<MavenPublication>("release") {
             groupId = "com.pouyaheydari.updater"
-            artifactId = "main"
+            artifactId = "core"
             version = libs.versions.appVersion.get()
             afterEvaluate {
                 from(components["release"])
@@ -48,3 +44,4 @@ publishing {
         }
     }
 }
+
