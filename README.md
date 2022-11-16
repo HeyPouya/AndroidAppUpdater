@@ -31,13 +31,13 @@ list.add(UpdaterStoreList(Store.DIRECT_URL, "Store Title", R.mipmap.ic_launcher 
 
 parameters of UpdaterStoreList, as the order you see in above line:
 
-1.  Store type
+1.  Store type (e.g. GOOGLE_PLAY, CAFE_BAZAAR, ...)
 2.  Store title that user sees
 3.  Icon of store that user sees
 4.  An url to show the user if the store is not installed in user's device
-5.  Package name of your application
+5.  Package name of the application on the store
 
-#### or you can omit adding some properties in Kotlin
+#### You can omit adding some properties in Kotlin
 
 ```kotlin
 list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Download From Google Play", packageName = BuildConfig.APPLICATION_ID))
@@ -45,35 +45,22 @@ list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Download From Google Play", packag
 
 ### Available stores
 
-this library currently supports only these markets:
+This library currently supports only these markets:
 
-[Google Play](https://play.google.com)
-
-[CafeBazaar](https://cafebazaar.ir)
-
-[IranApps](https://iranapps.ir)
-
-[Myket](https://myket.ir/)
-
-To Select an Store you should use:
-
-```kotlin
-Store.GOOGLE_PLAY
-Store.CAFE_BAZAAR
-Store.MYKET
-Store.IRAN_APPS
-```
+* [Store.GOOGLE_PLAY](https://play.google.com)
+* [Store.CAFE_BAZAAR](https://cafebazaar.ir)
+* [Store.MYKET](https://iranapps.ir)
+* [Store.IRAN_APPS](https://myket.ir/)
 
 ### Direct Download
 
-you can also make as many direct APK download links as you need.
-Users can download that APK directly on their phone, and after downloading finishes, the install page will be shown to the user.
-
-#### Remember to put WRITE_EXTERNAL_STORAGE, INTERNET and REQUEST_INSTALL_PACKAGES permissions in your manifest. The library asks these permissions at runtime if needed
+You can also make as many direct APK download links as you need.
+Users can download that APK directly on their phone. After downloading finishes, the install page will be shown to the user automatically.
 
 ```kotlin
 list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launcher , "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
 ```
+***Remember to put WRITE_EXTERNAL_STORAGE, INTERNET and REQUEST_INSTALL_PACKAGES permissions in your manifest. The library asks these permissions at runtime if needed***
 
 ### To Show UpdateDialog
 
@@ -81,7 +68,7 @@ list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launch
 AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade yo the new version.", list, true, font).show(supportFragmentManager, "TAG")
 ```
 
-parameters as the order you see in above line:
+Parameters in the order are:
 
 1.  Update dialog title
 2.  Update dialog description
@@ -91,7 +78,7 @@ parameters as the order you see in above line:
 
 ### To change library's texts
 
-In strings file, add these lines:
+In strings file, add these lines and customize them according to your needs:
 
 ```xml
 <resources>
@@ -105,10 +92,9 @@ In strings file, add these lines:
 </resources>
 ```
 
-### To use default icons
+### Using default icons
 
-I have added default icons of Iranian stores in the app.
-if you like to use them, you can find them like :
+Some default icons are included in the library.
 
 ```text
 R.drawable.appupdater_ic_google_play
@@ -118,10 +104,9 @@ R.drawable.appupdater_ic_iran_apps
 ```
 
 ## Kotlin DSL
+This library also supports DSL. To use it, add the required dependency.
 
 ### Adding Stores in DSL
-
-you can show users as many stores as you need, to download your application from there. to make a new store:
 
 ```kotlin
 store {
@@ -158,7 +143,7 @@ You can see the demo application to learn more about the usage.
 
 ### Adding the dependency
 
-Add this to your root *build.gradle* file:
+Add this to your root **build.gradle** file:
 
 ```groovy
 allprojects {
@@ -171,13 +156,20 @@ allprojects {
 Now add the dependency to your app build.gradle file:
 
 ```groovy
-implementation 'com.github.SirLordPouya:AndroidAppUpdater:latest_version'
+// Always add the core dependency
+implementation ("com.github.SirLordPouya.AndroidAppUpdater:core:latest_version")
+
+// To use the library in Kotlin & Java
+implementation ("com.github.SirLordPouya.AndroidAppUpdater:main:latest_version")
+
+//To use the library with Kotlin DSL, Kotlin & Java
+implementation ("com.github.SirLordPouya.AndroidAppUpdater:dsl:latest_version")
 ```
 
 ## License
 
 ```text
-LoadingFragment is released under the Apache License 2.0. See LICENSE for details.
+Android App Updater is released under the Apache License 2.0. See LICENSE for details.
 Copyright (c) 2018 Pouya Heydari
 ```
 
