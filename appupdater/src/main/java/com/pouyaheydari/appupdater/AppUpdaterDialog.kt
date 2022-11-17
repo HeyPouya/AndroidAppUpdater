@@ -17,10 +17,7 @@ import com.pouyaheydari.appupdater.core.directlink.DirectLinkDownload
 import com.pouyaheydari.appupdater.core.pojo.Store.*
 import com.pouyaheydari.appupdater.core.pojo.UpdaterFragmentModel
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
-import com.pouyaheydari.appupdater.core.stores.CafeBazaarStore
-import com.pouyaheydari.appupdater.core.stores.GooglePlayStore
-import com.pouyaheydari.appupdater.core.stores.IranAppsStore
-import com.pouyaheydari.appupdater.core.stores.MyketStore
+import com.pouyaheydari.appupdater.core.stores.*
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.core.utils.typeface
 
@@ -140,14 +137,12 @@ class AppUpdaterDialog : DialogFragment() {
                         false -> hideUpdateInProgressDialog()
                     }
                 }
-            GOOGLE_PLAY ->
-                GooglePlayStore().setStoreData(context, item)
-            CAFE_BAZAAR ->
-                CafeBazaarStore().setStoreData(context, item)
-            MYKET ->
-                MyketStore().setStoreData(context, item)
-            IRAN_APPS ->
-                IranAppsStore().setStoreData(context, item)
+            GOOGLE_PLAY -> GooglePlayStore().setStoreData(context, item)
+            CAFE_BAZAAR -> CafeBazaarStore().setStoreData(context, item)
+            MYKET -> MyketStore().setStoreData(context, item)
+            IRAN_APPS -> IranAppsStore().setStoreData(context, item)
+            HUAWEI_APP_GALLERY -> HuaweiAppGallery().setStoreData(context, item)
+            SAMSUNG_GALAXY_STORE -> SamsungGalaxyStore().setStoreData(context, item)
         }
     }
 

@@ -8,5 +8,7 @@ enum class Store {
     GOOGLE_PLAY,
     CAFE_BAZAAR,
     MYKET,
-    IRAN_APPS
+    IRAN_APPS,
+    HUAWEI_APP_GALLERY,
+    SAMSUNG_GALAXY_STORE
 }
