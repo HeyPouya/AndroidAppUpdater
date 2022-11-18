@@ -119,7 +119,7 @@ store {
        icon = R.mipmap.ic_launcher
        url = "https://cafebazaar.ir/download/bazaar.apk"
        packageName = BuildConfig.APPLICATION_ID
-        }
+}
 ```
 
 ### Showing UpdateDialog in DSL
@@ -138,7 +138,7 @@ store {
                     url = "https://cafebazaar.ir/download/bazaar.apk"
                     packageName = BuildConfig.APPLICATION_ID
                 })
-                }.show(supportFragmentManager, TAG)
+}.show(supportFragmentManager, TAG)
 ```
 
 **Check the demo application to see it in your IDE.**
