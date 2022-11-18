@@ -100,6 +100,8 @@ Some default icons are included in the library.
 
 ```text
 R.drawable.appupdater_ic_google_play
+R.drawable.appupdater_ic_app_gallery
+R.drawable.appupdater_ic_galaxy_store
 R.drawable.appupdater_ic_bazar
 R.drawable.appupdater_ic_myket
 R.drawable.appupdater_ic_iran_apps
