@@ -12,7 +12,7 @@ import java.io.File
 /**
  * A class to request apk installation in different Android apis
  */
-class InstallAPKUtil {
+class InstallApkUtil {
 
     /**
      * Uses different methods to install the apk depending the user's Android version

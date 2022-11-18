@@ -9,7 +9,14 @@ import android.content.Intent
 import android.os.Build
 import android.os.Environment
 import android.util.Log
-import com.pouyaheydari.appupdater.core.utils.*
+import com.pouyaheydari.appupdater.core.utils.APK_NAME
+import com.pouyaheydari.appupdater.core.utils.DownloadAPKUtil
+import com.pouyaheydari.appupdater.core.utils.InstallApkUtil
+import com.pouyaheydari.appupdater.core.utils.PermissionUtils
+import com.pouyaheydari.appupdater.core.utils.TAG
+import com.pouyaheydari.appupdater.core.utils.UnknownSourceInstallRequest
+import com.pouyaheydari.appupdater.core.utils.requestId
+import com.pouyaheydari.appupdater.core.utils.showUpdateInProgressCallback
 import com.pouyaheydari.updater.core.R
 import java.io.File
 
@@ -43,9 +50,9 @@ class DirectLinkDownload : BroadcastReceiver() {
         showUpdateInProgressCallback = null
 
         if (!File(getDestination(context)).exists())
-            Log.d(TAG, context.getString(R.string.couldnt_find_downloaded_file))
+            Log.d(TAG, context.getString(R.string.appupdater_couldnt_find_downloaded_file))
         else
-            InstallAPKUtil().installAPK(context, getDestination(context), Build.VERSION.SDK_INT)
+            InstallApkUtil().installAPK(context, getDestination(context), Build.VERSION.SDK_INT)
     }
 
     /**

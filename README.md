@@ -1,4 +1,4 @@
-# Android App Updater (+ Iranian Android markets)
+# Android App Updater (+ Support for third party markets)
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Easy%20App%20Updater-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7388)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7e8f094fd77044b5b26bc6c157bfbbc3)](https://www.codacy.com/manual/SirLordPouya/AndroidAppUpdater?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SirLordPouya/AndroidAppUpdater&amp;utm_campaign=Badge_Grade)
@@ -48,6 +48,8 @@ list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Download From Google Play", packag
 This library currently supports only these markets:
 
 * [Store.GOOGLE_PLAY](https://play.google.com)
+* [Store.HUAWEI_APP_GALLERY](https://appgallery.huawei.com/)
+* [Store.SAMSUNG_GALAXY_STORE](https://www.samsung.com/de/apps/galaxy-store/)
 * [Store.CAFE_BAZAAR](https://cafebazaar.ir)
 * [Store.MYKET](https://iranapps.ir)
 * [Store.IRAN_APPS](https://myket.ir/)
@@ -137,7 +139,7 @@ store {
                 }.show(supportFragmentManager, TAG)
 ```
 
-You can see the demo application to learn more about the usage.
+**Check the demo application to see it in your IDE.**
 
 ## Download
 

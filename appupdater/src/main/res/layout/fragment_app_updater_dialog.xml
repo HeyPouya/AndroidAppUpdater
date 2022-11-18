@@ -20,7 +20,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="16dp"
-                android:contentDescription="@string/update_icon"
+                android:contentDescription="@string/appupdater_update_icon"
                 android:src="@drawable/appupdater_ic_cloud"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:gravity="center"
-                        android:text="@string/or"
+                        android:text="@string/appupdater_or"
                         android:textColor="@color/appupdater_text_colors"
                         android:textSize="16sp" />
 
@@ -77,7 +77,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
                     android:gravity="center"
-                    android:text="@string/download_from_store"
+                    android:text="@string/appupdater_download_from_store"
                     android:textColor="@color/appupdater_text_colors"
                     android:textSize="16sp" />
             </LinearLayout>

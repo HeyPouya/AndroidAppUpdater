@@ -36,7 +36,7 @@ abstract class Stores {
             val storeName = store.name.lowercase(Locale.ROOT).replace("_", " ")
             Toast.makeText(
                 context,
-                context?.getString(R.string.please_install, storeName),
+                context?.getString(R.string.appupdater_please_install, storeName),
                 Toast.LENGTH_LONG
             ).show()
         }

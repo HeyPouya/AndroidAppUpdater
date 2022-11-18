@@ -14,10 +14,21 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.pouyaheydari.appupdater.core.directlink.DirectLinkDownload
-import com.pouyaheydari.appupdater.core.pojo.Store.*
+import com.pouyaheydari.appupdater.core.pojo.Store.CAFE_BAZAAR
+import com.pouyaheydari.appupdater.core.pojo.Store.DIRECT_URL
+import com.pouyaheydari.appupdater.core.pojo.Store.GOOGLE_PLAY
+import com.pouyaheydari.appupdater.core.pojo.Store.HUAWEI_APP_GALLERY
+import com.pouyaheydari.appupdater.core.pojo.Store.IRAN_APPS
+import com.pouyaheydari.appupdater.core.pojo.Store.MYKET
+import com.pouyaheydari.appupdater.core.pojo.Store.SAMSUNG_GALAXY_STORE
 import com.pouyaheydari.appupdater.core.pojo.UpdaterFragmentModel
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
-import com.pouyaheydari.appupdater.core.stores.*
+import com.pouyaheydari.appupdater.core.stores.CafeBazaarStore
+import com.pouyaheydari.appupdater.core.stores.GooglePlayStore
+import com.pouyaheydari.appupdater.core.stores.HuaweiAppGallery
+import com.pouyaheydari.appupdater.core.stores.IranAppsStore
+import com.pouyaheydari.appupdater.core.stores.MyketStore
+import com.pouyaheydari.appupdater.core.stores.SamsungGalaxyStore
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.core.utils.typeface
 
