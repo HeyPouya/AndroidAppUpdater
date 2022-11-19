@@ -12,7 +12,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
         <receiver
-            android:name="com.pouyaheydari.appupdater.core.directlink.DirectLinkDownload"
+            android:name="com.pouyaheydari.appupdater.core.receiver.DownloadFinishedReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />

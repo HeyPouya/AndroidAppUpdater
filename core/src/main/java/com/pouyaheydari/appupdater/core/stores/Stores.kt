@@ -11,7 +11,7 @@ import com.pouyaheydari.updater.core.R
 import java.util.*
 
 /**
- * this super class has some functions to use them in child classes
+ * This is the super class of all store (e.g. [GooglePlayStore])
  */
 abstract class Stores {
 
