@@ -10,7 +10,7 @@ import android.content.Context
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import com.pouyaheydari.updater.core.R
+import com.pouyaheydari.appupdater.core.R
 
 /**
  * Checks for needed permissions and tries to download the apk

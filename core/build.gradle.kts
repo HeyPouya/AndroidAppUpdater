@@ -17,7 +17,7 @@ android {
             allVariants()
         }
     }
-    namespace = "com.pouyaheydari.updater.core"
+    namespace = "com.pouyaheydari.appupdater.core"
     group = "com.github.sirlordpouya.androidappupdater"
     version = libs.versions.appVersion.get()
 }

@@ -1,7 +1,7 @@
 package com.pouyaheydari.appupdater.core.pojo
 
 import android.graphics.Typeface
-import com.pouyaheydari.updater.core.R
+import com.pouyaheydari.appupdater.core.R
 import java.io.Serializable
 
 /**

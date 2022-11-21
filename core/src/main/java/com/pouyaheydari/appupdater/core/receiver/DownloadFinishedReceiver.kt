@@ -6,12 +6,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
+import com.pouyaheydari.appupdater.core.R
 import com.pouyaheydari.appupdater.core.utils.TAG
 import com.pouyaheydari.appupdater.core.utils.getExistingApk
 import com.pouyaheydari.appupdater.core.utils.hideUpdateInProgress
 import com.pouyaheydari.appupdater.core.utils.installAPK
 import com.pouyaheydari.appupdater.core.utils.requestId
-import com.pouyaheydari.updater.core.R
 
 /**
  * Receives when download is finished and opens the install dialog

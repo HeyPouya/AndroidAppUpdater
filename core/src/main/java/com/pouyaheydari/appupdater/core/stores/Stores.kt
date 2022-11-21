@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import com.pouyaheydari.appupdater.core.R
 import com.pouyaheydari.appupdater.core.pojo.Store
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
-import com.pouyaheydari.updater.core.R
-import java.util.*
+import java.util.Locale
 
 /**
  * This is the super class of all store (e.g. [GooglePlayStore])
