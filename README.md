@@ -13,7 +13,7 @@
 
 App Updater is an  easy-to-use and fully customizable library to show update dialog to users.
 
-##### It is built with Kotlin and androidX and also supports DSL
+**Supports Kotlin DSL and dark mode**
 
 <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/Screenshot_1.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/Screenshot_2.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/Screenshot_3.png" width="250">
 
@@ -25,8 +25,15 @@ If you provide your application on stores (other than  Google Play), you can lis
 To create a new store:
 
 ```kotlin
-val list = ArrayList<UpdaterStoreList>()
-list.add(UpdaterStoreList(Store.DIRECT_URL, "Store Title", R.mipmap.ic_launcher , "https://url/app.apk", BuildConfig.APPLICATION_ID))
+val list = arrayListOf<UpdaterStoreList>()
+list.add(
+    UpdaterStoreList(
+        store = Store.GOOGLE_PLAY,
+        title = "Store Title",
+        icon = R.mipmap.ic_launcher,
+        url = "https://url/app.apk",
+        packageName = SAMPLE_PACKAGE_NAME)
+)
 ```
 
 parameters of UpdaterStoreList, as the order you see in above line:
@@ -40,7 +47,12 @@ parameters of UpdaterStoreList, as the order you see in above line:
 #### You can omit adding some properties in Kotlin
 
 ```kotlin
-list.add(UpdaterStoreList(Store.GOOGLE_PLAY, "Download From Google Play", packageName = BuildConfig.APPLICATION_ID))
+list.add(
+    UpdaterStoreList(
+      store = Store.GOOGLE_PLAY,
+      title = "Google Play",
+      packageName = BuildConfig.APPLICATION_ID)
+)
 ```
 
 ### Available stores
@@ -60,14 +72,28 @@ You can also make as many direct APK download links as you need.
 Users can download that APK directly on their phone. After downloading finishes, the install page will be shown to the user automatically.
 
 ```kotlin
-list.add(UpdaterStoreList(Store.DIRECT_URL, "Direct Download",R.mipmap.ic_launcher , "https://cafebazaar.ir/download/bazaar.apk", BuildConfig.APPLICATION_ID))
+list.add(
+    UpdaterStoreList(
+      store = Store.DIRECT_URL,
+      title = "Direct Download",
+      icon = R.mipmap.ic_launcher,
+      url = "https://cafebazaar.ir/download/bazaar.apk",
+      packageName = BuildConfig.APPLICATION_ID)
+)
 ```
 ***Remember to put WRITE_EXTERNAL_STORAGE, INTERNET and REQUEST_INSTALL_PACKAGES permissions in your manifest. The library asks these permissions at runtime if needed***
 
 ### To Show UpdateDialog
 
 ```kotlin
-AppUpdaterDialog.getInstance("New Update!!!!", "Lots of new features!! upgrade yo the new version.", list, true, font).show(supportFragmentManager, "TAG")
+AppUpdaterDialog.getInstance(
+    title =  getString(R.string.library_title),
+    description = getString(R.string.library_description),
+    storeList = list,
+    isForce = false,
+    typeface = font,
+    theme = Theme.LIGHT
+).show(supportFragmentManager, TAG)
 ```
 
 Parameters in the order are:
@@ -77,6 +103,7 @@ Parameters in the order are:
 3.  List of stores you created in last step
 4.  Is it a force update? (should dialog be cancelable or not)
 5.  Typeface to customize font style
+6. Theme of the dialog (Theme.Light or Theme.Dark)
 
 ### To change library's texts
 
@@ -108,7 +135,7 @@ R.drawable.appupdater_ic_iran_apps
 ```
 
 ## Kotlin DSL
-This library also supports DSL. To use it, add the required dependency.
+This library also supports DSL. To use it, add the required dependency first.
 
 ### Adding Stores in DSL
 
@@ -130,6 +157,7 @@ store {
             description = "Lots of new features! Update right now"
             isForceUpdate = false
             typeface = Typeface.createFromAsset(assets, FONT_PATH)
+            theme = Theme.DARK
             list = listOf(
                 store {
                     store = Store.DIRECT_URL

@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.MATCH_PARENT
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.WRAP_CONTENT
 import androidx.fragment.app.DialogFragment
-import com.pouyaheydari.appupdater.core.utils.typeface
+import com.pouyaheydari.appupdater.core.utils.tf
 
 /**
  * Dialog to show download progress to user
@@ -20,7 +20,7 @@ class UpdateInProgressDialog : DialogFragment(R.layout.fragment_update_in_progre
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(view) {
-            typeface?.let {
+            tf?.let {
                 findViewById<TextView>(R.id.txtTitle).typeface = it
                 findViewById<TextView>(R.id.txtDescription).typeface = it
             }

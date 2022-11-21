@@ -10,5 +10,5 @@ var requestId: Long = -10L
 const val APK_NAME = "NewAPK.apk"
 
 // to use typeface while using the dialog
-var typeface: Typeface? = null
+var tf: Typeface? = null
 var showUpdateInProgressCallback: ((Boolean) -> Unit)? = null

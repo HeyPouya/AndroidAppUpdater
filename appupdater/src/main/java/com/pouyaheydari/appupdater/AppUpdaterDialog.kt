@@ -21,7 +21,7 @@ import com.pouyaheydari.appupdater.core.pojo.UpdaterFragmentModel
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 import com.pouyaheydari.appupdater.core.utils.getApk
 import com.pouyaheydari.appupdater.core.utils.serializable
-import com.pouyaheydari.appupdater.core.utils.typeface
+import com.pouyaheydari.appupdater.core.utils.tf
 
 private const val DATA_LIST = "DATA_LIST"
 private const val UPDATE_DIALOG_TAG = "UpdateDialog"
@@ -58,7 +58,7 @@ class AppUpdaterDialog : DialogFragment() {
 
         val view = inflater.inflate(R.layout.fragment_app_updater_dialog, container, false)
         return view.apply {
-            typeface?.let {
+            tf?.let {
                 findViewById<TextView>(R.id.txtTitle).typeface = it
                 findViewById<TextView>(R.id.txtDescription).typeface = it
                 findViewById<TextView>(R.id.txtOr).typeface = it
@@ -166,7 +166,7 @@ class AppUpdaterDialog : DialogFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        typeface = null
+        tf = null
     }
 
     companion object {
@@ -180,18 +180,18 @@ class AppUpdaterDialog : DialogFragment() {
         fun getInstance(
             title: String = "",
             description: String = "",
-            list: List<UpdaterStoreList> = listOf(),
+            storeList: List<UpdaterStoreList> = listOf(),
             isForce: Boolean = false,
-            tf: Typeface? = null,
+            typeface: Typeface? = null,
             theme: Theme = Theme.LIGHT
         ): AppUpdaterDialog {
 
             // set typeface in utils class to use later in application
-            typeface = tf
+            tf = typeface
 
             // bundle to add data to our dialog
             val bundle = Bundle()
-            val data = UpdaterFragmentModel(title, description, list, !isForce, theme = theme)
+            val data = UpdaterFragmentModel(title, description, storeList, !isForce, theme = theme)
             bundle.putSerializable(DATA_LIST, data)
             fragment.arguments = bundle
             return fragment

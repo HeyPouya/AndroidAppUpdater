@@ -115,11 +115,11 @@ class MainActivity : AppCompatActivity() {
         val list = listOf(
             // direct download
             UpdaterStoreList(
-                Store.DIRECT_URL,
-                getString(R.string.direct_download, "1"),
-                R.mipmap.ic_launcher,
-                CUSTOM_URL,
-                SAMPLE_PACKAGE_NAME
+                store = Store.DIRECT_URL,
+                title = getString(R.string.direct_download, "1"),
+                icon = R.mipmap.ic_launcher,
+                url = CUSTOM_URL,
+                packageName = SAMPLE_PACKAGE_NAME
             ),
             UpdaterStoreList(
                 Store.DIRECT_URL,
@@ -168,11 +168,12 @@ class MainActivity : AppCompatActivity() {
         )
         // creating update dialog
         AppUpdaterDialog.getInstance(
-            getString(R.string.library_title),
-            getString(R.string.library_description),
-            list,
-            false,
-            font
+            title = getString(R.string.library_title),
+            description = getString(R.string.library_description),
+            storeList = list,
+            isForce = false,
+            typeface = font,
+            theme = Theme.LIGHT
         ).show(supportFragmentManager, TAG)
     }
 }

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
-import com.pouyaheydari.appupdater.core.utils.typeface
+import com.pouyaheydari.appupdater.core.utils.tf
 
 /**
  * Adapter to show Direct download links
@@ -35,8 +35,8 @@ class DirectRecyclerAdapter(
         fun onBind(item: UpdaterStoreList) {
             val txtDirect = view.findViewById<TextView>(R.id.txtDirect)
             txtDirect.text = item.title
-            if (typeface != null)
-                txtDirect.typeface = typeface
+            if (tf != null)
+                txtDirect.typeface = tf
             view.setOnClickListener { listener(item) }
         }
     }

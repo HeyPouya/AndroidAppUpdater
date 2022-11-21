@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
-import com.pouyaheydari.appupdater.core.utils.typeface
+import com.pouyaheydari.appupdater.core.utils.tf
 
 /**
  * Adapter to show stores on dialog page
@@ -45,8 +45,8 @@ class StoresRecyclerAdapter(
             }
             txtStoreTitle.setTextColor(ContextCompat.getColor(view.context, textColor))
             txtStoreTitle.text = item.title
-            if (typeface != null)
-                txtStoreTitle.typeface = typeface
+            if (tf != null)
+                txtStoreTitle.typeface = tf
             imgStore.setImageResource(item.icon)
             view.setOnClickListener { listener(item) }
         }
