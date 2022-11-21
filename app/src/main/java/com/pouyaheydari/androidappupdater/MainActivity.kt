@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.pouyaheydari.appupdater.AppUpdaterDialog
 import com.pouyaheydari.appupdater.core.pojo.Store
+import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 import com.pouyaheydari.appupdater.dsl.store
 import com.pouyaheydari.appupdater.dsl.updateDialogBuilder
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             description = getString(R.string.library_description)
             isForceUpdate = false
             typeface = Typeface.createFromAsset(assets, FONT_PATH)
+            theme = Theme.DARK
             list = listOf(
                 store {
                     store = Store.DIRECT_URL

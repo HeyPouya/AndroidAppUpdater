@@ -11,10 +11,12 @@ import android.widget.LinearLayout.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.pouyaheydari.appupdater.core.pojo.Store.DIRECT_URL
+import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.core.pojo.UpdaterFragmentModel
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 import com.pouyaheydari.appupdater.core.utils.getApk
@@ -41,9 +43,16 @@ class AppUpdaterDialog : DialogFragment() {
         // Setting isCancelable
         data?.isForceUpdate?.let { isCancelable = it }
 
+        val dialogBackground = data?.theme?.let {
+            when (it) {
+                Theme.LIGHT -> R.drawable.dialog_background
+                Theme.DARK -> R.drawable.dialog_background_dark
+            }
+        } ?: R.drawable.dialog_background
+
         // Set background for the dialog
         dialog?.window?.setBackgroundDrawable(
-            ContextCompat.getDrawable(requireContext(), R.drawable.dialog_background)
+            ContextCompat.getDrawable(requireContext(), dialogBackground)
         )
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
@@ -76,20 +85,36 @@ class AppUpdaterDialog : DialogFragment() {
         val title = data?.title
         val description = data?.description
         val list = data?.list
+        setTheme(data?.theme)
         checkNotNull(list)
-        setUpProperties(title, description, list)
+        setUpProperties(title, description, list, data?.theme)
     }
 
-    private fun setUpProperties(title: String?, description: String?, list: List<UpdaterStoreList>) {
+    private fun setTheme(theme: Theme?) {
+        val textColor = when (theme ?: Theme.LIGHT) {
+            Theme.LIGHT -> R.color.appupdater_text_colors
+            Theme.DARK -> R.color.appupdater_text_colors_dark
+        }
+        with(requireView()) {
+            findViewById<TextView>(R.id.txtTitle)?.setTextColor(getColor(requireContext(), textColor))
+            findViewById<TextView>(R.id.txtDescription)?.setTextColor(getColor(requireContext(), textColor))
+            findViewById<TextView>(R.id.txtOr)?.setTextColor(getColor(requireContext(), textColor))
+            findViewById<TextView>(R.id.txtStore)?.setTextColor(getColor(requireContext(), textColor))
+            findViewById<View>(R.id.leftOrLine)?.setBackgroundColor(getColor(requireContext(), textColor))
+            findViewById<View>(R.id.rightOrLine)?.setBackgroundColor(getColor(requireContext(), textColor))
+        }
+    }
+
+    private fun setUpProperties(title: String?, description: String?, list: List<UpdaterStoreList>, theme: Theme?) {
         requireView().findViewById<TextView>(R.id.txtTitle)?.text = title
         requireView().findViewById<TextView>(R.id.txtDescription)?.text = description
 
         hideOrLayoutIfNeeded(checkIfDirectAndStoreAvailable(list))
 
-        setUpBothRecyclers(list)
+        setUpBothRecyclers(list, theme)
     }
 
-    private fun setUpBothRecyclers(list: List<UpdaterStoreList>) {
+    private fun setUpBothRecyclers(list: List<UpdaterStoreList>, theme: Theme?) {
         val directLinks = list.filter { it.store == DIRECT_URL }
         val storeLinks = list.filterNot { it.store == DIRECT_URL }
 
@@ -100,7 +125,7 @@ class AppUpdaterDialog : DialogFragment() {
 
         if (storeLinks.isNotEmpty()) {
             requireView().findViewById<RecyclerView>(R.id.recyclerStores)?.adapter =
-                StoresRecyclerAdapter(storeLinks) { onListListener(it) }
+                StoresRecyclerAdapter(storeLinks, theme) { onListListener(it) }
         }
     }
 
@@ -153,11 +178,12 @@ class AppUpdaterDialog : DialogFragment() {
          * get Instance method
          */
         fun getInstance(
-            title: String? = "",
-            description: String? = "",
+            title: String = "",
+            description: String = "",
             list: List<UpdaterStoreList> = listOf(),
             isForce: Boolean = false,
-            tf: Typeface? = null
+            tf: Typeface? = null,
+            theme: Theme = Theme.LIGHT
         ): AppUpdaterDialog {
 
             // set typeface in utils class to use later in application
@@ -165,7 +191,7 @@ class AppUpdaterDialog : DialogFragment() {
 
             // bundle to add data to our dialog
             val bundle = Bundle()
-            val data = UpdaterFragmentModel(title, description, list, !isForce)
+            val data = UpdaterFragmentModel(title, description, list, !isForce, theme = theme)
             bundle.putSerializable(DATA_LIST, data)
             fragment.arguments = bundle
             return fragment
