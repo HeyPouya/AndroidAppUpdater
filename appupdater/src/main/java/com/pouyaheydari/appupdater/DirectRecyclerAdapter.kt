@@ -35,8 +35,9 @@ class DirectRecyclerAdapter(
         fun onBind(item: UpdaterStoreList) {
             val txtDirect = view.findViewById<TextView>(R.id.txtDirect)
             txtDirect.text = item.title
-            if (tf != null)
+            if (tf != null) {
                 txtDirect.typeface = tf
+            }
             view.setOnClickListener { listener(item) }
         }
     }

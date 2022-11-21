@@ -12,12 +12,10 @@ import android.os.Build
 import android.os.Environment
 import com.pouyaheydari.updater.core.R
 
-
 /**
  * Checks for needed permissions and tries to download the apk
  */
 fun getApk(url: String, activity: Activity?, callback: (Boolean) -> Unit) {
-
     checkNotNull(activity)
 
     val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -34,7 +32,6 @@ fun getApk(url: String, activity: Activity?, callback: (Boolean) -> Unit) {
 }
 
 private fun prepareToDownloadApk(url: String, context: Context, callback: (Boolean) -> Unit) {
-
     // Show update in Progress alert dialog to the user
     showUpdateInProgress(callback)
 

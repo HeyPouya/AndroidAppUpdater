@@ -1,5 +1,5 @@
 [versions]
-appVersion = "600"
+appVersion = "700"
 compileSdkVersion = "33"
 minSdkVersion = "16"
 targetSdkVersion = "33"

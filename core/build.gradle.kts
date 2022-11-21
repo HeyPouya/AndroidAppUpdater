@@ -21,12 +21,12 @@ android {
     group = "com.github.sirlordpouya.androidappupdater"
     version = libs.versions.appVersion.get()
 }
-dependencies{
+dependencies {
 
-    //support dependency
+    // support dependency
     implementation(libs.appcompat)
 
-    //testing dependency
+    // testing dependency
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidTestJUnit)
     androidTestImplementation(libs.androidTestRules)
@@ -44,4 +44,3 @@ publishing {
         }
     }
 }
-

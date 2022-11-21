@@ -45,8 +45,9 @@ class StoresRecyclerAdapter(
             }
             txtStoreTitle.setTextColor(ContextCompat.getColor(view.context, textColor))
             txtStoreTitle.text = item.title
-            if (tf != null)
+            if (tf != null) {
                 txtStoreTitle.typeface = tf
+            }
             imgStore.setImageResource(item.icon)
             view.setOnClickListener { listener(item) }
         }

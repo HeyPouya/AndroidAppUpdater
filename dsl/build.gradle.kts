@@ -22,11 +22,11 @@ android {
 }
 
 dependencies {
-    //library dependency
+    // library dependency
     implementation(project(":core"))
     implementation(project(":appupdater"))
 
-    //testing dependency
+    // testing dependency
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidTestJUnit)
     androidTestImplementation(libs.androidTestRules)

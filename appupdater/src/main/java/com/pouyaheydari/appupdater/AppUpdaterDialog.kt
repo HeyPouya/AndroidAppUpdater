@@ -36,7 +36,6 @@ class AppUpdaterDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         // Getting data passed to the library
         val data = arguments?.serializable<UpdaterFragmentModel>(DATA_LIST)
 
@@ -160,8 +159,9 @@ class AppUpdaterDialog : DialogFragment() {
     }
 
     private fun hideUpdateInProgressDialog() {
-        if (UpdateInProgressDialog.instance.isAdded)
+        if (UpdateInProgressDialog.instance.isAdded) {
             UpdateInProgressDialog.instance.dismiss()
+        }
     }
 
     override fun onDestroy() {
@@ -185,7 +185,6 @@ class AppUpdaterDialog : DialogFragment() {
             typeface: Typeface? = null,
             theme: Theme = Theme.LIGHT
         ): AppUpdaterDialog {
-
             // set typeface in utils class to use later in application
             tf = typeface
 

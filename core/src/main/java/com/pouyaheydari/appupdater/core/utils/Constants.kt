@@ -2,8 +2,7 @@ package com.pouyaheydari.appupdater.core.utils
 
 import android.graphics.Typeface
 
-
-//A file to store constants of the project
+// A file to store constants of the project
 
 const val TAG = "AndroidAppUpdater"
 var requestId: Long = -10L

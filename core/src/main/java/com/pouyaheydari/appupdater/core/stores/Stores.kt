@@ -30,9 +30,9 @@ abstract class Stores {
     }
 
     private fun showUrlOrErrorToast(context: Context?, item: UpdaterStoreList, store: Store) {
-        if (item.url.isNotEmpty())
+        if (item.url.isNotEmpty()) {
             context?.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.url)))
-        else {
+        } else {
             val storeName = store.name.lowercase(Locale.ROOT).replace("_", " ")
             Toast.makeText(
                 context,

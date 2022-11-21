@@ -22,7 +22,6 @@ class DownloadFinishedReceiver : BroadcastReceiver() {
      * To show install page when apk got downloaded successfully
      */
     override fun onReceive(context: Context?, intent: Intent?) {
-
         val action = intent?.action
         if (action == DownloadManager.ACTION_DOWNLOAD_COMPLETE) {
             val referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
@@ -39,9 +38,10 @@ class DownloadFinishedReceiver : BroadcastReceiver() {
 
     private fun verifyDownloadedApkExists(context: Context) {
         val existingApk = context.getExistingApk()
-        if (!existingApk.exists())
+        if (!existingApk.exists()) {
             Log.d(TAG, context.getString(R.string.appupdater_couldnt_find_downloaded_file))
-        else
+        } else {
             installAPK(context, existingApk, Build.VERSION.SDK_INT)
+        }
     }
 }

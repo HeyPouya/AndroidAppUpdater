@@ -18,16 +18,16 @@ android {
 
 dependencies {
 
-    //library dependency
+    // library dependency
     implementation(project(":core"))
     implementation(project(":dsl"))
     implementation(project(":appupdater"))
 
-    //support dependency
+    // support dependency
     implementation(libs.appcompat)
     implementation(libs.constraintLayout)
 
-    //testing dependency
+    // testing dependency
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidTestJUnit)
     androidTestImplementation(libs.androidTestRules)

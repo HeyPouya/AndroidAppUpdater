@@ -24,12 +24,12 @@ android {
 dependencies {
 
     implementation(project(":core"))
-    //support dependency
+    // support dependency
     implementation(libs.appcompat)
     implementation(libs.constraintLayout)
     implementation(libs.recyclerView)
 
-    //testing dependency
+    // testing dependency
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidTestJUnit)
     androidTestImplementation(libs.androidTestRules)

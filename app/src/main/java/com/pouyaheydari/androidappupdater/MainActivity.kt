@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                     title = getString(R.string.galaxy_store)
                     icon = R.drawable.appupdater_ic_galaxy_store
                     packageName = SAMPLE_PACKAGE_NAME
-                },
+                }
             )
         }.show(supportFragmentManager, TAG)
     }
@@ -107,7 +107,6 @@ class MainActivity : AppCompatActivity() {
      * core and appupdater
      */
     private fun kotlinSample() {
-
         // typeface to use in dialog
         val font = Typeface.createFromAsset(assets, FONT_PATH)
 
@@ -164,7 +163,7 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.galaxy_store),
                 packageName = SAMPLE_PACKAGE_NAME,
                 icon = R.drawable.appupdater_ic_galaxy_store
-            ),
+            )
         )
         // creating update dialog
         AppUpdaterDialog.getInstance(

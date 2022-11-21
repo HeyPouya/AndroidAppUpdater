@@ -17,11 +17,12 @@ private const val PERMISSION_REQUEST_CODE = 2000
 
 fun Context.deleteExistingFile() {
     val file = getExistingApk()
-    if (file.exists())
+    if (file.exists()) {
         file.delete()
+    }
 }
 
-fun Context.getExistingApk() = File("${this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)}/${APK_NAME}")
+fun Context.getExistingApk() = File("${this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)}/$APK_NAME")
 
 /**
  * Check if application has a permission or not

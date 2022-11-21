@@ -9,7 +9,6 @@ import android.util.Log
 import androidx.core.content.FileProvider
 import java.io.File
 
-
 /**
  * Uses different methods to install the apk depending the user's Android version
  */
