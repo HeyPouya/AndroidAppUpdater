@@ -8,14 +8,14 @@
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/icon.png" width="250">
+<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/blob/master/pics/icon.png" width="250">
 </p>
 
 App Updater is an  easy-to-use and fully customizable library to show update dialog to users.
 
 **Supports Kotlin DSL and Compose**
 
-<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/Screenshot_1.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/Screenshot_2.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/Screenshot_3.png" width="250">
+<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/blob/master/pics/Screenshot_1.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/blob/master/pics/Screenshot_2.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/blob/master/pics/Screenshot_3.png" width="250">
 
 ## Kotlin Usage
 
