@@ -8,14 +8,14 @@
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/icon.png" width="250">
+<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/icon.png" width="250">
 </p>
 
 App Updater is an  easy-to-use and fully customizable library to show update dialog to users.
 
-**Supports Kotlin DSL and dark mode**
+**Supports Kotlin DSL and Compose**
 
-<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/Screenshot_1.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/Screenshot_2.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/Screenshot_3.png" width="250">
+<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/Screenshot_1.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/Screenshot_2.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/Screenshot_3.png" width="250">
 
 ## Kotlin Usage
 
@@ -134,6 +134,20 @@ R.drawable.appupdater_ic_myket
 R.drawable.appupdater_ic_iran_apps
 ```
 
+## Jetpack Compose
+You can also show a native compose UpdateDialog to the user:
+
+```kotlin
+AndroidAppUpdaterTheme {
+    AndroidAppUpdater(
+        dialogTitle = stringResource(id = R.string.appupdater_app_name),
+        dialogDescription = stringResource(id = R.string.appupdater_download_notification_desc),
+        storeList = storeList,
+        theme = Theme.DARK
+    )
+}
+```
+
 ## Kotlin DSL
 This library also supports DSL. To use it, add the required dependency first.
 
@@ -168,7 +182,6 @@ store {
                 })
 }.show(supportFragmentManager, TAG)
 ```
-
 **Check the demo application to see it in your IDE.**
 
 ## Download
@@ -196,6 +209,9 @@ implementation ("com.github.SirLordPouya.AndroidAppUpdater:main:latest_version")
 
 //To use the library with Kotlin DSL, Kotlin & Java
 implementation ("com.github.SirLordPouya.AndroidAppUpdater:dsl:latest_version")
+
+//To use the library with Jetpack Compose
+implementation ("com.github.SirLordPouya.AndroidAppUpdater:compose:latest_version")
 ```
 
 ## License

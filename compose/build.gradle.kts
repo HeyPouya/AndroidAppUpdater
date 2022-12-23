@@ -1,22 +1,28 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
+    `maven-publish`
 }
 
 android {
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
     defaultConfig {
-        applicationId = "com.pouyaheydari.androidappupdater"
         minSdk = libs.versions.composeMinSdkVersion.get().toInt()
         targetSdk = libs.versions.targetSdkVersion.get().toInt()
-        versionCode = libs.versions.appVersion.get().toInt()
-        versionName = libs.versions.appVersion.get()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
     }
-    namespace = "com.pouyaheydari.androidappupdater"
+
+    publishing {
+        multipleVariants("release") {
+            allVariants()
+        }
+    }
+    namespace = "com.pouyaheydari.appupdater.compose"
+    group = "com.github.sirlordpouya.androidappupdater"
+    version = libs.versions.appVersion.get()
 
     kotlinOptions {
         jvmTarget = "1.8"
@@ -36,27 +42,31 @@ android {
 
 dependencies {
 
-    // library dependency
     implementation(project(":core"))
-    implementation(project(":dsl"))
-    implementation(project(":appupdater"))
-    implementation(project(":compose"))
-
-    // support dependency
-    implementation(libs.appcompat)
-    implementation(libs.constraintLayout)
     implementation(libs.lifecycle)
-    implementation(libs.compose.activity)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.material)
+    implementation(libs.compose.viewModel)
 
-    // testing dependency
+    // testing
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidTestJUnit)
-    androidTestImplementation(libs.androidTestRules)
     androidTestImplementation(libs.androidTestEspresso)
     androidTestImplementation(libs.compose.test.junit)
     debugImplementation(libs.compose.test.ui.tooling)
     debugImplementation(libs.compose.test.ui.manifest)
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.pouyaheydari.updater"
+            artifactId = "compose"
+            version = libs.versions.appVersion.get()
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
 }

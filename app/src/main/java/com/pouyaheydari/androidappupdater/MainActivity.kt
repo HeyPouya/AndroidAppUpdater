@@ -1,5 +1,6 @@
 package com.pouyaheydari.androidappupdater
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.Button
@@ -31,6 +32,10 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btnDSL).setOnClickListener {
             dslSample()
+        }
+
+        findViewById<Button>(R.id.btnCompose).setOnClickListener {
+            startActivity(Intent(this, ComposeSampleActivity::class.java))
         }
     }
 
