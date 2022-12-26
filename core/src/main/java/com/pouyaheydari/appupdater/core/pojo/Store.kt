@@ -3,6 +3,7 @@ package com.pouyaheydari.appupdater.core.pojo
 import com.pouyaheydari.appupdater.core.stores.AmazonAppStore
 import com.pouyaheydari.appupdater.core.stores.Aptoide
 import com.pouyaheydari.appupdater.core.stores.CafeBazaarStore
+import com.pouyaheydari.appupdater.core.stores.FDroid
 import com.pouyaheydari.appupdater.core.stores.GooglePlayStore
 import com.pouyaheydari.appupdater.core.stores.HuaweiAppGallery
 import com.pouyaheydari.appupdater.core.stores.IranAppsStore
@@ -23,4 +24,5 @@ enum class Store(val provider: Class<out Stores>?) {
     SAMSUNG_GALAXY_STORE(SamsungGalaxyStore::class.java),
     AMAZON_APP_STORE(AmazonAppStore::class.java),
     APTOIDE(Aptoide::class.java),
+    FDROID(FDroid::class.java),
 }

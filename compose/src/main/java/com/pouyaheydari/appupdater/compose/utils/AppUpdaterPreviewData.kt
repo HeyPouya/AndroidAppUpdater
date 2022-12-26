@@ -4,8 +4,10 @@ import com.pouyaheydari.appupdater.compose.R
 import com.pouyaheydari.appupdater.core.pojo.Store
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 
-const val CUSTOM_URL = "https://cafebazaar.ir/download/bazaar.apk"
-const val SAMPLE_PACKAGE_NAME = "com.tencent.mm"
+private const val CUSTOM_URL = "https://cafebazaar.ir/download/bazaar.apk"
+private const val SAMPLE_PACKAGE_NAME = "com.tencent.mm"
+private const val FDROID_SAMPLE_PACKAGE_NAME = "de.storchp.fdroidbuildstatus"
+
 
 val storeList = listOf(
     // direct download
@@ -71,5 +73,11 @@ val storeList = listOf(
         "Aptoide",
         packageName = SAMPLE_PACKAGE_NAME,
         icon = R.drawable.appupdater_ic_aptoide
+    ),
+    UpdaterStoreList(
+        Store.FDROID,
+        "FDroid",
+        packageName = FDROID_SAMPLE_PACKAGE_NAME,
+        icon = R.drawable.appupdater_ic_fdroid
     ),
 )

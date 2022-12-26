@@ -16,6 +16,7 @@ const val TAG = "showUpdateDialogTag"
 const val FONT_PATH = "fonts/vazir.ttf"
 const val CUSTOM_URL = "https://cafebazaar.ir/download/bazaar.apk"
 const val SAMPLE_PACKAGE_NAME = "com.tencent.mm"
+const val FDROID_SAMPLE_PACKAGE_NAME = "de.storchp.fdroidbuildstatus"
 
 /**
  * Main activity of the sample application
@@ -114,6 +115,12 @@ class MainActivity : AppCompatActivity() {
                     icon = R.drawable.appupdater_ic_aptoide
                     packageName = SAMPLE_PACKAGE_NAME
                 },
+                store {
+                    store = Store.FDROID
+                    title = getString(R.string.fdroid)
+                    icon = R.drawable.appupdater_ic_fdroid
+                    packageName = FDROID_SAMPLE_PACKAGE_NAME
+                },
             )
         }.show(supportFragmentManager, TAG)
     }
@@ -190,8 +197,14 @@ class MainActivity : AppCompatActivity() {
             UpdaterStoreList(
                 Store.APTOIDE,
                 getString(R.string.aptoide),
-                packageName = com.pouyaheydari.appupdater.compose.utils.SAMPLE_PACKAGE_NAME,
+                packageName = SAMPLE_PACKAGE_NAME,
                 icon = R.drawable.appupdater_ic_aptoide
+            ),
+            UpdaterStoreList(
+                Store.FDROID,
+                getString(R.string.fdroid),
+                packageName = FDROID_SAMPLE_PACKAGE_NAME,
+                icon = R.drawable.appupdater_ic_fdroid
             ),
         )
         // creating update dialog
