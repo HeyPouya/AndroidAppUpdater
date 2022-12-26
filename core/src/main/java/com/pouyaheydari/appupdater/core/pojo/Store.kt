@@ -1,5 +1,7 @@
 package com.pouyaheydari.appupdater.core.pojo
 
+import com.pouyaheydari.appupdater.core.stores.AmazonAppStore
+import com.pouyaheydari.appupdater.core.stores.Aptoide
 import com.pouyaheydari.appupdater.core.stores.CafeBazaarStore
 import com.pouyaheydari.appupdater.core.stores.GooglePlayStore
 import com.pouyaheydari.appupdater.core.stores.HuaweiAppGallery
@@ -18,5 +20,7 @@ enum class Store(val provider: Class<out Stores>?) {
     MYKET(MyketStore::class.java),
     IRAN_APPS(IranAppsStore::class.java),
     HUAWEI_APP_GALLERY(HuaweiAppGallery::class.java),
-    SAMSUNG_GALAXY_STORE(SamsungGalaxyStore::class.java)
+    SAMSUNG_GALAXY_STORE(SamsungGalaxyStore::class.java),
+    AMAZON_APP_STORE(AmazonAppStore::class.java),
+    APTOIDE(Aptoide::class.java),
 }

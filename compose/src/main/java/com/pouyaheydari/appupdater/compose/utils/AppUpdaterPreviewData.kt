@@ -59,5 +59,17 @@ val storeList = listOf(
         "Galaxy Store",
         packageName = SAMPLE_PACKAGE_NAME,
         icon = R.drawable.appupdater_ic_galaxy_store
-    )
+    ),
+    UpdaterStoreList(
+        Store.AMAZON_APP_STORE,
+        "Amazon App Store",
+        packageName = SAMPLE_PACKAGE_NAME,
+        icon = R.drawable.appupdater_ic_amazon_app_store
+    ),
+    UpdaterStoreList(
+        Store.APTOIDE,
+        "Aptoide",
+        packageName = SAMPLE_PACKAGE_NAME,
+        icon = R.drawable.appupdater_ic_aptoide
+    ),
 )

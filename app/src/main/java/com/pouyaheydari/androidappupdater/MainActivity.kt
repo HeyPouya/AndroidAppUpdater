@@ -101,7 +101,19 @@ class MainActivity : AppCompatActivity() {
                     title = getString(R.string.galaxy_store)
                     icon = R.drawable.appupdater_ic_galaxy_store
                     packageName = SAMPLE_PACKAGE_NAME
-                }
+                },
+                store {
+                    store = Store.AMAZON_APP_STORE
+                    title = getString(R.string.amazon_store)
+                    icon = R.drawable.appupdater_ic_amazon_app_store
+                    packageName = SAMPLE_PACKAGE_NAME
+                },
+                store {
+                    store = Store.APTOIDE
+                    title = getString(R.string.aptoide)
+                    icon = R.drawable.appupdater_ic_aptoide
+                    packageName = SAMPLE_PACKAGE_NAME
+                },
             )
         }.show(supportFragmentManager, TAG)
     }
@@ -168,7 +180,19 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.galaxy_store),
                 packageName = SAMPLE_PACKAGE_NAME,
                 icon = R.drawable.appupdater_ic_galaxy_store
-            )
+            ),
+            UpdaterStoreList(
+                Store.AMAZON_APP_STORE,
+                getString(R.string.amazon_store),
+                packageName = SAMPLE_PACKAGE_NAME,
+                icon = R.drawable.appupdater_ic_amazon_app_store
+            ),
+            UpdaterStoreList(
+                Store.APTOIDE,
+                getString(R.string.aptoide),
+                packageName = com.pouyaheydari.appupdater.compose.utils.SAMPLE_PACKAGE_NAME,
+                icon = R.drawable.appupdater_ic_aptoide
+            ),
         )
         // creating update dialog
         AppUpdaterDialog.getInstance(
