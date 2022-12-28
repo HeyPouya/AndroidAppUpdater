@@ -57,9 +57,6 @@ fun AndroidAppUpdater(
     val viewModel: AndroidAppUpdaterViewModel = viewModel()
 
     AndroidAppUpdaterTheme(darkTheme = theme == Theme.DARK) {
-        if (viewModel.state.value) {
-            UpdateInProgressDialog()
-        }
         Dialog(
             onDismissRequest = { },
             properties = DialogProperties(
@@ -68,6 +65,9 @@ fun AndroidAppUpdater(
             ),
         ) {
             DialogContent(dialogTitle, dialogDescription, storeList, typeface, viewModel)
+        }
+        if (viewModel.state.value) {
+            UpdateInProgressDialog()
         }
     }
 }
