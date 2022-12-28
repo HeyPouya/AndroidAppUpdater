@@ -13,7 +13,9 @@ private const val PLAY_URL = "market://details?id="
  */
 class GooglePlayStore : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("$PLAY_URL${item.packageName}"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("$PLAY_URL${item.packageName}")).run {
+            setPackage("com.android.vending")
+        }
         showStore(context, intent, item, Store.GOOGLE_PLAY)
     }
 }
