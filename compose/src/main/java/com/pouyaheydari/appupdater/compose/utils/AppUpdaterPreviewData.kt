@@ -8,6 +8,7 @@ private const val CUSTOM_URL = "https://cafebazaar.ir/download/bazaar.apk"
 private const val SAMPLE_PACKAGE_NAME = "com.tencent.mm"
 private const val FDROID_SAMPLE_PACKAGE_NAME = "de.storchp.fdroidbuildstatus"
 private const val GET_APP_SAMPLE_PACKAGE_NAME = "com.opera.browser"
+private const val ONE_STORE_SAMPLE_PACKAGE_NAME = "com.kakao.talk"
 
 val storeList = listOf(
     // direct download
@@ -85,5 +86,11 @@ val storeList = listOf(
         "Mi GetApp",
         packageName = GET_APP_SAMPLE_PACKAGE_NAME,
         icon = R.drawable.appupdater_ic_get_app_store,
+    ),
+    UpdaterStoreList(
+        Store.ONE_STORE_APP_MARKET,
+        "One Store",
+        packageName = ONE_STORE_SAMPLE_PACKAGE_NAME,
+        icon = R.drawable.appupdater_ic_one_store,
     ),
 )

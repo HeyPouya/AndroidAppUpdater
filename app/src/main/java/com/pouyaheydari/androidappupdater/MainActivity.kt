@@ -18,6 +18,7 @@ private const val CUSTOM_URL = "https://cafebazaar.ir/download/bazaar.apk"
 private const val SAMPLE_PACKAGE_NAME = "com.tencent.mm"
 private const val FDROID_SAMPLE_PACKAGE_NAME = "de.storchp.fdroidbuildstatus"
 private const val GET_APP_SAMPLE_PACKAGE_NAME = "com.opera.browser"
+private const val ONE_STORE_SAMPLE_PACKAGE_NAME = "com.kakao.talk"
 
 /**
  * Main activity of the sample application
@@ -128,6 +129,12 @@ class MainActivity : AppCompatActivity() {
                     icon = R.drawable.appupdater_ic_get_app_store
                     packageName = GET_APP_SAMPLE_PACKAGE_NAME
                 },
+                store {
+                    store = Store.ONE_STORE_APP_MARKET
+                    title = getString(R.string.one_store)
+                    icon = R.drawable.appupdater_ic_one_store
+                    packageName = ONE_STORE_SAMPLE_PACKAGE_NAME
+                },
             )
         }.show(supportFragmentManager, TAG)
     }
@@ -218,6 +225,12 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.mi_get_app),
                 packageName = GET_APP_SAMPLE_PACKAGE_NAME,
                 icon = R.drawable.appupdater_ic_get_app_store,
+            ),
+            UpdaterStoreList(
+                Store.ONE_STORE_APP_MARKET,
+                getString(R.string.one_store),
+                packageName = ONE_STORE_SAMPLE_PACKAGE_NAME,
+                icon = R.drawable.appupdater_ic_one_store,
             ),
         )
         // creating update dialog
