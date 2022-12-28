@@ -51,7 +51,7 @@ fun Context.showRequest() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         this.startActivity(
             Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
-                .setData(Uri.parse(String.format(Locale.ENGLISH, "package:%s", this.packageName)))
+                .setData(Uri.parse(String.format(Locale.ENGLISH, "package:%s", this.packageName))),
         )
     }
 }

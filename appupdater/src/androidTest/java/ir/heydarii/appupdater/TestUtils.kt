@@ -39,12 +39,12 @@ class TestUtils {
         ) {
             Assert.assertTrue(
                 "The permission is granted but the function is returning false",
-                permissionCheck
+                permissionCheck,
             )
         } else {
             Assert.assertFalse(
                 "The permission is not granted but the function is returning true",
-                permissionCheck
+                permissionCheck,
             )
         }
     }

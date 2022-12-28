@@ -52,7 +52,7 @@ fun AndroidAppUpdater(
     storeList: List<UpdaterStoreList> = listOf(),
     isForce: Boolean = false,
     typeface: Typeface? = null,
-    theme: Theme = Theme.LIGHT
+    theme: Theme = Theme.LIGHT,
 ) {
     val viewModel: AndroidAppUpdaterViewModel = viewModel()
 
@@ -65,7 +65,7 @@ fun AndroidAppUpdater(
             properties = DialogProperties(
                 dismissOnBackPress = isForce,
                 dismissOnClickOutside = isForce,
-            )
+            ),
         ) {
             DialogContent(dialogTitle, dialogDescription, storeList, typeface, viewModel)
         }
@@ -86,7 +86,7 @@ fun DialogContent(
         backgroundColor = MaterialTheme.colors.surface,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp)
+            .padding(vertical = 16.dp),
     ) {
         Column(
             horizontalAlignment = CenterHorizontally,
@@ -108,15 +108,17 @@ private fun StoresListContent(storeList: List<UpdaterStoreList>, viewModel: Andr
         content = {
             storeList.filter { it.store != Store.DIRECT_URL }.forEach {
                 item {
-                    Box(contentAlignment = Center,
-                        modifier = Modifier.clickable { viewModel.onListListener(it, context) }) {
+                    Box(
+                        contentAlignment = Center,
+                        modifier = Modifier.clickable { viewModel.onListListener(it, context) },
+                    ) {
                         Column(horizontalAlignment = CenterHorizontally) {
                             Image(painter = painterResource(id = it.icon), contentDescription = null)
                             Text(
                                 text = it.title,
                                 style = MaterialTheme.typography.body2,
                                 color = MaterialTheme.colors.onSurface,
-                                modifier = Modifier.padding(top = 8.dp)
+                                modifier = Modifier.padding(top = 8.dp),
                             )
                         }
                     }
@@ -124,7 +126,7 @@ private fun StoresListContent(storeList: List<UpdaterStoreList>, viewModel: Andr
             }
         },
         verticalArrangement = Arrangement.spacedBy(32.dp),
-        contentPadding = PaddingValues(vertical = 32.dp)
+        contentPadding = PaddingValues(vertical = 32.dp),
     )
 }
 
@@ -135,13 +137,13 @@ private fun DividerContent(shouldShow: Boolean) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp)
+                .padding(top = 16.dp),
         ) {
             Divider(
                 color = MaterialTheme.colors.background,
                 modifier = Modifier
                     .weight(1F)
-                    .padding(start = 16.dp, end = 8.dp)
+                    .padding(start = 16.dp, end = 8.dp),
             )
             Text(
                 text = stringResource(id = R.string.appupdater_or),
@@ -150,7 +152,7 @@ private fun DividerContent(shouldShow: Boolean) {
                 color = MaterialTheme.colors.background,
                 modifier = Modifier
                     .weight(1F)
-                    .padding(start = 8.dp, end = 16.dp)
+                    .padding(start = 8.dp, end = 16.dp),
             )
         }
     }
@@ -168,7 +170,7 @@ private fun DirectLinkContent(storeList: List<UpdaterStoreList>, viewModel: Andr
                         textAlign = TextAlign.Center,
                         color = Blue,
                         style = MaterialTheme.typography.body1,
-                        modifier = Modifier.clickable { viewModel.onListListener(it, context) }
+                        modifier = Modifier.clickable { viewModel.onListListener(it, context) },
                     )
                 }
             }
@@ -177,7 +179,7 @@ private fun DirectLinkContent(storeList: List<UpdaterStoreList>, viewModel: Andr
         verticalArrangement = Arrangement.spacedBy(16.dp),
         userScrollEnabled = false,
         modifier = Modifier.padding(top = 32.dp, start = 8.dp, end = 8.dp),
-        contentPadding = PaddingValues(top = 16.dp)
+        contentPadding = PaddingValues(top = 16.dp),
     )
 }
 
@@ -185,7 +187,7 @@ private fun DirectLinkContent(storeList: List<UpdaterStoreList>, viewModel: Andr
 private fun DialogHeader(
     dialogTitle: String,
     typeface: Typeface?,
-    dialogDescription: String
+    dialogDescription: String,
 ) {
     Image(
         painter = painterResource(id = R.drawable.appupdater_ic_cloud),
@@ -203,7 +205,7 @@ private fun DialogHeader(
         fontFamily = typeface?.let { FontFamily(it) },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp)
+            .padding(horizontal = 8.dp),
     )
     Text(
         textAlign = TextAlign.Center,
@@ -213,7 +215,7 @@ private fun DialogHeader(
         fontFamily = typeface?.let { FontFamily(it) },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp)
+            .padding(horizontal = 8.dp),
     )
 }
 
@@ -224,27 +226,27 @@ private fun UpdateInProgressDialog() {
             shape = RoundedCornerShape(12.dp),
             elevation = 8.dp,
             backgroundColor = MaterialTheme.colors.surface,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 16.dp, horizontal = 8.dp)
+                    .padding(vertical = 16.dp, horizontal = 8.dp),
             ) {
                 Text(
                     text = stringResource(id = (R.string.appupdater_please_wait)),
                     style = MaterialTheme.typography.h1,
-                    modifier = Modifier.padding(all = 8.dp)
+                    modifier = Modifier.padding(all = 8.dp),
                 )
                 Text(
                     text = stringResource(id = (R.string.appupdater_downloading_new_version)),
                     style = MaterialTheme.typography.body1,
-                    modifier = Modifier.padding(all = 8.dp)
+                    modifier = Modifier.padding(all = 8.dp),
                 )
                 LinearProgressIndicator(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(all = 8.dp)
+                        .padding(all = 8.dp),
                 )
             }
         }
@@ -258,7 +260,7 @@ fun LightPreview() {
         dialogTitle = stringResource(id = R.string.appupdater_app_name),
         dialogDescription = stringResource(id = R.string.appupdater_download_notification_desc),
         storeList = storeList,
-        theme = Theme.LIGHT
+        theme = Theme.LIGHT,
     )
 }
 

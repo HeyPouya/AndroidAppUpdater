@@ -25,7 +25,7 @@ private val LightColorScheme = lightColors(
 fun AndroidAppUpdaterTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = when {
         darkTheme -> DarkColorScheme
@@ -45,6 +45,6 @@ fun AndroidAppUpdaterTheme(
     MaterialTheme(
         colors = colorScheme,
         typography = Typography,
-        content = content
+        content = content,
     )
 }

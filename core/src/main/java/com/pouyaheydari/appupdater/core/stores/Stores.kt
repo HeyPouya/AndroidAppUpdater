@@ -37,7 +37,7 @@ abstract class Stores {
             Toast.makeText(
                 context,
                 context?.getString(R.string.appupdater_please_install, storeName),
-                Toast.LENGTH_LONG
+                Toast.LENGTH_LONG,
             ).show()
         }
     }

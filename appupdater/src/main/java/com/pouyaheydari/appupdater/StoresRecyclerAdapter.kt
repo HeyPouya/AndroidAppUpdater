@@ -17,7 +17,7 @@ import com.pouyaheydari.appupdater.core.utils.tf
 class StoresRecyclerAdapter(
     private val list: List<UpdaterStoreList>,
     private val theme: Theme?,
-    private val listener: (UpdaterStoreList) -> Unit
+    private val listener: (UpdaterStoreList) -> Unit,
 ) : RecyclerView.Adapter<StoresRecyclerAdapter.SoresViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =

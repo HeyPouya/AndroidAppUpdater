@@ -21,7 +21,7 @@ class ComposeSampleActivity : ComponentActivity() {
                     dialogTitle = stringResource(id = R.string.appupdater_app_name),
                     dialogDescription = stringResource(id = R.string.appupdater_download_notification_desc),
                     storeList = storeList,
-                    theme = Theme.DARK
+                    theme = Theme.DARK,
                 )
             }
         }
@@ -36,7 +36,7 @@ fun DefaultPreview() {
             dialogTitle = stringResource(id = R.string.appupdater_app_name),
             dialogDescription = stringResource(id = R.string.appupdater_download_notification_desc),
             storeList = storeList,
-            theme = Theme.DARK
+            theme = Theme.DARK,
         )
     }
 }

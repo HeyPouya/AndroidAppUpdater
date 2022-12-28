@@ -13,7 +13,7 @@ data class UpdaterFragmentModel(
     var list: List<UpdaterStoreList> = listOf(),
     var isForceUpdate: Boolean = false,
     var typeface: Typeface? = null,
-    var theme: Theme = Theme.LIGHT
+    var theme: Theme = Theme.LIGHT,
 ) : Serializable
 
 /**
@@ -24,5 +24,5 @@ data class UpdaterStoreList(
     var title: String = "Store",
     var icon: Int = R.drawable.appupdater_ic_cloud,
     var url: String = "",
-    var packageName: String = ""
+    var packageName: String = "",
 ) : Serializable

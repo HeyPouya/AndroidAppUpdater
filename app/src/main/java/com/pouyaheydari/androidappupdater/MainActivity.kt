@@ -149,75 +149,75 @@ class MainActivity : AppCompatActivity() {
                 title = getString(R.string.direct_download, "1"),
                 icon = R.mipmap.ic_launcher,
                 url = CUSTOM_URL,
-                packageName = SAMPLE_PACKAGE_NAME
+                packageName = SAMPLE_PACKAGE_NAME,
             ),
             UpdaterStoreList(
                 Store.DIRECT_URL,
                 getString(R.string.direct_download, "2"),
                 R.mipmap.ic_launcher,
                 CUSTOM_URL,
-                SAMPLE_PACKAGE_NAME
+                SAMPLE_PACKAGE_NAME,
             ),
             // stores
             UpdaterStoreList(
                 Store.GOOGLE_PLAY,
                 getString(R.string.play),
                 packageName = SAMPLE_PACKAGE_NAME,
-                icon = R.drawable.appupdater_ic_google_play
+                icon = R.drawable.appupdater_ic_google_play,
             ),
             UpdaterStoreList(
                 Store.CAFE_BAZAAR,
                 getString(R.string.bazaar),
                 packageName = SAMPLE_PACKAGE_NAME,
-                icon = R.drawable.appupdater_ic_bazar
+                icon = R.drawable.appupdater_ic_bazar,
             ),
             UpdaterStoreList(
                 Store.MYKET,
                 getString(R.string.myket),
                 packageName = SAMPLE_PACKAGE_NAME,
-                icon = R.drawable.appupdater_ic_myket
+                icon = R.drawable.appupdater_ic_myket,
             ),
             UpdaterStoreList(
                 Store.IRAN_APPS,
                 getString(R.string.iran_apps),
                 packageName = SAMPLE_PACKAGE_NAME,
-                icon = R.drawable.appupdater_ic_iran_apps
+                icon = R.drawable.appupdater_ic_iran_apps,
             ),
             UpdaterStoreList(
                 Store.HUAWEI_APP_GALLERY,
                 getString(R.string.app_gallery),
                 packageName = SAMPLE_PACKAGE_NAME,
-                icon = R.drawable.appupdater_ic_app_gallery
+                icon = R.drawable.appupdater_ic_app_gallery,
             ),
             UpdaterStoreList(
                 Store.SAMSUNG_GALAXY_STORE,
                 getString(R.string.galaxy_store),
                 packageName = SAMPLE_PACKAGE_NAME,
-                icon = R.drawable.appupdater_ic_galaxy_store
+                icon = R.drawable.appupdater_ic_galaxy_store,
             ),
             UpdaterStoreList(
                 Store.AMAZON_APP_STORE,
                 getString(R.string.amazon_store),
                 packageName = SAMPLE_PACKAGE_NAME,
-                icon = R.drawable.appupdater_ic_amazon_app_store
+                icon = R.drawable.appupdater_ic_amazon_app_store,
             ),
             UpdaterStoreList(
                 Store.APTOIDE,
                 getString(R.string.aptoide),
                 packageName = SAMPLE_PACKAGE_NAME,
-                icon = R.drawable.appupdater_ic_aptoide
+                icon = R.drawable.appupdater_ic_aptoide,
             ),
             UpdaterStoreList(
                 Store.FDROID,
                 getString(R.string.fdroid),
                 packageName = FDROID_SAMPLE_PACKAGE_NAME,
-                icon = R.drawable.appupdater_ic_fdroid
+                icon = R.drawable.appupdater_ic_fdroid,
             ),
             UpdaterStoreList(
                 Store.MI_GET_APP_STORE,
                 getString(R.string.mi_get_app),
                 packageName = GET_APP_SAMPLE_PACKAGE_NAME,
-                icon = R.drawable.appupdater_ic_get_app_store
+                icon = R.drawable.appupdater_ic_get_app_store,
             ),
         )
         // creating update dialog
@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity() {
             storeList = list,
             isForce = false,
             typeface = font,
-            theme = Theme.LIGHT
+            theme = Theme.LIGHT,
         ).show(supportFragmentManager, TAG)
     }
 }

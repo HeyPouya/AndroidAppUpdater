@@ -13,7 +13,7 @@ import com.pouyaheydari.appupdater.core.utils.tf
  */
 class DirectRecyclerAdapter(
     private val list: List<UpdaterStoreList>,
-    private val listener: (UpdaterStoreList) -> Unit
+    private val listener: (UpdaterStoreList) -> Unit,
 ) : RecyclerView.Adapter<DirectRecyclerAdapter.SoresViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoresViewHolder =

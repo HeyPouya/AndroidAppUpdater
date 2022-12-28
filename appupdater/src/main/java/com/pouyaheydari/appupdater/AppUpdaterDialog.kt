@@ -34,7 +34,7 @@ class AppUpdaterDialog : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         // Getting data passed to the library
         val data = arguments?.serializable<UpdaterFragmentModel>(DATA_LIST)
@@ -51,7 +51,7 @@ class AppUpdaterDialog : DialogFragment() {
 
         // Set background for the dialog
         dialog?.window?.setBackgroundDrawable(
-            ContextCompat.getDrawable(requireContext(), dialogBackground)
+            ContextCompat.getDrawable(requireContext(), dialogBackground),
         )
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
@@ -86,7 +86,7 @@ class AppUpdaterDialog : DialogFragment() {
         val list = data?.list
         setTheme(data?.theme)
         checkNotNull(list)
-        setUpProperties(title, description, list, data?.theme)
+        setUpProperties(title, description, list, data.theme)
     }
 
     private fun setTheme(theme: Theme?) {
@@ -183,7 +183,7 @@ class AppUpdaterDialog : DialogFragment() {
             storeList: List<UpdaterStoreList> = listOf(),
             isForce: Boolean = false,
             typeface: Typeface? = null,
-            theme: Theme = Theme.LIGHT
+            theme: Theme = Theme.LIGHT,
         ): AppUpdaterDialog {
             // set typeface in utils class to use later in application
             tf = typeface

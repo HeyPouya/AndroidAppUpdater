@@ -1,1 +1,1 @@
-include (":app", ":appupdater", ":dsl", ":core", ":compose")
+include(":app", ":appupdater", ":dsl", ":core", ":compose")

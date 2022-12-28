@@ -29,8 +29,8 @@ private fun installAPKForPAndAbove(context: Context, apk: File) {
                     FileProvider.getUriForFile(
                         context,
                         "${context.packageName}.fileProvider.GenericFileProvider",
-                        apk
-                    )
+                        apk,
+                    ),
                 )
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -49,7 +49,7 @@ private fun installAPKForNtoO(context: Context, apk: File) {
     val uri = FileProvider.getUriForFile(
         context,
         "${context.packageName}.fileProvider.GenericFileProvider",
-        apk
+        apk,
     )
     val install = Intent(Intent.ACTION_INSTALL_PACKAGE)
     install.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
