@@ -7,6 +7,7 @@ import com.pouyaheydari.appupdater.core.stores.FDroid
 import com.pouyaheydari.appupdater.core.stores.GooglePlayStore
 import com.pouyaheydari.appupdater.core.stores.HuaweiAppGallery
 import com.pouyaheydari.appupdater.core.stores.IranAppsStore
+import com.pouyaheydari.appupdater.core.stores.MiGetAppStore
 import com.pouyaheydari.appupdater.core.stores.MyketStore
 import com.pouyaheydari.appupdater.core.stores.SamsungGalaxyStore
 import com.pouyaheydari.appupdater.core.stores.Stores
@@ -25,4 +26,5 @@ enum class Store(val provider: Class<out Stores>?) {
     AMAZON_APP_STORE(AmazonAppStore::class.java),
     APTOIDE(Aptoide::class.java),
     FDROID(FDroid::class.java),
+    MI_GET_APP_STORE(MiGetAppStore::class.java),
 }

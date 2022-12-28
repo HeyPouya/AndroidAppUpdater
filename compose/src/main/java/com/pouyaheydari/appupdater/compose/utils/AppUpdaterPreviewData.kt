@@ -7,6 +7,7 @@ import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 private const val CUSTOM_URL = "https://cafebazaar.ir/download/bazaar.apk"
 private const val SAMPLE_PACKAGE_NAME = "com.tencent.mm"
 private const val FDROID_SAMPLE_PACKAGE_NAME = "de.storchp.fdroidbuildstatus"
+private const val GET_APP_SAMPLE_PACKAGE_NAME = "com.opera.browser"
 
 
 val storeList = listOf(
@@ -79,5 +80,11 @@ val storeList = listOf(
         "FDroid",
         packageName = FDROID_SAMPLE_PACKAGE_NAME,
         icon = R.drawable.appupdater_ic_fdroid
+    ),
+    UpdaterStoreList(
+        Store.MI_GET_APP_STORE,
+        "Mi GetApp",
+        packageName = GET_APP_SAMPLE_PACKAGE_NAME,
+        icon = R.drawable.appupdater_ic_get_app_store
     ),
 )

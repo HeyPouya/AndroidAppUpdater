@@ -12,11 +12,12 @@ import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 import com.pouyaheydari.appupdater.dsl.store
 import com.pouyaheydari.appupdater.dsl.updateDialogBuilder
 
-const val TAG = "showUpdateDialogTag"
-const val FONT_PATH = "fonts/vazir.ttf"
-const val CUSTOM_URL = "https://cafebazaar.ir/download/bazaar.apk"
-const val SAMPLE_PACKAGE_NAME = "com.tencent.mm"
-const val FDROID_SAMPLE_PACKAGE_NAME = "de.storchp.fdroidbuildstatus"
+private const val TAG = "showUpdateDialogTag"
+private const val FONT_PATH = "fonts/vazir.ttf"
+private const val CUSTOM_URL = "https://cafebazaar.ir/download/bazaar.apk"
+private const val SAMPLE_PACKAGE_NAME = "com.tencent.mm"
+private const val FDROID_SAMPLE_PACKAGE_NAME = "de.storchp.fdroidbuildstatus"
+private const val GET_APP_SAMPLE_PACKAGE_NAME = "com.opera.browser"
 
 /**
  * Main activity of the sample application
@@ -121,6 +122,12 @@ class MainActivity : AppCompatActivity() {
                     icon = R.drawable.appupdater_ic_fdroid
                     packageName = FDROID_SAMPLE_PACKAGE_NAME
                 },
+                store {
+                    store = Store.MI_GET_APP_STORE
+                    title = getString(R.string.mi_get_app)
+                    icon = R.drawable.appupdater_ic_get_app_store
+                    packageName = GET_APP_SAMPLE_PACKAGE_NAME
+                },
             )
         }.show(supportFragmentManager, TAG)
     }
@@ -205,6 +212,12 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.fdroid),
                 packageName = FDROID_SAMPLE_PACKAGE_NAME,
                 icon = R.drawable.appupdater_ic_fdroid
+            ),
+            UpdaterStoreList(
+                Store.MI_GET_APP_STORE,
+                getString(R.string.mi_get_app),
+                packageName = GET_APP_SAMPLE_PACKAGE_NAME,
+                icon = R.drawable.appupdater_ic_get_app_store
             ),
         )
         // creating update dialog
