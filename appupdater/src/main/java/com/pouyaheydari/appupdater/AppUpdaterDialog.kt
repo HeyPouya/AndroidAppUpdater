@@ -19,6 +19,7 @@ import com.pouyaheydari.appupdater.core.pojo.Store.DIRECT_URL
 import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.core.pojo.UpdaterFragmentModel
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
+import com.pouyaheydari.appupdater.core.utils.areDirectAndStoresAvailable
 import com.pouyaheydari.appupdater.core.utils.getApk
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.core.utils.tf
@@ -108,7 +109,7 @@ class AppUpdaterDialog : DialogFragment() {
         requireView().findViewById<TextView>(R.id.txtTitle)?.text = title
         requireView().findViewById<TextView>(R.id.txtDescription)?.text = description
 
-        hideOrLayoutIfNeeded(checkIfDirectAndStoreAvailable(list))
+        hideOrLayoutIfNeeded(areDirectAndStoresAvailable(list))
 
         setUpBothRecyclers(list, theme)
     }
@@ -131,16 +132,6 @@ class AppUpdaterDialog : DialogFragment() {
     private fun hideOrLayoutIfNeeded(storeAndDirectAvailable: Boolean) {
         requireView().findViewById<LinearLayout>(R.id.linearLayout).isVisible = storeAndDirectAvailable
     }
-
-    private fun checkIfDirectAndStoreAvailable(list: List<UpdaterStoreList>) =
-        list.map { it.store }
-            .distinct()
-            .toList()
-            .partition {
-                it == DIRECT_URL
-            }.run {
-                first.isNotEmpty() && second.isNotEmpty()
-            }
 
     private fun onListListener(item: UpdaterStoreList) {
         when (item.store) {

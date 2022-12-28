@@ -38,12 +38,12 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pouyaheydari.appupdater.compose.ui.theme.AndroidAppUpdaterTheme
 import com.pouyaheydari.appupdater.compose.ui.theme.Blue
-import com.pouyaheydari.appupdater.compose.utils.areDirectAndStoresAvailable
 import com.pouyaheydari.appupdater.compose.utils.getActivity
 import com.pouyaheydari.appupdater.compose.utils.storeList
 import com.pouyaheydari.appupdater.core.pojo.Store
 import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
+import com.pouyaheydari.appupdater.core.utils.areDirectAndStoresAvailable
 
 @Composable
 fun AndroidAppUpdater(
