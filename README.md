@@ -31,7 +31,7 @@ list.add(
         store = Store.GOOGLE_PLAY,
         title = "Store Title",
         icon = R.mipmap.ic_launcher,
-        url = "https://url/app.apk",
+        url = "https://url/to/your/website",
         packageName = SAMPLE_PACKAGE_NAME)
 )
 ```
@@ -55,16 +55,21 @@ list.add(
 )
 ```
 
-### Available stores
+### Available stores and icons
 
-This library currently supports only these markets:
+This library currently supports these markets:
 
 * [Store.GOOGLE_PLAY](https://play.google.com)
+* [Store.AMAZON_APP_STORE](https://www.amazon.com/gp/mas/get/amazonapp)
 * [Store.HUAWEI_APP_GALLERY](https://appgallery.huawei.com/)
 * [Store.SAMSUNG_GALAXY_STORE](https://www.samsung.com/de/apps/galaxy-store/)
+* [Store.MI_GET_APP_STORE](https://global.app.mi.com/)
+* [Store.OPPO_APP_MARKET](https://oppomobile.com/)
+* [Store.FDROID](https://f-droid.org/)
+* [Store.APTOIDE](https://en.aptoide.com/)
+* [Store.ONE_STORE_APP_MARKET](https://m.onestore.co.kr/mobilepoc/main/main.omp)
 * [Store.CAFE_BAZAAR](https://cafebazaar.ir)
-* [Store.MYKET](https://iranapps.ir)
-* [Store.IRAN_APPS](https://myket.ir/)
+* [Store.MYKET](https://myket.ir/)
 
 ### Direct Download
 
@@ -125,14 +130,19 @@ In strings file, add these lines and customize them according to your needs:
 
 Some default icons are included in the library.
 
-```text
-R.drawable.appupdater_ic_google_play
-R.drawable.appupdater_ic_app_gallery
-R.drawable.appupdater_ic_galaxy_store
-R.drawable.appupdater_ic_bazar
-R.drawable.appupdater_ic_myket
-R.drawable.appupdater_ic_iran_apps
-```
+| Market Name          | Icon name                                 |
+| -------------------- | ----------------------------------------- |
+| Google Play          | R.drawable.appupdater_ic_google_play      |
+| Huawei App Gallery   | R.drawable.appupdater_ic_app_gallery      |
+| Samsung Galaxy Store | R.drawable.appupdater_ic_galaxy_store     |
+| Amazon App Store     | R.drawable.appupdater_ic_amazon_app_store |
+| Xiaomi GetApp Store  | R.drawable.appupdater_ic_get_app_store    |
+| Oppo App Market      | R.drawable.appupdater_ic_oppo_app_market  |
+| F-Droid App Store    | R.drawable.appupdater_ic_fdroid           |
+| Aptoide App Store    | R.drawable.appupdater_ic_aptoide          |
+| OneStore App Market  | R.drawable.appupdater_ic_one_store        |
+| Cafe Bazaar Store    | R.drawable.appupdater_ic_bazar            |
+| Myket App Store      | R.drawable.appupdater_ic_myket            |
 
 ## Jetpack Compose
 You can also show a native compose UpdateDialog to the user:
