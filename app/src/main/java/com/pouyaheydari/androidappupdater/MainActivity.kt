@@ -135,6 +135,12 @@ class MainActivity : AppCompatActivity() {
                     icon = R.drawable.appupdater_ic_one_store
                     packageName = ONE_STORE_SAMPLE_PACKAGE_NAME
                 },
+                store {
+                    store = Store.OPPO_APP_MARKET
+                    title = getString(R.string.oppo_app_market)
+                    icon = R.drawable.appupdater_ic_oppo_app_market
+                    packageName = SAMPLE_PACKAGE_NAME
+                },
             )
         }.show(supportFragmentManager, TAG)
     }
@@ -231,6 +237,12 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.one_store),
                 packageName = ONE_STORE_SAMPLE_PACKAGE_NAME,
                 icon = R.drawable.appupdater_ic_one_store,
+            ),
+            UpdaterStoreList(
+                Store.OPPO_APP_MARKET,
+                getString(R.string.oppo_app_market),
+                packageName = SAMPLE_PACKAGE_NAME,
+                icon = R.drawable.appupdater_ic_oppo_app_market,
             ),
         )
         // creating update dialog

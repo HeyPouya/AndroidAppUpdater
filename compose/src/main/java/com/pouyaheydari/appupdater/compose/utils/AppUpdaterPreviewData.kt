@@ -93,4 +93,10 @@ val storeList = listOf(
         packageName = ONE_STORE_SAMPLE_PACKAGE_NAME,
         icon = R.drawable.appupdater_ic_one_store,
     ),
+    UpdaterStoreList(
+        Store.OPPO_APP_MARKET,
+        "Oppo App Market",
+        packageName = SAMPLE_PACKAGE_NAME,
+        icon = R.drawable.appupdater_ic_oppo_app_market,
+    ),
 )
