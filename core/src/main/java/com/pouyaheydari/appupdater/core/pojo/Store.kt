@@ -6,10 +6,10 @@ import com.pouyaheydari.appupdater.core.stores.CafeBazaarStore
 import com.pouyaheydari.appupdater.core.stores.FDroid
 import com.pouyaheydari.appupdater.core.stores.GooglePlayStore
 import com.pouyaheydari.appupdater.core.stores.HuaweiAppGallery
-import com.pouyaheydari.appupdater.core.stores.IranAppsStore
 import com.pouyaheydari.appupdater.core.stores.MiGetAppStore
 import com.pouyaheydari.appupdater.core.stores.MyketStore
 import com.pouyaheydari.appupdater.core.stores.OneStoreAppMarket
+import com.pouyaheydari.appupdater.core.stores.OppoAppMarket
 import com.pouyaheydari.appupdater.core.stores.SamsungGalaxyStore
 import com.pouyaheydari.appupdater.core.stores.Stores
 
@@ -21,7 +21,6 @@ enum class Store(val provider: Class<out Stores>?) {
     GOOGLE_PLAY(GooglePlayStore::class.java),
     CAFE_BAZAAR(CafeBazaarStore::class.java),
     MYKET(MyketStore::class.java),
-    IRAN_APPS(IranAppsStore::class.java),
     HUAWEI_APP_GALLERY(HuaweiAppGallery::class.java),
     SAMSUNG_GALAXY_STORE(SamsungGalaxyStore::class.java),
     AMAZON_APP_STORE(AmazonAppStore::class.java),
@@ -29,4 +28,5 @@ enum class Store(val provider: Class<out Stores>?) {
     FDROID(FDroid::class.java),
     MI_GET_APP_STORE(MiGetAppStore::class.java),
     ONE_STORE_APP_MARKET(OneStoreAppMarket::class.java),
+    OPPO_APP_MARKET(OppoAppMarket::class.java),
 }

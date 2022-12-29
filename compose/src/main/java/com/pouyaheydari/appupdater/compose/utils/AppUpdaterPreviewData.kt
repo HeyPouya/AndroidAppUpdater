@@ -46,12 +46,6 @@ val storeList = listOf(
         icon = R.drawable.appupdater_ic_myket,
     ),
     UpdaterStoreList(
-        Store.IRAN_APPS,
-        "Iran Apps",
-        packageName = SAMPLE_PACKAGE_NAME,
-        icon = R.drawable.appupdater_ic_iran_apps,
-    ),
-    UpdaterStoreList(
         Store.HUAWEI_APP_GALLERY,
         "App Gallery",
         packageName = SAMPLE_PACKAGE_NAME,

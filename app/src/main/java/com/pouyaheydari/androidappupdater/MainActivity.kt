@@ -88,12 +88,6 @@ class MainActivity : AppCompatActivity() {
                     packageName = SAMPLE_PACKAGE_NAME
                 },
                 store {
-                    store = Store.IRAN_APPS
-                    title = getString(R.string.iran_apps)
-                    icon = R.drawable.appupdater_ic_iran_apps
-                    packageName = SAMPLE_PACKAGE_NAME
-                },
-                store {
                     store = Store.HUAWEI_APP_GALLERY
                     title = getString(R.string.app_gallery)
                     icon = R.drawable.appupdater_ic_app_gallery
@@ -189,12 +183,6 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.myket),
                 packageName = SAMPLE_PACKAGE_NAME,
                 icon = R.drawable.appupdater_ic_myket,
-            ),
-            UpdaterStoreList(
-                Store.IRAN_APPS,
-                getString(R.string.iran_apps),
-                packageName = SAMPLE_PACKAGE_NAME,
-                icon = R.drawable.appupdater_ic_iran_apps,
             ),
             UpdaterStoreList(
                 Store.HUAWEI_APP_GALLERY,
