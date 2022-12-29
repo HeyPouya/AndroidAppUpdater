@@ -3,6 +3,7 @@ package com.pouyaheydari.appupdater.core.stores
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.widget.Toast
 import com.pouyaheydari.appupdater.core.R
@@ -22,23 +23,36 @@ abstract class Stores {
 
     protected fun showStore(context: Context?, intent: Intent, item: UpdaterStoreList, store: Store) {
         try {
+            intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
             context?.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
-            showUrlOrErrorToast(context, item, store)
+            openWebViewToShowUrl(context, item, store)
         }
     }
 
-    private fun showUrlOrErrorToast(context: Context?, item: UpdaterStoreList, store: Store) {
+    private fun openWebViewToShowUrl(context: Context?, item: UpdaterStoreList, store: Store) {
         if (item.url.isNotEmpty()) {
-            context?.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.url)))
+            try {
+                val webViewIntent = Intent(Intent.ACTION_VIEW, Uri.parse(item.url)).run {
+                    addFlags(FLAG_ACTIVITY_NEW_TASK)
+                }
+                context?.startActivity(webViewIntent)
+            } catch (e: ActivityNotFoundException) {
+                e.printStackTrace()
+                showErrorToast(context, store)
+            }
         } else {
-            val storeName = store.name.lowercase(Locale.ROOT).replace("_", " ")
-            Toast.makeText(
-                context,
-                context?.getString(R.string.appupdater_please_install, storeName),
-                Toast.LENGTH_LONG,
-            ).show()
+            showErrorToast(context, store)
         }
+    }
+
+    private fun showErrorToast(context: Context?, store: Store) {
+        val storeName = store.name.lowercase(Locale.ROOT).replace("_", " ")
+        Toast.makeText(
+            context,
+            context?.getString(R.string.appupdater_please_install, storeName),
+            Toast.LENGTH_LONG,
+        ).show()
     }
 }
