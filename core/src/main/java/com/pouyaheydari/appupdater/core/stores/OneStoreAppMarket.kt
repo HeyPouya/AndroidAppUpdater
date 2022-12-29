@@ -6,10 +6,10 @@ import android.net.Uri
 import com.pouyaheydari.appupdater.core.pojo.Store
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 
-private const val ONE_STORE_APP_MARKET_URL = "onestore://common/product/"
+const val ONE_STORE_APP_MARKET_URL = "onestore://common/product/"
 
 /**
- * shows apk in Xiaomi GetApp store
+ * shows apk in [OneStore](https://m.onestore.co.kr/mobilepoc/main/main.omp)
  */
 class OneStoreAppMarket : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {
