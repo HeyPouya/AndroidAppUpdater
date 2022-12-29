@@ -31,6 +31,7 @@ dependencies {
     androidTestImplementation(libs.androidTestJUnit)
     androidTestImplementation(libs.androidTestRules)
     androidTestImplementation(libs.androidTestEspresso)
+    androidTestImplementation(libs.espresso.intents)
 }
 publishing {
     publications {
