@@ -6,10 +6,10 @@ import android.net.Uri
 import com.pouyaheydari.appupdater.core.pojo.Store
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 
-private const val MI_APP_STORE_URL = "mimarket://details?id="
+const val MI_APP_STORE_URL = "mimarket://details?id="
 
 /**
- * shows apk in Xiaomi GetApp store
+ * shows apk in [Xiaomi GetApp store](https://global.app.mi.com/)
  */
 class MiGetAppStore : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {
