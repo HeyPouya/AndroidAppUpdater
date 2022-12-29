@@ -9,7 +9,7 @@ import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 const val SAMSUNG_GALAXY_STORE_URL = "samsungapps://ProductDetail/"
 
 /**
- * shows apk in [Samsung Galaxy store](https://www.samsung.com/de/apps/galaxy-store/)
+ * Opens application's page in [Samsung Galaxy store](https://www.samsung.com/de/apps/galaxy-store/)
  */
 class SamsungGalaxyStore : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {

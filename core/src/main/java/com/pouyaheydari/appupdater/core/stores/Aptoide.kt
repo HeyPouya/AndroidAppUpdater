@@ -10,7 +10,7 @@ const val APTOIDE_URL = "aptoideinstall://package="
 const val APTOIDE_PACKAGE = "cm.aptoide.pt"
 
 /**
- * shows apk in Aptoide Store
+ * Opens application's page in [Aptoide App Store](https://en.aptoide.com/)
  */
 class Aptoide : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {

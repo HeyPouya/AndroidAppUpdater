@@ -10,7 +10,7 @@ const val PLAY_URL = "market://details?id="
 const val PLAY_PACKAGE = "com.android.vending"
 
 /**
- * shows apk in GooglePlay store
+ * Opens application's page in [GooglePlay Store](https://play.google.com)
  */
 class GooglePlayStore : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {

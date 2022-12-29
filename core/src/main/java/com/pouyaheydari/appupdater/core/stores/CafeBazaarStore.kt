@@ -10,7 +10,7 @@ const val BAZAAR_URL = "bazaar://details?id="
 const val BAZAAR_PACKAGE = "com.farsitel.bazaar"
 
 /**
- * shows apk in CafeBazaar store
+ * Opens application's page in [CafeBazaar App Store](https://cafebazaar.ir)
  */
 class CafeBazaarStore : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {

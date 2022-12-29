@@ -10,7 +10,7 @@ const val FDROID_URL = "fdroid.app://details?id="
 const val FDROID_PACKAGE = "org.fdroid.fdroid"
 
 /**
- * shows apk in F-Droid store
+ * Opens application's page in [F-Droid App Store](https://f-droid.org/)
  */
 class FDroid : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {

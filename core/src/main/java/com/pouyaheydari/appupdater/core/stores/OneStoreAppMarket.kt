@@ -9,7 +9,7 @@ import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 const val ONE_STORE_APP_MARKET_URL = "onestore://common/product/"
 
 /**
- * shows apk in [OneStore](https://m.onestore.co.kr/mobilepoc/main/main.omp)
+ * Opens application's page in [OneStore App Market](https://m.onestore.co.kr/mobilepoc/main/main.omp)
  */
 class OneStoreAppMarket : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {

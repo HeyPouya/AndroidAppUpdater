@@ -10,7 +10,7 @@ const val OPPO_APP_MARKET_URL = "market://details?id="
 const val OPPO_PACKAGE = "com.heytap.market"
 
 /**
- * shows apk in [OppoAppMarket](https://oppomobile.com/)
+ * Opens application's page in [OppoAppMarket](https://oppomobile.com/)
  */
 class OppoAppMarket : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {

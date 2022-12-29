@@ -10,7 +10,7 @@ const val HUAWEI_APP_GALLERY_URL = "appmarket://details?id="
 const val HUAWEI_APP_GALLERY_PACKAGE = "com.huawei.appmarket"
 
 /**
- * shows apk in Huawei App Gallery store
+ * Opens application's page in [Huawei App Gallery](https://appgallery.huawei.com/)
  */
 class HuaweiAppGallery : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {

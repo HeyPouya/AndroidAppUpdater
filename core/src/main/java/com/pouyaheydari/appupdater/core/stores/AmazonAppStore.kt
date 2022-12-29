@@ -10,7 +10,7 @@ const val AMAZON_APP_STORE_URL = "amzn://apps/android?p="
 const val AMAZON_PACKAGE = "com.amazon.venezia"
 
 /**
- * shows apk in Amazon App Store
+ * Opens application's page in [Amazon App Store](https://www.amazon.com/gp/mas/get/amazonapp)
  */
 class AmazonAppStore : Stores() {
     override fun setStoreData(context: Context?, item: UpdaterStoreList) {
