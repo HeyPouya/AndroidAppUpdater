@@ -1,4 +1,4 @@
-package ir.heydarii.appupdater
+package com.pouyaheydari.appupdater
 
 import android.Manifest
 import android.content.Context
@@ -12,9 +12,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/**
- * Some sample tests
- */
 @RunWith(AndroidJUnit4::class)
 class TestUtils {
     lateinit var appContext: Context
