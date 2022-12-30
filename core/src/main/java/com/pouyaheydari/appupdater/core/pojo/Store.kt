@@ -12,6 +12,7 @@ import com.pouyaheydari.appupdater.core.stores.OneStoreAppMarket
 import com.pouyaheydari.appupdater.core.stores.OppoAppMarket
 import com.pouyaheydari.appupdater.core.stores.SamsungGalaxyStore
 import com.pouyaheydari.appupdater.core.stores.Stores
+import com.pouyaheydari.appupdater.core.stores.VAppStore
 
 /**
  * Enum class to select type of market
@@ -29,4 +30,5 @@ enum class Store(val provider: Class<out Stores>?) {
     MI_GET_APP_STORE(MiGetAppStore::class.java),
     ONE_STORE_APP_MARKET(OneStoreAppMarket::class.java),
     OPPO_APP_MARKET(OppoAppMarket::class.java),
+    V_APP_STORE(VAppStore::class.java),
 }

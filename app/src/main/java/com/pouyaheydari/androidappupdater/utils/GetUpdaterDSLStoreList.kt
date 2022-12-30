@@ -97,4 +97,11 @@ fun getDSLList(context: Context) = listOf(
         packageName = SAMPLE_PACKAGE_NAME
         url = WEBSITE_URL
     },
+    store {
+        store = Store.V_APP_STORE
+        title = context.getString(R.string.v_app_store)
+        icon = R.drawable.appupdater_ic_v_app_store
+        packageName = SAMPLE_PACKAGE_NAME
+        url = WEBSITE_URL
+    },
 )

@@ -99,4 +99,11 @@ fun getNormalList(context: Context) = listOf(
         icon = R.drawable.appupdater_ic_oppo_app_market,
         url = WEBSITE_URL,
     ),
+    UpdaterStoreList(
+        store = Store.V_APP_STORE,
+        title = context.getString(R.string.v_app_store),
+        packageName = SAMPLE_PACKAGE_NAME,
+        icon = R.drawable.appupdater_ic_v_app_store,
+        url = WEBSITE_URL,
+    ),
 )
