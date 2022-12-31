@@ -13,6 +13,7 @@ import com.pouyaheydari.appupdater.core.stores.OneStoreAppMarket
 import com.pouyaheydari.appupdater.core.stores.OppoAppMarket
 import com.pouyaheydari.appupdater.core.stores.SamsungGalaxyStore
 import com.pouyaheydari.appupdater.core.stores.Stores
+import com.pouyaheydari.appupdater.core.stores.TencentAppStore
 import com.pouyaheydari.appupdater.core.stores.VAppStore
 
 /**
@@ -33,4 +34,5 @@ enum class Store(val provider: Class<out Stores>?) {
     OPPO_APP_MARKET(OppoAppMarket::class.java),
     V_APP_STORE(VAppStore::class.java),
     NINE_APPS_STORE(NineApps::class.java),
+    TENCENT_APPS_STORE(TencentAppStore::class.java),
 }

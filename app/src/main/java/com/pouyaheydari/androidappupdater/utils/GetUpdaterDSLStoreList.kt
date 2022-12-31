@@ -111,4 +111,11 @@ fun getDSLList(context: Context) = listOf(
         packageName = SAMPLE_PACKAGE_NAME
         url = WEBSITE_URL
     },
+    store {
+        store = Store.TENCENT_APPS_STORE
+        title = context.getString(R.string.tencent_app_store)
+        icon = R.drawable.appupdater_ic_tencent_app_store
+        packageName = SAMPLE_PACKAGE_NAME
+        url = WEBSITE_URL
+    },
 )
