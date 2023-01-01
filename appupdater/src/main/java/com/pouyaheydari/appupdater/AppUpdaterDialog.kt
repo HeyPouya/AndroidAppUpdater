@@ -6,15 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.RecyclerView
+import com.pouyaheydari.appupdater.adapters.DirectRecyclerAdapter
+import com.pouyaheydari.appupdater.adapters.StoresRecyclerAdapter
 import com.pouyaheydari.appupdater.core.pojo.Store.DIRECT_URL
 import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.core.pojo.UpdaterFragmentModel
@@ -23,6 +22,7 @@ import com.pouyaheydari.appupdater.core.utils.areDirectAndStoresAvailable
 import com.pouyaheydari.appupdater.core.utils.getApk
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.core.utils.tf
+import com.pouyaheydari.appupdater.databinding.FragmentAppUpdaterDialogBinding
 
 private const val DATA_LIST = "DATA_LIST"
 private const val UPDATE_DIALOG_TAG = "UpdateDialog"
@@ -31,6 +31,9 @@ private const val UPDATE_DIALOG_TAG = "UpdateDialog"
  * Shows ForceUpdate Dialog Fragment
  */
 class AppUpdaterDialog : DialogFragment() {
+
+    private var _binding: FragmentAppUpdaterDialogBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,13 +59,13 @@ class AppUpdaterDialog : DialogFragment() {
         )
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
-        val view = inflater.inflate(R.layout.fragment_app_updater_dialog, container, false)
-        return view.apply {
+        _binding = FragmentAppUpdaterDialogBinding.inflate(inflater, container, false)
+        return binding.root.apply {
             tf?.let {
-                findViewById<TextView>(R.id.txtTitle).typeface = it
-                findViewById<TextView>(R.id.txtDescription).typeface = it
-                findViewById<TextView>(R.id.txtOr).typeface = it
-                findViewById<TextView>(R.id.txtStore).typeface = it
+                binding.txtTitle.typeface = it
+                binding.txtDescription.typeface = it
+                binding.txtOr.typeface = it
+                binding.txtStore.typeface = it
             }
         }
     }
@@ -95,19 +98,19 @@ class AppUpdaterDialog : DialogFragment() {
             Theme.LIGHT -> R.color.appupdater_text_colors
             Theme.DARK -> R.color.appupdater_text_colors_dark
         }
-        with(requireView()) {
-            findViewById<TextView>(R.id.txtTitle)?.setTextColor(getColor(requireContext(), textColor))
-            findViewById<TextView>(R.id.txtDescription)?.setTextColor(getColor(requireContext(), textColor))
-            findViewById<TextView>(R.id.txtOr)?.setTextColor(getColor(requireContext(), textColor))
-            findViewById<TextView>(R.id.txtStore)?.setTextColor(getColor(requireContext(), textColor))
-            findViewById<View>(R.id.leftOrLine)?.setBackgroundColor(getColor(requireContext(), textColor))
-            findViewById<View>(R.id.rightOrLine)?.setBackgroundColor(getColor(requireContext(), textColor))
+        with(binding) {
+            txtTitle.setTextColor(getColor(requireContext(), textColor))
+            txtDescription.setTextColor(getColor(requireContext(), textColor))
+            txtOr.setTextColor(getColor(requireContext(), textColor))
+            txtStore.setTextColor(getColor(requireContext(), textColor))
+            leftOrLine.setBackgroundColor(getColor(requireContext(), textColor))
+            rightOrLine.setBackgroundColor(getColor(requireContext(), textColor))
         }
     }
 
     private fun setUpProperties(title: String?, description: String?, list: List<UpdaterStoreList>, theme: Theme?) {
-        requireView().findViewById<TextView>(R.id.txtTitle)?.text = title
-        requireView().findViewById<TextView>(R.id.txtDescription)?.text = description
+        binding.txtTitle.text = title
+        binding.txtDescription.text = description
 
         hideOrLayoutIfNeeded(areDirectAndStoresAvailable(list))
 
@@ -119,18 +122,16 @@ class AppUpdaterDialog : DialogFragment() {
         val storeLinks = list.filterNot { it.store == DIRECT_URL }
 
         if (directLinks.isNotEmpty()) {
-            requireView().findViewById<RecyclerView>(R.id.recyclerDirect)?.adapter =
-                DirectRecyclerAdapter(directLinks) { onListListener(it) }
+            binding.recyclerDirect.adapter = DirectRecyclerAdapter(directLinks) { onListListener(it) }
         }
 
         if (storeLinks.isNotEmpty()) {
-            requireView().findViewById<RecyclerView>(R.id.recyclerStores)?.adapter =
-                StoresRecyclerAdapter(storeLinks, theme) { onListListener(it) }
+            binding.recyclerStores.adapter = StoresRecyclerAdapter(storeLinks, theme) { onListListener(it) }
         }
     }
 
     private fun hideOrLayoutIfNeeded(storeAndDirectAvailable: Boolean) {
-        requireView().findViewById<LinearLayout>(R.id.linearLayout).isVisible = storeAndDirectAvailable
+        binding.linearLayout.isVisible = storeAndDirectAvailable
     }
 
     private fun onListListener(item: UpdaterStoreList) {
@@ -153,6 +154,11 @@ class AppUpdaterDialog : DialogFragment() {
         if (UpdateInProgressDialog.instance.isAdded) {
             UpdateInProgressDialog.instance.dismiss()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onDestroy() {

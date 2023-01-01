@@ -11,7 +11,7 @@ import com.pouyaheydari.appupdater.core.utils.tf
 /**
  * Dialog to show download progress to user
  */
-class UpdateInProgressDialog : DialogFragment(R.layout.fragment_update_in_progress_dialog) {
+internal class UpdateInProgressDialog : DialogFragment(R.layout.fragment_update_in_progress_dialog) {
 
     companion object {
         var instance = UpdateInProgressDialog()

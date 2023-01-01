@@ -10,7 +10,9 @@ android {
         targetSdk = libs.versions.targetSdkVersion.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    buildFeatures {
+        viewBinding = true
+    }
     publishing {
         multipleVariants("release") {
             allVariants()
