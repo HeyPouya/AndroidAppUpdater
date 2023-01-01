@@ -12,6 +12,7 @@
 </p>
 
 App Updater is an  easy-to-use and fully customizable library to show update dialog to users.
+The update dialog can contain different app stores or direct download links.
 
 **Supports Kotlin DSL and Compose**
 
@@ -19,9 +20,30 @@ App Updater is an  easy-to-use and fully customizable library to show update dia
 
 ## Kotlin Usage
 
-### Stores
+### Available stores
 
-If you provide your application on stores (other than  Google Play), you can list all of them in the update dialog.
+The library currently supports these markets:
+
+| App Store Name                                                          | App Store Enum             |
+|-------------------------------------------------------------------------|----------------------------|
+| [Google Play](https://play.google.com)                                  | Store.GOOGLE_PLAY          |
+| [Huawei App Gallery](https://appgallery.huawei.com/)                    | Store.HUAWEI_APP_GALLERY   |
+| [Samsung Galaxy Store](https://www.samsung.com/de/apps/galaxy-store/)   | Store.SAMSUNG_GALAXY_STORE |
+| [Amazon App Store](https://www.amazon.com/gp/mas/get/amazonapp)         | Store.AMAZON_APP_STORE     |
+| [Xiaomi GetApp Market](https://global.app.mi.com/)                      | Store.MI_GET_APP_STORE     |
+| [Oppo App Market](https://oppomobile.com/)                              | Store.OPPO_APP_MARKET      |
+| [F-Droid App Store](https://f-droid.org/)                               | Store.FDROID               |
+| [Aptoide App Store](https://en.aptoide.com/)                            | Store.APTOIDE              |
+| [OneStore App Market](https://m.onestore.co.kr/mobilepoc/main/main.omp) | Store.ONE_STORE_APP_MARKET |
+| [Vivo V-AppStore](https://developer.vivo.com/home)                      | Store.V_APP_STORE          |
+| [9-Apps Market](https://www.9apps.com/)                                 | Store.NINE_APPS_STORE      |
+| [Tencent App Store](https://appstore.tencent.com/)                      | Store.TENCENT_APPS_STORE   |
+| [Cafe Bazaar Store](https://cafebazaar.ir)                              | Store.CAFE_BAZAAR          |
+| [Myket App Store](https://myket.ir/)                                    | Store.MYKET                |
+
+### Showing stores
+
+If you provide your application on above mentioned stores, you can list all of them in the update dialog.
 To create a new store:
 
 ```kotlin
@@ -30,111 +52,99 @@ list.add(
     UpdaterStoreList(
         store = Store.GOOGLE_PLAY,
         title = "Store Title",
-        icon = R.mipmap.ic_launcher,
+        icon = R.drawable.appupdater_ic_google_play,
         url = "https://url/to/your/website",
-        packageName = SAMPLE_PACKAGE_NAME)
+        packageName = "YOUR_APPS_PACKAGE_NAME"
+    )
 )
 ```
 
-parameters of UpdaterStoreList, as the order you see in above line:
+Parameters of UpdaterStoreList, in order:
 
-1.  Store type (e.g. GOOGLE_PLAY, CAFE_BAZAAR, ...)
-2.  Store title that user sees
-3.  Icon of store that user sees
-4.  An url to show the user if the store is not installed in user's device
-5.  Package name of the application on the store
+| order | Parameter Name | Parameter Type | Description                                                                |
+|-------|----------------|----------------|----------------------------------------------------------------------------|
+| 1     | store          | Store          | Store Enum (e.g. GOOGLE_PLAY, CAFE_BAZAAR, ...)                            |
+| 2     | title          | String         | Title of the store that user sees                                          |
+| 3     | icon           | Int            | Icon of the store that user sees                                           |
+| 4     | url            | String         | An url to open in a webview if the store is not installed in user's device |
+| 5     | packageName    | String         | Package name of the application on the store                               |
 
-#### You can omit adding some properties in Kotlin
+***You can omit adding some properties in Kotlin:***
 
 ```kotlin
 list.add(
     UpdaterStoreList(
       store = Store.GOOGLE_PLAY,
       title = "Google Play",
-      packageName = BuildConfig.APPLICATION_ID)
+        packageName = "YOUR_APPS_PACKAGE_NAME"
+    )
 )
 ```
 
-### Available stores and icons
-
-This library currently supports these markets:
-
-* [Store.GOOGLE_PLAY](https://play.google.com)
-* [Store.AMAZON_APP_STORE](https://www.amazon.com/gp/mas/get/amazonapp)
-* [Store.HUAWEI_APP_GALLERY](https://appgallery.huawei.com/)
-* [Store.SAMSUNG_GALAXY_STORE](https://www.samsung.com/de/apps/galaxy-store/)
-* [Store.MI_GET_APP_STORE](https://global.app.mi.com/)
-* [Store.OPPO_APP_MARKET](https://oppomobile.com/)
-* [Store.FDROID](https://f-droid.org/)
-* [Store.APTOIDE](https://en.aptoide.com/)
-* [Store.ONE_STORE_APP_MARKET](https://m.onestore.co.kr/mobilepoc/main/main.omp)
-* [Store.V_APP_STORE](https://developer.vivo.com/home)
-* [Store.NINE_APPS_STORE](https://www.9apps.com/)
-* [Store.TENCENT_APPS_STORE](https://appstore.tencent.com/)
-* [Store.CAFE_BAZAAR](https://cafebazaar.ir)
-* [Store.MYKET](https://myket.ir/)
-
 ### Direct Download
 
-You can also make as many direct APK download links as you need.
-Users can download that APK directly on their phone. After downloading finishes, the install page will be shown to the user automatically.
+You can also make as many direct APK download links as you need. Users can download the APK directly on their phone.
+After downloading finishes, the install page will be shown to the user automatically.
 
 ```kotlin
 list.add(
     UpdaterStoreList(
       store = Store.DIRECT_URL,
       title = "Direct Download",
-      icon = R.mipmap.ic_launcher,
       url = "https://cafebazaar.ir/download/bazaar.apk",
-      packageName = BuildConfig.APPLICATION_ID)
+      packageName = "YOUR_APPS_PACKAGE_NAME"
+    )
 )
 ```
-***Remember to put WRITE_EXTERNAL_STORAGE, INTERNET and REQUEST_INSTALL_PACKAGES permissions in your manifest. The library asks these permissions at runtime if needed***
+***Remember to put WRITE_EXTERNAL_STORAGE, INTERNET and REQUEST_INSTALL_PACKAGES permissions in your manifest. The library asks for these permissions at runtime if needed***
 
 ### To Show UpdateDialog
 
 ```kotlin
 AppUpdaterDialog.getInstance(
-    title =  getString(R.string.library_title),
-    description = getString(R.string.library_description),
+    title =  "New Update !",
+    description = "Lots of new features! Update right now",
     storeList = list,
     isForce = false,
-    typeface = font,
+    typeface = typeface,
     theme = Theme.LIGHT
 ).show(supportFragmentManager, TAG)
 ```
 
 Parameters in the order are:
 
-1.  Update dialog title
-2.  Update dialog description
-3.  List of stores you created in last step
-4.  Is it a force update? (should dialog be cancelable or not)
-5.  Typeface to customize font style
-6. Theme of the dialog (Theme.Light or Theme.Dark)
+| order | Parameter Name | Parameter Type         | Description                                                                                       |
+|-------|----------------|------------------------|---------------------------------------------------------------------------------------------------|
+| 1     | title          | String                 | Title of the update dialog                                                                        |
+| 2     | description    | String                 | Description of the update dialog                                                                  |
+| 3     | list           | List<UpdaterStoreList> | List of Stores and Direct links to be shown to the user in the update dialog                      |
+| 4     | isForceUpdate  | Boolean                | Makes the dialog non-cancelable if sets to true                                                   |
+| 5     | typeface       | Typeface?              | Typeface to customize the font style if needed (You can omit this parameter if you don't need it) |
+| 5     | theme          | Theme                  | Theme of the dialog (can be set to Theme.Light or Theme.Dark)                                     |
 
-### To change library's texts
+### Customizing dialog texts
 
-In strings file, add these lines and customize them according to your needs:
+If you need to customize any texts in the updater or the update in progress dialogs, you can add these strings resources in your strings.xml file to override them:
 
 ```xml
 <resources>
-<string name="please_wait">Please wait</string>
-<string name="downloading_new_version">Downloading new version...</string>
-<string name="download_notification_title">Downloading...</string>
-<string name="download_notification_description">Downloading new version</string>
-<string name="please_install">Please install</string>
-<string name="or">or</string>
-<string name="download_from_store">Download from store</string>
+<string name="appupdater_please_wait">Please wait</string>
+<string name="appupdater_downloading_new_version">Downloading new version...</string>
+<string name="appupdater_download_notification_title">Downloading...</string>
+<string name="appupdater_download_notification_description">Downloading new version</string>
+<string name="appupdater_please_install">Please install</string>
+<string name="appupdater_or">or</string>
+<string name="appupdater_download_from_store">Download from store</string>
 </resources>
 ```
 
-### Using default icons
+### Default icons
 
-Some default icons are included in the library.
+There are default icons of all stores included in the library. You can use them or use your own icons.
+Here is the list of icon names for each store:
 
 | Market Name          | Icon name                                  |
-| -------------------- | ------------------------------------------ |
+|----------------------|--------------------------------------------|
 | Google Play          | R.drawable.appupdater_ic_google_play       |
 | Huawei App Gallery   | R.drawable.appupdater_ic_app_gallery       |
 | Samsung Galaxy Store | R.drawable.appupdater_ic_galaxy_store      |
@@ -156,27 +166,28 @@ You can also show a native compose UpdateDialog to the user:
 ```kotlin
 AndroidAppUpdaterTheme {
     AndroidAppUpdater(
-        dialogTitle = stringResource(id = R.string.appupdater_app_name),
-        dialogDescription = stringResource(id = R.string.appupdater_download_notification_desc),
-        storeList = storeList,
+        dialogTitle = "New Update !",
+        dialogDescription = "Lots of new features! Update right now",
+        storeList = list,
         theme = Theme.DARK
     )
 }
 ```
 
-## Kotlin DSL
+## Using library in Kotlin DSL style
 This library also supports DSL. To use it, add the required dependency first.
 
 ### Adding Stores in DSL
 
 ```kotlin
-store {
-       store = Store.DIRECT_URL
-       title = "Direct Download 2"
-       icon = R.mipmap.ic_launcher
-       url = "https://cafebazaar.ir/download/bazaar.apk"
-       packageName = BuildConfig.APPLICATION_ID
-}
+val list = listOf(
+    store {
+        store = Store.GOOGLE_PLAY
+        title = "Store Title"
+        icon = R.drawable.appupdater_ic_google_play
+        url = "https://url/to/your/website"
+        packageName = "YOUR_APPS_PACKAGE_NAME"
+    },)
 ```
 
 ### Showing UpdateDialog in DSL
@@ -188,14 +199,7 @@ store {
             isForceUpdate = false
             typeface = Typeface.createFromAsset(assets, FONT_PATH)
             theme = Theme.DARK
-            list = listOf(
-                store {
-                    store = Store.DIRECT_URL
-                    title = "Direct Download 1"
-                    icon = R.mipmap.ic_launcher
-                    url = "https://cafebazaar.ir/download/bazaar.apk"
-                    packageName = BuildConfig.APPLICATION_ID
-                })
+            list = list
 }.show(supportFragmentManager, TAG)
 ```
 **Check the demo application to see it in your IDE.**
@@ -206,7 +210,7 @@ store {
 
 Add this to your root **build.gradle** file:
 
-```groovy
+```kotlin
 allprojects {
     repositories {
         maven ("https://jitpack.io")
@@ -214,9 +218,9 @@ allprojects {
 }
 ```
 
-Now add the dependency to your app build.gradle file:
+Then add these dependencies to your app build.gradle file:
 
-```groovy
+```kotlin
 // Always add the core dependency
 implementation ("com.github.SirLordPouya.AndroidAppUpdater:core:latest_version")
 
@@ -237,4 +241,4 @@ Android App Updater is released under the Apache License 2.0. See LICENSE for de
 Copyright (c) 2018 Pouya Heydari
 ```
 
-### <div>Library's icon and style is designed by <a href="https://dribbble.com/Amirgk" title="Amir Gerdakane">Amir Gerdakane</a>
+#### <div>Library's icon and style is designed by <a href="https://dribbble.com/Amirgk" title="Amir Gerdakane">Amir Gerdakane</a>
