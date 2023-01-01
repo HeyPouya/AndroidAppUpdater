@@ -9,14 +9,12 @@ fun getDSLList(context: Context) = listOf(
     store {
         store = Store.DIRECT_URL
         title = context.getString(R.string.direct_download, "1")
-        icon = R.mipmap.ic_launcher
         url = APK_URL
         packageName = SAMPLE_PACKAGE_NAME
     },
     store {
         store = Store.DIRECT_URL
         title = context.getString(R.string.direct_download, "2")
-        icon = R.mipmap.ic_launcher
         url = APK_URL
         packageName = SAMPLE_PACKAGE_NAME
     },

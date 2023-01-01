@@ -10,14 +10,12 @@ fun getNormalList(context: Context) = listOf(
     UpdaterStoreList(
         store = Store.DIRECT_URL,
         title = context.getString(R.string.direct_download, "1"),
-        icon = R.mipmap.ic_launcher,
         url = APK_URL,
         packageName = SAMPLE_PACKAGE_NAME,
     ),
     UpdaterStoreList(
         store = Store.DIRECT_URL,
         title = context.getString(R.string.direct_download, "2"),
-        icon = R.mipmap.ic_launcher,
         url = APK_URL,
         packageName = SAMPLE_PACKAGE_NAME,
     ),
