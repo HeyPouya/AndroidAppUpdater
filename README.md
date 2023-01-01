@@ -68,6 +68,9 @@ This library currently supports these markets:
 * [Store.FDROID](https://f-droid.org/)
 * [Store.APTOIDE](https://en.aptoide.com/)
 * [Store.ONE_STORE_APP_MARKET](https://m.onestore.co.kr/mobilepoc/main/main.omp)
+* [Store.V_APP_STORE](https://developer.vivo.com/home)
+* [Store.NINE_APPS_STORE](https://www.9apps.com/)
+* [Store.TENCENT_APPS_STORE](https://appstore.tencent.com/)
 * [Store.CAFE_BAZAAR](https://cafebazaar.ir)
 * [Store.MYKET](https://myket.ir/)
 
@@ -130,19 +133,22 @@ In strings file, add these lines and customize them according to your needs:
 
 Some default icons are included in the library.
 
-| Market Name          | Icon name                                 |
-| -------------------- | ----------------------------------------- |
-| Google Play          | R.drawable.appupdater_ic_google_play      |
-| Huawei App Gallery   | R.drawable.appupdater_ic_app_gallery      |
-| Samsung Galaxy Store | R.drawable.appupdater_ic_galaxy_store     |
-| Amazon App Store     | R.drawable.appupdater_ic_amazon_app_store |
-| Xiaomi GetApp Store  | R.drawable.appupdater_ic_get_app_store    |
-| Oppo App Market      | R.drawable.appupdater_ic_oppo_app_market  |
-| F-Droid App Store    | R.drawable.appupdater_ic_fdroid           |
-| Aptoide App Store    | R.drawable.appupdater_ic_aptoide          |
-| OneStore App Market  | R.drawable.appupdater_ic_one_store        |
-| Cafe Bazaar Store    | R.drawable.appupdater_ic_bazar            |
-| Myket App Store      | R.drawable.appupdater_ic_myket            |
+| Market Name          | Icon name                                  |
+| -------------------- | ------------------------------------------ |
+| Google Play          | R.drawable.appupdater_ic_google_play       |
+| Huawei App Gallery   | R.drawable.appupdater_ic_app_gallery       |
+| Samsung Galaxy Store | R.drawable.appupdater_ic_galaxy_store      |
+| Amazon App Store     | R.drawable.appupdater_ic_amazon_app_store  |
+| Xiaomi GetApp Store  | R.drawable.appupdater_ic_get_app_store     |
+| Oppo App Market      | R.drawable.appupdater_ic_oppo_app_market   |
+| F-Droid App Store    | R.drawable.appupdater_ic_fdroid            |
+| Aptoide App Store    | R.drawable.appupdater_ic_aptoide           |
+| OneStore App Market  | R.drawable.appupdater_ic_one_store         |
+| Vivo V-AppStore      | R.drawable.appupdater_ic_v_app_store       |
+| 9-Apps Market        | R.drawable.appupdater_ic_nine_apps         |
+| Tencent App Store    | R.drawable.appupdater_ic_tencent_app_store |
+| Cafe Bazaar Store    | R.drawable.appupdater_ic_bazar             |
+| Myket App Store      | R.drawable.appupdater_ic_myket             |
 
 ## Jetpack Compose
 You can also show a native compose UpdateDialog to the user:
@@ -203,7 +209,7 @@ Add this to your root **build.gradle** file:
 ```groovy
 allprojects {
     repositories {
-        maven { url 'https://jitpack.io' }
+        maven ("https://jitpack.io")
     }
 }
 ```
