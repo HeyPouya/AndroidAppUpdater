@@ -1,5 +1,6 @@
 package com.pouyaheydari.appupdater
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +10,12 @@ import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.WRAP_CONTE
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.pouyaheydari.appupdater.core.pojo.Theme
+import com.pouyaheydari.appupdater.core.pojo.UpdateInProgressFragmentModel
+import com.pouyaheydari.appupdater.core.pojo.UpdateInProgressFragmentModel.Companion.EMPTY
 import com.pouyaheydari.appupdater.core.utils.serializable
-import com.pouyaheydari.appupdater.core.utils.tf
 import com.pouyaheydari.appupdater.databinding.FragmentUpdateInProgressDialogBinding
 
-private const val THEME = "THEME"
+private const val DATA = "DATA"
 
 /**
  * Dialog to show download in progress to user
@@ -25,22 +27,10 @@ internal class UpdateInProgressDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentUpdateInProgressDialogBinding.inflate(inflater, container, false)
-        val data = arguments?.serializable(THEME) ?: Theme.LIGHT
-        setDialogBackground(data)
-        setTheme(data)
+        val data = arguments?.serializable(DATA) ?: EMPTY
+        setDialogBackground(data.theme)
+        setTheme(data.theme)
         return binding.root
-    }
-
-    private fun setTheme(data: Theme) {
-        val textColor = when (data) {
-            Theme.LIGHT -> R.color.appupdater_text_colors
-            Theme.DARK -> R.color.appupdater_text_colors_dark
-        }
-
-        with(binding) {
-            txtTitle.setTextColor(ContextCompat.getColor(requireContext(), textColor))
-            txtDescription.setTextColor(ContextCompat.getColor(requireContext(), textColor))
-        }
     }
 
     private fun setDialogBackground(data: Theme) {
@@ -55,24 +45,41 @@ internal class UpdateInProgressDialog : DialogFragment() {
         )
     }
 
-    companion object {
-        private val fragment = UpdateInProgressDialog()
+    private fun setTheme(data: Theme) {
+        val textColor = when (data) {
+            Theme.LIGHT -> R.color.appupdater_text_colors
+            Theme.DARK -> R.color.appupdater_text_colors_dark
+        }
 
-        fun getInstance(theme: Theme?): UpdateInProgressDialog {
-            val bundle = Bundle()
-            bundle.putSerializable(THEME, theme)
-            fragment.arguments = bundle
-            return fragment
+        with(binding) {
+            txtTitle.setTextColor(ContextCompat.getColor(requireContext(), textColor))
+            txtDescription.setTextColor(ContextCompat.getColor(requireContext(), textColor))
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val data = arguments?.serializable(DATA) ?: EMPTY
+        setTypeface(data.typeface)
+    }
+
+    private fun setTypeface(typeface: Typeface?) {
         with(binding) {
-            tf?.let {
+            typeface?.let {
                 txtTitle.typeface = it
                 txtDescription.typeface = it
             }
+        }
+    }
+
+    companion object {
+        private val fragment = UpdateInProgressDialog()
+
+        fun getInstance(data: UpdateInProgressFragmentModel?): UpdateInProgressDialog {
+            val bundle = Bundle()
+            bundle.putSerializable(DATA, data)
+            fragment.arguments = bundle
+            return fragment
         }
     }
 

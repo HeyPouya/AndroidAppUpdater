@@ -1,10 +1,10 @@
 package com.pouyaheydari.appupdater.adapters
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
-import com.pouyaheydari.appupdater.core.utils.tf
 import com.pouyaheydari.appupdater.databinding.DownloadDirectItemBinding
 
 /**
@@ -12,6 +12,7 @@ import com.pouyaheydari.appupdater.databinding.DownloadDirectItemBinding
  */
 internal class DirectRecyclerAdapter(
     private val list: List<UpdaterStoreList>,
+    private val typeface: Typeface?,
     private val listener: (UpdaterStoreList) -> Unit,
 ) : RecyclerView.Adapter<DirectRecyclerAdapter.SoresViewHolder>() {
 
@@ -34,9 +35,7 @@ internal class DirectRecyclerAdapter(
         fun onBind(item: UpdaterStoreList) {
             val txtDirect = binding.txtDirect
             txtDirect.text = item.title
-            if (tf != null) {
-                txtDirect.typeface = tf
-            }
+            typeface?.let { txtDirect.typeface = it }
             binding.root.setOnClickListener { listener(item) }
         }
     }
