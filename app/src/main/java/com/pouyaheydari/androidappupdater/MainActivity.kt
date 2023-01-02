@@ -1,7 +1,6 @@
 package com.pouyaheydari.androidappupdater
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             title = getString(R.string.library_title)
             description = getString(R.string.library_description)
             isForceUpdate = false
-            typeface = Typeface.createFromAsset(assets, FONT_PATH)
+            fontPath = FONT_PATH
             theme = Theme.DARK
             list = getDSLList(this@MainActivity)
         }.show(supportFragmentManager, TAG)
@@ -58,9 +57,6 @@ class MainActivity : AppCompatActivity() {
      * core and appupdater
      */
     private fun kotlinSample() {
-        // typeface to use in dialog
-        val font = Typeface.createFromAsset(assets, FONT_PATH)
-
         //   make a list of stores
         val list = getNormalList(this)
         // creating update dialog
@@ -69,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             description = getString(R.string.library_description),
             storeList = list,
             isForce = false,
-            typeface = font,
+            fontPath = FONT_PATH,
             theme = Theme.LIGHT,
         ).show(supportFragmentManager, TAG)
     }

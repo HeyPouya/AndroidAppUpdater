@@ -15,6 +15,6 @@ inline fun store(block: UpdaterStoreList.() -> Unit): UpdaterStoreList = Updater
 inline fun updateDialogBuilder(block: UpdaterFragmentModel.() -> Unit): AppUpdaterDialog {
     val updaterModel = UpdaterFragmentModel().apply(block)
     with(updaterModel) {
-        return AppUpdaterDialog.getInstance(title, description, list, isForceUpdate, typeface, theme)
+        return AppUpdaterDialog.getInstance(title, description, list, isForceUpdate, fontPath, theme)
     }
 }

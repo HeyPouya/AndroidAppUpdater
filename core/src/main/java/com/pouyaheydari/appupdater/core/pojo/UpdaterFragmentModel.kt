@@ -1,6 +1,5 @@
 package com.pouyaheydari.appupdater.core.pojo
 
-import android.graphics.Typeface
 import java.io.Serializable
 
 /**
@@ -11,7 +10,7 @@ data class UpdaterFragmentModel(
     var description: String = "",
     var list: List<UpdaterStoreList> = listOf(),
     var isForceUpdate: Boolean = false,
-    var typeface: Typeface? = null,
+    var fontPath: String? = null,
     var theme: Theme = Theme.LIGHT,
 ) : Serializable {
 

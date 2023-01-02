@@ -29,7 +29,7 @@ private fun installAPKForPAndAbove(context: Context, apk: File) {
                 }
                 context.startActivity(intent)
             } catch (e: ActivityNotFoundException) {
-                Log.d(TAG, e.message.orEmpty())
+                Log.e(TAG, e.message.orEmpty())
             }
         } else {
             context.showRequest()

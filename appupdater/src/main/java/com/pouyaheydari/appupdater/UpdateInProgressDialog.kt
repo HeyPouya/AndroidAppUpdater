@@ -2,6 +2,7 @@ package com.pouyaheydari.appupdater
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +11,12 @@ import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.WRAP_CONTE
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.pouyaheydari.appupdater.core.pojo.Theme
-import com.pouyaheydari.appupdater.core.pojo.UpdateInProgressFragmentModel
 import com.pouyaheydari.appupdater.core.pojo.UpdateInProgressFragmentModel.Companion.EMPTY
+import com.pouyaheydari.appupdater.core.utils.TAG
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.databinding.FragmentUpdateInProgressDialogBinding
 
-private const val DATA = "DATA"
+const val UPDATE_IN_PROGRESS_DATA = "UPDATE_IN_PROGRESS_DATA"
 
 /**
  * Dialog to show download in progress to user
@@ -27,7 +28,7 @@ internal class UpdateInProgressDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentUpdateInProgressDialogBinding.inflate(inflater, container, false)
-        val data = arguments?.serializable(DATA) ?: EMPTY
+        val data = arguments?.serializable(UPDATE_IN_PROGRESS_DATA) ?: EMPTY
         setDialogBackground(data.theme)
         setTheme(data.theme)
         return binding.root
@@ -59,27 +60,22 @@ internal class UpdateInProgressDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val data = arguments?.serializable(DATA) ?: EMPTY
-        setTypeface(data.typeface)
+        val data = arguments?.serializable(UPDATE_IN_PROGRESS_DATA) ?: EMPTY
+        setTypeface(data.fontPath)
     }
 
-    private fun setTypeface(typeface: Typeface?) {
+    private fun setTypeface(fontPath: String?) {
+        val tf: Typeface? = try {
+            Typeface.createFromAsset(requireContext().assets, fontPath)
+        } catch (e: Exception) {
+            Log.e(TAG, "Could not set the typeface, falling back to default")
+            null
+        }
         with(binding) {
-            typeface?.let {
+            tf?.let {
                 txtTitle.typeface = it
                 txtDescription.typeface = it
             }
-        }
-    }
-
-    companion object {
-        private val fragment = UpdateInProgressDialog()
-
-        fun getInstance(data: UpdateInProgressFragmentModel?): UpdateInProgressDialog {
-            val bundle = Bundle()
-            bundle.putSerializable(DATA, data)
-            fragment.arguments = bundle
-            return fragment
         }
     }
 

@@ -39,7 +39,7 @@ class DownloadFinishedReceiver : BroadcastReceiver() {
     private fun verifyDownloadedApkExists(context: Context) {
         val existingApk = context.getExistingApk()
         if (!existingApk.exists()) {
-            Log.d(TAG, context.getString(R.string.appupdater_couldnt_find_downloaded_file))
+            Log.e(TAG, context.getString(R.string.appupdater_couldnt_find_downloaded_file))
         } else {
             installAPK(context, existingApk, Build.VERSION.SDK_INT)
         }
