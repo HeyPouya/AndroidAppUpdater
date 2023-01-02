@@ -24,16 +24,9 @@ private fun installAPKForPAndAbove(context: Context, apk: File) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
         if (context.packageManager.canRequestPackageInstalls()) {
             try {
-                val intent = Intent(
-                    Intent.ACTION_VIEW,
-                    FileProvider.getUriForFile(
-                        context,
-                        "${context.packageName}.fileProvider.GenericFileProvider",
-                        apk,
-                    ),
-                )
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                val intent = Intent(Intent.ACTION_VIEW, getFileUri(context, apk)).run {
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
                 context.startActivity(intent)
             } catch (e: ActivityNotFoundException) {
                 Log.d(TAG, e.message.orEmpty())
@@ -46,23 +39,23 @@ private fun installAPKForPAndAbove(context: Context, apk: File) {
 
 @Suppress("DEPRECATION")
 private fun installAPKForNtoO(context: Context, apk: File) {
-    val uri = FileProvider.getUriForFile(
-        context,
-        "${context.packageName}.fileProvider.GenericFileProvider",
-        apk,
-    )
-    val install = Intent(Intent.ACTION_INSTALL_PACKAGE)
-    install.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-    install.data = uri
-    install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-    install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    val install = Intent(Intent.ACTION_INSTALL_PACKAGE, getFileUri(context, apk)).run {
+        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
+    }
     context.startActivity(install)
 }
 
+private fun getFileUri(context: Context, apk: File): Uri = FileProvider.getUriForFile(
+    context,
+    "${context.packageName}.fileProvider.GenericFileProvider",
+    apk,
+)
+
 private fun installAPKForMAndBellow(context: Context, apk: File) {
     val apkUri = Uri.fromFile(apk)
-    val intent = Intent(Intent.ACTION_VIEW)
-    intent.setDataAndType(apkUri, "application/vnd.android.package-archive")
-    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+    val intent = Intent(Intent.ACTION_VIEW).run {
+        setDataAndType(apkUri, "application/vnd.android.package-archive")
+        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    }
     context.startActivity(intent)
 }

@@ -14,6 +14,7 @@ data class UpdaterFragmentModel(
     var typeface: Typeface? = null,
     var theme: Theme = Theme.LIGHT,
 ) : Serializable {
+
     companion object {
         val EMPTY = UpdaterFragmentModel()
     }
