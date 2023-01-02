@@ -122,11 +122,11 @@ class AppUpdaterDialog : DialogFragment() {
         val storeLinks = list.filterNot { it.store == DIRECT_URL }
 
         if (directLinks.isNotEmpty()) {
-            binding.recyclerDirect.adapter = DirectRecyclerAdapter(directLinks) { onListListener(it) }
+            binding.recyclerDirect.adapter = DirectRecyclerAdapter(directLinks) { onListListener(it, theme) }
         }
 
         if (storeLinks.isNotEmpty()) {
-            binding.recyclerStores.adapter = StoresRecyclerAdapter(storeLinks, theme) { onListListener(it) }
+            binding.recyclerStores.adapter = StoresRecyclerAdapter(storeLinks, theme) { onListListener(it, theme) }
         }
     }
 
@@ -134,25 +134,25 @@ class AppUpdaterDialog : DialogFragment() {
         binding.linearLayout.isVisible = storeAndDirectAvailable
     }
 
-    private fun onListListener(item: UpdaterStoreList) {
+    private fun onListListener(item: UpdaterStoreList, theme: Theme?) {
         when (item.store) {
             DIRECT_URL -> getApk(item.url, activity) { shouldShowUpdateInProgress ->
                 when (shouldShowUpdateInProgress) {
-                    true -> showUpdateInProgressDialog()
-                    false -> hideUpdateInProgressDialog()
+                    true -> showUpdateInProgressDialog(theme)
+                    false -> hideUpdateInProgressDialog(theme)
                 }
             }
             else -> item.store.provider?.newInstance()?.setStoreData(context, item)
         }
     }
 
-    private fun showUpdateInProgressDialog() {
-        UpdateInProgressDialog.instance.show(parentFragmentManager, UPDATE_DIALOG_TAG)
+    private fun showUpdateInProgressDialog(theme: Theme?) {
+        UpdateInProgressDialog.getInstance(theme).show(parentFragmentManager, UPDATE_DIALOG_TAG)
     }
 
-    private fun hideUpdateInProgressDialog() {
-        if (UpdateInProgressDialog.instance.isAdded) {
-            UpdateInProgressDialog.instance.dismiss()
+    private fun hideUpdateInProgressDialog(theme: Theme?) {
+        if (UpdateInProgressDialog.getInstance(theme).isAdded) {
+            UpdateInProgressDialog.getInstance(theme).dismiss()
         }
     }
 
