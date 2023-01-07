@@ -30,6 +30,8 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.constraintLayout)
     implementation(libs.recyclerView)
+    implementation(libs.coroutines)
+    implementation(libs.androidx.fragment)
 
     // testing dependency
     testImplementation(libs.junit4)
