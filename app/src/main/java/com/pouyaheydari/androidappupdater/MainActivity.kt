@@ -1,6 +1,7 @@
 package com.pouyaheydari.androidappupdater
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -45,9 +46,9 @@ class MainActivity : AppCompatActivity() {
             title = getString(R.string.library_title)
             description = getString(R.string.library_description)
             isForceUpdate = false
-            fontPath = FONT_PATH
+            typeface = Typeface.createFromAsset(assets, FONT_PATH)
             theme = Theme.DARK
-            list = getDSLList(this@MainActivity)
+            storeList = getDSLList(this@MainActivity)
         }.show(supportFragmentManager, TAG)
     }
 
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             description = getString(R.string.library_description),
             storeList = list,
             isForce = false,
-            fontPath = FONT_PATH,
+            typeface = Typeface.createFromAsset(assets, FONT_PATH),
             theme = Theme.LIGHT,
         ).show(supportFragmentManager, TAG)
     }
