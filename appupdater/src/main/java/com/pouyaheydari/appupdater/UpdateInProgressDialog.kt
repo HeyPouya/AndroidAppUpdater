@@ -1,8 +1,6 @@
 package com.pouyaheydari.appupdater
 
-import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +9,11 @@ import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.WRAP_CONTE
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.pouyaheydari.appupdater.core.pojo.Theme
-import com.pouyaheydari.appupdater.core.pojo.UpdateInProgressFragmentModel.Companion.EMPTY
-import com.pouyaheydari.appupdater.core.utils.TAG
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.databinding.FragmentUpdateInProgressDialogBinding
+import com.pouyaheydari.appupdater.utils.TypefaceHolder
 
-const val UPDATE_IN_PROGRESS_DATA = "UPDATE_IN_PROGRESS_DATA"
+const val THEME = "THEME"
 
 /**
  * Dialog to show download in progress to user
@@ -28,9 +25,9 @@ internal class UpdateInProgressDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentUpdateInProgressDialogBinding.inflate(inflater, container, false)
-        val data = arguments?.serializable(UPDATE_IN_PROGRESS_DATA) ?: EMPTY
-        setDialogBackground(data.theme)
-        setTheme(data.theme)
+        val theme = arguments?.serializable(THEME) ?: Theme.LIGHT
+        setDialogBackground(theme)
+        setTheme(theme)
         return binding.root
     }
 
@@ -60,19 +57,13 @@ internal class UpdateInProgressDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val data = arguments?.serializable(UPDATE_IN_PROGRESS_DATA) ?: EMPTY
-        setTypeface(data.fontPath)
+        setTypeface()
     }
 
-    private fun setTypeface(fontPath: String?) {
-        val tf: Typeface? = try {
-            Typeface.createFromAsset(requireContext().assets, fontPath)
-        } catch (e: Exception) {
-            Log.e(TAG, "Could not set the typeface, falling back to default")
-            null
-        }
+    private fun setTypeface() {
+        val typeface = TypefaceHolder.getTypeface()
         with(binding) {
-            tf?.let {
+            typeface?.let {
                 txtTitle.typeface = it
                 txtDescription.typeface = it
             }
