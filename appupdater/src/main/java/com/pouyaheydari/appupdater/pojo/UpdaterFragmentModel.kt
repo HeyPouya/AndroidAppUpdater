@@ -1,16 +1,17 @@
-package com.pouyaheydari.appupdater.core.pojo
+package com.pouyaheydari.appupdater.pojo
 
+import com.pouyaheydari.appupdater.core.pojo.Theme
+import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 import java.io.Serializable
 
 /**
- * User has to pass this model to the library
+ * This model is used to pass the data to dialog fragment via bundles
  */
 data class UpdaterFragmentModel(
     var title: String = "",
     var description: String = "",
-    var list: List<UpdaterStoreList> = listOf(),
+    var storeLis: List<UpdaterStoreList> = listOf(),
     var isForceUpdate: Boolean = false,
-    var fontPath: String? = null,
     var theme: Theme = Theme.LIGHT,
 ) : Serializable {
 
