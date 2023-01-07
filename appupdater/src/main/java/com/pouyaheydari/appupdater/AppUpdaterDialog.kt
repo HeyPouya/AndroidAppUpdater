@@ -2,7 +2,6 @@ package com.pouyaheydari.appupdater
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,30 +12,36 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import com.pouyaheydari.appupdater.adapters.DirectRecyclerAdapter
 import com.pouyaheydari.appupdater.adapters.StoresRecyclerAdapter
 import com.pouyaheydari.appupdater.core.pojo.Store.DIRECT_URL
 import com.pouyaheydari.appupdater.core.pojo.Theme
-import com.pouyaheydari.appupdater.core.pojo.UpdateInProgressFragmentModel
-import com.pouyaheydari.appupdater.core.pojo.UpdaterFragmentModel
 import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
-import com.pouyaheydari.appupdater.core.utils.TAG
 import com.pouyaheydari.appupdater.core.utils.areDirectAndStoresAvailable
-import com.pouyaheydari.appupdater.core.utils.getApk
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.databinding.FragmentAppUpdaterDialogBinding
+import com.pouyaheydari.appupdater.pojo.UpdaterFragmentModel
+import com.pouyaheydari.appupdater.utils.TypefaceHolder
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 
-private const val DATA_LIST = "DATA_LIST"
-private const val UPDATE_DIALOG_TAG = "UpdateDialog"
+private const val UPDATE_DIALOG_KEY = "UPDATE_DIALOG_KEY"
+private const val UPDATE_DIALOG_TAG = "UPDATE_DIALOG_TAG"
+private const val UPDATE_DIALOG_README_URL = "https://github.com/SirLordPouya/AndroidAppUpdater"
 
 /**
  * Shows ForceUpdate Dialog Fragment
  */
 class AppUpdaterDialog : DialogFragment() {
 
+    private val viewModel: AppUpdaterViewModel by viewModels()
+
     private var _binding: FragmentAppUpdaterDialogBinding? = null
     private val binding get() = _binding!!
+    var callback: ((Boolean) -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +49,10 @@ class AppUpdaterDialog : DialogFragment() {
         savedInstanceState: Bundle?,
     ): View {
         // Getting data passed to the library
-        val data = arguments?.serializable(DATA_LIST) ?: UpdaterFragmentModel.EMPTY
+        val data = arguments?.serializable(UPDATE_DIALOG_KEY) ?: UpdaterFragmentModel.EMPTY
+        if (data == UpdaterFragmentModel.EMPTY || data.storeLis.isEmpty()) {
+            throw IllegalArgumentException("It seems you forgot to add any data to the updater dialog. Add the data as described in $UPDATE_DIALOG_README_URL")
+        }
         setDialogBackground(data.theme)
         isCancelable = data.isForceUpdate
 
@@ -74,20 +82,33 @@ class AppUpdaterDialog : DialogFragment() {
         getData()
     }
 
+    private fun subscribeToUpdateInProgressDialog(theme: Theme) {
+        lifecycleScope.launchWhenCreated {
+            viewModel.updateInProgressState.asStateFlow().collectLatest {
+                when (it) {
+                    true -> showUpdateInProgressDialog(theme)
+                    false -> hideUpdateInProgressDialog()
+                }
+            }
+        }
+    }
+
     private fun getData() {
-        val data = arguments?.serializable(DATA_LIST) ?: UpdaterFragmentModel.EMPTY
+        val data = arguments?.serializable(UPDATE_DIALOG_KEY) ?: UpdaterFragmentModel.EMPTY
         val title = data.title
         val description = data.description
-        val list = data.list
+        val list = data.storeLis
         setTheme(data.theme)
-        val tf: Typeface? = try {
-            Typeface.createFromAsset(requireContext().assets, data.fontPath)
-        } catch (e: Exception) {
-            Log.e(TAG, "Could not set the typeface, falling back to default")
-            null
+        val typeface = TypefaceHolder.getTypeface()
+        setTypeface(typeface)
+        callback = { shouldShowUpdateInProgress ->
+            when (shouldShowUpdateInProgress) {
+                true -> showUpdateInProgressDialog(data.theme)
+                false -> hideUpdateInProgressDialog()
+            }
         }
-        setTypeface(tf)
-        setUpProperties(title, description, list, data.theme, tf, data.fontPath)
+        setUpProperties(title, description, list, data.theme, typeface)
+        subscribeToUpdateInProgressDialog(data.theme)
     }
 
     private fun setTypeface(typeface: Typeface?) {
@@ -114,25 +135,25 @@ class AppUpdaterDialog : DialogFragment() {
         }
     }
 
-    private fun setUpProperties(title: String?, description: String?, list: List<UpdaterStoreList>, theme: Theme, typeface: Typeface?, fontPath: String?) {
+    private fun setUpProperties(title: String?, description: String?, list: List<UpdaterStoreList>, theme: Theme, typeface: Typeface?) {
         binding.txtTitle.text = title
         binding.txtDescription.text = description
 
         hideOrLayoutIfNeeded(areDirectAndStoresAvailable(list))
 
-        setUpBothRecyclers(list, theme, typeface, fontPath)
+        setUpBothRecyclers(list, theme, typeface)
     }
 
-    private fun setUpBothRecyclers(list: List<UpdaterStoreList>, theme: Theme, typeface: Typeface?, fontPath: String?) {
+    private fun setUpBothRecyclers(list: List<UpdaterStoreList>, theme: Theme, typeface: Typeface?) {
         val directLinks = list.filter { it.store == DIRECT_URL }
         val storeLinks = list.filterNot { it.store == DIRECT_URL }
 
         if (directLinks.isNotEmpty()) {
-            binding.recyclerDirect.adapter = DirectRecyclerAdapter(directLinks, typeface) { onListListener(it, theme, fontPath) }
+            binding.recyclerDirect.adapter = DirectRecyclerAdapter(directLinks, typeface) { viewModel.onListListener(it, requireActivity()) }
         }
 
         if (storeLinks.isNotEmpty()) {
-            binding.recyclerStores.adapter = StoresRecyclerAdapter(storeLinks, theme, typeface) { onListListener(it, theme, fontPath) }
+            binding.recyclerStores.adapter = StoresRecyclerAdapter(storeLinks, theme, typeface) { viewModel.onListListener(it, requireActivity()) }
         }
     }
 
@@ -140,24 +161,14 @@ class AppUpdaterDialog : DialogFragment() {
         binding.linearLayout.isVisible = storeAndDirectAvailable
     }
 
-    private fun onListListener(item: UpdaterStoreList, theme: Theme, fontPath: String?) {
-        when (item.store) {
-            DIRECT_URL -> getApk(item.url, activity) { shouldShowUpdateInProgress ->
-                when (shouldShowUpdateInProgress) {
-                    true -> showUpdateInProgressDialog(theme, fontPath)
-                    false -> hideUpdateInProgressDialog()
-                }
-            }
-            else -> item.store.provider?.newInstance()?.setStoreData(context, item)
+    private fun showUpdateInProgressDialog(theme: Theme) {
+        if (parentFragmentManager.findFragmentByTag(UPDATE_DIALOG_TAG) == null && requireActivity().lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+            val fragment = UpdateInProgressDialog()
+            val bundle = Bundle()
+            bundle.putSerializable(THEME, theme)
+            fragment.arguments = bundle
+            fragment.show(parentFragmentManager, UPDATE_DIALOG_TAG)
         }
-    }
-
-    private fun showUpdateInProgressDialog(theme: Theme, fontPath: String?) {
-        val fragment = UpdateInProgressDialog()
-        val bundle = Bundle()
-        bundle.putSerializable(UPDATE_IN_PROGRESS_DATA, UpdateInProgressFragmentModel(fontPath, theme))
-        fragment.arguments = bundle
-        fragment.show(parentFragmentManager, UPDATE_DIALOG_TAG)
     }
 
     private fun hideUpdateInProgressDialog() {
@@ -169,29 +180,36 @@ class AppUpdaterDialog : DialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        callback = null
         _binding = null
     }
 
     companion object {
 
-        // fragment variable to make this dialog singleton
-        private val fragment = AppUpdaterDialog()
-
         /**
-         * get Instance method
+         * @param title Title of the dialog
+         * @param description Description that is shown below the title
+         * @param storeList List of all stores that user can update your app from (including [com.pouyaheydari.appupdater.core.pojo.Store.DIRECT_URL])
+         * @param isForce Should the user be able to close the dialog?
+         * @param typeface Typeface to be used in text views
+         *
+         * @return a new instance of [AppUpdaterDialog]
          */
         fun getInstance(
-            title: String = "",
-            description: String = "",
-            storeList: List<UpdaterStoreList> = listOf(),
+            title: String,
+            description: String,
+            storeList: List<UpdaterStoreList>,
             isForce: Boolean = false,
-            fontPath: String? = null,
+            typeface: Typeface? = null,
             theme: Theme = Theme.LIGHT,
         ): AppUpdaterDialog {
+            val fragment = AppUpdaterDialog()
+
+            TypefaceHolder.setTypeface(typeface)
             // bundle to add data to our dialog
             val bundle = Bundle()
-            val data = UpdaterFragmentModel(title, description, storeList, !isForce, fontPath, theme)
-            bundle.putSerializable(DATA_LIST, data)
+            val data = UpdaterFragmentModel(title, description, storeList, !isForce, theme)
+            bundle.putSerializable(UPDATE_DIALOG_KEY, data)
             fragment.arguments = bundle
             return fragment
         }
