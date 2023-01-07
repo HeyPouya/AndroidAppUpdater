@@ -45,7 +45,7 @@ dependencies {
     // support dependency
     implementation(libs.appcompat)
     implementation(libs.constraintLayout)
-    implementation(libs.lifecycle)
+    implementation(libs.lifecycle.runtime)
     implementation(libs.compose.activity)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)

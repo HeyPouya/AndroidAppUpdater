@@ -43,7 +43,7 @@ android {
 dependencies {
 
     implementation(project(":core"))
-    implementation(libs.lifecycle)
+    implementation(libs.lifecycle.runtime)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.material)
