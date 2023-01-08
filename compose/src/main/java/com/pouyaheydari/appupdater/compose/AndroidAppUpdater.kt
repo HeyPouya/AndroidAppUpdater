@@ -40,15 +40,15 @@ import com.pouyaheydari.appupdater.compose.ui.theme.Blue
 import com.pouyaheydari.appupdater.compose.utils.getActivity
 import com.pouyaheydari.appupdater.compose.utils.storeList
 import com.pouyaheydari.appupdater.core.pojo.Store
+import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
-import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 import com.pouyaheydari.appupdater.core.utils.areDirectAndStoresAvailable
 
 @Composable
 fun AndroidAppUpdater(
     dialogTitle: String = "",
     dialogDescription: String = "",
-    storeList: List<UpdaterStoreList> = listOf(),
+    storeList: List<StoreListItem> = listOf(),
     onDismissRequested: () -> Unit = {},
     typeface: Typeface? = null,
     theme: Theme = Theme.LIGHT,
@@ -69,7 +69,7 @@ fun AndroidAppUpdater(
 fun DialogContent(
     dialogTitle: String,
     dialogDescription: String,
-    storeList: List<UpdaterStoreList>,
+    storeList: List<StoreListItem>,
     typeface: Typeface?,
     viewModel: AndroidAppUpdaterViewModel,
 ) {
@@ -94,7 +94,7 @@ fun DialogContent(
 }
 
 @Composable
-private fun StoresListContent(storeList: List<UpdaterStoreList>, viewModel: AndroidAppUpdaterViewModel) {
+private fun StoresListContent(storeList: List<StoreListItem>, viewModel: AndroidAppUpdaterViewModel) {
     val context = LocalContext.current.getActivity()
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -152,7 +152,7 @@ private fun DividerContent(shouldShow: Boolean) {
 }
 
 @Composable
-private fun DirectLinkContent(storeList: List<UpdaterStoreList>, viewModel: AndroidAppUpdaterViewModel) {
+private fun DirectLinkContent(storeList: List<StoreListItem>, viewModel: AndroidAppUpdaterViewModel) {
     val context = LocalContext.current.getActivity()
     LazyColumn(
         content = {

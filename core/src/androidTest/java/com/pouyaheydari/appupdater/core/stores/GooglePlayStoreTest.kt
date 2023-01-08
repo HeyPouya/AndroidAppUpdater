@@ -7,7 +7,7 @@ import androidx.test.espresso.intent.rule.IntentsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.pouyaheydari.appupdater.core.pojo.Store
-import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
+import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,7 +25,7 @@ internal class GooglePlayStoreTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        googlePlayStore.setStoreData(appContext, UpdaterStoreList(store = Store.GOOGLE_PLAY, packageName = packageName, url = url))
+        googlePlayStore.setStoreData(appContext, StoreListItem(store = Store.GOOGLE_PLAY, packageName = packageName, url = url))
 
         Intents.intended(IntentMatchers.hasPackage(PLAY_PACKAGE))
         Intents.intended(IntentMatchers.hasData(Uri.parse("$PLAY_URL$packageName")))

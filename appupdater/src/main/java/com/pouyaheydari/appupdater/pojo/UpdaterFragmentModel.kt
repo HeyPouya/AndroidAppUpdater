@@ -1,7 +1,7 @@
 package com.pouyaheydari.appupdater.pojo
 
+import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
-import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 import java.io.Serializable
 
 /**
@@ -10,7 +10,7 @@ import java.io.Serializable
 data class UpdaterFragmentModel(
     var title: String = "",
     var description: String = "",
-    var storeLis: List<UpdaterStoreList> = listOf(),
+    var storeLis: List<StoreListItem> = listOf(),
     var isForceUpdate: Boolean = false,
     var theme: Theme = Theme.LIGHT,
 ) : Serializable {

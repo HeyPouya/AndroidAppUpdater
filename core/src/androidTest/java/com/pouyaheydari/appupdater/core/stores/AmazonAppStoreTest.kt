@@ -7,7 +7,7 @@ import androidx.test.espresso.intent.rule.IntentsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.pouyaheydari.appupdater.core.pojo.Store
-import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
+import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,7 +24,7 @@ class AmazonAppStoreTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        amazonAppStore.setStoreData(appContext, UpdaterStoreList(store = Store.AMAZON_APP_STORE, packageName = packageName, url = url))
+        amazonAppStore.setStoreData(appContext, StoreListItem(store = Store.AMAZON_APP_STORE, packageName = packageName, url = url))
 
         Intents.intended(IntentMatchers.hasPackage(AMAZON_PACKAGE))
         Intents.intended(IntentMatchers.hasData(Uri.parse("$AMAZON_APP_STORE_URL$packageName")))

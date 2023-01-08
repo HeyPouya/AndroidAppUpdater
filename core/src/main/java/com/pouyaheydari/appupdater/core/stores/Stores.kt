@@ -8,7 +8,7 @@ import android.net.Uri
 import android.widget.Toast
 import com.pouyaheydari.appupdater.core.R
 import com.pouyaheydari.appupdater.core.pojo.Store
-import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
+import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import java.util.Locale
 
 /**
@@ -19,9 +19,9 @@ abstract class Stores {
     /**
      * Sets intent of the store
      */
-    abstract fun setStoreData(context: Context?, item: UpdaterStoreList)
+    abstract fun setStoreData(context: Context?, item: StoreListItem)
 
-    protected fun showStore(context: Context?, intent: Intent, item: UpdaterStoreList, store: Store) {
+    protected fun showStore(context: Context?, intent: Intent, item: StoreListItem, store: Store) {
         try {
             intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
             context?.startActivity(intent)
@@ -31,7 +31,7 @@ abstract class Stores {
         }
     }
 
-    private fun openWebViewToShowUrl(context: Context?, item: UpdaterStoreList, store: Store) {
+    private fun openWebViewToShowUrl(context: Context?, item: StoreListItem, store: Store) {
         if (item.url.isNotEmpty()) {
             try {
                 val webViewIntent = Intent(Intent.ACTION_VIEW, Uri.parse(item.url)).run {

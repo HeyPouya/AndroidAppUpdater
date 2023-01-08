@@ -6,18 +6,18 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.pouyaheydari.appupdater.R
+import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
-import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 import com.pouyaheydari.appupdater.databinding.DownloadStoresItemBinding
 
 /**
  * Adapter to show stores on dialog page
  */
 internal class StoresRecyclerAdapter(
-    private val list: List<UpdaterStoreList>,
+    private val list: List<StoreListItem>,
     private val theme: Theme,
     private val typeface: Typeface?,
-    private val listener: (UpdaterStoreList) -> Unit,
+    private val listener: (StoreListItem) -> Unit,
 ) : RecyclerView.Adapter<StoresRecyclerAdapter.SoresViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -36,7 +36,7 @@ internal class StoresRecyclerAdapter(
         /**
          * Binds data to view
          */
-        fun onBind(item: UpdaterStoreList) {
+        fun onBind(item: StoreListItem) {
             val txtStoreTitle = binding.txtStoreTitle
             val imgStore = binding.imgStore
             val textColor = when (theme) {

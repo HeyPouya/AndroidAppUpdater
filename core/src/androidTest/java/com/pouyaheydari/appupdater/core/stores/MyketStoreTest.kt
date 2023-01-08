@@ -7,7 +7,7 @@ import androidx.test.espresso.intent.rule.IntentsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.pouyaheydari.appupdater.core.pojo.Store
-import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
+import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,7 +24,7 @@ internal class MyketStoreTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        myketStore.setStoreData(appContext, UpdaterStoreList(store = Store.MYKET, packageName = packageName, url = url))
+        myketStore.setStoreData(appContext, StoreListItem(store = Store.MYKET, packageName = packageName, url = url))
 
         Intents.intended(IntentMatchers.hasPackage(MYKET_PACKAGE))
         Intents.intended(IntentMatchers.hasData(Uri.parse("$MYKET_URL$packageName")))

@@ -18,8 +18,8 @@ import androidx.lifecycle.lifecycleScope
 import com.pouyaheydari.appupdater.adapters.DirectRecyclerAdapter
 import com.pouyaheydari.appupdater.adapters.StoresRecyclerAdapter
 import com.pouyaheydari.appupdater.core.pojo.Store.DIRECT_URL
+import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
-import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
 import com.pouyaheydari.appupdater.core.utils.areDirectAndStoresAvailable
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.databinding.FragmentAppUpdaterDialogBinding
@@ -135,7 +135,7 @@ class AppUpdaterDialog : DialogFragment() {
         }
     }
 
-    private fun setUpProperties(title: String?, description: String?, list: List<UpdaterStoreList>, theme: Theme, typeface: Typeface?) {
+    private fun setUpProperties(title: String?, description: String?, list: List<StoreListItem>, theme: Theme, typeface: Typeface?) {
         binding.txtTitle.text = title
         binding.txtDescription.text = description
 
@@ -144,7 +144,7 @@ class AppUpdaterDialog : DialogFragment() {
         setUpBothRecyclers(list, theme, typeface)
     }
 
-    private fun setUpBothRecyclers(list: List<UpdaterStoreList>, theme: Theme, typeface: Typeface?) {
+    private fun setUpBothRecyclers(list: List<StoreListItem>, theme: Theme, typeface: Typeface?) {
         val directLinks = list.filter { it.store == DIRECT_URL }
         val storeLinks = list.filterNot { it.store == DIRECT_URL }
 
@@ -198,7 +198,7 @@ class AppUpdaterDialog : DialogFragment() {
         fun getInstance(
             title: String,
             description: String,
-            storeList: List<UpdaterStoreList>,
+            storeList: List<StoreListItem>,
             isForce: Boolean = false,
             typeface: Typeface? = null,
             theme: Theme = Theme.LIGHT,

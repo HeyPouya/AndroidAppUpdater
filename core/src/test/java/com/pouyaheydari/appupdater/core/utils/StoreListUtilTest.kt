@@ -1,7 +1,7 @@
 package com.pouyaheydari.appupdater.core.utils
 
 import com.pouyaheydari.appupdater.core.pojo.Store
-import com.pouyaheydari.appupdater.core.pojo.UpdaterStoreList
+import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -10,10 +10,10 @@ internal class StoreListUtilTest {
     @Test
     fun `when passing both direct and app stores, then areDirectAndStoresAvailable return true`() {
         val list = listOf(
-            UpdaterStoreList(
+            StoreListItem(
                 store = Store.DIRECT_URL,
             ),
-            UpdaterStoreList(
+            StoreListItem(
                 store = Store.GOOGLE_PLAY,
             ),
         )
@@ -26,7 +26,7 @@ internal class StoreListUtilTest {
     @Test
     fun `when passing only direct store, then areDirectAndStoresAvailable return false`() {
         val list = listOf(
-            UpdaterStoreList(
+            StoreListItem(
                 store = Store.DIRECT_URL,
             ),
         )
@@ -39,7 +39,7 @@ internal class StoreListUtilTest {
     @Test
     fun `when passing only app stores, then areDirectAndStoresAvailable return false`() {
         val list = listOf(
-            UpdaterStoreList(
+            StoreListItem(
                 store = Store.GOOGLE_PLAY,
             ),
         )
@@ -51,7 +51,7 @@ internal class StoreListUtilTest {
 
     @Test
     fun `when passing empty list, then areDirectAndStoresAvailable return false`() {
-        val list = listOf<UpdaterStoreList>()
+        val list = listOf<StoreListItem>()
 
         val result = areDirectAndStoresAvailable(list)
 
