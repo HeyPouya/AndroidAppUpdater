@@ -42,7 +42,7 @@ import com.pouyaheydari.appupdater.compose.utils.storeList
 import com.pouyaheydari.appupdater.core.pojo.Store
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
-import com.pouyaheydari.appupdater.core.utils.areDirectAndStoresAvailable
+import com.pouyaheydari.appupdater.core.utils.shouldShowStoresDivider
 
 @Composable
 fun AndroidAppUpdater(
@@ -87,7 +87,7 @@ fun DialogContent(
         ) {
             DialogHeader(dialogTitle, typeface, dialogDescription)
             DirectLinkContent(storeList, viewModel)
-            DividerContent(areDirectAndStoresAvailable(storeList))
+            DividerContent(shouldShowStoresDivider(storeList))
             StoresListContent(storeList, viewModel)
         }
     }

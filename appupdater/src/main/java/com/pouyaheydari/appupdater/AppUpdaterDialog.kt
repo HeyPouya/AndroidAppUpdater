@@ -20,8 +20,8 @@ import com.pouyaheydari.appupdater.adapters.StoresRecyclerAdapter
 import com.pouyaheydari.appupdater.core.pojo.Store.DIRECT_URL
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
-import com.pouyaheydari.appupdater.core.utils.areDirectAndStoresAvailable
 import com.pouyaheydari.appupdater.core.utils.serializable
+import com.pouyaheydari.appupdater.core.utils.shouldShowStoresDivider
 import com.pouyaheydari.appupdater.databinding.FragmentAppUpdaterDialogBinding
 import com.pouyaheydari.appupdater.pojo.UpdaterFragmentModel
 import com.pouyaheydari.appupdater.utils.TypefaceHolder
@@ -139,7 +139,7 @@ class AppUpdaterDialog : DialogFragment() {
         binding.txtTitle.text = title
         binding.txtDescription.text = description
 
-        hideOrLayoutIfNeeded(areDirectAndStoresAvailable(list))
+        hideOrLayoutIfNeeded(shouldShowStoresDivider(list))
 
         setUpBothRecyclers(list, theme, typeface)
     }

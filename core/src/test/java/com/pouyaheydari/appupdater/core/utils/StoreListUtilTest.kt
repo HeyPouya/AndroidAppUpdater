@@ -18,7 +18,7 @@ internal class StoreListUtilTest {
             ),
         )
 
-        val result = areDirectAndStoresAvailable(list)
+        val result = shouldShowStoresDivider(list)
 
         assertEquals(true, result)
     }
@@ -31,7 +31,7 @@ internal class StoreListUtilTest {
             ),
         )
 
-        val result = areDirectAndStoresAvailable(list)
+        val result = shouldShowStoresDivider(list)
 
         assertEquals(false, result)
     }
@@ -44,7 +44,7 @@ internal class StoreListUtilTest {
             ),
         )
 
-        val result = areDirectAndStoresAvailable(list)
+        val result = shouldShowStoresDivider(list)
 
         assertEquals(false, result)
     }
@@ -53,7 +53,7 @@ internal class StoreListUtilTest {
     fun `when passing empty list, then areDirectAndStoresAvailable return false`() {
         val list = listOf<StoreListItem>()
 
-        val result = areDirectAndStoresAvailable(list)
+        val result = shouldShowStoresDivider(list)
 
         assertEquals(false, result)
     }
