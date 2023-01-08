@@ -4,6 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.pouyaheydari.androidappupdater.ui.theme.AndroidAppUpdaterTheme
@@ -23,12 +27,17 @@ class ComposeSampleActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AndroidAppUpdaterTheme {
-                AndroidAppUpdater(
-                    dialogTitle = stringResource(id = R.string.appupdater_app_name),
-                    dialogDescription = stringResource(id = R.string.appupdater_download_notification_desc),
-                    storeList = getNormalList(this),
-                    theme = Theme.DARK,
-                )
+                var state by remember { mutableStateOf(true) }
+
+                if (state) {
+                    AndroidAppUpdater(
+                        dialogTitle = stringResource(id = R.string.appupdater_app_name),
+                        dialogDescription = stringResource(id = R.string.appupdater_download_notification_desc),
+                        storeList = getNormalList(this),
+                        theme = Theme.DARK,
+                        onDismissRequested = { state = false },
+                    )
+                }
             }
         }
     }

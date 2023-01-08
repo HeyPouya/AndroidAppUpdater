@@ -34,7 +34,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pouyaheydari.appupdater.compose.ui.theme.AndroidAppUpdaterTheme
 import com.pouyaheydari.appupdater.compose.ui.theme.Blue
@@ -50,20 +49,14 @@ fun AndroidAppUpdater(
     dialogTitle: String = "",
     dialogDescription: String = "",
     storeList: List<UpdaterStoreList> = listOf(),
-    isForce: Boolean = false,
+    onDismissRequested: () -> Unit = {},
     typeface: Typeface? = null,
     theme: Theme = Theme.LIGHT,
 ) {
     val viewModel: AndroidAppUpdaterViewModel = viewModel()
 
     AndroidAppUpdaterTheme(darkTheme = theme == Theme.DARK) {
-        Dialog(
-            onDismissRequest = { },
-            properties = DialogProperties(
-                dismissOnBackPress = isForce,
-                dismissOnClickOutside = isForce,
-            ),
-        ) {
+        Dialog(onDismissRequest = { onDismissRequested() }) {
             DialogContent(dialogTitle, dialogDescription, storeList, typeface, viewModel)
         }
         if (viewModel.state.value) {
