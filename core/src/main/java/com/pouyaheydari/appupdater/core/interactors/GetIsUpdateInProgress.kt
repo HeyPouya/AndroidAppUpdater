@@ -2,7 +2,7 @@ package com.pouyaheydari.appupdater.core.interactors
 
 import com.pouyaheydari.appupdater.core.data.Repository
 
-internal class GetRequestIdInteractor {
+class GetIsUpdateInProgress {
 
-    operator fun invoke(): Long = Repository.requestId
+    operator fun invoke() = Repository.shouldShowUpdateInProgressDialog
 }

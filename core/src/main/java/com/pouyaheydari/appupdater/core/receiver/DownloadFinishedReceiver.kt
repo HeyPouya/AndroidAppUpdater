@@ -8,9 +8,9 @@ import android.os.Build
 import android.util.Log
 import com.pouyaheydari.appupdater.core.R
 import com.pouyaheydari.appupdater.core.interactors.GetRequestIdInteractor
+import com.pouyaheydari.appupdater.core.interactors.SetIsUpdateInProgress
 import com.pouyaheydari.appupdater.core.utils.TAG
 import com.pouyaheydari.appupdater.core.utils.getExistingApk
-import com.pouyaheydari.appupdater.core.utils.hideUpdateInProgress
 import com.pouyaheydari.appupdater.core.utils.installAPK
 
 /**
@@ -34,6 +34,10 @@ class DownloadFinishedReceiver : BroadcastReceiver() {
                 }
             }
         }
+    }
+
+    private fun hideUpdateInProgress() {
+        SetIsUpdateInProgress().invoke(false)
     }
 
     private fun verifyDownloadedApkExists(context: Context) {

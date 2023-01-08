@@ -25,7 +25,7 @@ dependencies {
 
     // support dependency
     implementation(libs.appcompat)
-
+    implementation(libs.coroutines)
     // testing dependency
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidTestJUnit)

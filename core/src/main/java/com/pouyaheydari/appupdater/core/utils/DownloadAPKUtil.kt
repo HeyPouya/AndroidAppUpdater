@@ -11,14 +11,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import com.pouyaheydari.appupdater.core.R
+import com.pouyaheydari.appupdater.core.interactors.SetIsUpdateInProgress
 import com.pouyaheydari.appupdater.core.interactors.SetRequestIdInteractor
-
-private var showUpdateInProgressCallback: ((Boolean) -> Unit)? = null
 
 /**
  * Checks for needed permissions and tries to download the apk
  */
-fun getApk(url: String, activity: Activity?, callback: (Boolean) -> Unit) {
+fun getApk(url: String, activity: Activity?) {
     checkNotNull(activity)
 
     val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -28,15 +27,15 @@ fun getApk(url: String, activity: Activity?, callback: (Boolean) -> Unit) {
     }
 
     if (activity.isPermissionGranted(permission) || Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-        prepareToDownloadApk(url, activity, callback)
+        prepareToDownloadApk(url, activity)
     } else {
         activity.getPermission(arrayOf(permission))
     }
 }
 
-private fun prepareToDownloadApk(url: String, context: Context, callback: (Boolean) -> Unit) {
+private fun prepareToDownloadApk(url: String, context: Context) {
     // Show update in Progress alert dialog to the user
-    showUpdateInProgress(callback)
+    showUpdateInProgress()
 
     // Delete APK if user downloaded the apk before
     context.deleteExistingFile()
@@ -45,17 +44,8 @@ private fun prepareToDownloadApk(url: String, context: Context, callback: (Boole
     downloadNewApk(url, context)
 }
 
-private fun showUpdateInProgress(callback: (Boolean) -> Unit) {
-    showUpdateInProgressCallback = callback
-    showUpdateInProgressCallback?.let { it(true) }
-}
-
-/**
- * Hides update in progress dialog
- */
-fun hideUpdateInProgress() {
-    showUpdateInProgressCallback?.let { it(false) }
-    showUpdateInProgressCallback = null
+private fun showUpdateInProgress() {
+    SetIsUpdateInProgress().invoke(true)
 }
 
 /**
