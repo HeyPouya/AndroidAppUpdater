@@ -7,11 +7,11 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import com.pouyaheydari.appupdater.core.R
+import com.pouyaheydari.appupdater.core.interactors.GetRequestIdInteractor
 import com.pouyaheydari.appupdater.core.utils.TAG
 import com.pouyaheydari.appupdater.core.utils.getExistingApk
 import com.pouyaheydari.appupdater.core.utils.hideUpdateInProgress
 import com.pouyaheydari.appupdater.core.utils.installAPK
-import com.pouyaheydari.appupdater.core.utils.requestId
 
 /**
  * Receives when download is finished and opens the install dialog
@@ -27,7 +27,7 @@ class DownloadFinishedReceiver : BroadcastReceiver() {
             val referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
             // if downloaded file is our apk
-            if (referenceId == requestId) {
+            if (referenceId == GetRequestIdInteractor().invoke()) {
                 context?.let {
                     hideUpdateInProgress()
                     verifyDownloadedApkExists(it)

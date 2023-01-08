@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import com.pouyaheydari.appupdater.core.R
+import com.pouyaheydari.appupdater.core.interactors.SetRequestIdInteractor
 
 private var showUpdateInProgressCallback: ((Boolean) -> Unit)? = null
 
@@ -73,5 +74,5 @@ fun downloadNewApk(url: String, context: Context) {
 
     // enqueue the file to start download
     val manager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-    requestId = manager.enqueue(downloadManager)
+    SetRequestIdInteractor().invoke(manager.enqueue(downloadManager))
 }
