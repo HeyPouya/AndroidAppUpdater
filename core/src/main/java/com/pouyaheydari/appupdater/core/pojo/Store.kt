@@ -15,6 +15,7 @@ import com.pouyaheydari.appupdater.core.stores.SamsungGalaxyStore
 import com.pouyaheydari.appupdater.core.stores.Stores
 import com.pouyaheydari.appupdater.core.stores.TencentAppStore
 import com.pouyaheydari.appupdater.core.stores.VAppStore
+import com.pouyaheydari.appupdater.core.stores.ZTEAppCenter
 
 /**
  * Enum class to select type of market
@@ -35,4 +36,5 @@ enum class Store(val provider: Class<out Stores>?) {
     V_APP_STORE(VAppStore::class.java),
     NINE_APPS_STORE(NineApps::class.java),
     TENCENT_APPS_STORE(TencentAppStore::class.java),
+    ZTE_APP_CENTER(ZTEAppCenter::class.java),
 }

@@ -118,4 +118,11 @@ fun getNormalList(context: Context) = listOf(
         icon = R.drawable.appupdater_ic_tencent_app_store,
         url = WEBSITE_URL,
     ),
+    StoreListItem(
+        store = Store.ZTE_APP_CENTER,
+        title = context.getString(R.string.zte_app_store),
+        packageName = SAMPLE_PACKAGE_NAME,
+        icon = R.drawable.appupdater_ic_zte,
+        url = WEBSITE_URL,
+    ),
 )

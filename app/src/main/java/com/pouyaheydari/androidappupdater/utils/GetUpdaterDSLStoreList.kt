@@ -116,4 +116,11 @@ fun getDSLList(context: Context) = listOf(
         packageName = SAMPLE_PACKAGE_NAME
         url = WEBSITE_URL
     },
+    store {
+        store = Store.ZTE_APP_CENTER
+        title = context.getString(R.string.zte_app_store)
+        icon = R.drawable.appupdater_ic_zte
+        packageName = SAMPLE_PACKAGE_NAME
+        url = WEBSITE_URL
+    },
 )
