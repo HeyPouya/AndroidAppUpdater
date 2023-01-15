@@ -119,7 +119,14 @@ fun getDSLList(context: Context) = listOf(
     store {
         store = Store.ZTE_APP_CENTER
         title = context.getString(R.string.zte_app_store)
-        icon = R.drawable.appupdater_ic_zte
+        icon = R.drawable.appupdater_ic_zte_app_center
+        packageName = SAMPLE_PACKAGE_NAME
+        url = WEBSITE_URL
+    },
+    store {
+        store = Store.LENOVO_APP_CENTER
+        title = context.getString(R.string.lenovo_app_center)
+        icon = R.drawable.appupdater_ic_lenovo_app_center
         packageName = SAMPLE_PACKAGE_NAME
         url = WEBSITE_URL
     },

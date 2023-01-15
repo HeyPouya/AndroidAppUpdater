@@ -6,6 +6,7 @@ import com.pouyaheydari.appupdater.core.stores.CafeBazaarStore
 import com.pouyaheydari.appupdater.core.stores.FDroid
 import com.pouyaheydari.appupdater.core.stores.GooglePlayStore
 import com.pouyaheydari.appupdater.core.stores.HuaweiAppGallery
+import com.pouyaheydari.appupdater.core.stores.LenovoAppCenter
 import com.pouyaheydari.appupdater.core.stores.MiGetAppStore
 import com.pouyaheydari.appupdater.core.stores.MyketStore
 import com.pouyaheydari.appupdater.core.stores.NineApps
@@ -37,4 +38,5 @@ enum class Store(val provider: Class<out Stores>?) {
     NINE_APPS_STORE(NineApps::class.java),
     TENCENT_APPS_STORE(TencentAppStore::class.java),
     ZTE_APP_CENTER(ZTEAppCenter::class.java),
+    LENOVO_APP_CENTER(LenovoAppCenter::class.java),
 }
