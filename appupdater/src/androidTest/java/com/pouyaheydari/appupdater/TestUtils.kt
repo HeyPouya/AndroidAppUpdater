@@ -14,7 +14,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 internal class TestUtils {
-    lateinit var appContext: Context
+    private lateinit var appContext: Context
 
     /**
      * Providing context

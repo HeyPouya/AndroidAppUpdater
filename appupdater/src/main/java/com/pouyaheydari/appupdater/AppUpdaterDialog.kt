@@ -41,7 +41,6 @@ class AppUpdaterDialog : DialogFragment() {
 
     private var _binding: FragmentAppUpdaterDialogBinding? = null
     private val binding get() = _binding!!
-    var callback: ((Boolean) -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -101,12 +100,6 @@ class AppUpdaterDialog : DialogFragment() {
         setTheme(data.theme)
         val typeface = TypefaceHolder.getTypeface()
         setTypeface(typeface)
-        callback = { shouldShowUpdateInProgress ->
-            when (shouldShowUpdateInProgress) {
-                true -> showUpdateInProgressDialog(data.theme)
-                false -> hideUpdateInProgressDialog()
-            }
-        }
         setUpProperties(title, description, list, data.theme, typeface)
         subscribeToUpdateInProgressDialog(data.theme)
     }
@@ -180,7 +173,6 @@ class AppUpdaterDialog : DialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        callback = null
         _binding = null
     }
 
