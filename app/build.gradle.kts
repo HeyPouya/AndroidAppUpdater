@@ -45,18 +45,19 @@ dependencies {
     // support dependency
     implementation(libs.appcompat)
     implementation(libs.constraintLayout)
-    implementation(libs.lifecycle.runtime)
-    implementation(libs.compose.activity)
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling)
-    implementation(libs.compose.material)
+
+    // compose
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.activity)
+    implementation(libs.androidx.compose.material)
 
     // testing dependency
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidTestJUnit)
     androidTestImplementation(libs.androidTestRules)
     androidTestImplementation(libs.androidTestEspresso)
-    androidTestImplementation(libs.compose.test.junit)
-    debugImplementation(libs.compose.test.ui.tooling)
-    debugImplementation(libs.compose.test.ui.manifest)
+    androidTestImplementation(composeBom)
 }

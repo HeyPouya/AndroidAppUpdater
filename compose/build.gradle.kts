@@ -8,7 +8,6 @@ android {
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
     defaultConfig {
         minSdk = libs.versions.composeMinSdkVersion.get().toInt()
-        targetSdk = libs.versions.targetSdkVersion.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -43,19 +42,20 @@ android {
 dependencies {
 
     implementation(project(":core"))
-    implementation(libs.lifecycle.runtime)
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling)
-    implementation(libs.compose.material)
-    implementation(libs.compose.viewModel)
+
+    // compose
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.viewModel)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.ui.tooling)
 
     // testing
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidTestJUnit)
     androidTestImplementation(libs.androidTestEspresso)
-    androidTestImplementation(libs.compose.test.junit)
-    debugImplementation(libs.compose.test.ui.tooling)
-    debugImplementation(libs.compose.test.ui.manifest)
+    androidTestImplementation(composeBom)
 }
 
 publishing {

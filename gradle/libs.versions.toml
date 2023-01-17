@@ -14,11 +14,11 @@ androidTestRules = "1.5.0"
 androidTestEspresso = "3.5.0"
 recyclerView = "1.2.1"
 compose = "1.3.2"
-composeActivity = "1.6.1"
 lifecycle = "2.5.1"
-composeMaterial = "1.3.1"
 coroutines = "1.6.4"
 fragment = "1.5.5"
+androidxComposeBom = "2023.01.00"
+composeActivity = "1.6.1"
 
 [libraries]
 agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -31,14 +31,11 @@ androidTestJUnit = { group = "androidx.test.ext", name = "junit", version.ref = 
 androidTestRules = { group = "androidx.test", name = "rules", version.ref = "androidTestRules" }
 androidTestEspresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidTestEspresso" }
 recyclerView = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerView" }
-compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose" }
-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
-compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "composeActivity" }
-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "composeMaterial" }
-compose-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
-compose-test-junit = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose" }
-compose-test-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
-compose-test-ui-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose" }
-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime", version.ref = "lifecycle" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidx-compose-viewModel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+androidx-compose-material = { group = "androidx.compose.material", name = "material" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "composeActivity" }
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
