@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.androidx.compose.viewModel)
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.ui.tooling.preview)
 
     // testing
     testImplementation(libs.junit4)
