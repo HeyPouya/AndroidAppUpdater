@@ -98,6 +98,8 @@ private fun StoresListContent(storeList: List<StoreListItem>, viewModel: Android
     val context = LocalContext.current.getActivity()
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
+        verticalArrangement = Arrangement.spacedBy(32.dp),
+        contentPadding = PaddingValues(vertical = 32.dp),
         content = {
             storeList.filter { it.store != Store.DIRECT_URL }.forEach {
                 item {
@@ -118,8 +120,6 @@ private fun StoresListContent(storeList: List<StoreListItem>, viewModel: Android
                 }
             }
         },
-        verticalArrangement = Arrangement.spacedBy(32.dp),
-        contentPadding = PaddingValues(vertical = 32.dp),
     )
 }
 
