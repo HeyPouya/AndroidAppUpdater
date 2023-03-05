@@ -37,6 +37,8 @@ The library currently supports these markets:
 | [OneStore App Market](https://m.onestore.co.kr/mobilepoc/main/main.omp) | Store.ONE_STORE_APP_MARKET |
 | [Vivo V-AppStore](https://developer.vivo.com/home)                      | Store.V_APP_STORE          |
 | [9-Apps Market](https://www.9apps.com/)                                 | Store.NINE_APPS_STORE      |
+| [ZTE App Center](https://apps.ztems.com/)                               | Store.ZTE_APP_CENTER       |
+| [Lenovo App Center](https://www.lenovomm.com)                           | Store.LENOVO_APP_CENTER    |
 | [Tencent App Store](https://appstore.tencent.com/)                      | Store.TENCENT_APPS_STORE   |
 | [Cafe Bazaar Store](https://cafebazaar.ir)                              | Store.CAFE_BAZAAR          |
 | [Myket App Store](https://myket.ir/)                                    | Store.MYKET                |
@@ -47,9 +49,9 @@ If you provide your application on above mentioned stores, you can list all of t
 To create a new store:
 
 ```kotlin
-val list = arrayListOf<UpdaterStoreList>()
+val list = arrayListOf<StoreListItem>()
 list.add(
-    UpdaterStoreList(
+    StoreListItem(
         store = Store.GOOGLE_PLAY,
         title = "Store Title",
         icon = R.drawable.appupdater_ic_google_play,
@@ -59,7 +61,7 @@ list.add(
 )
 ```
 
-Parameters of UpdaterStoreList, in order:
+Parameters of StoreListItem, in order:
 
 | order | Parameter Name | Parameter Type | Description                                                                |
 |-------|----------------|----------------|----------------------------------------------------------------------------|
@@ -73,7 +75,7 @@ Parameters of UpdaterStoreList, in order:
 
 ```kotlin
 list.add(
-    UpdaterStoreList(
+    StoreListItem(
       store = Store.GOOGLE_PLAY,
       title = "Google Play",
         packageName = "YOUR_APPS_PACKAGE_NAME"
@@ -88,7 +90,7 @@ After downloading finishes, the install page will be shown to the user automatic
 
 ```kotlin
 list.add(
-    UpdaterStoreList(
+    StoreListItem(
       store = Store.DIRECT_URL,
       title = "Direct Download",
       url = "https://cafebazaar.ir/download/bazaar.apk",
@@ -156,9 +158,13 @@ Here is the list of icon names for each store:
 | OneStore App Market  | R.drawable.appupdater_ic_one_store         |
 | Vivo V-AppStore      | R.drawable.appupdater_ic_v_app_store       |
 | 9-Apps Market        | R.drawable.appupdater_ic_nine_apps         |
+| ZTE App Center       | R.drawable.appupdater_ic_zte_app_center    |
+| Lenovo App Center    | R.drawable.appupdater_ic_lenovo_app_center |
 | Tencent App Store    | R.drawable.appupdater_ic_tencent_app_store |
 | Cafe Bazaar Store    | R.drawable.appupdater_ic_bazar             |
 | Myket App Store      | R.drawable.appupdater_ic_myket             |
+
+***Note: Don't forget to add import for drawables <import com.pouyaheydari.appupdater.R.\*>***
 
 ## Jetpack Compose
 You can also show a native compose UpdateDialog to the user:
@@ -187,7 +193,7 @@ val list = listOf(
         icon = R.drawable.appupdater_ic_google_play
         url = "https://url/to/your/website"
         packageName = "YOUR_APPS_PACKAGE_NAME"
-    },)
+    })
 ```
 
 ### Showing UpdateDialog in DSL
