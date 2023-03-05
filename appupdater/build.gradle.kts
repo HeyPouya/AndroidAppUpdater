@@ -13,8 +13,9 @@ android {
         viewBinding = true
     }
     publishing {
-        multipleVariants("release") {
-            allVariants()
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
         }
     }
     namespace = "com.pouyaheydari.appupdater"
