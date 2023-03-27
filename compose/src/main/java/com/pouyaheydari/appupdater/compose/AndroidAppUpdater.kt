@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -18,12 +17,9 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TabRowDefaults.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -36,6 +32,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.pouyaheydari.appupdater.compose.ui.DividerComponent
+import com.pouyaheydari.appupdater.compose.ui.UpdateInProgressDialogComponent
 import com.pouyaheydari.appupdater.compose.ui.theme.AndroidAppUpdaterTheme
 import com.pouyaheydari.appupdater.compose.ui.theme.Blue
 import com.pouyaheydari.appupdater.compose.utils.getActivity
@@ -58,10 +56,10 @@ fun AndroidAppUpdater(
 
     AndroidAppUpdaterTheme(darkTheme = theme == Theme.DARK) {
         Dialog(onDismissRequest = { onDismissRequested() }) {
-            DialogContent(dialogTitle, dialogDescription, storeList, typeface, viewModel)
+            DialogContent(dialogTitle, dialogDescription, storeList, typeface, viewModel::onListListener)
         }
         if (viewModel.state.value) {
-            UpdateInProgressDialog()
+            UpdateInProgressDialogComponent()
         }
     }
 }
@@ -72,7 +70,7 @@ fun DialogContent(
     dialogDescription: String,
     storeList: List<StoreListItem>,
     typeface: Typeface?,
-    viewModel: AndroidAppUpdaterViewModel,
+    onClickListener: (StoreListItem, Activity?) -> Unit,
 ) {
     Card(
         shape = RoundedCornerShape(12.dp),
@@ -90,12 +88,12 @@ fun DialogContent(
             item(span = { GridItemSpan(maxLineSpan) }) { DialogHeader(dialogTitle, typeface, dialogDescription) }
             storeList.filter { it.store == Store.DIRECT_URL }.forEach {
                 item(span = { GridItemSpan(maxLineSpan) }) {
-                    DirectLinkContent(it, viewModel::onListListener)
+                    DirectLinkContent(it, onClickListener)
                 }
             }
-            item(span = { GridItemSpan(maxLineSpan) }) { DividerContent(shouldShowStoresDivider(storeList)) }
+            item(span = { GridItemSpan(maxLineSpan) }) { DividerComponent(shouldShowStoresDivider(storeList)) }
             storeList.filter { it.store != Store.DIRECT_URL }.forEach {
-                item { StoresListContent(it, viewModel::onListListener) }
+                item { StoresListContent(it, onClickListener) }
             }
         }
     }
@@ -115,34 +113,6 @@ private fun StoresListContent(item: StoreListItem, onClickListener: (StoreListIt
                 style = MaterialTheme.typography.body2,
                 color = MaterialTheme.colors.onSurface,
                 modifier = Modifier.padding(top = 8.dp),
-            )
-        }
-    }
-}
-
-@Composable
-private fun DividerContent(shouldShow: Boolean) {
-    if (shouldShow) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp),
-        ) {
-            Divider(
-                color = MaterialTheme.colors.background,
-                modifier = Modifier
-                    .weight(1F)
-                    .padding(start = 16.dp, end = 8.dp),
-            )
-            Text(
-                text = stringResource(id = R.string.appupdater_or),
-            )
-            Divider(
-                color = MaterialTheme.colors.background,
-                modifier = Modifier
-                    .weight(1F)
-                    .padding(start = 8.dp, end = 16.dp),
             )
         }
     }
@@ -197,40 +167,6 @@ private fun DialogHeader(
     }
 }
 
-@Composable
-private fun UpdateInProgressDialog() {
-    Dialog(onDismissRequest = { /* Do nothing */ }) {
-        Card(
-            shape = RoundedCornerShape(12.dp),
-            elevation = 8.dp,
-            backgroundColor = MaterialTheme.colors.surface,
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp, horizontal = 8.dp),
-            ) {
-                Text(
-                    text = stringResource(id = (R.string.appupdater_please_wait)),
-                    style = MaterialTheme.typography.h1,
-                    modifier = Modifier.padding(all = 8.dp),
-                )
-                Text(
-                    text = stringResource(id = (R.string.appupdater_downloading_new_version)),
-                    style = MaterialTheme.typography.body1,
-                    modifier = Modifier.padding(all = 8.dp),
-                )
-                LinearProgressIndicator(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(all = 8.dp),
-                )
-            }
-        }
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 fun LightPreview() {
@@ -251,10 +187,4 @@ fun DarkPreview() {
         storeList = storeList,
         theme = Theme.DARK,
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun UpdateInProgressDialogPreview() {
-    UpdateInProgressDialog()
 }
