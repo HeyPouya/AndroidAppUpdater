@@ -15,35 +15,33 @@ import androidx.compose.ui.unit.dp
 import com.pouyaheydari.appupdater.compose.R
 
 @Composable
-fun DividerComponent(shouldShow: Boolean) {
-    if (shouldShow) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
+fun DividerComponent() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp),
+    ) {
+        Divider(
+            color = MaterialTheme.colors.background,
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp),
-        ) {
-            Divider(
-                color = MaterialTheme.colors.background,
-                modifier = Modifier
-                    .weight(1F)
-                    .padding(start = 16.dp, end = 8.dp),
-            )
-            Text(
-                text = stringResource(id = R.string.appupdater_or),
-            )
-            Divider(
-                color = MaterialTheme.colors.background,
-                modifier = Modifier
-                    .weight(1F)
-                    .padding(start = 8.dp, end = 16.dp),
-            )
-        }
+                .weight(1F)
+                .padding(start = 16.dp, end = 8.dp),
+        )
+        Text(
+            text = stringResource(id = R.string.appupdater_or),
+        )
+        Divider(
+            color = MaterialTheme.colors.background,
+            modifier = Modifier
+                .weight(1F)
+                .padding(start = 8.dp, end = 16.dp),
+        )
     }
 }
 
 @Preview
 @Composable
 private fun Preview() {
-    DividerComponent(shouldShow = true)
+    DividerComponent()
 }

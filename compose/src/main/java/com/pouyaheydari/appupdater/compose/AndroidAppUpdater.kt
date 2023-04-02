@@ -83,7 +83,9 @@ fun DialogContent(
                     DirectDownloadLinkComponent(it, onClickListener, activity)
                 }
             }
-            item(span = { GridItemSpan(maxLineSpan) }) { DividerComponent(shouldShowStoresDivider(storeList)) }
+            if (shouldShowStoresDivider(storeList)) {
+                item(span = { GridItemSpan(maxLineSpan) }) { DividerComponent() }
+            }
             storeList.filter { it.store != Store.DIRECT_URL }.forEach {
                 item { SquareStoreItemComponent(it, onClickListener, activity) }
             }
