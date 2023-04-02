@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class AndroidAppUpdaterViewModel : ViewModel() {
     private var updateInProgressState = mutableStateOf(false)
-    var state: State<Boolean> = updateInProgressState
+    val shouldShowUpdateInProgress: State<Boolean> = updateInProgressState
 
     fun onListListener(item: StoreListItem, activity: Activity?) {
         when (item.store) {
