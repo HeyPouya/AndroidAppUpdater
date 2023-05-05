@@ -16,14 +16,24 @@ import java.util.Locale
  */
 abstract class Stores {
 
+    private var intent: Intent? = null
+    private var item: StoreListItem? = null
+    private var store: Store? = null
+
     /**
      * Sets intent of the store
      */
-    abstract fun setStoreData(context: Context?, item: StoreListItem)
+    abstract fun setStoreData(item: StoreListItem)
 
-    protected fun showStore(context: Context?, intent: Intent, item: StoreListItem, store: Store) {
+    protected fun setData(intent: Intent, item: StoreListItem, store: Store) {
+        this.intent = intent
+        this.store = store
+        this.item = item
+    }
+
+    fun showStore(context: Context?) {
         try {
-            intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
+            intent?.addFlags(FLAG_ACTIVITY_NEW_TASK)
             context?.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
@@ -31,10 +41,10 @@ abstract class Stores {
         }
     }
 
-    private fun openWebViewToShowUrl(context: Context?, item: StoreListItem, store: Store) {
-        if (item.url.isNotEmpty()) {
+    private fun openWebViewToShowUrl(context: Context?, item: StoreListItem?, store: Store?) {
+        if (item?.url.orEmpty().isNotEmpty()) {
             try {
-                val webViewIntent = Intent(Intent.ACTION_VIEW, Uri.parse(item.url)).run {
+                val webViewIntent = Intent(Intent.ACTION_VIEW, Uri.parse(item?.url)).run {
                     addFlags(FLAG_ACTIVITY_NEW_TASK)
                 }
                 context?.startActivity(webViewIntent)
@@ -47,8 +57,8 @@ abstract class Stores {
         }
     }
 
-    private fun showErrorToast(context: Context?, store: Store) {
-        val storeName = store.name.lowercase(Locale.ROOT).replace("_", " ")
+    private fun showErrorToast(context: Context?, store: Store?) {
+        val storeName = store?.name?.lowercase(Locale.ROOT)?.replace("_", " ")
         Toast.makeText(
             context,
             context?.getString(R.string.appupdater_please_install, storeName),

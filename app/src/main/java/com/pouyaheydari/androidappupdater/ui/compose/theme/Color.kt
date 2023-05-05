@@ -1,4 +1,4 @@
-package com.pouyaheydari.androidappupdater.ui.theme
+package com.pouyaheydari.androidappupdater.ui.compose.theme
 
 import androidx.compose.ui.graphics.Color
 

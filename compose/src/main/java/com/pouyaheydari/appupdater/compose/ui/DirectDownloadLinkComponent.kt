@@ -1,6 +1,5 @@
 package com.pouyaheydari.appupdater.compose.ui
 
-import android.app.Activity
 import androidx.compose.foundation.clickable
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -12,13 +11,13 @@ import com.pouyaheydari.appupdater.compose.ui.theme.Blue
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 
 @Composable
-fun DirectDownloadLinkComponent(item: StoreListItem, onClickListener: (StoreListItem, Activity?) -> Unit, activity: Activity?) {
+fun DirectDownloadLinkComponent(item: StoreListItem, onClickListener: (StoreListItem) -> Unit = {}) {
     Text(
         text = item.title,
         textAlign = TextAlign.Center,
         color = Blue,
         style = MaterialTheme.typography.body1,
-        modifier = Modifier.clickable { onClickListener(item, activity) },
+        modifier = Modifier.clickable { onClickListener(item) },
     )
 }
 
@@ -27,7 +26,5 @@ fun DirectDownloadLinkComponent(item: StoreListItem, onClickListener: (StoreList
 private fun Preview() {
     DirectDownloadLinkComponent(
         item = StoreListItem(title = "Direct Link 1"),
-        onClickListener = { _, _ -> },
-        activity = null,
     )
 }

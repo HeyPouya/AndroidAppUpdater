@@ -1,6 +1,5 @@
 package com.pouyaheydari.appupdater.compose.ui
 
-import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -16,9 +15,9 @@ import androidx.compose.ui.unit.dp
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 
 @Composable
-fun SquareStoreItemComponent(item: StoreListItem, onClickListener: (StoreListItem, Activity?) -> Unit, activity: Activity?) {
+fun SquareStoreItemComponent(item: StoreListItem, onClickListener: (StoreListItem) -> Unit = {}) {
     Column(
-        modifier = Modifier.clickable { onClickListener(item, activity) },
+        modifier = Modifier.clickable { onClickListener(item) },
         horizontalAlignment = CenterHorizontally,
     ) {
         Image(painter = painterResource(id = item.icon), contentDescription = null)
@@ -34,5 +33,5 @@ fun SquareStoreItemComponent(item: StoreListItem, onClickListener: (StoreListIte
 @Preview
 @Composable
 private fun Preview() {
-    SquareStoreItemComponent(item = StoreListItem(), onClickListener = { _, _ -> }, activity = null)
+    SquareStoreItemComponent(item = StoreListItem())
 }

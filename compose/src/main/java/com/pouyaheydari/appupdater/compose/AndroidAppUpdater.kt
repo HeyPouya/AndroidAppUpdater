@@ -1,7 +1,7 @@
 package com.pouyaheydari.appupdater.compose
 
-import android.app.Activity
 import android.graphics.Typeface
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -28,9 +29,12 @@ import com.pouyaheydari.appupdater.compose.ui.UpdateInProgressDialogComponent
 import com.pouyaheydari.appupdater.compose.ui.theme.AndroidAppUpdaterTheme
 import com.pouyaheydari.appupdater.compose.utils.getActivity
 import com.pouyaheydari.appupdater.compose.utils.storeList
+import com.pouyaheydari.appupdater.core.pojo.DialogStates
 import com.pouyaheydari.appupdater.core.pojo.Store
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
+import com.pouyaheydari.appupdater.core.utils.TAG
+import com.pouyaheydari.appupdater.core.utils.getApk
 import com.pouyaheydari.appupdater.core.utils.shouldShowStoresDivider
 
 @Composable
@@ -43,13 +47,30 @@ fun AndroidAppUpdater(
     theme: Theme = Theme.LIGHT,
 ) {
     val viewModel: AndroidAppUpdaterViewModel = viewModel()
+    val activity = LocalContext.current.getActivity()
 
     AndroidAppUpdaterTheme(darkTheme = theme == Theme.DARK) {
         Dialog(onDismissRequest = { onDismissRequested() }) {
             DialogContent(dialogTitle, dialogDescription, storeList, typeface, viewModel::onListListener)
         }
-        if (viewModel.shouldShowUpdateInProgress.value) {
-            UpdateInProgressDialogComponent()
+
+        when (val value = viewModel.shouldShowUpdateInProgress.collectAsState().value) {
+            is DialogStates.DownloadApk -> {
+                if (value.apkUrl == null) {
+                    Log.e(TAG, "Download url is null. Skipping downloading the apk")
+                } else if (activity == null) {
+                    Log.e(TAG, "Provided activity is null. Skipping downloading the apk")
+                } else {
+                    getApk(value.apkUrl!!, activity)
+                }
+            }
+
+            DialogStates.HideUpdateInProgress -> {}
+            is DialogStates.OpenStore -> {
+                value.store?.showStore(activity)
+            }
+
+            DialogStates.ShowUpdateInProgress -> UpdateInProgressDialogComponent()
         }
     }
 }
@@ -60,7 +81,7 @@ fun DialogContent(
     dialogDescription: String,
     storeList: List<StoreListItem>,
     typeface: Typeface?,
-    onClickListener: (StoreListItem, Activity?) -> Unit,
+    onClickListener: (StoreListItem) -> Unit,
 ) {
     Card(
         shape = RoundedCornerShape(12.dp),
@@ -70,8 +91,6 @@ fun DialogContent(
             .fillMaxWidth()
             .padding(vertical = 16.dp),
     ) {
-        val activity = LocalContext.current.getActivity()
-
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             verticalArrangement = Arrangement.spacedBy(32.dp),
@@ -80,14 +99,14 @@ fun DialogContent(
             item(span = { GridItemSpan(maxLineSpan) }) { DialogHeaderComponent(dialogTitle, typeface, dialogDescription) }
             storeList.filter { it.store == Store.DIRECT_URL }.forEach {
                 item(span = { GridItemSpan(maxLineSpan) }) {
-                    DirectDownloadLinkComponent(it, onClickListener, activity)
+                    DirectDownloadLinkComponent(it, onClickListener)
                 }
             }
             if (shouldShowStoresDivider(storeList)) {
                 item(span = { GridItemSpan(maxLineSpan) }) { DividerComponent() }
             }
             storeList.filter { it.store != Store.DIRECT_URL }.forEach {
-                item { SquareStoreItemComponent(it, onClickListener, activity) }
+                item { SquareStoreItemComponent(it, onClickListener) }
             }
         }
     }

@@ -1,16 +1,21 @@
-package com.pouyaheydari.androidappupdater
+package com.pouyaheydari.androidappupdater.ui.compose
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Button
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.pouyaheydari.androidappupdater.ui.theme.AndroidAppUpdaterTheme
+import com.pouyaheydari.androidappupdater.ui.compose.theme.AndroidAppUpdaterTheme
 import com.pouyaheydari.androidappupdater.utils.getNormalList
 import com.pouyaheydari.appupdater.compose.AndroidAppUpdater
 import com.pouyaheydari.appupdater.compose.R
@@ -29,6 +34,11 @@ class ComposeSampleActivity : ComponentActivity() {
             AndroidAppUpdaterTheme {
                 var state by remember { mutableStateOf(true) }
 
+                Box(modifier = Modifier.fillMaxSize()) {
+                    Button(onClick = { state = true }) {
+                        Text(text = "Show dialog")
+                    }
+                }
                 if (state) {
                     AndroidAppUpdater(
                         dialogTitle = stringResource(id = R.string.appupdater_app_name),

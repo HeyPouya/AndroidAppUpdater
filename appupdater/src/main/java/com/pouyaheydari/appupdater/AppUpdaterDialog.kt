@@ -2,6 +2,7 @@ package com.pouyaheydari.appupdater
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,19 +15,24 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.pouyaheydari.appupdater.adapters.DirectRecyclerAdapter
 import com.pouyaheydari.appupdater.adapters.StoresRecyclerAdapter
+import com.pouyaheydari.appupdater.core.pojo.DialogStates
 import com.pouyaheydari.appupdater.core.pojo.Store.DIRECT_URL
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
+import com.pouyaheydari.appupdater.core.utils.TAG
+import com.pouyaheydari.appupdater.core.utils.getApk
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.core.utils.shouldShowStoresDivider
 import com.pouyaheydari.appupdater.databinding.FragmentAppUpdaterDialogBinding
 import com.pouyaheydari.appupdater.pojo.UpdaterFragmentModel
 import com.pouyaheydari.appupdater.utils.TypefaceHolder
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 private const val UPDATE_DIALOG_KEY = "UPDATE_DIALOG_KEY"
 private const val UPDATE_DIALOG_TAG = "UPDATE_DIALOG_TAG"
@@ -82,14 +88,23 @@ class AppUpdaterDialog : DialogFragment() {
     }
 
     private fun subscribeToUpdateInProgressDialog(theme: Theme) {
-        lifecycleScope.launchWhenCreated {
-            viewModel.updateInProgressState.asStateFlow().collectLatest {
+        viewModel.updateInProgressState.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+            .distinctUntilChanged()
+            .onEach {
                 when (it) {
-                    true -> showUpdateInProgressDialog(theme)
-                    false -> hideUpdateInProgressDialog()
+                    is DialogStates.DownloadApk -> {
+                        if (it.apkUrl == null) {
+                            Log.e(TAG, "Download url is null. Skipping downloading the apk")
+                        } else {
+                            getApk(it.apkUrl!!, requireActivity())
+                        }
+                    }
+
+                    DialogStates.HideUpdateInProgress -> hideUpdateInProgressDialog()
+                    is DialogStates.OpenStore -> it.store?.showStore(requireContext())
+                    DialogStates.ShowUpdateInProgress -> showUpdateInProgressDialog(theme)
                 }
-            }
-        }
+            }.launchIn(lifecycleScope)
     }
 
     private fun getData() {
@@ -142,11 +157,11 @@ class AppUpdaterDialog : DialogFragment() {
         val storeLinks = list.filterNot { it.store == DIRECT_URL }
 
         if (directLinks.isNotEmpty()) {
-            binding.recyclerDirect.adapter = DirectRecyclerAdapter(directLinks, typeface) { viewModel.onListListener(it, requireActivity()) }
+            binding.recyclerDirect.adapter = DirectRecyclerAdapter(directLinks, typeface) { viewModel.onListListener(it) }
         }
 
         if (storeLinks.isNotEmpty()) {
-            binding.recyclerStores.adapter = StoresRecyclerAdapter(storeLinks, theme, typeface) { viewModel.onListListener(it, requireActivity()) }
+            binding.recyclerStores.adapter = StoresRecyclerAdapter(storeLinks, theme, typeface) { viewModel.onListListener(it) }
         }
     }
 

@@ -28,6 +28,7 @@ internal class UpdateInProgressDialog : DialogFragment() {
         val theme = arguments?.serializable(THEME) ?: Theme.LIGHT
         setDialogBackground(theme)
         setTheme(theme)
+        isCancelable = false
         return binding.root
     }
 

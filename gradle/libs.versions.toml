@@ -4,7 +4,7 @@ compileSdkVersion = "33"
 minSdkVersion = "16"
 composeMinSdkVersion = "21"
 targetSdkVersion = "33"
-agp = "7.4.2"
+agp = "8.0.1"
 kotlin = "1.8.0"
 appcompat = "1.6.1"
 constraintLayout = "2.1.4"
@@ -19,6 +19,7 @@ coroutines = "1.6.4"
 fragment = "1.5.6"
 androidxComposeBom = "2023.03.00"
 composeActivity = "1.7.0"
+androidBuildTools = "33.0.2"
 
 [libraries]
 agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }

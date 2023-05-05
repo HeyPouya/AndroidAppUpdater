@@ -1,35 +1,36 @@
 package com.pouyaheydari.appupdater.compose
 
-import android.app.Activity
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pouyaheydari.appupdater.core.interactors.GetIsUpdateInProgress
+import com.pouyaheydari.appupdater.core.pojo.DialogStates
 import com.pouyaheydari.appupdater.core.pojo.Store
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
-import com.pouyaheydari.appupdater.core.utils.getApk
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class AndroidAppUpdaterViewModel : ViewModel() {
-    private var updateInProgressState = mutableStateOf(false)
-    val shouldShowUpdateInProgress: State<Boolean> = updateInProgressState
+    val shouldShowUpdateInProgress = MutableStateFlow<DialogStates>(DialogStates.HideUpdateInProgress)
 
-    fun onListListener(item: StoreListItem, activity: Activity?) {
+    fun onListListener(item: StoreListItem) {
         when (item.store) {
             Store.DIRECT_URL -> {
                 observeUpdateInProgressStatus()
-                getApk(item.url, activity)
+                shouldShowUpdateInProgress.value = DialogStates.DownloadApk(item.url)
             }
-            else -> item.store.provider?.newInstance()?.setStoreData(activity, item)
+
+            else -> {
+                val store = item.store.provider?.newInstance()?.also { it.setStoreData(item) }
+                shouldShowUpdateInProgress.value = DialogStates.OpenStore(store)
+            }
         }
     }
 
     private fun observeUpdateInProgressStatus() {
         viewModelScope.launch {
             GetIsUpdateInProgress().invoke().collectLatest {
-                updateInProgressState.value = it
+                shouldShowUpdateInProgress.value = if (it) DialogStates.ShowUpdateInProgress else DialogStates.HideUpdateInProgress
             }
         }
     }

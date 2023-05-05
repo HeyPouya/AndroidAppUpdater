@@ -1,4 +1,4 @@
-package com.pouyaheydari.androidappupdater.ui.theme
+package com.pouyaheydari.androidappupdater.ui.compose.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme

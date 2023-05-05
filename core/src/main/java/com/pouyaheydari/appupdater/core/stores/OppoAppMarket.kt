@@ -1,6 +1,5 @@
 package com.pouyaheydari.appupdater.core.stores
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.pouyaheydari.appupdater.core.pojo.Store
@@ -13,10 +12,10 @@ const val OPPO_PACKAGE = "com.heytap.market"
  * Opens application's page in [OppoAppMarket](https://oppomobile.com/)
  */
 class OppoAppMarket : Stores() {
-    override fun setStoreData(context: Context?, item: StoreListItem) {
+    override fun setStoreData(item: StoreListItem) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse("$OPPO_APP_MARKET_URL${item.packageName}")).run {
             setPackage(OPPO_PACKAGE)
         }
-        showStore(context, intent, item, Store.OPPO_APP_MARKET)
+        setData(intent, item, Store.OPPO_APP_MARKET)
     }
 }

@@ -1,10 +1,12 @@
-package com.pouyaheydari.androidappupdater
+package com.pouyaheydari.androidappupdater.ui.android
 
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.pouyaheydari.androidappupdater.R
+import com.pouyaheydari.androidappupdater.ui.compose.ComposeSampleActivity
 import com.pouyaheydari.androidappupdater.utils.getDSLList
 import com.pouyaheydari.androidappupdater.utils.getNormalList
 import com.pouyaheydari.appupdater.AppUpdaterDialog

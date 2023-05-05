@@ -17,9 +17,7 @@ import com.pouyaheydari.appupdater.core.interactors.SetRequestIdInteractor
 /**
  * Checks for needed permissions and tries to download the apk
  */
-fun getApk(url: String, activity: Activity?) {
-    checkNotNull(activity)
-
+fun getApk(url: String, activity: Activity) {
     val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && !activity.packageManager.canRequestPackageInstalls()) {

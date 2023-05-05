@@ -1,6 +1,5 @@
 package com.pouyaheydari.appupdater.core.stores
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.pouyaheydari.appupdater.core.pojo.Store
@@ -13,10 +12,10 @@ const val BAZAAR_PACKAGE = "com.farsitel.bazaar"
  * Opens application's page in [CafeBazaar App Store](https://cafebazaar.ir)
  */
 class CafeBazaarStore : Stores() {
-    override fun setStoreData(context: Context?, item: StoreListItem) {
+    override fun setStoreData(item: StoreListItem) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse("$BAZAAR_URL${item.packageName}")).run {
             setPackage(BAZAAR_PACKAGE)
         }
-        showStore(context, intent, item, Store.CAFE_BAZAAR)
+        setData(intent, item, Store.CAFE_BAZAAR)
     }
 }
