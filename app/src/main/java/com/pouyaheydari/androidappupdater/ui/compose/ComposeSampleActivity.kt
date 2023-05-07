@@ -12,9 +12,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.pouyaheydari.androidappupdater.R
 import com.pouyaheydari.androidappupdater.ui.compose.theme.AndroidAppUpdaterTheme
 import com.pouyaheydari.androidappupdater.utils.getNormalList
 import com.pouyaheydari.appupdater.compose.AndroidAppUpdater
@@ -32,17 +34,17 @@ class ComposeSampleActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AndroidAppUpdaterTheme {
-                var state by remember { mutableStateOf(true) }
+                var state by remember { mutableStateOf(false) }
 
-                Box(modifier = Modifier.fillMaxSize()) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Button(onClick = { state = true }) {
-                        Text(text = "Show dialog")
+                        Text(text = getString(R.string.show_compose_dialog))
                     }
                 }
                 if (state) {
                     AndroidAppUpdater(
                         dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
-                        dialogDescription = stringResource(id = coreR.string.appupdater_download_notification_desc),
+                        dialogDescription = stringResource(id = R.string.library_description),
                         storeList = getNormalList(this),
                         theme = Theme.DARK,
                         onDismissRequested = { state = false },
@@ -59,7 +61,7 @@ fun DefaultPreview() {
     AndroidAppUpdaterTheme {
         AndroidAppUpdater(
             dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
-            dialogDescription = stringResource(id = coreR.string.appupdater_download_notification_desc),
+            dialogDescription = stringResource(id = R.string.library_description),
             storeList = storeList,
             theme = Theme.DARK,
         )
