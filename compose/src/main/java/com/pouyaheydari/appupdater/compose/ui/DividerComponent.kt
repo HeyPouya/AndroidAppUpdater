@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pouyaheydari.appupdater.compose.R
+import com.pouyaheydari.appupdater.core.R as coreR
 
 @Composable
 fun DividerComponent() {
@@ -29,7 +29,7 @@ fun DividerComponent() {
                 .padding(start = 16.dp, end = 8.dp),
         )
         Text(
-            text = stringResource(id = R.string.appupdater_or),
+            text = stringResource(id = coreR.string.appupdater_or),
         )
         Divider(
             color = MaterialTheme.colors.background,

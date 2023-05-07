@@ -18,9 +18,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.pouyaheydari.androidappupdater.ui.compose.theme.AndroidAppUpdaterTheme
 import com.pouyaheydari.androidappupdater.utils.getNormalList
 import com.pouyaheydari.appupdater.compose.AndroidAppUpdater
-import com.pouyaheydari.appupdater.compose.R
 import com.pouyaheydari.appupdater.compose.utils.storeList
 import com.pouyaheydari.appupdater.core.pojo.Theme
+import com.pouyaheydari.appupdater.core.R as coreR
 
 /**
  * To use the library in compose,
@@ -41,8 +41,8 @@ class ComposeSampleActivity : ComponentActivity() {
                 }
                 if (state) {
                     AndroidAppUpdater(
-                        dialogTitle = stringResource(id = R.string.appupdater_app_name),
-                        dialogDescription = stringResource(id = R.string.appupdater_download_notification_desc),
+                        dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
+                        dialogDescription = stringResource(id = coreR.string.appupdater_download_notification_desc),
                         storeList = getNormalList(this),
                         theme = Theme.DARK,
                         onDismissRequested = { state = false },
@@ -58,8 +58,8 @@ class ComposeSampleActivity : ComponentActivity() {
 fun DefaultPreview() {
     AndroidAppUpdaterTheme {
         AndroidAppUpdater(
-            dialogTitle = stringResource(id = R.string.appupdater_app_name),
-            dialogDescription = stringResource(id = R.string.appupdater_download_notification_desc),
+            dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
+            dialogDescription = stringResource(id = coreR.string.appupdater_download_notification_desc),
             storeList = storeList,
             theme = Theme.DARK,
         )

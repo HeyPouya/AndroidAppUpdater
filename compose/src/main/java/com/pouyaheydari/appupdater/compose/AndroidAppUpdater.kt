@@ -36,6 +36,7 @@ import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.core.utils.TAG
 import com.pouyaheydari.appupdater.core.utils.getApk
 import com.pouyaheydari.appupdater.core.utils.shouldShowStoresDivider
+import com.pouyaheydari.appupdater.core.R as coreR
 
 @Composable
 fun AndroidAppUpdater(
@@ -116,8 +117,8 @@ fun DialogContent(
 @Composable
 fun LightPreview() {
     AndroidAppUpdater(
-        dialogTitle = stringResource(id = R.string.appupdater_app_name),
-        dialogDescription = stringResource(id = R.string.appupdater_download_notification_desc),
+        dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
+        dialogDescription = stringResource(id = coreR.string.appupdater_download_notification_desc),
         storeList = storeList,
         theme = Theme.LIGHT,
     )
@@ -127,8 +128,8 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     AndroidAppUpdater(
-        dialogTitle = stringResource(id = R.string.appupdater_app_name),
-        dialogDescription = stringResource(id = R.string.appupdater_download_notification_desc),
+        dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
+        dialogDescription = stringResource(id = coreR.string.appupdater_download_notification_desc),
         storeList = storeList,
         theme = Theme.DARK,
     )

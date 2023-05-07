@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.pouyaheydari.appupdater.R
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.databinding.DownloadStoresItemBinding
+import com.pouyaheydari.appupdater.core.R as coreR
 
 /**
  * Adapter to show stores on dialog page
@@ -40,8 +40,8 @@ internal class StoresRecyclerAdapter(
             val txtStoreTitle = binding.txtStoreTitle
             val imgStore = binding.imgStore
             val textColor = when (theme) {
-                Theme.LIGHT -> R.color.appupdater_text_colors
-                Theme.DARK -> R.color.appupdater_text_colors_dark
+                Theme.LIGHT -> coreR.color.appupdater_text_colors
+                Theme.DARK -> coreR.color.appupdater_text_colors_dark
             }
             txtStoreTitle.setTextColor(ContextCompat.getColor(binding.root.context, textColor))
             txtStoreTitle.text = item.title

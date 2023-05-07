@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.pouyaheydari.appupdater.compose.R
+import com.pouyaheydari.appupdater.core.R as coreR
 
 @Composable
 fun UpdateInProgressDialogComponent() {
@@ -31,12 +31,12 @@ fun UpdateInProgressDialogComponent() {
                     .padding(vertical = 16.dp, horizontal = 8.dp),
             ) {
                 Text(
-                    text = stringResource(id = (R.string.appupdater_please_wait)),
+                    text = stringResource(id = (coreR.string.appupdater_please_wait)),
                     style = MaterialTheme.typography.h1,
                     modifier = Modifier.padding(horizontal = 8.dp),
                 )
                 Text(
-                    text = stringResource(id = (R.string.appupdater_downloading_new_version)),
+                    text = stringResource(id = (coreR.string.appupdater_downloading_new_version)),
                     style = MaterialTheme.typography.body1,
                     modifier = Modifier.padding(all = 8.dp),
                 )

@@ -12,6 +12,7 @@ import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.databinding.FragmentUpdateInProgressDialogBinding
 import com.pouyaheydari.appupdater.utils.TypefaceHolder
+import com.pouyaheydari.appupdater.core.R as coreR
 
 const val THEME = "THEME"
 
@@ -46,8 +47,8 @@ internal class UpdateInProgressDialog : DialogFragment() {
 
     private fun setTheme(data: Theme) {
         val textColor = when (data) {
-            Theme.LIGHT -> R.color.appupdater_text_colors
-            Theme.DARK -> R.color.appupdater_text_colors_dark
+            Theme.LIGHT -> coreR.color.appupdater_text_colors
+            Theme.DARK -> coreR.color.appupdater_text_colors_dark
         }
 
         with(binding) {

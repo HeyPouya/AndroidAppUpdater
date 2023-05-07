@@ -33,6 +33,7 @@ import com.pouyaheydari.appupdater.utils.TypefaceHolder
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import com.pouyaheydari.appupdater.core.R as coreR
 
 private const val UPDATE_DIALOG_KEY = "UPDATE_DIALOG_KEY"
 private const val UPDATE_DIALOG_TAG = "UPDATE_DIALOG_TAG"
@@ -130,8 +131,8 @@ class AppUpdaterDialog : DialogFragment() {
 
     private fun setTheme(theme: Theme) {
         val textColor = when (theme) {
-            Theme.LIGHT -> R.color.appupdater_text_colors
-            Theme.DARK -> R.color.appupdater_text_colors_dark
+            Theme.LIGHT -> coreR.color.appupdater_text_colors
+            Theme.DARK -> coreR.color.appupdater_text_colors_dark
         }
         with(binding) {
             txtTitle.setTextColor(getColor(requireContext(), textColor))

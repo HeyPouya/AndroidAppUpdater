@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pouyaheydari.appupdater.compose.R
+import com.pouyaheydari.appupdater.core.R as coreR
 
 @Composable
 fun DialogHeaderComponent(
@@ -28,7 +28,7 @@ fun DialogHeaderComponent(
 ) {
     Column(horizontalAlignment = CenterHorizontally) {
         Image(
-            painter = painterResource(id = R.drawable.appupdater_ic_cloud),
+            painter = painterResource(id = coreR.drawable.appupdater_ic_cloud),
             contentDescription = null,
             modifier = Modifier
                 .width(100.dp)
@@ -61,8 +61,8 @@ fun DialogHeaderComponent(
 @Composable
 private fun Preview() {
     DialogHeaderComponent(
-        dialogTitle = stringResource(id = R.string.appupdater_app_name),
+        dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
         typeface = null,
-        dialogDescription = stringResource(id = R.string.appupdater_download_notification_desc),
+        dialogDescription = stringResource(id = coreR.string.appupdater_download_notification_desc),
     )
 }
