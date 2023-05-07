@@ -25,7 +25,8 @@ internal class GooglePlayStoreTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        googlePlayStore.setStoreData(appContext, StoreListItem(store = Store.GOOGLE_PLAY, packageName = packageName, url = url))
+        googlePlayStore.setStoreData(StoreListItem(store = Store.GOOGLE_PLAY, packageName = packageName, url = url))
+        googlePlayStore.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasPackage(PLAY_PACKAGE))
         Intents.intended(IntentMatchers.hasData(Uri.parse("$PLAY_URL$packageName")))

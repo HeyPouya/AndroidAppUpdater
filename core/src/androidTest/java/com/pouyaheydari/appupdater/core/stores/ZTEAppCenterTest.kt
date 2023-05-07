@@ -24,7 +24,8 @@ internal class ZTEAppCenterTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        zteAppCenter.setStoreData(appContext, StoreListItem(store = Store.ZTE_APP_CENTER, packageName = packageName, url = url))
+        zteAppCenter.setStoreData(StoreListItem(store = Store.ZTE_APP_CENTER, packageName = packageName, url = url))
+        zteAppCenter.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasData(Uri.parse("$ZTE_APP_CENTER_URL$packageName")))
     }

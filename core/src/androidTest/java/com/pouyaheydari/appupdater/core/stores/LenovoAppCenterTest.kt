@@ -24,7 +24,8 @@ internal class LenovoAppCenterTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        lenovoAppCenter.setStoreData(appContext, StoreListItem(store = Store.LENOVO_APP_CENTER, packageName = packageName, url = url))
+        lenovoAppCenter.setStoreData(StoreListItem(store = Store.LENOVO_APP_CENTER, packageName = packageName, url = url))
+        lenovoAppCenter.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasData(Uri.parse("$LENOVO_APP_CENTER_URL$packageName")))
     }

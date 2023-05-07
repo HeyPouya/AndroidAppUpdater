@@ -24,7 +24,8 @@ internal class OppoAppMarketTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        oppoAppMarket.setStoreData(appContext, StoreListItem(store = Store.OPPO_APP_MARKET, packageName = packageName, url = url))
+        oppoAppMarket.setStoreData(StoreListItem(store = Store.OPPO_APP_MARKET, packageName = packageName, url = url))
+        oppoAppMarket.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasPackage(OPPO_PACKAGE))
         Intents.intended(IntentMatchers.hasData(Uri.parse("$OPPO_APP_MARKET_URL$packageName")))

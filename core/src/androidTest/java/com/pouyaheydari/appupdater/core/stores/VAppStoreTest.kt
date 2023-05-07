@@ -24,7 +24,8 @@ internal class VAppStoreTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        vAppStore.setStoreData(appContext, StoreListItem(store = Store.V_APP_STORE, packageName = packageName, url = url))
+        vAppStore.setStoreData(StoreListItem(store = Store.V_APP_STORE, packageName = packageName, url = url))
+        vAppStore.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasData(Uri.parse("$V_APP_STORE_URL$packageName")))
     }

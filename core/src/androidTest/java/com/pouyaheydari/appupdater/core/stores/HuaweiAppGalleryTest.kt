@@ -24,7 +24,8 @@ internal class HuaweiAppGalleryTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        huaweiAppGallery.setStoreData(appContext, StoreListItem(store = Store.HUAWEI_APP_GALLERY, packageName = packageName, url = url))
+        huaweiAppGallery.setStoreData(StoreListItem(store = Store.HUAWEI_APP_GALLERY, packageName = packageName, url = url))
+        huaweiAppGallery.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasData(Uri.parse("$HUAWEI_APP_GALLERY_URL$packageName")))
         Intents.intended(IntentMatchers.hasPackage(HUAWEI_APP_GALLERY_PACKAGE))

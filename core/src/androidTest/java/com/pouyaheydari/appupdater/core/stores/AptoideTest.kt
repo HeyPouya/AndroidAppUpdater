@@ -24,7 +24,8 @@ internal class AptoideTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        aptoide.setStoreData(appContext, StoreListItem(store = Store.APTOIDE, packageName = packageName, url = url))
+        aptoide.setStoreData(StoreListItem(store = Store.APTOIDE, packageName = packageName, url = url))
+        aptoide.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasData(Uri.parse("$APTOIDE_URL$packageName")))
         Intents.intended(IntentMatchers.hasPackage(APTOIDE_PACKAGE))

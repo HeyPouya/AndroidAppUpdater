@@ -24,7 +24,8 @@ internal class FDroidTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        fDroid.setStoreData(appContext, StoreListItem(store = Store.FDROID, packageName = packageName, url = url))
+        fDroid.setStoreData(StoreListItem(store = Store.FDROID, packageName = packageName, url = url))
+        fDroid.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasData(Uri.parse("$FDROID_URL$packageName")))
         Intents.intended(IntentMatchers.hasPackage(FDROID_PACKAGE))

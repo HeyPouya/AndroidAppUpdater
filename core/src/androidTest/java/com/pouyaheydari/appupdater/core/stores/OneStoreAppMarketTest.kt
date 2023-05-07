@@ -24,7 +24,8 @@ internal class OneStoreAppMarketTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        oneStoreAppMarket.setStoreData(appContext, StoreListItem(store = Store.ONE_STORE_APP_MARKET, packageName = packageName, url = url))
+        oneStoreAppMarket.setStoreData(StoreListItem(store = Store.ONE_STORE_APP_MARKET, packageName = packageName, url = url))
+        oneStoreAppMarket.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasData(Uri.parse("$ONE_STORE_APP_MARKET_URL$packageName")))
     }

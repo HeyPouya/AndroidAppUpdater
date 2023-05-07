@@ -24,7 +24,8 @@ internal class MyketStoreTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        myketStore.setStoreData(appContext, StoreListItem(store = Store.MYKET, packageName = packageName, url = url))
+        myketStore.setStoreData(StoreListItem(store = Store.MYKET, packageName = packageName, url = url))
+        myketStore.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasPackage(MYKET_PACKAGE))
         Intents.intended(IntentMatchers.hasData(Uri.parse("$MYKET_URL$packageName")))

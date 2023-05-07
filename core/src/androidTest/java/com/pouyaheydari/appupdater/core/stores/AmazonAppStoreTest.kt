@@ -24,7 +24,8 @@ class AmazonAppStoreTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        amazonAppStore.setStoreData(appContext, StoreListItem(store = Store.AMAZON_APP_STORE, packageName = packageName, url = url))
+        amazonAppStore.setStoreData(StoreListItem(store = Store.AMAZON_APP_STORE, packageName = packageName, url = url))
+        amazonAppStore.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasPackage(AMAZON_PACKAGE))
         Intents.intended(IntentMatchers.hasData(Uri.parse("$AMAZON_APP_STORE_URL$packageName")))

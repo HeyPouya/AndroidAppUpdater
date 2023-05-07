@@ -1,4 +1,4 @@
-package ir.heydarii.androidappupdater
+package com.pouyaheydari.androidappupdater
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry

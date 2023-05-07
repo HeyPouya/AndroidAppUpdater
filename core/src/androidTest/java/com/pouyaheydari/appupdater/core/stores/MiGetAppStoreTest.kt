@@ -24,7 +24,8 @@ internal class MiGetAppStoreTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        miGetAppStore.setStoreData(appContext, StoreListItem(store = Store.MI_GET_APP_STORE, packageName = packageName, url = url))
+        miGetAppStore.setStoreData(StoreListItem(store = Store.MI_GET_APP_STORE, packageName = packageName, url = url))
+        miGetAppStore.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasData(Uri.parse("$MI_APP_STORE_URL$packageName")))
     }

@@ -24,7 +24,8 @@ internal class CafeBazaarStoreTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        cafeBazaarStore.setStoreData(appContext, StoreListItem(store = Store.CAFE_BAZAAR, packageName = packageName, url = url))
+        cafeBazaarStore.setStoreData(StoreListItem(store = Store.CAFE_BAZAAR, packageName = packageName, url = url))
+        cafeBazaarStore.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasPackage(BAZAAR_PACKAGE))
         Intents.intended(IntentMatchers.hasData(Uri.parse("$BAZAAR_URL$packageName")))

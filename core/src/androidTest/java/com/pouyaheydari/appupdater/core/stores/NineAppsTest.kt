@@ -24,7 +24,8 @@ internal class NineAppsTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        nineApps.setStoreData(appContext, StoreListItem(store = Store.NINE_APPS_STORE, packageName = packageName, url = url))
+        nineApps.setStoreData(StoreListItem(store = Store.NINE_APPS_STORE, packageName = packageName, url = url))
+        nineApps.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasPackage(NINE_APPS_PACKAGE))
         Intents.intended(IntentMatchers.hasData(Uri.parse("$NINE_APPS_STORE_URL$packageName")))

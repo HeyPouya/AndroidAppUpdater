@@ -24,7 +24,8 @@ internal class TencentStoreTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        tencentAppStore.setStoreData(appContext, StoreListItem(store = Store.TENCENT_APPS_STORE, packageName = packageName, url = url))
+        tencentAppStore.setStoreData(StoreListItem(store = Store.TENCENT_APPS_STORE, packageName = packageName, url = url))
+        tencentAppStore.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasData(Uri.parse("$TENCENT_APP_STORE_URL$packageName")))
     }

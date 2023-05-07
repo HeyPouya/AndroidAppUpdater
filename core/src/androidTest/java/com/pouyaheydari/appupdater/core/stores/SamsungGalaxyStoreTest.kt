@@ -24,7 +24,8 @@ internal class SamsungGalaxyStoreTest {
         val packageName = appContext.packageName
         val url = "https://pouyaheydari.com"
 
-        samsungGalaxyStore.setStoreData(appContext, StoreListItem(store = Store.SAMSUNG_GALAXY_STORE, packageName = packageName, url = url))
+        samsungGalaxyStore.setStoreData(StoreListItem(store = Store.SAMSUNG_GALAXY_STORE, packageName = packageName, url = url))
+        samsungGalaxyStore.showStore(appContext)
 
         Intents.intended(IntentMatchers.hasData(Uri.parse("$SAMSUNG_GALAXY_STORE_URL$packageName")))
     }
