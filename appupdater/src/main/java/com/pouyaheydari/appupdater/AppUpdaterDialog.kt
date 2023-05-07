@@ -89,7 +89,7 @@ class AppUpdaterDialog : DialogFragment() {
     }
 
     private fun subscribeToUpdateInProgressDialog(theme: Theme) {
-        viewModel.updateInProgressState.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+        viewModel.screenState.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
             .distinctUntilChanged()
             .onEach {
                 when (it) {

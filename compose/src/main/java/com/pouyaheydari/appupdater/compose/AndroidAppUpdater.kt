@@ -55,7 +55,7 @@ fun AndroidAppUpdater(
             DialogContent(dialogTitle, dialogDescription, storeList, typeface, viewModel::onListListener)
         }
 
-        when (val value = viewModel.shouldShowUpdateInProgress.collectAsState().value) {
+        when (val value = viewModel.screenState.collectAsState().value) {
             is DialogStates.DownloadApk -> {
                 if (value.apkUrl == null) {
                     Log.e(TAG, "Download url is null. Skipping downloading the apk")
