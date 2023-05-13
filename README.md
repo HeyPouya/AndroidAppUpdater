@@ -77,7 +77,7 @@ list.add(
     StoreListItem(
       store = Store.GOOGLE_PLAY,
       title = "Google Play",
-        packageName = "YOUR_APPS_PACKAGE_NAME"
+      packageName = "YOUR_APPS_PACKAGE_NAME"
     )
 )
 ```
