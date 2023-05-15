@@ -6,7 +6,6 @@ plugins {
 
 android {
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
-    buildToolsVersion = libs.versions.androidBuildTools.get()
     defaultConfig {
         minSdk = libs.versions.composeMinSdkVersion.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -25,9 +24,8 @@ android {
     group = "com.github.sirlordpouya.androidappupdater"
     version = libs.versions.appVersion.get()
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true

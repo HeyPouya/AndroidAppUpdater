@@ -5,7 +5,6 @@ plugins {
 
 android {
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
-    buildToolsVersion = libs.versions.androidBuildTools.get()
     defaultConfig {
         applicationId = "com.pouyaheydari.androidappupdater"
         minSdk = libs.versions.composeMinSdkVersion.get().toInt()
@@ -19,9 +18,8 @@ android {
     }
     namespace = "com.pouyaheydari.androidappupdater"
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true

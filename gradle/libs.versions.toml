@@ -19,7 +19,6 @@ coroutines = "1.7.1"
 fragment = "1.5.7"
 androidxComposeBom = "2023.05.01"
 composeActivity = "1.7.1"
-androidBuildTools = "33.0.2"
 
 [libraries]
 agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
