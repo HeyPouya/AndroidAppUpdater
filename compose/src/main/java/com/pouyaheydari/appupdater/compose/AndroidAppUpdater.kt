@@ -57,12 +57,10 @@ fun AndroidAppUpdater(
 
         when (val value = viewModel.screenState.collectAsState().value) {
             is DialogStates.DownloadApk -> {
-                if (value.apkUrl == null) {
-                    Log.e(TAG, "Download url is null. Skipping downloading the apk")
-                } else if (activity == null) {
+                if (activity == null) {
                     Log.e(TAG, "Provided activity is null. Skipping downloading the apk")
                 } else {
-                    getApk(value.apkUrl!!, activity)
+                    getApk(value.apkUrl, activity)
                 }
             }
 

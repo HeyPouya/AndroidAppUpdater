@@ -2,7 +2,6 @@ package com.pouyaheydari.appupdater
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,6 @@ import com.pouyaheydari.appupdater.core.pojo.DialogStates
 import com.pouyaheydari.appupdater.core.pojo.Store.DIRECT_URL
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
-import com.pouyaheydari.appupdater.core.utils.TAG
 import com.pouyaheydari.appupdater.core.utils.getApk
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.core.utils.shouldShowStoresDivider
@@ -94,11 +92,7 @@ class AppUpdaterDialog : DialogFragment() {
             .onEach {
                 when (it) {
                     is DialogStates.DownloadApk -> {
-                        if (it.apkUrl == null) {
-                            Log.e(TAG, "Download url is null. Skipping downloading the apk")
-                        } else {
-                            getApk(it.apkUrl!!, requireActivity())
-                        }
+                        getApk(it.apkUrl, requireActivity())
                     }
 
                     DialogStates.HideUpdateInProgress -> hideUpdateInProgressDialog()
