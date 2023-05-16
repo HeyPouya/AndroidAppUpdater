@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             description = getString(R.string.library_description)
             isForceUpdate = false
             typeface = Typeface.createFromAsset(assets, FONT_PATH)
-            theme = Theme.DARK
+            theme = Theme.SYSTEM_DEFAULT
             storeList = getDSLList(this@MainActivity)
         }.show(supportFragmentManager, TAG)
     }

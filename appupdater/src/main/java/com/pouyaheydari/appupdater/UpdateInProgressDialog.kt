@@ -8,9 +8,11 @@ import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.MATCH_PARE
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.WRAP_CONTENT
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
-import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.databinding.FragmentUpdateInProgressDialogBinding
+import com.pouyaheydari.appupdater.pojo.UserSelectedTheme
+import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.DARK
+import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.LIGHT
 import com.pouyaheydari.appupdater.utils.TypefaceHolder
 import com.pouyaheydari.appupdater.core.R as coreR
 
@@ -26,17 +28,17 @@ internal class UpdateInProgressDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentUpdateInProgressDialogBinding.inflate(inflater, container, false)
-        val theme = arguments?.serializable(THEME) ?: Theme.LIGHT
+        val theme = arguments?.serializable(THEME) ?: LIGHT
         setDialogBackground(theme)
         setTheme(theme)
         isCancelable = false
         return binding.root
     }
 
-    private fun setDialogBackground(data: Theme) {
+    private fun setDialogBackground(data: UserSelectedTheme) {
         val dialogBackground = when (data) {
-            Theme.LIGHT -> R.drawable.dialog_background
-            Theme.DARK -> R.drawable.update_in_progress_dialog_background_dark
+            LIGHT -> R.drawable.dialog_background
+            DARK -> R.drawable.update_in_progress_dialog_background_dark
         }
 
         // Set background for the dialog
@@ -45,10 +47,10 @@ internal class UpdateInProgressDialog : DialogFragment() {
         )
     }
 
-    private fun setTheme(data: Theme) {
+    private fun setTheme(data: UserSelectedTheme) {
         val textColor = when (data) {
-            Theme.LIGHT -> coreR.color.appupdater_text_colors
-            Theme.DARK -> coreR.color.appupdater_text_colors_dark
+            LIGHT -> coreR.color.appupdater_text_colors
+            DARK -> coreR.color.appupdater_text_colors_dark
         }
 
         with(binding) {

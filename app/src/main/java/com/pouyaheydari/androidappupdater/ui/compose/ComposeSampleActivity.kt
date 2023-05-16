@@ -46,7 +46,7 @@ class ComposeSampleActivity : ComponentActivity() {
                         dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
                         dialogDescription = stringResource(id = R.string.library_description),
                         storeList = getNormalList(this),
-                        theme = Theme.LIGHT,
+                        theme = Theme.SYSTEM_DEFAULT,
                         onDismissRequested = { state = false },
                     )
                 }

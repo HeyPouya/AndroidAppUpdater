@@ -26,7 +26,11 @@ import com.pouyaheydari.appupdater.core.utils.getApk
 import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.core.utils.shouldShowStoresDivider
 import com.pouyaheydari.appupdater.databinding.FragmentAppUpdaterDialogBinding
+import com.pouyaheydari.appupdater.mapper.mapToSelectedTheme
 import com.pouyaheydari.appupdater.pojo.UpdaterFragmentModel
+import com.pouyaheydari.appupdater.pojo.UserSelectedTheme
+import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.DARK
+import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.LIGHT
 import com.pouyaheydari.appupdater.utils.TypefaceHolder
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
@@ -57,17 +61,17 @@ class AppUpdaterDialog : DialogFragment() {
         if (data == UpdaterFragmentModel.EMPTY || data.storeLis.isEmpty()) {
             throw IllegalArgumentException("It seems you forgot to add any data to the updater dialog. Add the data as described in $UPDATE_DIALOG_README_URL")
         }
-        setDialogBackground(data.theme)
+        setDialogBackground(mapToSelectedTheme(data.theme, requireContext()))
         isCancelable = data.isForceUpdate
 
         _binding = FragmentAppUpdaterDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    private fun setDialogBackground(theme: Theme) {
+    private fun setDialogBackground(theme: UserSelectedTheme) {
         val dialogBackground = when (theme) {
-            Theme.LIGHT -> R.drawable.dialog_background
-            Theme.DARK -> R.drawable.dialog_background_dark
+            LIGHT -> R.drawable.dialog_background
+            DARK -> R.drawable.dialog_background_dark
         }
         dialog?.window?.setBackgroundDrawable(
             ContextCompat.getDrawable(requireContext(), dialogBackground),
@@ -86,7 +90,7 @@ class AppUpdaterDialog : DialogFragment() {
         getData()
     }
 
-    private fun subscribeToUpdateInProgressDialog(theme: Theme) {
+    private fun subscribeToUpdateInProgressDialog(theme: UserSelectedTheme) {
         viewModel.screenState.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
             .distinctUntilChanged()
             .onEach {
@@ -107,11 +111,12 @@ class AppUpdaterDialog : DialogFragment() {
         val title = data.title
         val description = data.description
         val list = data.storeLis
-        setTheme(data.theme)
+        val theme = mapToSelectedTheme(data.theme, requireContext())
+        setTheme(theme)
         val typeface = TypefaceHolder.getTypeface()
         setTypeface(typeface)
-        setUpProperties(title, description, list, data.theme, typeface)
-        subscribeToUpdateInProgressDialog(data.theme)
+        setUpProperties(title, description, list, theme, typeface)
+        subscribeToUpdateInProgressDialog(theme)
     }
 
     private fun setTypeface(typeface: Typeface?) {
@@ -123,10 +128,10 @@ class AppUpdaterDialog : DialogFragment() {
         }
     }
 
-    private fun setTheme(theme: Theme) {
+    private fun setTheme(theme: UserSelectedTheme) {
         val textColor = when (theme) {
-            Theme.LIGHT -> coreR.color.appupdater_text_colors
-            Theme.DARK -> coreR.color.appupdater_text_colors_dark
+            LIGHT -> coreR.color.appupdater_text_colors
+            DARK -> coreR.color.appupdater_text_colors_dark
         }
         with(binding) {
             txtTitle.setTextColor(getColor(requireContext(), textColor))
@@ -138,7 +143,7 @@ class AppUpdaterDialog : DialogFragment() {
         }
     }
 
-    private fun setUpProperties(title: String?, description: String?, list: List<StoreListItem>, theme: Theme, typeface: Typeface?) {
+    private fun setUpProperties(title: String?, description: String?, list: List<StoreListItem>, theme: UserSelectedTheme, typeface: Typeface?) {
         binding.txtTitle.text = title
         binding.txtDescription.text = description
 
@@ -147,7 +152,7 @@ class AppUpdaterDialog : DialogFragment() {
         setUpBothRecyclers(list, theme, typeface)
     }
 
-    private fun setUpBothRecyclers(list: List<StoreListItem>, theme: Theme, typeface: Typeface?) {
+    private fun setUpBothRecyclers(list: List<StoreListItem>, theme: UserSelectedTheme, typeface: Typeface?) {
         val directLinks = list.filter { it.store == DIRECT_URL }
         val storeLinks = list.filterNot { it.store == DIRECT_URL }
 
@@ -164,7 +169,7 @@ class AppUpdaterDialog : DialogFragment() {
         binding.linearLayout.isVisible = storeAndDirectAvailable
     }
 
-    private fun showUpdateInProgressDialog(theme: Theme) {
+    private fun showUpdateInProgressDialog(theme: UserSelectedTheme) {
         if (parentFragmentManager.findFragmentByTag(UPDATE_DIALOG_TAG) == null && requireActivity().lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
             val fragment = UpdateInProgressDialog()
             val bundle = Bundle()

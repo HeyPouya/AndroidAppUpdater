@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
-import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.databinding.DownloadStoresItemBinding
+import com.pouyaheydari.appupdater.pojo.UserSelectedTheme
+import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.DARK
+import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.LIGHT
 import com.pouyaheydari.appupdater.core.R as coreR
 
 /**
@@ -15,7 +17,7 @@ import com.pouyaheydari.appupdater.core.R as coreR
  */
 internal class StoresRecyclerAdapter(
     private val list: List<StoreListItem>,
-    private val theme: Theme,
+    private val theme: UserSelectedTheme,
     private val typeface: Typeface?,
     private val listener: (StoreListItem) -> Unit,
 ) : RecyclerView.Adapter<StoresRecyclerAdapter.SoresViewHolder>() {
@@ -40,8 +42,8 @@ internal class StoresRecyclerAdapter(
             val txtStoreTitle = binding.txtStoreTitle
             val imgStore = binding.imgStore
             val textColor = when (theme) {
-                Theme.LIGHT -> coreR.color.appupdater_text_colors
-                Theme.DARK -> coreR.color.appupdater_text_colors_dark
+                LIGHT -> coreR.color.appupdater_text_colors
+                DARK -> coreR.color.appupdater_text_colors_dark
             }
             txtStoreTitle.setTextColor(ContextCompat.getColor(binding.root.context, textColor))
             txtStoreTitle.text = item.title

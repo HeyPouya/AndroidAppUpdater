@@ -29,6 +29,7 @@ import com.pouyaheydari.appupdater.compose.ui.SquareStoreItemComponent
 import com.pouyaheydari.appupdater.compose.ui.UpdateInProgressDialogComponent
 import com.pouyaheydari.appupdater.compose.ui.theme.AndroidAppUpdaterTheme
 import com.pouyaheydari.appupdater.compose.utils.getActivity
+import com.pouyaheydari.appupdater.compose.utils.isDarkThemeSelected
 import com.pouyaheydari.appupdater.compose.utils.storeList
 import com.pouyaheydari.appupdater.core.pojo.DialogStates
 import com.pouyaheydari.appupdater.core.pojo.Store
@@ -46,12 +47,12 @@ fun AndroidAppUpdater(
     storeList: List<StoreListItem> = listOf(),
     onDismissRequested: () -> Unit = {},
     typeface: Typeface? = null,
-    theme: Theme = Theme.LIGHT,
+    theme: Theme = Theme.SYSTEM_DEFAULT,
 ) {
     val viewModel: AndroidAppUpdaterViewModel = viewModel()
     val activity = LocalContext.current.getActivity()
 
-    AndroidAppUpdaterTheme(darkTheme = theme == Theme.DARK) {
+    AndroidAppUpdaterTheme(darkTheme = isDarkThemeSelected(theme)) {
         Dialog(onDismissRequest = { onDismissRequested() }) {
             DialogContent(dialogTitle, dialogDescription, storeList, typeface, viewModel::onListListener)
         }
