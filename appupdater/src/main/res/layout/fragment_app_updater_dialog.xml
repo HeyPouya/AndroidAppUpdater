@@ -19,7 +19,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="16dp"
-                android:contentDescription="@string/appupdater_update_icon"
+                android:importantForAccessibility="no"
                 android:src="@drawable/appupdater_ic_cloud"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -8,5 +8,4 @@
     <string name="appupdater_or">or</string>
     <string name="appupdater_download_from_store">Download from store</string>
     <string name="appupdater_couldnt_find_downloaded_file">Couldn\'t find downloaded file.</string>
-    <string name="appupdater_update_icon">update icon</string>
 </resources>

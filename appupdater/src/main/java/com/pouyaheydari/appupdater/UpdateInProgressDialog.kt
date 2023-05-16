@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.MATCH_PARENT
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.WRAP_CONTENT
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
@@ -14,6 +13,7 @@ import com.pouyaheydari.appupdater.pojo.UserSelectedTheme
 import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.DARK
 import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.LIGHT
 import com.pouyaheydari.appupdater.utils.TypefaceHolder
+import com.pouyaheydari.appupdater.utils.getDialogWidth
 import com.pouyaheydari.appupdater.core.R as coreR
 
 const val THEME = "THEME"
@@ -76,8 +76,7 @@ internal class UpdateInProgressDialog : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        // making width of dialog to match_parent
-        dialog?.window?.setLayout(MATCH_PARENT, WRAP_CONTENT)
+        dialog?.window?.setLayout(getDialogWidth(), WRAP_CONTENT)
     }
 
     override fun onDestroyView() {
