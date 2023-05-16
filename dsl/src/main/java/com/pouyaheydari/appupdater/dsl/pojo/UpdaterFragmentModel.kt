@@ -14,5 +14,5 @@ data class UpdaterFragmentModel(
     var storeList: List<StoreListItem> = listOf(),
     var isForceUpdate: Boolean = false,
     var typeface: Typeface? = null,
-    var theme: Theme = Theme.LIGHT,
+    var theme: Theme = Theme.SYSTEM_DEFAULT,
 ) : Serializable

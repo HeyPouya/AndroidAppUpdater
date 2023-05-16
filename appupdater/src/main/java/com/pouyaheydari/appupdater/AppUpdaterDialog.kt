@@ -208,7 +208,7 @@ class AppUpdaterDialog : DialogFragment() {
             storeList: List<StoreListItem>,
             isForce: Boolean = false,
             typeface: Typeface? = null,
-            theme: Theme = Theme.LIGHT,
+            theme: Theme = Theme.SYSTEM_DEFAULT,
         ): AppUpdaterDialog {
             val fragment = AppUpdaterDialog()
 

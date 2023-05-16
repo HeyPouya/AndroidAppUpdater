@@ -12,7 +12,7 @@ data class UpdaterFragmentModel(
     var description: String = "",
     var storeLis: List<StoreListItem> = listOf(),
     var isForceUpdate: Boolean = false,
-    var theme: Theme = Theme.LIGHT,
+    var theme: Theme = Theme.SYSTEM_DEFAULT,
 ) : Serializable {
 
     companion object {
