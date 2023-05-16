@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -37,8 +37,8 @@ fun DialogHeaderComponent(
         Text(
             textAlign = TextAlign.Center,
             text = dialogTitle,
-            color = MaterialTheme.colors.onSurface,
-            style = MaterialTheme.typography.h1,
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.titleLarge,
             fontFamily = typeface?.let { FontFamily(it) },
             modifier = Modifier
                 .fillMaxWidth()
@@ -47,8 +47,8 @@ fun DialogHeaderComponent(
         Text(
             textAlign = TextAlign.Center,
             text = dialogDescription,
-            color = MaterialTheme.colors.onSurface,
-            style = MaterialTheme.typography.body2,
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.bodyMedium,
             fontFamily = typeface?.let { FontFamily(it) },
             modifier = Modifier
                 .fillMaxWidth()

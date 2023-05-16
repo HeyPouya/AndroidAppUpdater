@@ -4,10 +4,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -21,8 +22,8 @@ fun UpdateInProgressDialogComponent() {
     Dialog(onDismissRequest = { /* Do nothing */ }) {
         Card(
             shape = RoundedCornerShape(12.dp),
-            elevation = 8.dp,
-            backgroundColor = MaterialTheme.colors.surface,
+            elevation = CardDefaults.cardElevation(8.dp),
+            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
             modifier = Modifier.fillMaxWidth(),
         ) {
             Column(
@@ -32,12 +33,12 @@ fun UpdateInProgressDialogComponent() {
             ) {
                 Text(
                     text = stringResource(id = (coreR.string.appupdater_please_wait)),
-                    style = MaterialTheme.typography.h1,
+                    style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(horizontal = 8.dp),
                 )
                 Text(
                     text = stringResource(id = (coreR.string.appupdater_downloading_new_version)),
-                    style = MaterialTheme.typography.body1,
+                    style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(all = 8.dp),
                 )
                 LinearProgressIndicator(

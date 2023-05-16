@@ -1,8 +1,8 @@
 package com.pouyaheydari.appupdater.compose.ui
 
 import androidx.compose.foundation.clickable
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -16,7 +16,7 @@ fun DirectDownloadLinkComponent(item: StoreListItem, onClickListener: (StoreList
         text = item.title,
         textAlign = TextAlign.Center,
         color = Blue,
-        style = MaterialTheme.typography.body1,
+        style = MaterialTheme.typography.bodyLarge,
         modifier = Modifier.clickable { onClickListener(item) },
     )
 }

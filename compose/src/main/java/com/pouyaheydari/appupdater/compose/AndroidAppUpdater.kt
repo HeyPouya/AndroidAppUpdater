@@ -10,8 +10,9 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -84,8 +85,8 @@ fun DialogContent(
 ) {
     Card(
         shape = RoundedCornerShape(12.dp),
-        elevation = 8.dp,
-        backgroundColor = MaterialTheme.colors.surface,
+        elevation = CardDefaults.cardElevation(8.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 16.dp),
@@ -113,7 +114,7 @@ fun DialogContent(
 
 @Preview(showBackground = true)
 @Composable
-fun LightPreview() {
+private fun LightPreview() {
     AndroidAppUpdater(
         dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
         dialogDescription = stringResource(id = coreR.string.appupdater_download_notification_desc),
@@ -124,7 +125,7 @@ fun LightPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun DarkPreview() {
+private fun DarkPreview() {
     AndroidAppUpdater(
         dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
         dialogDescription = stringResource(id = coreR.string.appupdater_download_notification_desc),

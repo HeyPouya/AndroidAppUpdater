@@ -5,8 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,7 +46,7 @@ class ComposeSampleActivity : ComponentActivity() {
                         dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
                         dialogDescription = stringResource(id = R.string.library_description),
                         storeList = getNormalList(this),
-                        theme = Theme.DARK,
+                        theme = Theme.LIGHT,
                         onDismissRequested = { state = false },
                     )
                 }
@@ -57,7 +57,7 @@ class ComposeSampleActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+private fun DefaultPreview() {
     AndroidAppUpdaterTheme {
         AndroidAppUpdater(
             dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
