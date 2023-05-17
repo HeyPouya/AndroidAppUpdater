@@ -26,7 +26,7 @@ android {
 
 dependencies {
 
-    implementation(project(":core"))
+    api(project(":core"))
     // support dependency
     implementation(libs.appcompat)
     implementation(libs.constraintLayout)
