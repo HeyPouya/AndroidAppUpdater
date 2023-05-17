@@ -23,7 +23,7 @@ android {
 
 dependencies {
     // library dependency
-    implementation(project(":core"))
+    api(project(":core"))
     implementation(project(":appupdater"))
 
     // testing dependency
