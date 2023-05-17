@@ -2,7 +2,7 @@ name: Android CI
 
 on:
     push:
-        branches: [ "master" ]
+        branches: [ "feature/add-test-and-build-on-push-ci" ]
     pull_request:
         branches: [ "master" ]
 
