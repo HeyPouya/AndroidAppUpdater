@@ -45,12 +45,10 @@ afterEvaluate {
     publishing {
         publications {
             register<MavenPublication>("release") {
+                from(components["release"])
                 groupId = "com.pouyaheydari.updater"
                 artifactId = "main"
                 version = libs.versions.appVersion.get()
-                afterEvaluate {
-                    from(components["release"])
-                }
             }
         }
     }
