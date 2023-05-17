@@ -20,8 +20,6 @@ android {
         }
     }
     namespace = "com.pouyaheydari.appupdater.core"
-    group = "com.github.sirlordpouya.androidappupdater"
-    version = libs.versions.appVersion.get()
 }
 dependencies {
 
@@ -35,14 +33,17 @@ dependencies {
     androidTestImplementation(libs.androidTestEspresso)
     androidTestImplementation(libs.espresso.intents)
 }
-publishing {
-    publications {
-        register<MavenPublication>("release") {
-            groupId = "com.pouyaheydari.updater"
-            artifactId = "core"
-            version = libs.versions.appVersion.get()
-            afterEvaluate {
-                from(components["release"])
+
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                groupId = "com.pouyaheydari.updater"
+                artifactId = "core"
+                version = libs.versions.appVersion.get()
+                afterEvaluate {
+                    from(components["release"])
+                }
             }
         }
     }
