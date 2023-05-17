@@ -21,8 +21,6 @@ android {
         }
     }
     namespace = "com.pouyaheydari.appupdater.compose"
-    group = "com.github.sirlordpouya.androidappupdater"
-    version = libs.versions.appVersion.get()
 
     kotlinOptions {
         jvmTarget = "1.8"
@@ -60,14 +58,16 @@ dependencies {
     androidTestImplementation(composeBom)
 }
 
-publishing {
-    publications {
-        register<MavenPublication>("release") {
-            groupId = "com.pouyaheydari.updater"
-            artifactId = "compose"
-            version = libs.versions.appVersion.get()
-            afterEvaluate {
-                from(components["release"])
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                groupId = "com.pouyaheydari.updater"
+                artifactId = "compose"
+                version = libs.versions.appVersion.get()
+                afterEvaluate {
+                    from(components["release"])
+                }
             }
         }
     }
