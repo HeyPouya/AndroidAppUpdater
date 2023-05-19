@@ -29,7 +29,7 @@ import com.pouyaheydari.appupdater.core.R as coreR
  * you only need to add dependencies to:
  * core and compose
  */
-class ComposeSampleActivity : ComponentActivity() {
+internal class ComposeSampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

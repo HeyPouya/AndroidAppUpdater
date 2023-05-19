@@ -6,7 +6,10 @@ import com.pouyaheydari.appupdater.core.pojo.Store
 import com.pouyaheydari.appupdater.dsl.store
 import com.pouyaheydari.appupdater.core.R as coreR
 
-fun getDSLList(context: Context) = listOf(
+/**
+ * @return A list of [com.pouyaheydari.appupdater.core.pojo.StoreListItem] to be used in the dsl sample code
+ */
+internal fun getDSLList(context: Context) = listOf(
     store {
         store = Store.DIRECT_URL
         title = context.getString(R.string.direct_download, "1")

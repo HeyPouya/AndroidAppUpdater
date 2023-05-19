@@ -6,7 +6,10 @@ import com.pouyaheydari.appupdater.core.pojo.Store
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.R as coreR
 
-fun getNormalList(context: Context) = listOf(
+/**
+ * @return A list of [com.pouyaheydari.appupdater.core.pojo.StoreListItem] to be used in the compose and fragment sample codes
+ */
+internal fun getNormalList(context: Context) = listOf(
     // direct download
     StoreListItem(
         store = Store.DIRECT_URL,
