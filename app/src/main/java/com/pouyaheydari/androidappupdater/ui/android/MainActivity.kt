@@ -19,7 +19,7 @@ private const val FONT_PATH = "fonts/vazir.ttf"
 /**
  * Main activity of the sample application
  */
-class MainActivity : AppCompatActivity() {
+internal class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
