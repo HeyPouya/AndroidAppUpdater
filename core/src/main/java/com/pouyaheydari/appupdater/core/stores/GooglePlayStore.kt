@@ -11,7 +11,7 @@ const val PLAY_PACKAGE = "com.android.vending"
 /**
  * Opens application's page in [GooglePlay Store](https://play.google.com)
  */
-class GooglePlayStore() : Stores() {
+class GooglePlayStore : Stores() {
 
     override fun setStoreData(item: StoreListItem) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse("$PLAY_URL${item.packageName}")).run {

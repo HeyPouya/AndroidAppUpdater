@@ -2,7 +2,10 @@ package com.pouyaheydari.appupdater.core.data
 
 import kotlinx.coroutines.flow.MutableSharedFlow
 
-object Repository {
+/**
+ * Repository to store and publish the status of downloading the APK.
+ */
+internal object Repository {
 
     var requestId = -10L
 

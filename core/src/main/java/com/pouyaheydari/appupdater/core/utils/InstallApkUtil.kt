@@ -12,7 +12,7 @@ import java.io.File
 /**
  * Uses different methods to install the apk depending the user's Android version
  */
-fun installAPK(context: Context, apk: File, androidVersion: Int) {
+internal fun installAPK(context: Context, apk: File, androidVersion: Int) {
     when {
         androidVersion in 0..Build.VERSION_CODES.M -> installAPKForMAndBellow(context, apk)
         androidVersion in Build.VERSION_CODES.N..Build.VERSION_CODES.O -> installAPKForNtoO(context, apk)

@@ -5,4 +5,4 @@ import androidx.core.content.FileProvider
 /**
  * To accessing the downloaded APK
  */
-class GenericFileProvider : FileProvider()
+internal class GenericFileProvider : FileProvider()
