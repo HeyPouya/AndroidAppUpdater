@@ -16,7 +16,7 @@ import com.pouyaheydari.appupdater.core.utils.installAPK
 /**
  * Receives when download is finished and opens the install dialog
  */
-class DownloadFinishedReceiver : BroadcastReceiver() {
+internal class DownloadFinishedReceiver : BroadcastReceiver() {
 
     /**
      * To show install page when apk got downloaded successfully
