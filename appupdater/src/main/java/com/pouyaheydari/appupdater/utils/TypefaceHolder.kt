@@ -2,15 +2,12 @@ package com.pouyaheydari.appupdater.utils
 
 import android.graphics.Typeface
 
-object TypefaceHolder {
+/**
+ * Holds an instance of [Typeface] to be used in dialogs while being shown.
+ */
+internal object TypefaceHolder {
 
-    private var typeface: Typeface? = null
-
-    fun getTypeface() = typeface
-
-    fun setTypeface(typeface: Typeface?) {
-        TypefaceHolder.typeface = typeface
-    }
+    var typeface: Typeface? = null
 
     fun clear() {
         typeface = null

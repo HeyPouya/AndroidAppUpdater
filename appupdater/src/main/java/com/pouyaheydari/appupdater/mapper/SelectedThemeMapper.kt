@@ -14,7 +14,7 @@ import com.pouyaheydari.appupdater.pojo.UserSelectedTheme
  * @param theme Selected theme by the user
  * @param context Android context to get the system theme
  */
-fun mapToSelectedTheme(theme: Theme, context: Context): UserSelectedTheme = when (theme) {
+internal fun mapToSelectedTheme(theme: Theme, context: Context): UserSelectedTheme = when (theme) {
     LIGHT -> UserSelectedTheme.LIGHT
     DARK -> UserSelectedTheme.DARK
     SYSTEM_DEFAULT -> if (context.isSystemInDarkMode()) UserSelectedTheme.DARK else UserSelectedTheme.LIGHT
