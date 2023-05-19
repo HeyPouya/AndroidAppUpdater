@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.WRAP_CONTENT
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
-import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.databinding.FragmentUpdateInProgressDialogBinding
 import com.pouyaheydari.appupdater.pojo.UserSelectedTheme
 import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.DARK
 import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.LIGHT
 import com.pouyaheydari.appupdater.utils.TypefaceHolder
 import com.pouyaheydari.appupdater.utils.getDialogWidth
+import com.pouyaheydari.appupdater.utils.serializable
 import com.pouyaheydari.appupdater.core.R as coreR
 
 const val THEME = "THEME"
@@ -65,7 +65,7 @@ internal class UpdateInProgressDialog : DialogFragment() {
     }
 
     private fun setTypeface() {
-        val typeface = TypefaceHolder.getTypeface()
+        val typeface = TypefaceHolder.typeface
         with(binding) {
             typeface?.let {
                 txtTitle.typeface = it

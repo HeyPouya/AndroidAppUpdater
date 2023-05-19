@@ -22,7 +22,6 @@ import com.pouyaheydari.appupdater.core.pojo.Store.DIRECT_URL
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.core.utils.getApk
-import com.pouyaheydari.appupdater.core.utils.serializable
 import com.pouyaheydari.appupdater.core.utils.shouldShowStoresDivider
 import com.pouyaheydari.appupdater.databinding.FragmentAppUpdaterDialogBinding
 import com.pouyaheydari.appupdater.mapper.mapToSelectedTheme
@@ -32,6 +31,7 @@ import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.DARK
 import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.LIGHT
 import com.pouyaheydari.appupdater.utils.TypefaceHolder
 import com.pouyaheydari.appupdater.utils.getDialogWidth
+import com.pouyaheydari.appupdater.utils.serializable
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -113,7 +113,7 @@ class AppUpdaterDialog : DialogFragment() {
         val list = data.storeLis
         val theme = mapToSelectedTheme(data.theme, requireContext())
         setTheme(theme)
-        val typeface = TypefaceHolder.getTypeface()
+        val typeface = TypefaceHolder.typeface
         setTypeface(typeface)
         setUpProperties(title, description, list, theme, typeface)
         subscribeToUpdateInProgressDialog(theme)
@@ -212,7 +212,7 @@ class AppUpdaterDialog : DialogFragment() {
         ): AppUpdaterDialog {
             val fragment = AppUpdaterDialog()
 
-            TypefaceHolder.setTypeface(typeface)
+            TypefaceHolder.typeface = typeface
             // bundle to add data to our dialog
             val bundle = Bundle()
             val data = UpdaterFragmentModel(title, description, storeList, !isForce, theme)
