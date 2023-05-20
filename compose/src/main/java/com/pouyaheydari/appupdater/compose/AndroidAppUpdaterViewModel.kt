@@ -11,7 +11,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class AndroidAppUpdaterViewModel : ViewModel() {
+/**
+ * View Model of [AndroidAppUpdater]
+ */
+internal class AndroidAppUpdaterViewModel : ViewModel() {
     val screenState = MutableStateFlow<DialogStates>(DialogStates.HideUpdateInProgress)
 
     fun onListListener(item: StoreListItem) {

@@ -20,11 +20,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pouyaheydari.appupdater.core.R as coreR
 
+/**
+ * Shows header icon, title and description
+ *
+ * @param dialogTitle Title of dialog
+ * @param dialogDescription a brief description about the update dialog
+ * @param typeface for texts
+ */
 @Composable
-fun DialogHeaderComponent(
+internal fun DialogHeaderComponent(
     dialogTitle: String,
-    typeface: Typeface?,
     dialogDescription: String,
+    typeface: Typeface?,
 ) {
     Column(horizontalAlignment = CenterHorizontally) {
         Image(

@@ -17,8 +17,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.pouyaheydari.appupdater.core.R as coreR
 
+/**
+ * Update in progress dialog is not dismissible by the user.
+ */
 @Composable
-fun UpdateInProgressDialogComponent() {
+internal fun UpdateInProgressDialogComponent() {
     Dialog(onDismissRequest = { /* Do nothing */ }) {
         Card(
             shape = RoundedCornerShape(12.dp),
