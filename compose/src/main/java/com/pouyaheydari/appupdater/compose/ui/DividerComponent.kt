@@ -14,8 +14,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pouyaheydari.appupdater.core.R as coreR
 
+/**
+ * Shows a divider between direct download links and stores
+ */
 @Composable
-fun DividerComponent() {
+internal fun DividerComponent() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier

@@ -8,7 +8,7 @@ import com.pouyaheydari.appupdater.core.pojo.Theme
  * Returns if the dialog should be shown in dark mode based on the user selected [theme]
  */
 @Composable
-fun isDarkThemeSelected(theme: Theme): Boolean = when (theme) {
+internal fun isDarkThemeSelected(theme: Theme): Boolean = when (theme) {
     Theme.DARK -> true
     Theme.LIGHT -> false
     Theme.SYSTEM_DEFAULT -> isSystemInDarkTheme()

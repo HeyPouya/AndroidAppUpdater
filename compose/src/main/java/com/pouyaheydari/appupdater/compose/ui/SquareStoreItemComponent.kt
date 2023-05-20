@@ -14,8 +14,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 
+/**
+ * Shows stores in a square shape
+ *
+ * @param item of type [StoreListItem] to show the title and return it in onClick event
+ * @param onClickListener informs parent about selected item
+ */
 @Composable
-fun SquareStoreItemComponent(item: StoreListItem, onClickListener: (StoreListItem) -> Unit = {}) {
+internal fun SquareStoreItemComponent(
+    item: StoreListItem,
+    onClickListener: (StoreListItem) -> Unit = {},
+) {
     Column(
         modifier = Modifier.clickable { onClickListener(item) },
         horizontalAlignment = CenterHorizontally,
@@ -33,5 +42,5 @@ fun SquareStoreItemComponent(item: StoreListItem, onClickListener: (StoreListIte
 @Preview
 @Composable
 private fun Preview() {
-    SquareStoreItemComponent(item = StoreListItem())
+    SquareStoreItemComponent(item = StoreListItem(icon = com.pouyaheydari.appupdater.core.R.drawable.appupdater_ic_google_play))
 }

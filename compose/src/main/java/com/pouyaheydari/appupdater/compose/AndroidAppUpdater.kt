@@ -77,7 +77,7 @@ fun AndroidAppUpdater(
 }
 
 @Composable
-fun DialogContent(
+private fun DialogContent(
     dialogTitle: String,
     dialogDescription: String,
     storeList: List<StoreListItem>,
@@ -97,7 +97,7 @@ fun DialogContent(
             verticalArrangement = Arrangement.spacedBy(32.dp),
             contentPadding = PaddingValues(vertical = 16.dp),
         ) {
-            item(span = { GridItemSpan(maxLineSpan) }) { DialogHeaderComponent(dialogTitle, typeface, dialogDescription) }
+            item(span = { GridItemSpan(maxLineSpan) }) { DialogHeaderComponent(dialogTitle, dialogDescription, typeface) }
             storeList.filter { it.store == Store.DIRECT_URL }.forEach {
                 item(span = { GridItemSpan(maxLineSpan) }) {
                     DirectDownloadLinkComponent(it, onClickListener)
