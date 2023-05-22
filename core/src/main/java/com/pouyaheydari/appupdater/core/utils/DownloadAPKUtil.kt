@@ -46,9 +46,6 @@ private fun showUpdateInProgress() {
     SetIsUpdateInProgress().invoke(true)
 }
 
-/**
- * Downloads the given file via download manager
- */
 private fun downloadNewApk(url: String, context: Context) {
     val downloadManager = DownloadManager.Request(Uri.parse(url)).run {
         // setting title and description to be shown on download notification
