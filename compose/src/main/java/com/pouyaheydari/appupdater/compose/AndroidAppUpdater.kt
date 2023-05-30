@@ -54,7 +54,17 @@ fun AndroidAppUpdater(
 
     AndroidAppUpdaterTheme(darkTheme = isDarkThemeSelected(theme)) {
         Dialog(onDismissRequest = { onDismissRequested() }) {
-            DialogContent(dialogTitle, dialogDescription, storeList, typeface, viewModel::onListListener)
+            val (directDownloadItems, storeItems) = storeList.partition { it.store == Store.DIRECT_URL }
+
+            DialogContent(
+                dialogTitle = dialogTitle,
+                dialogDescription = dialogDescription,
+                directDownloadList = directDownloadItems,
+                storeList = storeItems,
+                typeface = typeface,
+                onClickListener = viewModel::onListListener,
+                shouldShowDividers = shouldShowStoresDivider(directDownloadItems, storeItems),
+            )
         }
 
         when (val value = viewModel.screenState.collectAsState().value) {
@@ -80,9 +90,11 @@ fun AndroidAppUpdater(
 private fun DialogContent(
     dialogTitle: String,
     dialogDescription: String,
+    directDownloadList: List<StoreListItem>,
     storeList: List<StoreListItem>,
     typeface: Typeface?,
     onClickListener: (StoreListItem) -> Unit,
+    shouldShowDividers: Boolean,
 ) {
     Card(
         shape = RoundedCornerShape(12.dp),
@@ -98,16 +110,17 @@ private fun DialogContent(
             contentPadding = PaddingValues(vertical = 16.dp),
         ) {
             item(span = { GridItemSpan(maxLineSpan) }) { DialogHeaderComponent(dialogTitle, dialogDescription, typeface) }
-            storeList.filter { it.store == Store.DIRECT_URL }.forEach {
+            directDownloadList.forEach {
                 item(span = { GridItemSpan(maxLineSpan) }) {
                     DirectDownloadLinkComponent(it, onClickListener)
                 }
             }
-            if (shouldShowStoresDivider(storeList)) {
+            if (shouldShowDividers) {
                 item(span = { GridItemSpan(maxLineSpan) }) { DividerComponent() }
             }
-            storeList.filter { it.store != Store.DIRECT_URL }.forEach {
-                item { SquareStoreItemComponent(it, onClickListener) }
+
+            storeList.forEach {
+                item(span = { if (storeList.size > 1) GridItemSpan(1) else GridItemSpan(maxLineSpan) }) { SquareStoreItemComponent(it, onClickListener) }
             }
         }
     }
@@ -120,6 +133,28 @@ private fun LightPreview() {
         dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
         dialogDescription = stringResource(id = coreR.string.appupdater_download_notification_desc),
         storeList = storeList,
+        theme = Theme.LIGHT,
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun LightPreviewSingleStoreItem() {
+    AndroidAppUpdater(
+        dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
+        dialogDescription = stringResource(id = coreR.string.appupdater_download_notification_desc),
+        storeList = storeList.subList(2, 3),
+        theme = Theme.LIGHT,
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun LightPreviewSingleDirectLinkItem() {
+    AndroidAppUpdater(
+        dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
+        dialogDescription = stringResource(id = coreR.string.appupdater_download_notification_desc),
+        storeList = storeList.subList(0, 1),
         theme = Theme.LIGHT,
     )
 }

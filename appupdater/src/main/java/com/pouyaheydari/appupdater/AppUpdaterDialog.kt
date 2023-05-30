@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.pouyaheydari.appupdater.adapters.DirectRecyclerAdapter
 import com.pouyaheydari.appupdater.adapters.StoresRecyclerAdapter
 import com.pouyaheydari.appupdater.core.pojo.DialogStates
@@ -147,21 +148,23 @@ class AppUpdaterDialog : DialogFragment() {
         binding.txtTitle.text = title
         binding.txtDescription.text = description
 
-        hideOrLayoutIfNeeded(shouldShowStoresDivider(list))
+        val directLinks = list.filter { it.store == DIRECT_URL }
+        val storeList = list.filterNot { it.store == DIRECT_URL }
 
-        setUpBothRecyclers(list, theme, typeface)
+        hideOrLayoutIfNeeded(shouldShowStoresDivider(directLinks, storeList))
+
+        setUpBothRecyclers(directLinks, storeList, theme, typeface)
     }
 
-    private fun setUpBothRecyclers(list: List<StoreListItem>, theme: UserSelectedTheme, typeface: Typeface?) {
-        val directLinks = list.filter { it.store == DIRECT_URL }
-        val storeLinks = list.filterNot { it.store == DIRECT_URL }
-
-        if (directLinks.isNotEmpty()) {
-            binding.recyclerDirect.adapter = DirectRecyclerAdapter(directLinks, typeface) { viewModel.onListListener(it) }
+    private fun setUpBothRecyclers(directDownloadList: List<StoreListItem>, storeList: List<StoreListItem>, theme: UserSelectedTheme, typeface: Typeface?) {
+        if (directDownloadList.isNotEmpty()) {
+            binding.recyclerDirect.adapter = DirectRecyclerAdapter(directDownloadList, typeface) { viewModel.onListListener(it) }
         }
 
-        if (storeLinks.isNotEmpty()) {
-            binding.recyclerStores.adapter = StoresRecyclerAdapter(storeLinks, theme, typeface) { viewModel.onListListener(it) }
+        if (storeList.isNotEmpty()) {
+            val spanCount = if (storeList.size > 1) 2 else 1
+            binding.recyclerStores.layoutManager = GridLayoutManager(requireContext(), spanCount)
+            binding.recyclerStores.adapter = StoresRecyclerAdapter(storeList, theme, typeface) { viewModel.onListListener(it) }
         }
     }
 
