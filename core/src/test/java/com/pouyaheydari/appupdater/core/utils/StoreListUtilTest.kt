@@ -8,52 +8,41 @@ import org.junit.Test
 internal class StoreListUtilTest {
 
     @Test
-    fun `when passing both direct and app stores, then areDirectAndStoresAvailable return true`() {
-        val list = listOf(
-            StoreListItem(
-                store = Store.DIRECT_URL,
-            ),
-            StoreListItem(
-                store = Store.GOOGLE_PLAY,
-            ),
-        )
+    fun `when both lists are not empty, then shouldShowStoresDivider return true`() {
+        val directDownloadList = listOf(StoreListItem(store = Store.DIRECT_URL))
+        val storeList = listOf(StoreListItem(store = Store.GOOGLE_PLAY))
 
-        val result = shouldShowStoresDivider(list)
+        val result = shouldShowStoresDivider(directDownloadList, storeList)
 
         assertEquals(true, result)
     }
 
     @Test
-    fun `when passing only direct store, then areDirectAndStoresAvailable return false`() {
-        val list = listOf(
-            StoreListItem(
-                store = Store.DIRECT_URL,
-            ),
-        )
+    fun `when only direct download link is not empty, then shouldShowStoresDivider return false`() {
+        val directDownloadList = listOf(StoreListItem(store = Store.DIRECT_URL))
+        val storeList = listOf<StoreListItem>()
 
-        val result = shouldShowStoresDivider(list)
+        val result = shouldShowStoresDivider(directDownloadList, storeList)
 
         assertEquals(false, result)
     }
 
     @Test
-    fun `when passing only app stores, then areDirectAndStoresAvailable return false`() {
-        val list = listOf(
-            StoreListItem(
-                store = Store.GOOGLE_PLAY,
-            ),
-        )
+    fun `when only app stores list is not empty, then shouldShowStoresDivider return false`() {
+        val directDownloadList = listOf<StoreListItem>()
+        val storeList = listOf(StoreListItem(store = Store.GOOGLE_PLAY))
 
-        val result = shouldShowStoresDivider(list)
+        val result = shouldShowStoresDivider(directDownloadList, storeList)
 
         assertEquals(false, result)
     }
 
     @Test
-    fun `when passing empty list, then areDirectAndStoresAvailable return false`() {
-        val list = listOf<StoreListItem>()
+    fun `when both lists are empty, then shouldShowStoresDivider return false`() {
+        val directDownloadList = listOf<StoreListItem>()
+        val storeList = listOf<StoreListItem>()
 
-        val result = shouldShowStoresDivider(list)
+        val result = shouldShowStoresDivider(directDownloadList, storeList)
 
         assertEquals(false, result)
     }
