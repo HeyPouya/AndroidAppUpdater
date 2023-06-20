@@ -1,8 +1,9 @@
 package com.pouyaheydari.appupdater.pojo
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
-import java.io.Serializable
 
 /**
  * This model is used to pass the data to dialog fragment via bundles
@@ -13,9 +14,37 @@ data class UpdaterFragmentModel(
     var storeList: List<StoreListItem> = listOf(),
     var isForceUpdate: Boolean = false,
     var theme: Theme = Theme.SYSTEM_DEFAULT,
-) : Serializable {
+) : Parcelable {
 
-    companion object {
+    constructor(parcel: Parcel) : this(
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.createTypedArrayList(StoreListItem).orEmpty(),
+        parcel.readByte() != 0.toByte(),
+        Theme.values()[parcel.readInt()],
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(title)
+        parcel.writeString(description)
+        parcel.writeTypedList(storeList)
+        parcel.writeByte(if (isForceUpdate) 1 else 0)
+        parcel.writeInt(theme.ordinal)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<UpdaterFragmentModel> {
+
         val EMPTY = UpdaterFragmentModel()
+        override fun createFromParcel(parcel: Parcel): UpdaterFragmentModel {
+            return UpdaterFragmentModel(parcel)
+        }
+
+        override fun newArray(size: Int): Array<UpdaterFragmentModel?> {
+            return arrayOfNulls(size)
+        }
     }
 }

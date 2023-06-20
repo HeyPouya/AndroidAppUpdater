@@ -13,7 +13,7 @@ import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.DARK
 import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.LIGHT
 import com.pouyaheydari.appupdater.utils.TypefaceHolder
 import com.pouyaheydari.appupdater.utils.getDialogWidth
-import com.pouyaheydari.appupdater.utils.serializable
+import com.pouyaheydari.appupdater.utils.getEnum
 import com.pouyaheydari.appupdater.core.R as coreR
 
 const val THEME = "THEME"
@@ -28,7 +28,7 @@ internal class UpdateInProgressDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentUpdateInProgressDialogBinding.inflate(inflater, container, false)
-        val theme = arguments?.serializable(THEME) ?: LIGHT
+        val theme = arguments?.getEnum(THEME) ?: LIGHT
         setDialogBackground(theme)
         setTheme(theme)
         isCancelable = false
