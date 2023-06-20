@@ -26,6 +26,7 @@ import com.pouyaheydari.appupdater.core.utils.getApk
 import com.pouyaheydari.appupdater.core.utils.shouldShowStoresDivider
 import com.pouyaheydari.appupdater.databinding.FragmentAppUpdaterDialogBinding
 import com.pouyaheydari.appupdater.mapper.mapToSelectedTheme
+import com.pouyaheydari.appupdater.pojo.UpdaterDialogData
 import com.pouyaheydari.appupdater.pojo.UpdaterFragmentModel
 import com.pouyaheydari.appupdater.pojo.UserSelectedTheme
 import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.DARK
@@ -59,7 +60,7 @@ class AppUpdaterDialog : DialogFragment() {
     ): View {
         // Getting data passed to the library
         val data = arguments?.serializable(UPDATE_DIALOG_KEY) ?: UpdaterFragmentModel.EMPTY
-        if (data == UpdaterFragmentModel.EMPTY || data.storeLis.isEmpty()) {
+        if (data == UpdaterFragmentModel.EMPTY || data.storeList.isEmpty()) {
             throw IllegalArgumentException("It seems you forgot to add any data to the updater dialog. Add the data as described in $UPDATE_DIALOG_README_URL")
         }
         setDialogBackground(mapToSelectedTheme(data.theme, requireContext()))
@@ -111,7 +112,7 @@ class AppUpdaterDialog : DialogFragment() {
         val data = arguments?.serializable(UPDATE_DIALOG_KEY) ?: UpdaterFragmentModel.EMPTY
         val title = data.title
         val description = data.description
-        val list = data.storeLis
+        val list = data.storeList
         val theme = mapToSelectedTheme(data.theme, requireContext())
         setTheme(theme)
         val typeface = TypefaceHolder.typeface
@@ -205,6 +206,10 @@ class AppUpdaterDialog : DialogFragment() {
          *
          * @return a new instance of [AppUpdaterDialog]
          */
+        @Deprecated(
+            message = "This function is deprecated and will be removed in the next version. Use getInstance with UpdaterDialogData input parameter instead.",
+            replaceWith = ReplaceWith("this.getInstance(UpdaterDialogData())", "com.pouyaheydari.appupdater.pojo.UpdaterDialogData"),
+        )
         fun getInstance(
             title: String,
             description: String,
@@ -220,6 +225,22 @@ class AppUpdaterDialog : DialogFragment() {
             val bundle = Bundle()
             val data = UpdaterFragmentModel(title, description, storeList, !isForce, theme)
             bundle.putSerializable(UPDATE_DIALOG_KEY, data)
+            fragment.arguments = bundle
+            return fragment
+        }
+
+        /**
+         * @param dialogData Data to be shown in the dialog
+         *
+         * @return a new instance of [AppUpdaterDialog]
+         */
+        fun getInstance(dialogData: UpdaterDialogData): AppUpdaterDialog = with(dialogData) {
+            val fragment = AppUpdaterDialog()
+            val data = UpdaterFragmentModel(title, description, storeList, !isForceUpdate, theme)
+
+            TypefaceHolder.typeface = typeface
+            // bundle to add data to our dialog
+            val bundle = Bundle().apply { putSerializable(UPDATE_DIALOG_KEY, data) }
             fragment.arguments = bundle
             return fragment
         }

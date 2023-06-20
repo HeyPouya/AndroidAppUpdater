@@ -12,6 +12,7 @@ import com.pouyaheydari.androidappupdater.utils.getNormalList
 import com.pouyaheydari.appupdater.AppUpdaterDialog
 import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.dsl.updateDialogBuilder
+import com.pouyaheydari.appupdater.pojo.UpdaterDialogData
 
 private const val TAG = "showUpdateDialogTag"
 private const val FONT_PATH = "fonts/vazir.ttf"
@@ -64,12 +65,14 @@ internal class MainActivity : AppCompatActivity() {
         val list = getNormalList(this)
         // creating update dialog
         AppUpdaterDialog.getInstance(
-            title = getString(R.string.library_title),
-            description = getString(R.string.library_description),
-            storeList = list,
-            isForce = false,
-            typeface = Typeface.createFromAsset(assets, FONT_PATH),
-            theme = Theme.LIGHT,
+            UpdaterDialogData(
+                title = getString(R.string.library_title),
+                description = getString(R.string.library_description),
+                storeList = list,
+                isForceUpdate = false,
+                typeface = Typeface.createFromAsset(assets, FONT_PATH),
+                theme = Theme.LIGHT,
+            ),
         ).show(supportFragmentManager, TAG)
     }
 }
