@@ -20,6 +20,7 @@ import com.pouyaheydari.androidappupdater.R
 import com.pouyaheydari.androidappupdater.ui.compose.theme.AndroidAppUpdaterTheme
 import com.pouyaheydari.androidappupdater.utils.getNormalList
 import com.pouyaheydari.appupdater.compose.AndroidAppUpdater
+import com.pouyaheydari.appupdater.compose.pojo.UpdaterDialogData
 import com.pouyaheydari.appupdater.compose.utils.storeList
 import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.core.R as coreR
@@ -43,11 +44,13 @@ internal class ComposeSampleActivity : ComponentActivity() {
                 }
                 if (state) {
                     AndroidAppUpdater(
-                        dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
-                        dialogDescription = stringResource(id = R.string.library_description),
-                        storeList = getNormalList(this),
-                        theme = Theme.SYSTEM_DEFAULT,
-                        onDismissRequested = { state = false },
+                        UpdaterDialogData(
+                            dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
+                            dialogDescription = stringResource(id = R.string.library_description),
+                            storeList = getNormalList(this),
+                            theme = Theme.SYSTEM_DEFAULT,
+                            onDismissRequested = { state = false },
+                        ),
                     )
                 }
             }
@@ -60,10 +63,12 @@ internal class ComposeSampleActivity : ComponentActivity() {
 private fun DefaultPreview() {
     AndroidAppUpdaterTheme {
         AndroidAppUpdater(
-            dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
-            dialogDescription = stringResource(id = R.string.library_description),
-            storeList = storeList,
-            theme = Theme.DARK,
+            UpdaterDialogData(
+                dialogTitle = stringResource(id = coreR.string.appupdater_app_name),
+                dialogDescription = stringResource(id = R.string.library_description),
+                storeList = storeList,
+                theme = Theme.DARK,
+            ),
         )
     }
 }
