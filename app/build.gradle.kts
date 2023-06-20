@@ -37,7 +37,6 @@ android {
 dependencies {
 
     // library dependency
-    implementation(project(":dsl"))
     implementation(project(":appupdater"))
     implementation(project(":compose"))
 

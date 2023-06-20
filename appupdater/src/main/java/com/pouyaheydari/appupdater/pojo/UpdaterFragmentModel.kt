@@ -10,7 +10,7 @@ import java.io.Serializable
 data class UpdaterFragmentModel(
     var title: String = "",
     var description: String = "",
-    var storeLis: List<StoreListItem> = listOf(),
+    var storeList: List<StoreListItem> = listOf(),
     var isForceUpdate: Boolean = false,
     var theme: Theme = Theme.SYSTEM_DEFAULT,
 ) : Serializable {
