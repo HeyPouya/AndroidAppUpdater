@@ -33,7 +33,8 @@ import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.DARK
 import com.pouyaheydari.appupdater.pojo.UserSelectedTheme.LIGHT
 import com.pouyaheydari.appupdater.utils.TypefaceHolder
 import com.pouyaheydari.appupdater.utils.getDialogWidth
-import com.pouyaheydari.appupdater.utils.serializable
+import com.pouyaheydari.appupdater.utils.parcelable
+import com.pouyaheydari.appupdater.utils.putEnum
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -59,7 +60,7 @@ class AppUpdaterDialog : DialogFragment() {
         savedInstanceState: Bundle?,
     ): View {
         // Getting data passed to the library
-        val data = arguments?.serializable(UPDATE_DIALOG_KEY) ?: UpdaterFragmentModel.EMPTY
+        val data = arguments?.parcelable(UPDATE_DIALOG_KEY) ?: UpdaterFragmentModel.EMPTY
         if (data == UpdaterFragmentModel.EMPTY || data.storeList.isEmpty()) {
             throw IllegalArgumentException("It seems you forgot to add any data to the updater dialog. Add the data as described in $UPDATE_DIALOG_README_URL")
         }
@@ -109,7 +110,7 @@ class AppUpdaterDialog : DialogFragment() {
     }
 
     private fun getData() {
-        val data = arguments?.serializable(UPDATE_DIALOG_KEY) ?: UpdaterFragmentModel.EMPTY
+        val data = arguments?.parcelable(UPDATE_DIALOG_KEY) ?: UpdaterFragmentModel.EMPTY
         val title = data.title
         val description = data.description
         val list = data.storeList
@@ -176,8 +177,9 @@ class AppUpdaterDialog : DialogFragment() {
     private fun showUpdateInProgressDialog(theme: UserSelectedTheme) {
         if (parentFragmentManager.findFragmentByTag(UPDATE_DIALOG_TAG) == null && requireActivity().lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
             val fragment = UpdateInProgressDialog()
-            val bundle = Bundle()
-            bundle.putSerializable(THEME, theme)
+            val bundle = Bundle().apply {
+                putEnum(THEME, theme)
+            }
             fragment.arguments = bundle
             fragment.show(parentFragmentManager, UPDATE_DIALOG_TAG)
         }
@@ -224,7 +226,7 @@ class AppUpdaterDialog : DialogFragment() {
             // bundle to add data to our dialog
             val bundle = Bundle()
             val data = UpdaterFragmentModel(title, description, storeList, !isForce, theme)
-            bundle.putSerializable(UPDATE_DIALOG_KEY, data)
+            bundle.putParcelable(UPDATE_DIALOG_KEY, data)
             fragment.arguments = bundle
             return fragment
         }
@@ -240,7 +242,7 @@ class AppUpdaterDialog : DialogFragment() {
 
             TypefaceHolder.typeface = typeface
             // bundle to add data to our dialog
-            val bundle = Bundle().apply { putSerializable(UPDATE_DIALOG_KEY, data) }
+            val bundle = Bundle().apply { putParcelable(UPDATE_DIALOG_KEY, data) }
             fragment.arguments = bundle
             return fragment
         }
