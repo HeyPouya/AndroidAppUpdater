@@ -219,17 +219,16 @@ class AppUpdaterDialog : DialogFragment() {
             isForce: Boolean = false,
             typeface: Typeface? = null,
             theme: Theme = Theme.SYSTEM_DEFAULT,
-        ): AppUpdaterDialog {
-            val fragment = AppUpdaterDialog()
-
-            TypefaceHolder.typeface = typeface
-            // bundle to add data to our dialog
-            val bundle = Bundle()
-            val data = UpdaterFragmentModel(title, description, storeList, !isForce, theme)
-            bundle.putParcelable(UPDATE_DIALOG_KEY, data)
-            fragment.arguments = bundle
-            return fragment
-        }
+        ): AppUpdaterDialog = getInstance(
+            UpdaterDialogData(
+                title = title,
+                description = description,
+                storeList = storeList,
+                isForceUpdate = isForce,
+                typeface = typeface,
+                theme = theme,
+            ),
+        )
 
         /**
          * @param dialogData Data to be shown in the dialog
