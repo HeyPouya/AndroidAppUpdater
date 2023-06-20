@@ -1,5 +1,6 @@
 package com.pouyaheydari.appupdater.compose
 
+import android.graphics.Typeface
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -34,11 +35,37 @@ import com.pouyaheydari.appupdater.compose.utils.isDarkThemeSelected
 import com.pouyaheydari.appupdater.compose.utils.storeList
 import com.pouyaheydari.appupdater.core.pojo.DialogStates
 import com.pouyaheydari.appupdater.core.pojo.Store
+import com.pouyaheydari.appupdater.core.pojo.StoreListItem
 import com.pouyaheydari.appupdater.core.pojo.Theme
 import com.pouyaheydari.appupdater.core.utils.TAG
 import com.pouyaheydari.appupdater.core.utils.getApk
 import com.pouyaheydari.appupdater.core.utils.shouldShowStoresDivider
 import com.pouyaheydari.appupdater.core.R as coreR
+
+@Deprecated(
+    message = "This function is deprecated and will be removed in the next version. Use getInstance with UpdaterDialogData input parameter instead.",
+    replaceWith = ReplaceWith("this.AndroidAppUpdater(UpdaterDialogData())", "com.pouyaheydari.appupdater.compose.pojo.UpdaterDialogData"),
+)
+@Composable
+fun AndroidAppUpdater(
+    dialogTitle: String = "",
+    dialogDescription: String = "",
+    storeList: List<StoreListItem> = listOf(),
+    onDismissRequested: () -> Unit = {},
+    typeface: Typeface? = null,
+    theme: Theme = Theme.SYSTEM_DEFAULT,
+) {
+    AndroidAppUpdater(
+        UpdaterDialogData(
+            dialogTitle = dialogTitle,
+            dialogDescription = dialogDescription,
+            storeList = storeList,
+            onDismissRequested = onDismissRequested,
+            typeface = typeface,
+            theme = theme,
+        ),
+    )
+}
 
 @Composable
 fun AndroidAppUpdater(dialogData: UpdaterDialogData) {
