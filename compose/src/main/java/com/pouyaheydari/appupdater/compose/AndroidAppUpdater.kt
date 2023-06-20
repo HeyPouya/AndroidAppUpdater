@@ -42,6 +42,18 @@ import com.pouyaheydari.appupdater.core.utils.getApk
 import com.pouyaheydari.appupdater.core.utils.shouldShowStoresDivider
 import com.pouyaheydari.appupdater.core.R as coreR
 
+/**
+ * Shows the compose dialog
+ *
+ * @param dialogTitle title of the update dialog
+ * @param dialogDescription description of the update dialog
+ * @param storeList list of Stores and Direct links to be shown to the user in the update dialog
+ * @param onDismissRequested gets invoked when the user requests to dismiss the dialog
+ * @param typeface Typeface to customize the font style if needed
+ * @param theme theme of the dialog
+ *
+ */
+
 @Deprecated(
     message = "This function is deprecated and will be removed in the next version. Use getInstance with UpdaterDialogData input parameter instead.",
     replaceWith = ReplaceWith("this.AndroidAppUpdater(UpdaterDialogData())", "com.pouyaheydari.appupdater.compose.pojo.UpdaterDialogData"),
@@ -67,6 +79,11 @@ fun AndroidAppUpdater(
     )
 }
 
+/**
+ * Shows the compose dialog
+ *
+ * @param dialogData Data to be shown in the dialog
+ */
 @Composable
 fun AndroidAppUpdater(dialogData: UpdaterDialogData) {
     val viewModel: AndroidAppUpdaterViewModel = viewModel()
