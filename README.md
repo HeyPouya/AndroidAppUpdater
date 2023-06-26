@@ -15,7 +15,9 @@ The update dialog can contain different app stores or direct download links.
 
 **Supports Kotlin DSL and Compose**
 
-<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/header.png" width="700">
+<p align="center">
+<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/header.png" width="800">
+</p>
 
 ## Kotlin Usage
 
