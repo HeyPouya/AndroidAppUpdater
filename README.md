@@ -10,12 +10,12 @@
 <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/icon.png" width="250">
 </p>
 
-App Updater is an  easy-to-use and fully customizable library to show update dialog to users.
+App Updater is an easy-to-use and fully customizable library to show update dialog to users.
 The update dialog can contain different app stores or direct download links.
 
 **Supports Kotlin DSL and Compose**
 
-<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/Screenshot_1.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/Screenshot_2.png" width="250"> <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/Screenshot_3.png" width="250">
+<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/header.png" width="700">
 
 ## Kotlin Usage
 
@@ -44,7 +44,8 @@ The library currently supports these markets:
 
 ### Showing stores
 
-If you provide your application on above mentioned stores, you can list all of them in the update dialog.
+If you provide your application on above mentioned stores, you can list all of them in the update
+dialog.
 To create a new store:
 
 ```kotlin
@@ -75,73 +76,108 @@ Parameters of StoreListItem, in order:
 ```kotlin
 list.add(
     StoreListItem(
-      store = Store.GOOGLE_PLAY,
-      title = "Google Play",
-      packageName = "YOUR_APPS_PACKAGE_NAME"
+        store = Store.GOOGLE_PLAY,
+        title = "Google Play",
+        packageName = "YOUR_APPS_PACKAGE_NAME"
     )
 )
 ```
 
 ### Direct Download
 
-You can also make as many direct APK download links as you need. Users can download the APK directly on their phone.
+You can also make as many direct APK download links as you need. Users can download the APK directly
+on their phone.
 After downloading finishes, the install page will be shown to the user automatically.
 
 ```kotlin
 list.add(
     StoreListItem(
-      store = Store.DIRECT_URL,
-      title = "Direct Download",
-      url = "https://cafebazaar.ir/download/bazaar.apk",
-      packageName = "YOUR_APPS_PACKAGE_NAME"
+        store = Store.DIRECT_URL,
+        title = "Direct Download",
+        url = "https://cafebazaar.ir/download/bazaar.apk"
     )
 )
 ```
-***Remember to put WRITE_EXTERNAL_STORAGE, INTERNET and REQUEST_INSTALL_PACKAGES permissions in your manifest. The library asks for these permissions at runtime if needed***
 
-### To Show UpdateDialog
+***Remember to put WRITE_EXTERNAL_STORAGE, INTERNET and REQUEST_INSTALL_PACKAGES permissions in your
+manifest. The library asks for these permissions at runtime if needed***
+
+## Show UpdateDialog with Jetpack Compose
+
+You can show a native compose UpdateDialog to the user:
+
+```kotlin
+AndroidAppUpdaterTheme {
+    AndroidAppUpdater(
+        UpdaterDialogData(
+            dialogTitle = "New Update !",
+            dialogDescription = "Lots of new features! Update right now",
+            storeList = list,
+            theme = Theme.DARK
+        )
+    )
+}
+```
+
+Parameters in the UpdaterDialogData in order are:
+
+| order | Parameter Name     | Parameter Type         | Description                                                                                        |
+|-------|--------------------|------------------------|----------------------------------------------------------------------------------------------------|
+| 1     | dialogTitle        | String                 | Title of the update dialog                                                                         |
+| 2     | dialogDescription  | String                 | Description of the update dialog                                                                   |
+| 3     | storeList          | List<UpdaterStoreList> | List of Stores and Direct links to be shown to the user in the update dialog                       |                    |                        |                                                                  |
+| 4     | onDismissRequested | () -> Unit             | Gets invoked when the user requests to dismiss the dialog                                          |
+| 5     | typeface           | Typeface?              | Typeface to customize the font style if needed (You can omit this parameter if you don 't need it) |                    |                        |                                                                              |
+| 6     | theme              | Theme                  | Theme of the dialog (can be set to Theme.Light, Theme.Dark or Theme.SYSTEM_DEFAULT)                |
+
+### Show UpdateDialog with Fragments
 
 ```kotlin
 AppUpdaterDialog.getInstance(
-    title =  "New Update !",
-    description = "Lots of new features! Update right now",
-    storeList = list,
-    isForce = false,
-    typeface = typeface,
-    theme = Theme.LIGHT
+    UpdaterDialogData(
+        title = "New Update !",
+        description = "Lots of new features! Update right now",
+        storeList = list,
+        isForceUpdate = false,
+        typeface = typeface,
+        theme = Theme.LIGHT
+    )
 ).show(supportFragmentManager, TAG)
 ```
 
-Parameters in the order are:
+Parameters in the UpdaterDialogData in order are:
 
 | order | Parameter Name | Parameter Type         | Description                                                                                       |
 |-------|----------------|------------------------|---------------------------------------------------------------------------------------------------|
 | 1     | title          | String                 | Title of the update dialog                                                                        |
 | 2     | description    | String                 | Description of the update dialog                                                                  |
-| 3     | list           | List<UpdaterStoreList> | List of Stores and Direct links to be shown to the user in the update dialog                      |
+| 3     | storeList      | List<UpdaterStoreList> | List of Stores and Direct links to be shown to the user in the update dialog                      |
 | 4     | isForceUpdate  | Boolean                | Makes the dialog non-cancelable if sets to true                                                   |
 | 5     | typeface       | Typeface?              | Typeface to customize the font style if needed (You can omit this parameter if you don't need it) |
-| 5     | theme          | Theme                  | Theme of the dialog (can be set to Theme.Light or Theme.Dark)                                     |
+| 6     | theme          | Theme                  | Theme of the dialog (can be set to Theme.Light, Theme.Dark or Theme.SYSTEM_DEFAULT)               |
 
 ### Customizing dialog texts
 
-If you need to customize any texts in the updater or the update in progress dialogs, you can add these strings resources in your strings.xml file to override them:
+If you need to customize any texts in the updater or the update in progress dialogs, you can add
+these strings resources in your strings.xml file to override them:
 
 ```xml
+
 <resources>
-<string name="appupdater_please_wait">Please wait</string>
-<string name="appupdater_downloading_new_version">Downloading new version...</string>
-<string name="appupdater_download_notification_title">Downloading...</string>
-<string name="appupdater_download_notification_description">Downloading new version</string>
-<string name="appupdater_please_install">Please install</string>
-<string name="appupdater_or">or</string>
-<string name="appupdater_download_from_store">Download from store</string>
+    <string name="appupdater_please_wait">Please wait</string>
+    <string name="appupdater_downloading_new_version">Downloading new version...</string>
+    <string name="appupdater_download_notification_title">Downloading...</string>
+    <string name="appupdater_download_notification_description">Downloading new version</string>
+    <string name="appupdater_please_install">Please install</string>
+    <string name="appupdater_or">or</string>
+    <string name="appupdater_download_from_store">Download from store</string>
 </resources>
 ```
 
 ### Default icons
 
-There are default icons of all stores included in the library. You can use them or use your own icons.
+There are default icons of all stores included in the library. You can use them or use your own
+icons.
 Here is the list of icon names for each store:
 
 | Market Name          | Icon name                                  |
@@ -165,21 +201,8 @@ Here is the list of icon names for each store:
 
 ***Note: Don't forget to add import for drawables <import com.pouyaheydari.appupdater.R.\*>***
 
-## Jetpack Compose
-You can also show a native compose UpdateDialog to the user:
-
-```kotlin
-AndroidAppUpdaterTheme {
-    AndroidAppUpdater(
-        dialogTitle = "New Update !",
-        dialogDescription = "Lots of new features! Update right now",
-        storeList = list,
-        theme = Theme.DARK
-    )
-}
-```
-
 ## Using library in Kotlin DSL style
+
 This library also supports DSL. To use it, add the required dependency first.
 
 ### Adding Stores in DSL
@@ -199,14 +222,15 @@ val list = listOf(
 
 ```kotlin
  updateDialogBuilder {
-            title = "New Update !"
-            description = "Lots of new features! Update right now"
-            isForceUpdate = false
-            typeface = Typeface.createFromAsset(assets, FONT_PATH)
-            theme = Theme.DARK
-            list = list
+    title = "New Update !"
+    description = "Lots of new features! Update right now"
+    isForceUpdate = false
+    typeface = Typeface.createFromAsset(assets, FONT_PATH)
+    theme = Theme.DARK
+    list = list
 }.show(supportFragmentManager, TAG)
 ```
+
 **Check the demo application to see it in your IDE.**
 
 ## Download
@@ -218,7 +242,7 @@ Add this to your root **build.gradle** file:
 ```kotlin
 allprojects {
     repositories {
-        maven ("https://jitpack.io")
+        maven("https://jitpack.io")
     }
 }
 ```
@@ -226,17 +250,12 @@ allprojects {
 Then add these dependencies to your app build.gradle file:
 
 ```kotlin
-// Always add the core dependency
-implementation ("com.github.SirLordPouya.AndroidAppUpdater:core:latest_version")
 
-// To use the library in Kotlin & Java
-implementation ("com.github.SirLordPouya.AndroidAppUpdater:main:latest_version")
-
-//To use the library with Kotlin DSL, Kotlin & Java
-implementation ("com.github.SirLordPouya.AndroidAppUpdater:dsl:latest_version")
+// To use the library in Kotlin, Kotlin DSL or Java
+implementation("com.github.SirLordPouya.AndroidAppUpdater:main:latest_version")
 
 //To use the library with Jetpack Compose
-implementation ("com.github.SirLordPouya.AndroidAppUpdater:compose:latest_version")
+implementation("com.github.SirLordPouya.AndroidAppUpdater:compose:latest_version")
 ```
 
 ## License
