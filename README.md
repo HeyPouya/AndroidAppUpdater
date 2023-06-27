@@ -1,4 +1,8 @@
-# Android App Updater (+ Support for third party markets)
+<p align="center">
+<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/icon.png" width="250">
+</p>
+
+# Android App Updater
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Easy%20App%20Updater-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7388)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7e8f094fd77044b5b26bc6c157bfbbc3)](https://app.codacy.com/gh/SirLordPouya/AndroidAppUpdater/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
@@ -6,24 +10,18 @@
 [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
-<p align="center">
-<img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/icon.png" width="250">
-</p>
-
 App Updater is an easy-to-use and fully customizable library to show update dialog to users.
-The update dialog can contain different app stores or direct download links.
-
-**Supports Kotlin DSL and Compose**
+The update dialog can contain different app stores or direct download links. It can be used as a **FragmentDialog** or **Composable**.
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/header.png" width="800">
 </p>
 
-## Kotlin Usage
+## Usage
 
 ### Available stores
 
-The library currently supports these markets:
+The library currently supports bellow markets:
 
 | App Store Name                                                          | App Store Enum             |
 |-------------------------------------------------------------------------|----------------------------|
@@ -178,8 +176,7 @@ these strings resources in your strings.xml file to override them:
 
 ### Default icons
 
-There are default icons of all stores included in the library. You can use them or use your own
-icons.
+There are default icons of all stores included in the library. You can use them or use your own icons.
 Here is the list of icon names for each store:
 
 | Market Name          | Icon name                                  |
@@ -205,7 +202,7 @@ Here is the list of icon names for each store:
 
 ## Using library in Kotlin DSL style
 
-This library also supports DSL. To use it, add the required dependency first.
+This library also supports DSL.
 
 ### Adding Stores in DSL
 
