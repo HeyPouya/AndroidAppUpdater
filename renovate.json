@@ -2,5 +2,23 @@
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
         "config:base"
-    ]
+    ],
+    "schedule": [
+        "on friday"
+    ],
+    "timezone": "Europe/Berlin",
+    "labels": [
+        "dependency-update"
+    ],
+    "prHourlyLimit": 0,
+    "baseBranches": [
+        "master"
+    ],
+    "separateMultipleMajor": true,
+    "dependencyDashboardTitle": "automated dependency updates dashboard",
+    "dependencyDashboard": true,
+    "branchPrefix": "chore/",
+    "additionalBranchPrefix": "update-libs/",
+    "commitMessageAction": "update",
+    "commitMessageExtra": "{{{currentValue}}} to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if isMajor}}{{prettyNewMajor}}{{else}}{{#if isSingleVersion}}{{prettyNewVersion}}{{else}}{{#if newValue}}{{{newValue}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}{{/if}}{{/if}}"
 }
