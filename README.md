@@ -19,6 +19,7 @@ The update dialog can contain different app stores or direct download links. It 
 
 ## Usage
 
+
 ### Available stores
 
 The library currently supports bellow markets:
