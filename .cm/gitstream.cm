@@ -1,7 +1,3 @@
-# -*- mode: yaml -*-
-manifest:
-    version: 1.0
-
 automations:
     # Add a label that indicates how many minutes it will take to review the PR.
     estimated_time_to_review:
