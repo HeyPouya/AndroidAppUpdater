@@ -17,7 +17,6 @@ The update dialog can contain different app stores or direct download links. It 
 <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/header.png" width="800">
 </p>
 
-
 ## Usage
 
 ### Available stores
