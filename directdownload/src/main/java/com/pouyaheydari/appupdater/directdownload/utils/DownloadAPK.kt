@@ -49,5 +49,5 @@ private fun startDownloadManagerToDownloadNewApk(url: String, context: Context) 
 
     // enqueue the file to start download
     val manager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-    com.pouyaheydari.appupdater.directdownload.domain.SetRequestIdInteractor().invoke(manager.enqueue(downloadManager))
+    com.pouyaheydari.appupdater.directdownload.domain.SetRequestIdUseCase().invoke(manager.enqueue(downloadManager))
 }

@@ -32,6 +32,8 @@ import com.pouyaheydari.appupdater.directdownload.R as directDownloadR
 
 /**
  * Use this composable to show the updater dialog.
+ *
+ * @param dialogData is th
  */
 @Composable
 fun AndroidAppUpdater(dialogData: UpdaterDialogData) {

@@ -7,9 +7,6 @@ import com.pouyaheydari.appupdater.store.R
 import com.pouyaheydari.appupdater.store.domain.stores.AppStore
 import com.pouyaheydari.appupdater.store.domain.stores.AppStoreType
 
-/**
- * The model that we are using for list of stores
- */
 data class StoreListItem(
     var store: AppStore = StoreFactory.getStore(AppStoreType.GOOGLE_PLAY, ""),
     var title: String = "",

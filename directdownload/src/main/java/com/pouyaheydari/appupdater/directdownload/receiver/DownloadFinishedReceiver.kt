@@ -8,8 +8,8 @@ import android.os.Build
 import android.util.Log
 import com.pouyaheydari.appupdater.core.utils.ANDROID_APP_UPDATER_DEBUG_TAG
 import com.pouyaheydari.appupdater.directdownload.R
-import com.pouyaheydari.appupdater.directdownload.domain.GetRequestIdInteractor
-import com.pouyaheydari.appupdater.directdownload.domain.SetIsUpdateInProgress
+import com.pouyaheydari.appupdater.directdownload.domain.GetRequestIdUseCase
+import com.pouyaheydari.appupdater.directdownload.domain.SetUpdateInProgressUseCase
 import com.pouyaheydari.appupdater.directdownload.utils.getExistingApk
 import com.pouyaheydari.appupdater.directdownload.utils.installAPK
 import kotlinx.coroutines.CoroutineScope
@@ -21,8 +21,8 @@ import kotlinx.coroutines.launch
  */
 internal class DownloadFinishedReceiver : BroadcastReceiver() {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
-    private val getRequestIdInteractor by lazy { GetRequestIdInteractor() }
-    private val setIsUpdateInProgress by lazy { SetIsUpdateInProgress() }
+    private val getRequestIdUseCase by lazy { GetRequestIdUseCase() }
+    private val setUpdateInProgressUseCase by lazy { SetUpdateInProgressUseCase() }
 
     /**
      * To show install page when apk got downloaded successfully
@@ -32,7 +32,7 @@ internal class DownloadFinishedReceiver : BroadcastReceiver() {
             val referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
             // if downloaded file is our apk
-            if (referenceId == getRequestIdInteractor()) {
+            if (referenceId == getRequestIdUseCase()) {
                 context?.let {
                     hideUpdateInProgress()
                     verifyDownloadedApkExists(it)
@@ -43,7 +43,7 @@ internal class DownloadFinishedReceiver : BroadcastReceiver() {
 
     private fun hideUpdateInProgress() {
         coroutineScope.launch {
-            setIsUpdateInProgress(false)
+            setUpdateInProgressUseCase(false)
         }
     }
 

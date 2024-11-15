@@ -49,7 +49,7 @@ private const val UPDATE_DIALOG_README_URL = "https://github.com/SirLordPouya/An
  * Shows ForceUpdate Dialog Fragment
  */
 class AppUpdaterDialog : DialogFragment() {
-    private val viewModel: AppUpdaterViewModel by viewModels()
+    private val viewModel: AppUpdaterViewModel by viewModels(factoryProducer = { AppUpdaterViewModelFactory() })
 
     private var appUpdaterDialogBinding: FragmentAppUpdaterDialogBinding? = null
     private val binding get() = appUpdaterDialogBinding!!

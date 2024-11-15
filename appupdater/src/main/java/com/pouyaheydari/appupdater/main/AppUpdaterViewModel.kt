@@ -3,7 +3,8 @@ package com.pouyaheydari.appupdater.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
-import com.pouyaheydari.appupdater.directdownload.domain.GetIsUpdateInProgress
+import com.pouyaheydari.appupdater.directdownload.domain.GetIsUpdateInProgressUseCase
+import com.pouyaheydari.appupdater.directdownload.domain.SetUpdateInProgressUseCase
 import com.pouyaheydari.appupdater.main.pojo.DialogStates
 import com.pouyaheydari.appupdater.main.utils.ErrorCallbackHolder
 import com.pouyaheydari.appupdater.main.utils.TypefaceHolder
@@ -16,7 +17,10 @@ import kotlinx.coroutines.launch
 /**
  * View Model of [AppUpdaterDialog]
  */
-internal class AppUpdaterViewModel : ViewModel() {
+internal class AppUpdaterViewModel(
+    private val isUpdateInProgressUseCase: GetIsUpdateInProgressUseCase,
+    private val setUpdateInProgressUseCase: SetUpdateInProgressUseCase
+) : ViewModel() {
     val screenState = MutableStateFlow<DialogStates>(DialogStates.HideUpdateInProgress)
 
     fun onStoreClicked(item: StoreListItem) {
@@ -36,7 +40,14 @@ internal class AppUpdaterViewModel : ViewModel() {
     }
 
     fun onDownloadStarted() {
+        setUpdateInProgress()
         observeUpdateInProgressStatus()
+    }
+
+    private fun setUpdateInProgress() {
+        viewModelScope.launch {
+            setUpdateInProgressUseCase(true)
+        }
     }
 
     fun onErrorWhileOpeningStore(store: AppStore) {
@@ -45,7 +56,7 @@ internal class AppUpdaterViewModel : ViewModel() {
 
     private fun observeUpdateInProgressStatus() {
         viewModelScope.launch {
-            GetIsUpdateInProgress().invoke().collectLatest {
+           isUpdateInProgressUseCase().collectLatest {
                 screenState.value = if (it) DialogStates.ShowUpdateInProgress else DialogStates.HideUpdateInProgress
             }
         }

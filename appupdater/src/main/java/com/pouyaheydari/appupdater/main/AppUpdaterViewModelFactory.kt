@@ -1,20 +1,16 @@
-package com.pouyaheydari.appupdater.compose.ui
+package com.pouyaheydari.appupdater.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.pouyaheydari.appupdater.compose.data.mapper.UpdaterViewModelDataMapper
-import com.pouyaheydari.appupdater.compose.ui.models.UpdaterDialogData
 import com.pouyaheydari.appupdater.directdownload.domain.GetIsUpdateInProgressUseCase
 import com.pouyaheydari.appupdater.directdownload.domain.SetUpdateInProgressUseCase
 
-internal class AndroidAppUpdaterViewModelFactory(
-    private val dialogData: UpdaterDialogData,
+internal class AppUpdaterViewModelFactory(
     private val getIsUpdateInProgressUseCase: GetIsUpdateInProgressUseCase = GetIsUpdateInProgressUseCase(),
     private val setUpdateInProgressUseCase: SetUpdateInProgressUseCase = SetUpdateInProgressUseCase()
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        val viewModelData = UpdaterViewModelDataMapper.map(dialogData)
-        return AndroidAppUpdaterViewModel(viewModelData, getIsUpdateInProgressUseCase, setUpdateInProgressUseCase) as T
+        return AppUpdaterViewModel(getIsUpdateInProgressUseCase, setUpdateInProgressUseCase) as T
     }
 }

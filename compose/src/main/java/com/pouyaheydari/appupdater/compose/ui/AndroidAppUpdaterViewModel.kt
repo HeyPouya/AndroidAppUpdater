@@ -7,7 +7,8 @@ import com.pouyaheydari.appupdater.compose.ui.models.DialogScreenIntents
 import com.pouyaheydari.appupdater.compose.ui.models.DialogScreenState
 import com.pouyaheydari.appupdater.compose.ui.models.UpdaterViewModelData
 import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
-import com.pouyaheydari.appupdater.directdownload.domain.GetIsUpdateInProgress
+import com.pouyaheydari.appupdater.directdownload.domain.GetIsUpdateInProgressUseCase
+import com.pouyaheydari.appupdater.directdownload.domain.SetUpdateInProgressUseCase
 import com.pouyaheydari.appupdater.store.domain.StoreListItem
 import com.pouyaheydari.appupdater.store.domain.stores.AppStore
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +23,8 @@ import kotlinx.coroutines.launch
  */
 internal class AndroidAppUpdaterViewModel(
     viewModelData: UpdaterViewModelData,
-    private val isUpdateInProgress: GetIsUpdateInProgress,
+    private val isUpdateInProgressUseCase: GetIsUpdateInProgressUseCase,
+    private val setUpdateInProgressUseCase: SetUpdateInProgressUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(DialogScreenState())
     val uiState: StateFlow<DialogScreenState> = _uiState.asStateFlow()
@@ -47,8 +49,18 @@ internal class AndroidAppUpdaterViewModel(
             DialogScreenIntents.OnStoreOpened -> _uiState.update { it.copy(shouldOpenStore = false) }
             DialogScreenIntents.OnErrorCallbackExecuted -> _uiState.update { it.copy(errorWhileOpeningStore = it.errorWhileOpeningStore.copy(shouldNotifyCaller = false)) }
             DialogScreenIntents.OnApkDownloadRequested -> _uiState.update { it.copy(shouldStartAPKDownload = false) }
-            DialogScreenIntents.OnApkDownloadStarted -> observeUpdateProgress()
+            DialogScreenIntents.OnApkDownloadStarted -> {
+                setUpdateInProgress()
+                observeUpdateProgress()
+            }
+
             is DialogScreenIntents.OnOpeningStoreFailed -> observeErrorWhileShowingStore(intent.store)
+        }
+    }
+
+    private fun setUpdateInProgress() {
+        viewModelScope.launch {
+            setUpdateInProgressUseCase(true)
         }
     }
 
@@ -68,7 +80,7 @@ internal class AndroidAppUpdaterViewModel(
 
     private fun observeUpdateProgress() {
         viewModelScope.launch {
-            isUpdateInProgress().collectLatest { updateInProgress ->
+            isUpdateInProgressUseCase().collectLatest { updateInProgress ->
                 _uiState.update { it.copy(shouldShowUpdateInProgress = updateInProgress, shouldStartAPKDownload = false, shouldOpenStore = false) }
             }
         }
