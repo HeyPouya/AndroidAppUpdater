@@ -2,7 +2,6 @@ package com.pouyaheydari.appupdater.directdownload.utils
 
 import android.content.Context
 import android.os.Environment
-import com.pouyaheydari.appupdater.core.utils.APK_NAME
 import java.io.File
 
 /**

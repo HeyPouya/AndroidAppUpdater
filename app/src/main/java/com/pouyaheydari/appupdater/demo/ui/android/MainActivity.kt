@@ -13,9 +13,9 @@ import com.pouyaheydari.appupdater.demo.utils.directDownloadList
 import com.pouyaheydari.appupdater.demo.utils.getDSLStoreList
 import com.pouyaheydari.appupdater.demo.utils.getDslDirectDownloadLink
 import com.pouyaheydari.appupdater.demo.utils.storeList
-import com.pouyaheydari.appupdater.main.AppUpdaterDialog
+import com.pouyaheydari.appupdater.main.ui.AppUpdaterDialog
 import com.pouyaheydari.appupdater.main.dsl.updateDialogBuilder
-import com.pouyaheydari.appupdater.main.pojo.UpdaterDialogData
+import com.pouyaheydari.appupdater.main.ui.model.UpdaterDialogData
 
 private const val TAG = "showUpdateDialogTag"
 private const val FONT_PATH = "fonts/vazir.ttf"

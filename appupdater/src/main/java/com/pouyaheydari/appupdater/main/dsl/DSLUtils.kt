@@ -1,8 +1,8 @@
 package com.pouyaheydari.appupdater.main.dsl
 
 import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
-import com.pouyaheydari.appupdater.main.AppUpdaterDialog
-import com.pouyaheydari.appupdater.main.pojo.UpdaterDialogData
+import com.pouyaheydari.appupdater.main.ui.AppUpdaterDialog
+import com.pouyaheydari.appupdater.main.ui.model.UpdaterDialogData
 import com.pouyaheydari.appupdater.store.domain.StoreListItem
 
 /**
@@ -10,6 +10,9 @@ import com.pouyaheydari.appupdater.store.domain.StoreListItem
  */
 inline fun store(block: StoreListItem.() -> Unit): StoreListItem = StoreListItem().apply(block)
 
+/**
+ * This inline function helps building direct download links in DSL way
+ */
 inline fun directDownload(block: DirectDownloadListItem.() -> Unit): DirectDownloadListItem = DirectDownloadListItem().apply(block)
 
 /**

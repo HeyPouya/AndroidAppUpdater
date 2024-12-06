@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.main
+package com.pouyaheydari.appupdater.main.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

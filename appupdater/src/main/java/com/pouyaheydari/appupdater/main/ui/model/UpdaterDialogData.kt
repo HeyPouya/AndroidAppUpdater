@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.main.pojo
+package com.pouyaheydari.appupdater.main.ui.model
 
 import android.graphics.Typeface
 import com.pouyaheydari.appupdater.core.model.Theme

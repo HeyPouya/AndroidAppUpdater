@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.main.pojo
+package com.pouyaheydari.appupdater.main.ui.model
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -9,7 +9,7 @@ import com.pouyaheydari.appupdater.store.domain.StoreListItem
 /**
  * This model is used to pass the data to dialog fragment via bundles
  */
-data class UpdaterFragmentModel(
+internal data class UpdaterFragmentModel(
     var title: String = "",
     var description: String = "",
     var storeList: List<StoreListItem> = listOf(),

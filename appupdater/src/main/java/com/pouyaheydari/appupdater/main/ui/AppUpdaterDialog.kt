@@ -1,14 +1,12 @@
-package com.pouyaheydari.appupdater.main
+package com.pouyaheydari.appupdater.main.ui
 
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.Window
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -18,16 +16,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
 import com.pouyaheydari.appupdater.directdownload.utils.getApk
-import com.pouyaheydari.appupdater.main.adapters.DirectRecyclerAdapter
-import com.pouyaheydari.appupdater.main.adapters.StoresRecyclerAdapter
+import com.pouyaheydari.appupdater.main.R
+import com.pouyaheydari.appupdater.main.data.mapper.mapToSelectedTheme
 import com.pouyaheydari.appupdater.main.databinding.FragmentAppUpdaterDialogBinding
-import com.pouyaheydari.appupdater.main.mapper.mapToSelectedTheme
-import com.pouyaheydari.appupdater.main.pojo.DialogStates
-import com.pouyaheydari.appupdater.main.pojo.UpdaterDialogData
-import com.pouyaheydari.appupdater.main.pojo.UpdaterFragmentModel
-import com.pouyaheydari.appupdater.main.pojo.UserSelectedTheme
-import com.pouyaheydari.appupdater.main.pojo.UserSelectedTheme.DARK
-import com.pouyaheydari.appupdater.main.pojo.UserSelectedTheme.LIGHT
+import com.pouyaheydari.appupdater.main.ui.adapters.DirectRecyclerAdapter
+import com.pouyaheydari.appupdater.main.ui.adapters.StoresRecyclerAdapter
+import com.pouyaheydari.appupdater.main.ui.model.DialogScreenIntents
+import com.pouyaheydari.appupdater.main.ui.model.DialogScreenStates
+import com.pouyaheydari.appupdater.main.ui.model.UpdaterDialogData
+import com.pouyaheydari.appupdater.main.ui.model.UpdaterFragmentModel
+import com.pouyaheydari.appupdater.main.ui.model.UserSelectedTheme
 import com.pouyaheydari.appupdater.main.utils.ErrorCallbackHolder
 import com.pouyaheydari.appupdater.main.utils.TypefaceHolder
 import com.pouyaheydari.appupdater.main.utils.getDialogWidth
@@ -36,14 +34,12 @@ import com.pouyaheydari.appupdater.main.utils.putEnum
 import com.pouyaheydari.appupdater.store.domain.AppStoreCallback
 import com.pouyaheydari.appupdater.store.domain.StoreListItem
 import com.pouyaheydari.appupdater.store.domain.showAppInSelectedStore
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import com.pouyaheydari.appupdater.directdownload.R as directDownloadR
 
 private const val UPDATE_DIALOG_KEY = "UPDATE_DIALOG_KEY"
 private const val UPDATE_DIALOG_TAG = "UPDATE_DIALOG_TAG"
-private const val UPDATE_DIALOG_README_URL = "https://github.com/SirLordPouya/AndroidAppUpdater"
+private const val UPDATE_DIALOG_README_URL = "https://github.com/HeyPouya/AndroidAppUpdater"
 
 /**
  * Shows ForceUpdate Dialog Fragment
@@ -67,14 +63,15 @@ class AppUpdaterDialog : DialogFragment() {
         setDialogBackground(mapToSelectedTheme(data.theme, requireContext()))
         isCancelable = data.isForceUpdate
 
-        appUpdaterDialogBinding = FragmentAppUpdaterDialogBinding.inflate(inflater, container, false)
+        appUpdaterDialogBinding =
+            FragmentAppUpdaterDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     private fun setDialogBackground(theme: UserSelectedTheme) {
         val dialogBackground = when (theme) {
-            LIGHT -> R.drawable.dialog_background
-            DARK -> R.drawable.dialog_background_dark
+            UserSelectedTheme.LIGHT -> R.drawable.dialog_background
+            UserSelectedTheme.DARK -> R.drawable.dialog_background_dark
         }
         dialog?.window?.setBackgroundDrawable(
             ContextCompat.getDrawable(requireContext(), dialogBackground),
@@ -84,7 +81,7 @@ class AppUpdaterDialog : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(getDialogWidth(), WRAP_CONTENT)
+        dialog?.window?.setLayout(getDialogWidth(), ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,35 +90,37 @@ class AppUpdaterDialog : DialogFragment() {
         getData()
     }
 
-    private fun subscribeToUpdateInProgressDialog(theme: UserSelectedTheme) {
+    private fun subscribeToViewModel(theme: UserSelectedTheme) {
         viewModel.screenState.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
-            .distinctUntilChanged()
             .onEach {
                 when (it) {
-                    is DialogStates.DownloadApk -> getApk(it.apkUrl, requireActivity()) {
-                        viewModel.onDownloadStarted()
+                    is DialogScreenStates.DownloadApk -> {
+                        getApk(it.apkUrl, requireActivity()) {
+                            viewModel.handleIntent(DialogScreenIntents.OnApkDownloadStarted)
+                        }
+                        viewModel.handleIntent(DialogScreenIntents.OnApkDownloadRequested)
                     }
 
-                    is DialogStates.OpenStore -> showAppInSelectedStore(context, it.store) { storeCallback ->
+                    is DialogScreenStates.OpenStore -> showAppInSelectedStore(context, it.store) { storeCallback ->
                         onStoreCallback(storeCallback)
                     }
 
-                    is DialogStates.ExecuteErrorCallback -> {
+                    is DialogScreenStates.ExecuteErrorCallback -> {
                         ErrorCallbackHolder.callback?.invoke(it.storeName)
-                        viewModel.onErrorCallbackCalled()
+                        viewModel.handleIntent(DialogScreenIntents.OnErrorCallbackExecuted)
                     }
 
-                    DialogStates.HideUpdateInProgress -> hideUpdateInProgressDialog()
-                    DialogStates.ShowUpdateInProgress -> showUpdateInProgressDialog(theme)
-                    DialogStates.Empty -> hideUpdateInProgressDialog()
+                    DialogScreenStates.HideUpdateInProgress -> hideUpdateInProgressDialog()
+                    DialogScreenStates.ShowUpdateInProgress -> showUpdateInProgressDialog(theme)
+                    DialogScreenStates.Empty -> hideUpdateInProgressDialog()
                 }
             }.launchIn(lifecycleScope)
     }
 
     private fun onStoreCallback(storeCallback: AppStoreCallback) {
         when (storeCallback) {
-            is AppStoreCallback.Failure -> viewModel.onErrorWhileOpeningStore(storeCallback.store)
-            is AppStoreCallback.Success -> viewModel.onStoreOpened()
+            is AppStoreCallback.Failure -> viewModel.handleIntent(DialogScreenIntents.OnOpeningStoreFailed(storeCallback.store))
+            is AppStoreCallback.Success -> viewModel.handleIntent(DialogScreenIntents.OnStoreOpened)
         }
     }
 
@@ -136,7 +135,7 @@ class AppUpdaterDialog : DialogFragment() {
         val typeface = TypefaceHolder.typeface
         setTypeface(typeface)
         setUpProperties(title, description, storeList, directDownloadList, theme, typeface)
-        subscribeToUpdateInProgressDialog(theme)
+        subscribeToViewModel(theme)
     }
 
     private fun setTypeface(typeface: Typeface?) {
@@ -150,16 +149,16 @@ class AppUpdaterDialog : DialogFragment() {
 
     private fun setTheme(theme: UserSelectedTheme) {
         val textColor = when (theme) {
-            LIGHT -> directDownloadR.color.appupdater_text_colors
-            DARK -> directDownloadR.color.appupdater_text_colors_dark
+            UserSelectedTheme.LIGHT -> com.pouyaheydari.appupdater.directdownload.R.color.appupdater_text_colors
+            UserSelectedTheme.DARK -> com.pouyaheydari.appupdater.directdownload.R.color.appupdater_text_colors_dark
         }
         with(binding) {
-            txtTitle.setTextColor(getColor(requireContext(), textColor))
-            txtDescription.setTextColor(getColor(requireContext(), textColor))
-            txtOr.setTextColor(getColor(requireContext(), textColor))
-            txtStore.setTextColor(getColor(requireContext(), textColor))
-            leftOrLine.setBackgroundColor(getColor(requireContext(), textColor))
-            rightOrLine.setBackgroundColor(getColor(requireContext(), textColor))
+            txtTitle.setTextColor(ContextCompat.getColor(requireContext(), textColor))
+            txtDescription.setTextColor(ContextCompat.getColor(requireContext(), textColor))
+            txtOr.setTextColor(ContextCompat.getColor(requireContext(), textColor))
+            txtStore.setTextColor(ContextCompat.getColor(requireContext(), textColor))
+            leftOrLine.setBackgroundColor(ContextCompat.getColor(requireContext(), textColor))
+            rightOrLine.setBackgroundColor(ContextCompat.getColor(requireContext(), textColor))
         }
     }
 
@@ -189,13 +188,17 @@ class AppUpdaterDialog : DialogFragment() {
         typeface: Typeface?,
     ) {
         if (directDownloadList.isNotEmpty()) {
-            binding.recyclerDirect.adapter = DirectRecyclerAdapter(directDownloadList, typeface) { viewModel.onDirectDownloadLinkClicked(it) }
+            binding.recyclerDirect.adapter = DirectRecyclerAdapter(directDownloadList, typeface) {
+                viewModel.handleIntent(DialogScreenIntents.OnDirectLinkClicked(it))
+            }
         }
 
         if (storeList.isNotEmpty()) {
             val spanCount = if (storeList.size > 1) 2 else 1
             binding.recyclerStores.layoutManager = GridLayoutManager(requireContext(), spanCount)
-            binding.recyclerStores.adapter = StoresRecyclerAdapter(storeList, theme, typeface) { viewModel.onStoreClicked(it) }
+            binding.recyclerStores.adapter = StoresRecyclerAdapter(storeList, theme, typeface) {
+                viewModel.handleIntent(DialogScreenIntents.OnStoreClicked(it))
+            }
         }
     }
 
@@ -204,7 +207,9 @@ class AppUpdaterDialog : DialogFragment() {
     }
 
     private fun showUpdateInProgressDialog(theme: UserSelectedTheme) {
-        if (parentFragmentManager.findFragmentByTag(UPDATE_DIALOG_TAG) == null && requireActivity().lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+        if (parentFragmentManager.findFragmentByTag(UPDATE_DIALOG_TAG) == null &&
+            requireActivity().lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)
+        ) {
             val fragment = UpdateInProgressDialog()
             val bundle = Bundle().apply {
                 putEnum(THEME, theme)
@@ -215,7 +220,9 @@ class AppUpdaterDialog : DialogFragment() {
     }
 
     private fun hideUpdateInProgressDialog() {
-        if (parentFragmentManager.findFragmentByTag(UPDATE_DIALOG_TAG) != null && requireActivity().lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+        if (parentFragmentManager.findFragmentByTag(UPDATE_DIALOG_TAG) != null &&
+            requireActivity().lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)
+        ) {
             val dialog = parentFragmentManager.findFragmentByTag(UPDATE_DIALOG_TAG) as UpdateInProgressDialog
             dialog.dismiss()
         }
@@ -234,7 +241,14 @@ class AppUpdaterDialog : DialogFragment() {
          */
         fun getInstance(dialogData: UpdaterDialogData): AppUpdaterDialog = with(dialogData) {
             val fragment = AppUpdaterDialog()
-            val data = UpdaterFragmentModel(title, description, storeList, directDownloadList, !isForceUpdate, theme)
+            val data = UpdaterFragmentModel(
+                title,
+                description,
+                storeList,
+                directDownloadList,
+                !isForceUpdate,
+                theme
+            )
 
             TypefaceHolder.typeface = typeface
             ErrorCallbackHolder.callback = errorWhileOpeningStoreCallback

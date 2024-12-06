@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.main.adapters
+package com.pouyaheydari.appupdater.main.ui.adapters
 
 import android.graphics.Typeface
 import android.view.LayoutInflater
@@ -7,9 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
 import com.pouyaheydari.appupdater.main.databinding.DownloadDirectItemBinding
 
-/**
- * Adapter to show Direct download links
- */
 internal class DirectRecyclerAdapter(
     private val list: List<DirectDownloadListItem>,
     private val typeface: Typeface?,
@@ -23,13 +20,7 @@ internal class DirectRecyclerAdapter(
 
     override fun onBindViewHolder(holder: SoresViewHolder, position: Int) = holder.onBind(list[position])
 
-    /**
-     * Direct download ViewHolder
-     */
     inner class SoresViewHolder(private val binding: DownloadDirectItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        /**
-         * Binds data to layout
-         */
         fun onBind(item: DirectDownloadListItem) {
             val txtDirect = binding.txtDirect
             txtDirect.text = item.title

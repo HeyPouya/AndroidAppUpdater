@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.main
+package com.pouyaheydari.appupdater.main.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,16 +7,17 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.WRAP_CONTENT
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import com.pouyaheydari.appupdater.main.R
 import com.pouyaheydari.appupdater.main.databinding.FragmentUpdateInProgressDialogBinding
-import com.pouyaheydari.appupdater.main.pojo.UserSelectedTheme
-import com.pouyaheydari.appupdater.main.pojo.UserSelectedTheme.DARK
-import com.pouyaheydari.appupdater.main.pojo.UserSelectedTheme.LIGHT
+import com.pouyaheydari.appupdater.main.ui.model.UserSelectedTheme
+import com.pouyaheydari.appupdater.main.ui.model.UserSelectedTheme.DARK
+import com.pouyaheydari.appupdater.main.ui.model.UserSelectedTheme.LIGHT
 import com.pouyaheydari.appupdater.main.utils.TypefaceHolder
 import com.pouyaheydari.appupdater.main.utils.getDialogWidth
 import com.pouyaheydari.appupdater.main.utils.getEnum
 import com.pouyaheydari.appupdater.directdownload.R as directDownloadR
 
-const val THEME = "THEME"
+internal const val THEME = "THEME"
 
 /**
  * Dialog to show download in progress to user

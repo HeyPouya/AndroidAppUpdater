@@ -9,8 +9,9 @@ import android.content.Context
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import com.pouyaheydari.appupdater.core.utils.APK_NAME
 import com.pouyaheydari.appupdater.directdownload.R
+
+internal const val APK_NAME = "NewAPK.apk"
 
 /**
  * Checks for needed permissions and tries to download the apk
