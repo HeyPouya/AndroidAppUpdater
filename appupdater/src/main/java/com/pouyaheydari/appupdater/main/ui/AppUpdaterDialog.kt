@@ -14,7 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
+import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
 import com.pouyaheydari.appupdater.directdownload.utils.getApk
 import com.pouyaheydari.appupdater.main.R
 import com.pouyaheydari.appupdater.main.data.mapper.mapToSelectedTheme
@@ -149,8 +149,8 @@ class AppUpdaterDialog : DialogFragment() {
 
     private fun setTheme(theme: UserSelectedTheme) {
         val textColor = when (theme) {
-            UserSelectedTheme.LIGHT -> com.pouyaheydari.appupdater.directdownload.R.color.appupdater_text_colors
-            UserSelectedTheme.DARK -> com.pouyaheydari.appupdater.directdownload.R.color.appupdater_text_colors_dark
+            UserSelectedTheme.LIGHT -> R.color.appupdater_text_colors
+            UserSelectedTheme.DARK -> R.color.appupdater_text_colors_dark
         }
         with(binding) {
             txtTitle.setTextColor(ContextCompat.getColor(requireContext(), textColor))

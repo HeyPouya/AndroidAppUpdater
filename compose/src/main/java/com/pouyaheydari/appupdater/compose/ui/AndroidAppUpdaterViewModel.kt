@@ -6,7 +6,7 @@ import com.pouyaheydari.appupdater.compose.data.mapper.UpdaterDialogUIMapper
 import com.pouyaheydari.appupdater.compose.ui.models.DialogScreenIntents
 import com.pouyaheydari.appupdater.compose.ui.models.DialogScreenState
 import com.pouyaheydari.appupdater.compose.ui.models.UpdaterViewModelData
-import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
+import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
 import com.pouyaheydari.appupdater.directdownload.domain.GetIsUpdateInProgressUseCase
 import com.pouyaheydari.appupdater.directdownload.domain.SetUpdateInProgressUseCase
 import com.pouyaheydari.appupdater.store.domain.StoreListItem

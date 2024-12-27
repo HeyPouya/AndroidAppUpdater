@@ -4,7 +4,7 @@ import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
+import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
 import com.pouyaheydari.appupdater.main.databinding.DownloadDirectItemBinding
 
 internal class DirectRecyclerAdapter(

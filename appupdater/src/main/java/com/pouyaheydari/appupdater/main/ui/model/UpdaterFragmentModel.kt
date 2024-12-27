@@ -3,7 +3,7 @@ package com.pouyaheydari.appupdater.main.ui.model
 import android.os.Parcel
 import android.os.Parcelable
 import com.pouyaheydari.appupdater.core.model.Theme
-import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
+import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
 import com.pouyaheydari.appupdater.store.domain.StoreListItem
 
 /**

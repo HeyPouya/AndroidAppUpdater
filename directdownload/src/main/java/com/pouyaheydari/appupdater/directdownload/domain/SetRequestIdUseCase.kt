@@ -1,8 +1,6 @@
 package com.pouyaheydari.appupdater.directdownload.domain
 
-import com.pouyaheydari.appupdater.directdownload.data.UpdateInProgressRepositoryImpl
-
-internal class SetRequestIdUseCase(private val repository: UpdateInProgressRepository = UpdateInProgressRepositoryImpl) {
+internal class SetRequestIdUseCase(private val repository: UpdateInProgressRepository) {
     operator fun invoke(requestId: Long) {
         repository.setRequestId(requestId)
     }

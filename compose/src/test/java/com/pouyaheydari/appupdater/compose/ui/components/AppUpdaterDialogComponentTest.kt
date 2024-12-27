@@ -7,7 +7,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.pouyaheydari.appupdater.compose.ui.models.DialogHeaderModel
 import com.pouyaheydari.appupdater.compose.ui.models.UpdaterDialogUIData
-import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
+import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
 import com.pouyaheydari.appupdater.store.domain.StoreFactory
 import com.pouyaheydari.appupdater.store.domain.StoreListItem
 import com.pouyaheydari.appupdater.store.domain.stores.AppStoreType

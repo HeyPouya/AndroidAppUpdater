@@ -1,8 +1,7 @@
 package com.pouyaheydari.appupdater.directdownload.domain
 
-import com.pouyaheydari.appupdater.directdownload.data.UpdateInProgressRepositoryImpl
 import kotlinx.coroutines.flow.Flow
 
-class GetIsUpdateInProgressUseCase(private val repository: UpdateInProgressRepository = UpdateInProgressRepositoryImpl) {
+class GetIsUpdateInProgressUseCase(private val repository: UpdateInProgressRepository) {
     operator fun invoke(): Flow<Boolean> = repository.getUpdateInProgressFlow()
 }

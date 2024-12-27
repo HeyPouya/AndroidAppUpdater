@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.pouyaheydari.appupdater.main.R
 import com.pouyaheydari.appupdater.main.databinding.DownloadStoresItemBinding
 import com.pouyaheydari.appupdater.main.ui.model.UserSelectedTheme
 import com.pouyaheydari.appupdater.main.ui.model.UserSelectedTheme.DARK
 import com.pouyaheydari.appupdater.main.ui.model.UserSelectedTheme.LIGHT
 import com.pouyaheydari.appupdater.store.domain.StoreListItem
-import com.pouyaheydari.appupdater.directdownload.R as directDownloadR
 
 internal class StoresRecyclerAdapter(
     private val list: List<StoreListItem>,
@@ -31,8 +31,8 @@ internal class StoresRecyclerAdapter(
             val txtStoreTitle = binding.txtStoreTitle
             val imgStore = binding.imgStore
             val textColor = when (theme) {
-                LIGHT -> directDownloadR.color.appupdater_text_colors
-                DARK -> directDownloadR.color.appupdater_text_colors_dark
+                LIGHT -> R.color.appupdater_text_colors
+                DARK -> R.color.appupdater_text_colors_dark
             }
             txtStoreTitle.setTextColor(ContextCompat.getColor(binding.root.context, textColor))
             txtStoreTitle.text = item.title

@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong
 
 private const val NO_REQUEST_ID = -10L
 
-internal object UpdateInProgressRepositoryImpl : UpdateInProgressRepository {
+object UpdateInProgressRepositoryImpl : UpdateInProgressRepository {
     private var requestId: AtomicLong = AtomicLong(NO_REQUEST_ID)
     private val shouldShowUpdateInProgressDialog = MutableSharedFlow<Boolean>(replay = 1)
 

@@ -1,6 +1,6 @@
 package com.pouyaheydari.appupdater.main.ui.model
 
-import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
+import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
 import com.pouyaheydari.appupdater.store.domain.StoreListItem
 import com.pouyaheydari.appupdater.store.domain.stores.AppStore
 

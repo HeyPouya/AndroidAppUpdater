@@ -4,12 +4,14 @@ import android.app.Activity
 import android.app.DownloadManager
 import android.app.DownloadManager.Request.NETWORK_MOBILE
 import android.app.DownloadManager.Request.NETWORK_WIFI
-import android.app.DownloadManager.Request.VISIBILITY_VISIBLE
+import android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
 import android.content.Context
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import com.pouyaheydari.appupdater.directdownload.R
+import com.pouyaheydari.appupdater.directdownload.data.UpdateInProgressRepositoryImpl
+import com.pouyaheydari.appupdater.directdownload.domain.SetRequestIdUseCase
 
 internal const val APK_NAME = "NewAPK.apk"
 
@@ -38,17 +40,14 @@ private fun deleteExistingApkIfAvailable(context: Context) {
 }
 
 private fun startDownloadManagerToDownloadNewApk(url: String, context: Context) {
-    val downloadManager = DownloadManager.Request(Uri.parse(url)).run {
-        // setting title and description to be shown on download notification
-        setTitle(context.getString(R.string.appupdater_download_notification_title))
-        setDescription(context.getString(R.string.appupdater_download_notification_desc))
-        setNotificationVisibility(VISIBILITY_VISIBLE)
-        setAllowedNetworkTypes(NETWORK_WIFI or NETWORK_MOBILE)
-        // setting the destination of the downloaded file
-        setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, APK_NAME)
-    }
+    val downloadManager = DownloadManager.Request(Uri.parse(url))
+        .setTitle(context.getString(R.string.appupdater_download_notification_title))
+        .setDescription(context.getString(R.string.appupdater_download_notification_desc))
+        .setNotificationVisibility(VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        .setAllowedNetworkTypes(NETWORK_WIFI or NETWORK_MOBILE)
+        .setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, APK_NAME)
 
     // enqueue the file to start download
     val manager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-    com.pouyaheydari.appupdater.directdownload.domain.SetRequestIdUseCase().invoke(manager.enqueue(downloadManager))
+    SetRequestIdUseCase(UpdateInProgressRepositoryImpl).invoke(manager.enqueue(downloadManager))
 }

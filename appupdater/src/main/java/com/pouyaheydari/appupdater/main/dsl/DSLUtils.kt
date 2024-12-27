@@ -1,6 +1,6 @@
 package com.pouyaheydari.appupdater.main.dsl
 
-import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
+import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
 import com.pouyaheydari.appupdater.main.ui.AppUpdaterDialog
 import com.pouyaheydari.appupdater.main.ui.model.UpdaterDialogData
 import com.pouyaheydari.appupdater.store.domain.StoreListItem

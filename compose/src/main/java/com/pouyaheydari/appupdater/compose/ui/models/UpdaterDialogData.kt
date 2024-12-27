@@ -2,7 +2,7 @@ package com.pouyaheydari.appupdater.compose.ui.models
 
 import android.graphics.Typeface
 import com.pouyaheydari.appupdater.core.model.Theme
-import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
+import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
 import com.pouyaheydari.appupdater.store.domain.StoreListItem
 
 /**

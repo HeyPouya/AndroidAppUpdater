@@ -2,7 +2,7 @@ package com.pouyaheydari.appupdater.demo.utils
 
 import android.content.Context
 import com.pouyaheydari.appupdater.demo.R
-import com.pouyaheydari.appupdater.directdownload.data.model.DirectDownloadListItem
+import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
 import com.pouyaheydari.appupdater.store.domain.StoreFactory
 import com.pouyaheydari.appupdater.store.domain.StoreListItem
 import com.pouyaheydari.appupdater.store.domain.stores.AppStoreType

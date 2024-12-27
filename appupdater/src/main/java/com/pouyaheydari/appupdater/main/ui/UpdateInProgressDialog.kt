@@ -15,7 +15,6 @@ import com.pouyaheydari.appupdater.main.ui.model.UserSelectedTheme.LIGHT
 import com.pouyaheydari.appupdater.main.utils.TypefaceHolder
 import com.pouyaheydari.appupdater.main.utils.getDialogWidth
 import com.pouyaheydari.appupdater.main.utils.getEnum
-import com.pouyaheydari.appupdater.directdownload.R as directDownloadR
 
 internal const val THEME = "THEME"
 
@@ -49,8 +48,8 @@ internal class UpdateInProgressDialog : DialogFragment() {
 
     private fun setTheme(data: UserSelectedTheme) {
         val textColor = when (data) {
-            LIGHT -> directDownloadR.color.appupdater_text_colors
-            DARK -> directDownloadR.color.appupdater_text_colors_dark
+            LIGHT -> R.color.appupdater_text_colors
+            DARK -> R.color.appupdater_text_colors_dark
         }
 
         with(binding) {

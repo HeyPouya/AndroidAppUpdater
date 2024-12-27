@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.directdownload.data.model
+package com.pouyaheydari.appupdater.directdownload.data
 
 import android.os.Parcel
 import android.os.Parcelable

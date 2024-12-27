@@ -2,12 +2,13 @@ package com.pouyaheydari.appupdater.main.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.pouyaheydari.appupdater.directdownload.data.UpdateInProgressRepositoryImpl
 import com.pouyaheydari.appupdater.directdownload.domain.GetIsUpdateInProgressUseCase
 import com.pouyaheydari.appupdater.directdownload.domain.SetUpdateInProgressUseCase
 
 internal class AppUpdaterViewModelFactory(
-    private val getIsUpdateInProgressUseCase: GetIsUpdateInProgressUseCase = GetIsUpdateInProgressUseCase(),
-    private val setUpdateInProgressUseCase: SetUpdateInProgressUseCase = SetUpdateInProgressUseCase()
+    private val getIsUpdateInProgressUseCase: GetIsUpdateInProgressUseCase = GetIsUpdateInProgressUseCase(UpdateInProgressRepositoryImpl),
+    private val setUpdateInProgressUseCase: SetUpdateInProgressUseCase = SetUpdateInProgressUseCase(UpdateInProgressRepositoryImpl)
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
