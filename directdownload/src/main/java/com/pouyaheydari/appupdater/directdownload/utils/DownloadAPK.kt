@@ -15,10 +15,7 @@ import com.pouyaheydari.appupdater.directdownload.domain.SetRequestIdUseCase
 
 internal const val APK_NAME = "NewAPK.apk"
 
-/**
- * Checks for needed permissions and tries to download the apk
- */
-fun getApk(url: String, activity: Activity, onDownloadingApkStarted: () -> Unit) {
+fun checkPermissionsAndDownloadApk(url: String, activity: Activity, onDownloadingApkStarted: () -> Unit) {
     if (checkAndRequestRequiredPermissionsBasedOnOsVersion(activity, Build.VERSION.SDK_INT)) {
         prepareToDownloadApk(url, activity)
         onDownloadingApkStarted()
@@ -28,8 +25,7 @@ fun getApk(url: String, activity: Activity, onDownloadingApkStarted: () -> Unit)
 private fun prepareToDownloadApk(url: String, context: Context) {
     // Delete APK if user downloaded the apk before
     deleteExistingApkIfAvailable(context)
-
-    startDownloadManagerToDownloadNewApk(url, context)
+    startDownloadManager(url, context)
 }
 
 private fun deleteExistingApkIfAvailable(context: Context) {
@@ -39,7 +35,7 @@ private fun deleteExistingApkIfAvailable(context: Context) {
     }
 }
 
-private fun startDownloadManagerToDownloadNewApk(url: String, context: Context) {
+private fun startDownloadManager(url: String, context: Context) {
     val downloadManager = DownloadManager.Request(Uri.parse(url))
         .setTitle(context.getString(R.string.appupdater_download_notification_title))
         .setDescription(context.getString(R.string.appupdater_download_notification_desc))

@@ -2,8 +2,9 @@ package com.pouyaheydari.appupdater.main.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pouyaheydari.appupdater.directdownload.domain.GetIsUpdateInProgressUseCase
-import com.pouyaheydari.appupdater.directdownload.domain.SetUpdateInProgressUseCase
+import com.pouyaheydari.appupdater.directdownload.domain.DownloadState
+import com.pouyaheydari.appupdater.directdownload.domain.GetDownloadStateUseCase
+import com.pouyaheydari.appupdater.directdownload.domain.SetDownloadStateUseCase
 import com.pouyaheydari.appupdater.main.ui.model.DialogScreenIntents
 import com.pouyaheydari.appupdater.main.ui.model.DialogScreenStates
 import com.pouyaheydari.appupdater.main.utils.ErrorCallbackHolder
@@ -13,8 +14,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 internal class AppUpdaterViewModel(
-    private val isUpdateInProgressUseCase: GetIsUpdateInProgressUseCase,
-    private val setUpdateInProgressUseCase: SetUpdateInProgressUseCase
+    private val isUpdateInProgressUseCase: GetDownloadStateUseCase,
+    private val setDownloadStateUseCase: SetDownloadStateUseCase
 ) : ViewModel() {
     val screenState = MutableStateFlow<DialogScreenStates>(DialogScreenStates.HideUpdateInProgress)
 
@@ -37,14 +38,18 @@ internal class AppUpdaterViewModel(
 
     private fun setUpdateInProgress() {
         viewModelScope.launch {
-            setUpdateInProgressUseCase(true)
+            setDownloadStateUseCase(DownloadState.Downloading)
         }
     }
 
     private fun observeUpdateInProgressStatus() {
         viewModelScope.launch {
             isUpdateInProgressUseCase().collectLatest {
-                screenState.value = if (it) DialogScreenStates.ShowUpdateInProgress else DialogScreenStates.HideUpdateInProgress
+                screenState.value = if (it == DownloadState.Downloading) {
+                    DialogScreenStates.ShowUpdateInProgress
+                } else {
+                    DialogScreenStates.HideUpdateInProgress
+                }
             }
         }
     }

@@ -7,8 +7,9 @@ import com.pouyaheydari.appupdater.compose.ui.models.DialogScreenIntents
 import com.pouyaheydari.appupdater.compose.ui.models.DialogScreenState
 import com.pouyaheydari.appupdater.compose.ui.models.UpdaterViewModelData
 import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
-import com.pouyaheydari.appupdater.directdownload.domain.GetIsUpdateInProgressUseCase
-import com.pouyaheydari.appupdater.directdownload.domain.SetUpdateInProgressUseCase
+import com.pouyaheydari.appupdater.directdownload.domain.DownloadState
+import com.pouyaheydari.appupdater.directdownload.domain.GetDownloadStateUseCase
+import com.pouyaheydari.appupdater.directdownload.domain.SetDownloadStateUseCase
 import com.pouyaheydari.appupdater.store.domain.StoreListItem
 import com.pouyaheydari.appupdater.store.domain.stores.AppStore
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,8 +24,8 @@ import kotlinx.coroutines.launch
  */
 internal class AndroidAppUpdaterViewModel(
     viewModelData: UpdaterViewModelData,
-    private val isUpdateInProgressUseCase: GetIsUpdateInProgressUseCase,
-    private val setUpdateInProgressUseCase: SetUpdateInProgressUseCase
+    private val getDownloadStateUseCase: GetDownloadStateUseCase,
+    private val setDownloadStateUseCase: SetDownloadStateUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(DialogScreenState())
     val uiState: StateFlow<DialogScreenState> = _uiState.asStateFlow()
@@ -60,7 +61,7 @@ internal class AndroidAppUpdaterViewModel(
 
     private fun setUpdateInProgress() {
         viewModelScope.launch {
-            setUpdateInProgressUseCase(true)
+            setDownloadStateUseCase(DownloadState.Downloading)
         }
     }
 
@@ -80,8 +81,9 @@ internal class AndroidAppUpdaterViewModel(
 
     private fun observeUpdateProgress() {
         viewModelScope.launch {
-            isUpdateInProgressUseCase().collectLatest { updateInProgress ->
-                _uiState.update { it.copy(shouldShowUpdateInProgress = updateInProgress, shouldStartAPKDownload = false, shouldOpenStore = false) }
+            getDownloadStateUseCase().collectLatest { downloadState ->
+                val isDownloadInProgress = downloadState == DownloadState.Downloading
+                _uiState.update { it.copy(shouldShowUpdateInProgress = isDownloadInProgress, shouldStartAPKDownload = false, shouldOpenStore = false) }
             }
         }
     }

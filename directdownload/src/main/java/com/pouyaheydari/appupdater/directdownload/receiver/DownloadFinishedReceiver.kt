@@ -9,42 +9,34 @@ import android.util.Log
 import com.pouyaheydari.appupdater.core.utils.ANDROID_APP_UPDATER_DEBUG_TAG
 import com.pouyaheydari.appupdater.directdownload.R
 import com.pouyaheydari.appupdater.directdownload.data.UpdateInProgressRepositoryImpl
+import com.pouyaheydari.appupdater.directdownload.domain.DownloadState
 import com.pouyaheydari.appupdater.directdownload.domain.GetRequestIdUseCase
-import com.pouyaheydari.appupdater.directdownload.domain.SetUpdateInProgressUseCase
+import com.pouyaheydari.appupdater.directdownload.domain.SetDownloadStateUseCase
 import com.pouyaheydari.appupdater.directdownload.utils.getExistingApk
 import com.pouyaheydari.appupdater.directdownload.utils.installAPK
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-/**
- * Receives when download is finished and opens the install dialog
- */
 internal class DownloadFinishedReceiver : BroadcastReceiver() {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private val getRequestIdUseCase by lazy { GetRequestIdUseCase(UpdateInProgressRepositoryImpl) }
-    private val setUpdateInProgressUseCase by lazy { SetUpdateInProgressUseCase(UpdateInProgressRepositoryImpl) }
+    private val setDownloadStateUseCase by lazy { SetDownloadStateUseCase(UpdateInProgressRepositoryImpl) }
 
-    /**
-     * To show install page when apk got downloaded successfully
-     */
-    override fun onReceive(context: Context?, intent: Intent?) {
+    override fun onReceive(context: Context, intent: Intent?) {
         if (intent?.action == DownloadManager.ACTION_DOWNLOAD_COMPLETE) {
             val referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
-            // if downloaded file is our apk
             if (referenceId == getRequestIdUseCase()) {
-                context?.let {
-                    hideUpdateInProgress()
-                    verifyDownloadedApkExists(it)
-                }
+                hideUpdateInProgress()
+                verifyDownloadedApkExists(context)
             }
         }
     }
 
     private fun hideUpdateInProgress() {
         coroutineScope.launch {
-            setUpdateInProgressUseCase(false)
+            setDownloadStateUseCase(DownloadState.Downloaded)
         }
     }
 

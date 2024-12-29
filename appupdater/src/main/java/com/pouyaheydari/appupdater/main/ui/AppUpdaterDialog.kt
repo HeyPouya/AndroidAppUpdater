@@ -15,7 +15,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
-import com.pouyaheydari.appupdater.directdownload.utils.getApk
+import com.pouyaheydari.appupdater.directdownload.utils.checkPermissionsAndDownloadApk
 import com.pouyaheydari.appupdater.main.R
 import com.pouyaheydari.appupdater.main.data.mapper.mapToSelectedTheme
 import com.pouyaheydari.appupdater.main.databinding.FragmentAppUpdaterDialogBinding
@@ -95,7 +95,7 @@ class AppUpdaterDialog : DialogFragment() {
             .onEach {
                 when (it) {
                     is DialogScreenStates.DownloadApk -> {
-                        getApk(it.apkUrl, requireActivity()) {
+                        checkPermissionsAndDownloadApk(it.apkUrl, requireActivity()) {
                             viewModel.handleIntent(DialogScreenIntents.OnApkDownloadStarted)
                         }
                         viewModel.handleIntent(DialogScreenIntents.OnApkDownloadRequested)

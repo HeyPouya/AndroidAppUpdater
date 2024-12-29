@@ -1,5 +1,6 @@
 package com.pouyaheydari.appupdater.directdownload.data
 
+import com.pouyaheydari.appupdater.directdownload.domain.DownloadState
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -26,10 +27,12 @@ class UpdateInProgressRepositoryImplTest {
     }
 
     @Test
-    fun `When the download in progress state is changed, then the correct value is being published to observers`() = runTest {
-        repository.updateApkDownloadProgress(true)
+    fun `When updateApkDownloadState is called, then the correct state is emitted`() = runTest {
+        val newState = DownloadState.Downloading
 
-        val isInProgress = repository.getUpdateInProgressFlow().first()
-        assertEquals(true, isInProgress)
+        repository.updateApkDownloadState(newState)
+
+        val state = repository.getDownloadState().first()
+        assertEquals(newState, state)
     }
 }

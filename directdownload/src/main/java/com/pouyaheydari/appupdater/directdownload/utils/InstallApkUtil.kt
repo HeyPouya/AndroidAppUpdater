@@ -11,9 +11,8 @@ import androidx.core.content.FileProvider
 import com.pouyaheydari.appupdater.core.utils.ANDROID_APP_UPDATER_DEBUG_TAG
 import java.io.File
 
-/**
- * Uses different methods to install the apk depending the user's Android version
- */
+const val APK_MIME_TYPE = "application/vnd.android.package-archive"
+
 internal fun installAPK(context: Context, apk: File, androidVersion: Int) {
     when {
         androidVersion in 0..Build.VERSION_CODES.M -> installAPKForMAndBellow(context, apk)
@@ -54,7 +53,7 @@ private fun getFileUri(context: Context, apk: File): Uri = FileProvider.getUriFo
 
 private fun installAPKForMAndBellow(context: Context, apk: File) {
     val intent = Intent(Intent.ACTION_VIEW, Uri.fromFile(apk)).apply {
-        type = "application/vnd.android.package-archive"
+        type = APK_MIME_TYPE
         flags = Intent.FLAG_ACTIVITY_NEW_TASK
     }
     context.startActivity(intent)

@@ -1,5 +1,6 @@
 package com.pouyaheydari.appupdater.directdownload.data
 
+import com.pouyaheydari.appupdater.directdownload.domain.DownloadState
 import com.pouyaheydari.appupdater.directdownload.domain.UpdateInProgressRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -10,7 +11,7 @@ private const val NO_REQUEST_ID = -10L
 
 object UpdateInProgressRepositoryImpl : UpdateInProgressRepository {
     private var requestId: AtomicLong = AtomicLong(NO_REQUEST_ID)
-    private val shouldShowUpdateInProgressDialog = MutableSharedFlow<Boolean>(replay = 1)
+    private val downloadState = MutableSharedFlow<DownloadState>(replay = 1)
 
     override fun getRequestId(): Long = requestId.get()
 
@@ -18,9 +19,9 @@ object UpdateInProgressRepositoryImpl : UpdateInProgressRepository {
         requestId.set(id)
     }
 
-    override fun getUpdateInProgressFlow(): Flow<Boolean> = shouldShowUpdateInProgressDialog.asSharedFlow()
+    override fun getDownloadState(): Flow<DownloadState> = downloadState.asSharedFlow()
 
-    override suspend fun updateApkDownloadProgress(isInProgress: Boolean) {
-        shouldShowUpdateInProgressDialog.emit(isInProgress)
+    override suspend fun updateApkDownloadState(state: DownloadState) {
+        downloadState.emit(state)
     }
 }

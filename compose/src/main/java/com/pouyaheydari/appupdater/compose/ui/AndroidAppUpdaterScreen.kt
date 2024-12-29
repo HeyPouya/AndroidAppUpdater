@@ -24,7 +24,7 @@ import com.pouyaheydari.appupdater.compose.ui.utils.previewDirectDownloadListDat
 import com.pouyaheydari.appupdater.compose.ui.utils.previewStoreListData
 import com.pouyaheydari.appupdater.core.model.Theme
 import com.pouyaheydari.appupdater.core.utils.ANDROID_APP_UPDATER_DEBUG_TAG
-import com.pouyaheydari.appupdater.directdownload.utils.getApk
+import com.pouyaheydari.appupdater.directdownload.utils.checkPermissionsAndDownloadApk
 import com.pouyaheydari.appupdater.store.domain.AppStoreCallback
 import com.pouyaheydari.appupdater.store.domain.showAppInSelectedStore
 import com.pouyaheydari.appupdater.store.domain.stores.AppStore
@@ -118,7 +118,7 @@ private fun getApkIfActivityIsNotNull(activity: Activity?, url: String, onDownlo
     if (activity == null) {
         Log.e(ANDROID_APP_UPDATER_DEBUG_TAG, "Provided activity is null. Skipping downloading the apk")
     } else {
-        getApk(url, activity, onDownloadingApkStarted)
+        checkPermissionsAndDownloadApk(url, activity, onDownloadingApkStarted)
     }
 }
 
