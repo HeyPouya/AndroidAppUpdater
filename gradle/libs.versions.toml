@@ -49,7 +49,8 @@ androidx-test-ui-espresso-intents = { group = "androidx.test.espresso", name = "
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidTestJUnit" }
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidTestRules" }
 androidx-test-ui-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidTestEspresso" }
-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 
 [plugins]

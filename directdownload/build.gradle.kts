@@ -25,12 +25,14 @@ dependencies {
     api(projects.core)
 
     implementation(libs.androidx.appcompat)
-    implementation(libs.coroutines)
+    implementation(libs.kotlinx.coroutines)
 
     // testing
     testImplementation(libs.junit4)
     testImplementation(libs.mockito)
     testImplementation(libs.mockito.kotlin)
+    testImplementation (libs.kotlinx.coroutines.test)
+
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.test.ui.espresso.core)

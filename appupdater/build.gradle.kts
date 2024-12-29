@@ -44,7 +44,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintLayout)
     implementation(libs.androidx.recyclerView)
-    implementation(libs.coroutines)
+    implementation(libs.kotlinx.coroutines)
     implementation(libs.androidx.fragment)
 
     // testing dependency
