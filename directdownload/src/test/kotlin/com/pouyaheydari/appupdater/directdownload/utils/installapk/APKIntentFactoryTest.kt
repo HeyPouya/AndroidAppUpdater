@@ -34,6 +34,7 @@ class APKIntentFactoryTest {
         assertEquals(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK, intent.flags)
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun `test getInstallAPKIntent for Android N to O`() {
         val uri: Uri = mock()

@@ -8,12 +8,13 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
 import org.robolectric.RobolectricTestRunner
 
+@Suppress("DEPRECATION")
 @RunWith(RobolectricTestRunner::class)
 class InstallAPKIntentForNToOTest {
 
     @Test
     fun testGetIntent() {
-        val fileUri:Uri = mock()
+        val fileUri: Uri = mock()
         val installAPKIntentForNToO = InstallAPKIntentForNToO()
 
         val intent = installAPKIntentForNToO.getIntent(fileUri)
