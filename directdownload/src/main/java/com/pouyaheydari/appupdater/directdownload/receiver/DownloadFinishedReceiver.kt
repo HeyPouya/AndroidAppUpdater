@@ -36,13 +36,4 @@ internal class DownloadFinishedReceiver : BroadcastReceiver() {
             setDownloadStateUseCase(DownloadState.Downloaded(apk))
         }
     }
-
-//    private fun verifyDownloadedApkExists(context: Context) {
-//        val existingApk = context.getExistingApk()
-//        if (!existingApk.exists()) {
-//            Log.e(ANDROID_APP_UPDATER_DEBUG_TAG, context.getString(R.string.appupdater_couldnt_find_downloaded_file))
-//        } else {
-//            installAPK(context, existingApk, Build.VERSION.SDK_INT)
-//        }
-//    }
 }
