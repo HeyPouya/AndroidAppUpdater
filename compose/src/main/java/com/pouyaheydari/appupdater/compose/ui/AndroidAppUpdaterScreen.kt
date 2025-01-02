@@ -3,6 +3,7 @@ package com.pouyaheydari.appupdater.compose.ui
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.os.Build
 import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.compose.animation.AnimatedVisibility
@@ -25,9 +26,11 @@ import com.pouyaheydari.appupdater.compose.ui.utils.previewStoreListData
 import com.pouyaheydari.appupdater.core.model.Theme
 import com.pouyaheydari.appupdater.core.utils.ANDROID_APP_UPDATER_DEBUG_TAG
 import com.pouyaheydari.appupdater.directdownload.utils.checkPermissionsAndDownloadApk
+import com.pouyaheydari.appupdater.directdownload.utils.installapk.installAPK
 import com.pouyaheydari.appupdater.store.domain.AppStoreCallback
 import com.pouyaheydari.appupdater.store.domain.showAppInSelectedStore
 import com.pouyaheydari.appupdater.store.domain.stores.AppStore
+import java.io.File
 import com.pouyaheydari.appupdater.directdownload.R as directDownloadR
 
 /**
@@ -56,7 +59,7 @@ internal fun AndroidAppUpdaterScreen(
         }
 
         UpdateInProgressDialogComponent(
-            isUpdateInProgress = state.shouldShowUpdateInProgress,
+            isUpdateInProgress = state.downloadState.shouldShowUpdateInProgress,
             dialogTitle = stringResource(id = (directDownloadR.string.appupdater_please_wait)),
             dialogDescription = stringResource(id = (directDownloadR.string.appupdater_downloading_new_version)),
             typeface = dialogData.typeface,
@@ -75,12 +78,33 @@ internal fun AndroidAppUpdaterScreen(
         )
 
         setupDirectApkDownload(
-            state.downloadUrl,
-            state.shouldStartAPKDownload,
+            state.downloadState.downloadUrl,
+            state.downloadState.shouldStartAPKDownload,
             activity,
             { viewModel.handleIntent(DialogScreenIntents.OnApkDownloadRequested) },
             { viewModel.handleIntent(DialogScreenIntents.OnApkDownloadStarted) },
         )
+
+        setupApkInstallation(
+            state.downloadState.shouldInstallApk,
+            state.downloadState.apk,
+            activity,
+        ) { viewModel.handleIntent(DialogScreenIntents.OnApkInstallationStarted) }
+    }
+}
+
+private fun setupApkInstallation(shouldInstallApk: Boolean, apk: File, activity: Activity?, onApkInstallationStartedListener: () -> Unit) {
+    if (shouldInstallApk) {
+        installAPKIfActivityIsNotNull(activity, apk)
+        onApkInstallationStartedListener()
+    }
+}
+
+private fun installAPKIfActivityIsNotNull(activity: Activity?, apk: File) {
+    if (activity == null) {
+        Log.e(ANDROID_APP_UPDATER_DEBUG_TAG, "Provided activity is null. Skipping apk installation")
+    } else {
+        installAPK(activity, apk, Build.VERSION.SDK_INT)
     }
 }
 

@@ -33,6 +33,8 @@ internal class AppUpdaterViewModel(
 
             is DialogScreenIntents.OnOpeningStoreFailed ->
                 screenState.value = DialogScreenStates.ExecuteErrorCallback(intent.store.getUserReadableName())
+
+            DialogScreenIntents.OnApkInstallationStarted -> screenState.value = DialogScreenStates.Empty
         }
     }
 
@@ -44,11 +46,13 @@ internal class AppUpdaterViewModel(
 
     private fun observeUpdateInProgressStatus() {
         viewModelScope.launch {
-            isUpdateInProgressUseCase().collectLatest {
-                screenState.value = if (it == DownloadState.Downloading) {
-                    DialogScreenStates.ShowUpdateInProgress
-                } else {
-                    DialogScreenStates.HideUpdateInProgress
+            isUpdateInProgressUseCase().collectLatest { downloadState ->
+                screenState.value = when (downloadState) {
+                    is DownloadState.Downloaded ->
+                        DialogScreenStates.InstallApk(downloadState.apk)
+
+                    is DownloadState.Downloading ->
+                        DialogScreenStates.ShowUpdateInProgress
                 }
             }
         }

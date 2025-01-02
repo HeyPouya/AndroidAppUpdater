@@ -12,4 +12,5 @@ internal sealed interface DialogScreenIntents {
     data object OnErrorCallbackExecuted : DialogScreenIntents
     data object OnApkDownloadStarted : DialogScreenIntents
     data object OnApkDownloadRequested : DialogScreenIntents
+    data object OnApkInstallationStarted : DialogScreenIntents
 }

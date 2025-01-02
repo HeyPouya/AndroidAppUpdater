@@ -49,13 +49,15 @@ internal class AndroidAppUpdaterViewModel(
             is DialogScreenIntents.OnStoreClicked -> showAppInSelectedStore(intent.item)
             DialogScreenIntents.OnStoreOpened -> _uiState.update { it.copy(shouldOpenStore = false) }
             DialogScreenIntents.OnErrorCallbackExecuted -> _uiState.update { it.copy(errorWhileOpeningStore = it.errorWhileOpeningStore.copy(shouldNotifyCaller = false)) }
-            DialogScreenIntents.OnApkDownloadRequested -> _uiState.update { it.copy(shouldStartAPKDownload = false) }
+            DialogScreenIntents.OnApkDownloadRequested -> _uiState.update { it.copy(downloadState = it.downloadState.copy(shouldStartAPKDownload = false)) }
             DialogScreenIntents.OnApkDownloadStarted -> {
                 setUpdateInProgress()
                 observeUpdateProgress()
             }
 
             is DialogScreenIntents.OnOpeningStoreFailed -> observeErrorWhileShowingStore(intent.store)
+            DialogScreenIntents.OnApkInstallationStarted ->
+                _uiState.update { it.copy(downloadState = it.downloadState.copy(shouldInstallApk = false)) }
         }
     }
 
@@ -76,14 +78,19 @@ internal class AndroidAppUpdaterViewModel(
     }
 
     private fun startDirectUrlApkDownload(item: DirectDownloadListItem) {
-        _uiState.update { it.copy(shouldStartAPKDownload = true, downloadUrl = item.url) }
+        _uiState.update { it.copy(downloadState = it.downloadState.copy(shouldStartAPKDownload = true, downloadUrl = item.url)) }
     }
 
     private fun observeUpdateProgress() {
         viewModelScope.launch {
             getDownloadStateUseCase().collectLatest { downloadState ->
-                val isDownloadInProgress = downloadState == DownloadState.Downloading
-                _uiState.update { it.copy(shouldShowUpdateInProgress = isDownloadInProgress, shouldStartAPKDownload = false, shouldOpenStore = false) }
+                when (downloadState) {
+                    is DownloadState.Downloaded ->
+                        _uiState.update { it.copy(downloadState = it.downloadState.copy(shouldShowUpdateInProgress = false, shouldInstallApk = true, apk = downloadState.apk)) }
+
+                    is DownloadState.Downloading ->
+                        _uiState.update { it.copy(downloadState = it.downloadState.copy(shouldShowUpdateInProgress = true)) }
+                }
             }
         }
     }

@@ -7,6 +7,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
+import java.io.File
 
 class GetDownloadStateUseCaseTest {
 
@@ -15,10 +16,11 @@ class GetDownloadStateUseCaseTest {
 
     @Test
     fun `When state is downloaded, then use case returns the correct state`() = runTest {
-        whenever(repository.getDownloadState()).thenReturn(flowOf(DownloadState.Downloaded))
+        val expected = DownloadState.Downloaded(File(""))
+        whenever(repository.getDownloadState()).thenReturn(flowOf(expected))
 
         val downloadState = getDownloadStateUseCase().first()
-        assertEquals(DownloadState.Downloaded, downloadState)
+        assertEquals(expected, downloadState)
     }
 
     @Test

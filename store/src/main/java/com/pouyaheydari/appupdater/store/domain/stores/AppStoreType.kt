@@ -3,7 +3,7 @@ package com.pouyaheydari.appupdater.store.domain.stores
 enum class AppStoreType(internal val userReadableName: String) {
     GOOGLE_PLAY("Google Play"),
     CAFE_BAZAAR("Cafe Bazaar"),
-    MYKET("Mylet"),
+    MYKET("Myket"),
     HUAWEI_APP_GALLERY("App Gallery"),
     SAMSUNG_GALAXY_STORE("Galaxy Store"),
     AMAZON_APP_STORE("Amazon App Store"),

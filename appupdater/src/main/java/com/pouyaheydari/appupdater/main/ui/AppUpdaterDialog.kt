@@ -1,6 +1,7 @@
 package com.pouyaheydari.appupdater.main.ui
 
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
 import com.pouyaheydari.appupdater.directdownload.utils.checkPermissionsAndDownloadApk
+import com.pouyaheydari.appupdater.directdownload.utils.installapk.installAPK
 import com.pouyaheydari.appupdater.main.R
 import com.pouyaheydari.appupdater.main.data.mapper.mapToSelectedTheme
 import com.pouyaheydari.appupdater.main.databinding.FragmentAppUpdaterDialogBinding
@@ -113,8 +115,15 @@ class AppUpdaterDialog : DialogFragment() {
                     DialogScreenStates.HideUpdateInProgress -> hideUpdateInProgressDialog()
                     DialogScreenStates.ShowUpdateInProgress -> showUpdateInProgressDialog(theme)
                     DialogScreenStates.Empty -> hideUpdateInProgressDialog()
+                    is DialogScreenStates.InstallApk -> installDownloadedApk(it)
                 }
             }.launchIn(lifecycleScope)
+    }
+
+    private fun installDownloadedApk(it: DialogScreenStates.InstallApk) {
+        hideUpdateInProgressDialog()
+        installAPK(requireActivity(), it.apk, Build.VERSION.SDK_INT)
+        viewModel.handleIntent(DialogScreenIntents.OnApkInstallationStarted)
     }
 
     private fun onStoreCallback(storeCallback: AppStoreCallback) {

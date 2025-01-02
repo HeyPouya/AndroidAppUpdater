@@ -11,9 +11,11 @@ import android.os.Build
 import android.os.Environment
 import com.pouyaheydari.appupdater.directdownload.R
 import com.pouyaheydari.appupdater.directdownload.data.UpdateInProgressRepositoryImpl
+import com.pouyaheydari.appupdater.directdownload.domain.SetDownloadFilePathUseCase
 import com.pouyaheydari.appupdater.directdownload.domain.SetRequestIdUseCase
+import java.io.File
 
-internal const val APK_NAME = "NewAPK.apk"
+private const val APK_NAME = "NewAPK.apk"
 
 fun checkPermissionsAndDownloadApk(url: String, activity: Activity, onDownloadingApkStarted: () -> Unit) {
     if (checkAndRequestRequiredPermissionsBasedOnOsVersion(activity, Build.VERSION.SDK_INT)) {
@@ -29,7 +31,7 @@ private fun prepareToDownloadApk(url: String, context: Context) {
 }
 
 private fun deleteExistingApkIfAvailable(context: Context) {
-    val file = context.getExistingApk()
+    val file = File(getApkFilePath(context))
     if (file.exists()) {
         file.delete()
     }
@@ -45,5 +47,8 @@ private fun startDownloadManager(url: String, context: Context) {
 
     // enqueue the file to start download
     val manager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+    SetDownloadFilePathUseCase(UpdateInProgressRepositoryImpl).invoke(getApkFilePath(context))
     SetRequestIdUseCase(UpdateInProgressRepositoryImpl).invoke(manager.enqueue(downloadManager))
 }
+
+private fun getApkFilePath(context: Context) = "${context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)}/$APK_NAME"

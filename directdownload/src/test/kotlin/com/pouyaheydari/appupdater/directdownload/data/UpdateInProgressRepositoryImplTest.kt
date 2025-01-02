@@ -6,6 +6,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import java.io.File
 
 class UpdateInProgressRepositoryImplTest {
 
@@ -29,6 +30,27 @@ class UpdateInProgressRepositoryImplTest {
     @Test
     fun `When updateApkDownloadState is called, then the correct state is emitted`() = runTest {
         val newState = DownloadState.Downloading
+
+        repository.updateApkDownloadState(newState)
+
+        val state = repository.getDownloadState().first()
+        assertEquals(newState, state)
+    }
+
+    @Test
+    fun `When file path is set by setDownloadFilePath, then correct file path will be returned by getDownloadFilePath`() {
+        val newFilePath = "/path/to/downloaded/apk"
+
+        repository.setDownloadFilePath(newFilePath)
+
+        val filePath = repository.getDownloadFilePath()
+        assertEquals(newFilePath, filePath)
+    }
+
+    @Test
+    fun `When updateApkDownloadState is called with Downloaded state, then the correct state is emitted`() = runTest {
+        val apkFile = File("/path/to/downloaded/apk")
+        val newState = DownloadState.Downloaded(apkFile)
 
         repository.updateApkDownloadState(newState)
 
