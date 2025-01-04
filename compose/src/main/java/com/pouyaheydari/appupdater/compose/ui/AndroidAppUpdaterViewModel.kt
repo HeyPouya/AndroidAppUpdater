@@ -73,7 +73,7 @@ internal class AndroidAppUpdaterViewModel(
 
     private fun observeErrorWhileShowingStore(store: AppStore) {
         _uiState.update {
-            it.copy(errorWhileOpeningStore = it.errorWhileOpeningStore.copy(shouldNotifyCaller = true, storeName = store.getUserReadableName()))
+            it.copy(shouldOpenStore = false, errorWhileOpeningStore = it.errorWhileOpeningStore.copy(shouldNotifyCaller = true, storeName = store.getUserReadableName()))
         }
     }
 
