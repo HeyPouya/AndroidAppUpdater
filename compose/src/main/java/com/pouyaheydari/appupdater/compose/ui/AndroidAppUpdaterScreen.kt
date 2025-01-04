@@ -142,7 +142,7 @@ private fun getApkIfActivityIsNotNull(activity: Activity?, url: String, onDownlo
     if (activity == null) {
         Log.e(ANDROID_APP_UPDATER_DEBUG_TAG, "Provided activity is null. Skipping downloading the apk")
     } else {
-        checkPermissionsAndDownloadApk(url, activity, onDownloadingApkStarted)
+        checkPermissionsAndDownloadApk(url, activity, Build.VERSION.SDK_INT, onDownloadingApkStarted)
     }
 }
 

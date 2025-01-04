@@ -7,18 +7,18 @@ import android.app.DownloadManager.Request.NETWORK_WIFI
 import android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
 import android.content.Context
 import android.net.Uri
-import android.os.Build
 import android.os.Environment
 import com.pouyaheydari.appupdater.directdownload.R
 import com.pouyaheydari.appupdater.directdownload.data.UpdateInProgressRepositoryImpl
 import com.pouyaheydari.appupdater.directdownload.domain.SetDownloadFilePathUseCase
 import com.pouyaheydari.appupdater.directdownload.domain.SetRequestIdUseCase
+import com.pouyaheydari.appupdater.directdownload.utils.permission.DownloadAPKPermissionFactory
 import java.io.File
 
 private const val APK_NAME = "NewAPK.apk"
 
-fun checkPermissionsAndDownloadApk(url: String, activity: Activity, onDownloadingApkStarted: () -> Unit) {
-    if (checkAndRequestRequiredPermissionsBasedOnOsVersion(activity, Build.VERSION.SDK_INT)) {
+fun checkPermissionsAndDownloadApk(url: String, activity: Activity, androidSdkVersion: Int, onDownloadingApkStarted: () -> Unit) {
+    if (DownloadAPKPermissionFactory().getDownloadAPKPermissionHandler(androidSdkVersion).resolvePermissions(activity)) {
         prepareToDownloadApk(url, activity)
         onDownloadingApkStarted()
     }

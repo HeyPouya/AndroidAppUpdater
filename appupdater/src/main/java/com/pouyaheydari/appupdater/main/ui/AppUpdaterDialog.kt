@@ -97,7 +97,7 @@ class AppUpdaterDialog : DialogFragment() {
             .onEach {
                 when (it) {
                     is DialogScreenStates.DownloadApk -> {
-                        checkPermissionsAndDownloadApk(it.apkUrl, requireActivity()) {
+                        checkPermissionsAndDownloadApk(it.apkUrl, requireActivity(), Build.VERSION.SDK_INT) {
                             viewModel.handleIntent(DialogScreenIntents.OnApkDownloadStarted)
                         }
                         viewModel.handleIntent(DialogScreenIntents.OnApkDownloadRequested)
