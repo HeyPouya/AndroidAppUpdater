@@ -1,6 +1,7 @@
 package com.pouyaheydari.appupdater.compose.ui
 
 import android.app.Activity
+import android.app.DownloadManager
 import android.content.Context
 import android.content.ContextWrapper
 import android.os.Build
@@ -25,7 +26,7 @@ import com.pouyaheydari.appupdater.compose.ui.utils.previewDirectDownloadListDat
 import com.pouyaheydari.appupdater.compose.ui.utils.previewStoreListData
 import com.pouyaheydari.appupdater.core.model.Theme
 import com.pouyaheydari.appupdater.core.utils.ANDROID_APP_UPDATER_DEBUG_TAG
-import com.pouyaheydari.appupdater.directdownload.utils.checkPermissionsAndDownloadApk
+import com.pouyaheydari.appupdater.directdownload.utils.donwloadapk.checkPermissionsAndDownloadApk
 import com.pouyaheydari.appupdater.directdownload.utils.installapk.installAPK
 import com.pouyaheydari.appupdater.store.domain.AppStoreCallback
 import com.pouyaheydari.appupdater.store.domain.showAppInSelectedStore
@@ -78,11 +79,13 @@ internal fun AndroidAppUpdaterScreen(
         )
 
         setupDirectApkDownload(
-            state.downloadState.downloadUrl,
-            state.downloadState.shouldStartAPKDownload,
-            activity,
-            { viewModel.handleIntent(DialogScreenIntents.OnApkDownloadRequested) },
-            { viewModel.handleIntent(DialogScreenIntents.OnApkDownloadStarted) },
+            url = state.downloadState.downloadUrl,
+            shouldStartAPKDownload = state.downloadState.shouldStartAPKDownload,
+            activity = activity,
+            notificationTitle = stringResource(com.pouyaheydari.appupdater.directdownload.R.string.appupdater_download_notification_title),
+            notificationDescription = stringResource(com.pouyaheydari.appupdater.directdownload.R.string.appupdater_download_notification_desc),
+            onDownloadApkRequested = { viewModel.handleIntent(DialogScreenIntents.OnApkDownloadRequested) },
+            onDownloadingApkStarted = { viewModel.handleIntent(DialogScreenIntents.OnApkDownloadStarted) },
         )
 
         setupApkInstallation(
@@ -129,20 +132,42 @@ private fun setupDirectApkDownload(
     url: String,
     shouldStartAPKDownload: Boolean,
     activity: Activity?,
+    notificationTitle: String,
+    notificationDescription: String,
     onDownloadApkRequested: () -> Unit,
     onDownloadingApkStarted: () -> Unit,
 ) {
     if (shouldStartAPKDownload) {
-        getApkIfActivityIsNotNull(activity, url, onDownloadingApkStarted)
+        getApkIfActivityIsNotNull(
+            activity = activity,
+            url = url,
+            notificationTitle = notificationTitle,
+            notificationDescription = notificationDescription,
+            onDownloadingApkStarted = onDownloadingApkStarted
+        )
         onDownloadApkRequested()
     }
 }
 
-private fun getApkIfActivityIsNotNull(activity: Activity?, url: String, onDownloadingApkStarted: () -> Unit) {
+private fun getApkIfActivityIsNotNull(
+    activity: Activity?,
+    url: String,
+    notificationTitle: String,
+    notificationDescription: String,
+    onDownloadingApkStarted: () -> Unit
+) {
     if (activity == null) {
         Log.e(ANDROID_APP_UPDATER_DEBUG_TAG, "Provided activity is null. Skipping downloading the apk")
     } else {
-        checkPermissionsAndDownloadApk(url, activity, Build.VERSION.SDK_INT, onDownloadingApkStarted)
+        checkPermissionsAndDownloadApk(
+            url = url,
+            activity = activity,
+            androidSdkVersion = Build.VERSION.SDK_INT,
+            notificationTitle = notificationTitle,
+            notificationDescription = notificationDescription,
+            downloadManager = activity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager,
+            onDownloadingApkStarted = onDownloadingApkStarted
+        )
     }
 }
 

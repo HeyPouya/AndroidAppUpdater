@@ -1,5 +1,7 @@
 package com.pouyaheydari.appupdater.main.ui
 
+import android.app.DownloadManager
+import android.content.Context
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -16,7 +18,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
-import com.pouyaheydari.appupdater.directdownload.utils.checkPermissionsAndDownloadApk
+import com.pouyaheydari.appupdater.directdownload.utils.donwloadapk.checkPermissionsAndDownloadApk
 import com.pouyaheydari.appupdater.directdownload.utils.installapk.installAPK
 import com.pouyaheydari.appupdater.main.R
 import com.pouyaheydari.appupdater.main.data.mapper.mapToSelectedTheme
@@ -97,7 +99,14 @@ class AppUpdaterDialog : DialogFragment() {
             .onEach {
                 when (it) {
                     is DialogScreenStates.DownloadApk -> {
-                        checkPermissionsAndDownloadApk(it.apkUrl, requireActivity(), Build.VERSION.SDK_INT) {
+                        checkPermissionsAndDownloadApk(
+                            url = it.apkUrl,
+                            activity = requireActivity(),
+                            androidSdkVersion = Build.VERSION.SDK_INT,
+                            notificationTitle = requireContext().getString(com.pouyaheydari.appupdater.directdownload.R.string.appupdater_download_notification_title),
+                            notificationDescription = requireContext().getString(com.pouyaheydari.appupdater.directdownload.R.string.appupdater_download_notification_desc),
+                            downloadManager = requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                        ) {
                             viewModel.handleIntent(DialogScreenIntents.OnApkDownloadStarted)
                         }
                         viewModel.handleIntent(DialogScreenIntents.OnApkDownloadRequested)

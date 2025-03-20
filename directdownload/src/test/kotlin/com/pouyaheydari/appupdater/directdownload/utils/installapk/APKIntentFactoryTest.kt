@@ -19,11 +19,11 @@ class APKIntentFactoryTest {
     private val context: Context = mock()
     private val apk: File = mock()
     private val fileUriProvider: FileUriProvider = mock()
+    private val uri: Uri = mock()
     private val apkIntentFactory = APKIntentFactory(fileUriProvider)
 
     @Test
     fun `test getInstallAPKIntent for Android P and above`() {
-        val uri: Uri = mock()
         whenever(fileUriProvider.getFileUri(context, apk, Build.VERSION_CODES.P)).thenReturn(uri)
 
         val intent = apkIntentFactory.getInstallAPKIntent(context, apk, Build.VERSION_CODES.P)
@@ -37,7 +37,6 @@ class APKIntentFactoryTest {
     @Suppress("DEPRECATION")
     @Test
     fun `test getInstallAPKIntent for Android N to O`() {
-        val uri: Uri = mock()
         whenever(fileUriProvider.getFileUri(context, apk, Build.VERSION_CODES.N)).thenReturn(uri)
 
         val intent = apkIntentFactory.getInstallAPKIntent(context, apk, Build.VERSION_CODES.N)
@@ -50,7 +49,6 @@ class APKIntentFactoryTest {
 
     @Test
     fun `test getInstallAPKIntent for Android M and below`() {
-        val uri: Uri = mock()
         whenever(fileUriProvider.getFileUri(context, apk, Build.VERSION_CODES.M)).thenReturn(uri)
 
         val intent = apkIntentFactory.getInstallAPKIntent(context, apk, Build.VERSION_CODES.M)
