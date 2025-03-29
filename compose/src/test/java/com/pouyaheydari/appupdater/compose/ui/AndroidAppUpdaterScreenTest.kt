@@ -27,6 +27,7 @@ import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import com.pouyaheydari.appupdater.directdownload.R as directDownloadR
+import com.pouyaheydari.appupdater.compose.ui.models.ApkDownloadState
 
 @RunWith(RobolectricTestRunner::class)
 internal class AndroidAppUpdaterScreenTest {
@@ -49,12 +50,14 @@ internal class AndroidAppUpdaterScreenTest {
                 onStoreClickListener = onStoreClickListener,
                 onDirectLinkClickListener = onDirectLinkClickListener
             ),
-            shouldShowUpdateInProgress = false,
             errorWhileOpeningStore = ErrorWhileOpeningStore(),
             selectedStore = StoreFactory.getStore(AppStoreType.GOOGLE_PLAY, ""),
             shouldOpenStore = false,
-            downloadUrl = "",
-            shouldStartAPKDownload = false
+            downloadState = ApkDownloadState(
+                shouldShowUpdateInProgress = false,
+                downloadUrl = "",
+                shouldStartAPKDownload = false
+            ),
         )
         whenever(viewModel.uiState).thenReturn(MutableStateFlow(uiState))
 
@@ -82,12 +85,14 @@ internal class AndroidAppUpdaterScreenTest {
         val uiState = DialogScreenState(
             shouldShowDialog = false,
             dialogContent = getUpdaterDialogData(),
-            shouldShowUpdateInProgress = false,
             errorWhileOpeningStore = ErrorWhileOpeningStore(),
             selectedStore = StoreFactory.getStore(AppStoreType.GOOGLE_PLAY, ""),
             shouldOpenStore = false,
-            downloadUrl = "",
-            shouldStartAPKDownload = false
+            downloadState = ApkDownloadState(
+                shouldShowUpdateInProgress = false,
+                downloadUrl = "",
+                shouldStartAPKDownload = false
+            ),
         )
         whenever(viewModel.uiState).thenReturn(MutableStateFlow(uiState))
 
@@ -107,12 +112,14 @@ internal class AndroidAppUpdaterScreenTest {
         val uiState = DialogScreenState(
             shouldShowDialog = false,
             dialogContent = getUpdaterDialogData(),
-            shouldShowUpdateInProgress = true,
             errorWhileOpeningStore = ErrorWhileOpeningStore(),
             selectedStore = StoreFactory.getStore(AppStoreType.GOOGLE_PLAY, ""),
             shouldOpenStore = false,
-            downloadUrl = "",
-            shouldStartAPKDownload = false
+            downloadState = ApkDownloadState(
+                shouldShowUpdateInProgress = true,
+                downloadUrl = "",
+                shouldStartAPKDownload = false
+            ),
         )
         whenever(viewModel.uiState).thenReturn(MutableStateFlow(uiState))
 
@@ -134,12 +141,14 @@ internal class AndroidAppUpdaterScreenTest {
         val uiState = DialogScreenState(
             shouldShowDialog = true,
             dialogContent = getUpdaterDialogData(),
-            shouldShowUpdateInProgress = false,
             errorWhileOpeningStore = ErrorWhileOpeningStore(shouldNotifyCaller = true, storeName = "GooglePlay"),
             selectedStore = StoreFactory.getStore(AppStoreType.GOOGLE_PLAY, ""),
             shouldOpenStore = false,
-            downloadUrl = "",
-            shouldStartAPKDownload = false
+            downloadState = ApkDownloadState(
+                shouldShowUpdateInProgress = false,
+                downloadUrl = "",
+                shouldStartAPKDownload = false
+            ),
         )
         whenever(viewModel.uiState).thenReturn(MutableStateFlow(uiState))
 
