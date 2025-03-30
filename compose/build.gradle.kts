@@ -57,6 +57,7 @@ dependencies {
     testImplementation(libs.androidx.compose.ui.test.junit)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.roboelectric)
+    testImplementation(libs.turbine)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.ui.espresso.core)

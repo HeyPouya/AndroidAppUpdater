@@ -21,6 +21,7 @@ composeActivity = "1.10.1"
 mockito = "5.15.2"
 mockitoKotlin = "5.4.0"
 roboelectric = "4.14.1"
+turbine = "1.2.0"
 uiautomator = "2.3.0"
 mavenPublish = "0.29.0"
 
@@ -52,6 +53,7 @@ androidx-test-ui-espresso-core = { group = "androidx.test.espresso", name = "esp
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
