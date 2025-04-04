@@ -6,7 +6,7 @@
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Easy%20App%20Updater-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7388)[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7e8f094fd77044b5b26bc6c157bfbbc3)](https://app.codacy.com/gh/SirLordPouya/AndroidAppUpdater/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)[![](https://jitpack.io/v/SirLordPouya/AndroidAppUpdater.svg)](https://jitpack.io/#SirLordPouya/AndroidAppUpdater)[![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
-Android App Updater is a simple yet powerful library for displaying an update dialog in your app. It supports multiple app stores and direct download links. You can use it as a **DialogFragment** or a**Composable** component.
+**Android App Updater** is a powerful and flexible library to display an update dialog in your Android app. It supports multiple app stores and direct APK download links. Use it easily with **DialogFragment** or **Jetpack Compose**.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/header.png" width="800">
@@ -16,7 +16,7 @@ Android App Updater is a simple yet powerful library for displaying an update di
 
 ### Step 1: Add JitPack Repository
 
-Add the following to your project's **build.gradle.kts**:
+Add the following to your project’s **build.gradle.kts**:
 
 ```kotlin
 allprojects {
@@ -26,10 +26,19 @@ allprojects {
 }
 ```
 
+Or to your project’s **settings.gradle.kts**:
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        maven ( url =  "https://jitpack.io" )
+    }
+}
+```
+
 ### Step 2: Add Dependencies
 
 ```kotlin
-// For standard Android projects
+// For DialogFragment integration
 implementation("com.github.SirLordPouya.AndroidAppUpdater:main:latest_version")
 
 // For Jetpack Compose integration
@@ -37,8 +46,6 @@ implementation("com.github.SirLordPouya.AndroidAppUpdater:compose:latest_version
 ```
 
 ## 🎯 Supported App Stores
-
-The library supports the following app stores:
 
 | Store                | Enum                              |
 |----------------------|-----------------------------------|
@@ -61,9 +68,7 @@ The library supports the following app stores:
 
 ## 📌 Usage
 
-### Defining App Stores
-
-To add stores where users can update the app:
+### Define App Stores
 
 ```kotlin
 val storesList = listOf(
@@ -75,18 +80,45 @@ val storesList = listOf(
 )
 ```
 
-### Adding a Direct Download Link
+### Default Store Icons
 
-Add these permissions to your `AndroidManifest.xml`:
+All supported store icons are available in the library. You can use them directly:
+
+| Market Name          | Icon Resource                              |
+|----------------------|--------------------------------------------|
+| Google Play          | R.drawable.appupdater_ic_google_play       |
+| Huawei App Gallery   | R.drawable.appupdater_ic_app_gallery       |
+| Samsung Galaxy Store | R.drawable.appupdater_ic_galaxy_store      |
+| Amazon App Store     | R.drawable.appupdater_ic_amazon_app_store  |
+| Xiaomi GetApp Store  | R.drawable.appupdater_ic_get_app_store     |
+| Oppo App Market      | R.drawable.appupdater_ic_oppo_app_market   |
+| F-Droid App Store    | R.drawable.appupdater_ic_fdroid            |
+| Aptoide App Store    | R.drawable.appupdater_ic_aptoide           |
+| OneStore App Market  | R.drawable.appupdater_ic_one_store         |
+| Vivo V-AppStore      | R.drawable.appupdater_ic_v_app_store       |
+| 9-Apps Market        | R.drawable.appupdater_ic_nine_apps         |
+| ZTE App Center       | R.drawable.appupdater_ic_zte_app_center    |
+| Lenovo App Center    | R.drawable.appupdater_ic_lenovo_app_center |
+| Tencent App Store    | R.drawable.appupdater_ic_tencent_app_store |
+| Cafe Bazaar Store    | R.drawable.appupdater_ic_bazar             |
+| Myket App Store      | R.drawable.appupdater_ic_myket             |
+
+👉 **Note**: Make sure to import:
+```kotlin
+import com.pouyaheydari.appupdater.R.*
+```
+
+### Add a Direct Download Link
+
+Add the required permissions to your `AndroidManifest.xml`:
 
 ```xml
-
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 ```
 
-Then, add a direct download link:
+Then create the download link:
 
 ```kotlin
 val directDownloadLinksList = listOf(
@@ -97,9 +129,9 @@ val directDownloadLinksList = listOf(
 )
 ```
 
-### Showing the Update Dialog
+### Show the Update Dialog
 
-#### ✅ Using Jetpack Compose
+#### ✅ With Jetpack Compose
 
 ```kotlin
 var shouldShowDialog by remember { mutableStateOf(true) }
@@ -120,7 +152,7 @@ if (shouldShowDialog) {
 }
 ```
 
-#### ✅ Using Fragments
+#### ✅ With Fragments
 
 ```kotlin
 val data = UpdaterDialogData(
@@ -138,12 +170,9 @@ AppUpdaterDialog.getInstance(data).show(supportFragmentManager, "UPDATE_DIALOG")
 
 ## 🎨 Customization
 
-### Overriding Default Texts
-
-Modify `strings.xml` to customize text:
+You can override default texts in `strings.xml`:
 
 ```xml
-
 <resources>
     <string name="appupdater_please_wait">Please wait</string>
     <string name="appupdater_downloading_new_version">Downloading new version...</string>
