@@ -61,8 +61,8 @@ class AppUpdaterDialog : DialogFragment() {
     ): View {
         // Getting data passed to the library
         val data = arguments?.parcelable(UPDATE_DIALOG_KEY) ?: UpdaterFragmentModel.EMPTY
-        if (data == UpdaterFragmentModel.EMPTY || data.storeList.isEmpty()) {
-            throw IllegalArgumentException("It seems you forgot to add any data to the updater dialog. Add the data as described in $UPDATE_DIALOG_README_URL")
+        if (data == UpdaterFragmentModel.EMPTY || (data.storeList.isEmpty() && data.directDownloadList.isEmpty())) {
+            throw IllegalArgumentException("Invalid data provided to the updater dialog. Either 'storeList' or 'directDownloadList' must be non-empty. For more details, refer to the documentation at $UPDATE_DIALOG_README_URL")
         }
         setDialogBackground(mapToSelectedTheme(data.theme, requireContext()))
         isCancelable = data.isForceUpdate
