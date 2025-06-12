@@ -21,7 +21,7 @@ composeActivity = "1.10.1"
 mockito = "5.16.1"
 mockitoKotlin = "5.4.0"
 roboelectric = "4.14.1"
-turbine = "1.2.0"
+turbine = "1.2.1"
 uiautomator = "2.3.0"
 mavenPublish = "0.29.0"
 
