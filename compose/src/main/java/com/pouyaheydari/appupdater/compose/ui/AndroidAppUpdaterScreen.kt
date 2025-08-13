@@ -82,8 +82,8 @@ internal fun AndroidAppUpdaterScreen(
             url = state.downloadState.downloadUrl,
             shouldStartAPKDownload = state.downloadState.shouldStartAPKDownload,
             activity = activity,
-            notificationTitle = stringResource(com.pouyaheydari.appupdater.directdownload.R.string.appupdater_download_notification_title),
-            notificationDescription = stringResource(com.pouyaheydari.appupdater.directdownload.R.string.appupdater_download_notification_desc),
+            notificationTitle = stringResource(directDownloadR.string.appupdater_download_notification_title),
+            notificationDescription = stringResource(directDownloadR.string.appupdater_download_notification_desc),
             onDownloadApkRequested = { viewModel.handleIntent(DialogScreenIntents.OnApkDownloadRequested) },
             onDownloadingApkStarted = { viewModel.handleIntent(DialogScreenIntents.OnApkDownloadStarted) },
         )
