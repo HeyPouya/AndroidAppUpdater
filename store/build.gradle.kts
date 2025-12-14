@@ -1,30 +1,11 @@
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.maven.publish)
+    alias(libs.plugins.project.androidLibrary)
 }
 
 android {
-    compileSdk = libs.versions.compileSdkVersion.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.minSdkVersion.get().toInt()
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlin {
-        jvmToolchain(17)
-    }
     namespace = "com.pouyaheydari.appupdater.store"
 }
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
+
 dependencies {
     api(projects.core)
 
