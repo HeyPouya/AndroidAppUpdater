@@ -1,25 +1,9 @@
 import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.maven.publish)
+    alias(libs.plugins.project.androidLibrary)
 }
 android {
-    compileSdk = libs.versions.compileSdkVersion.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.minSdkVersion.get().toInt()
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlin {
-        jvmToolchain(17)
-    }
-
     buildFeatures {
         viewBinding = true
     }
@@ -52,7 +36,7 @@ dependencies {
     testImplementation(libs.junit4)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.turbine)
-    testImplementation (libs.kotlinx.coroutines.test)
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.test.ui.espresso.core)

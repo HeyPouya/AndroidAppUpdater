@@ -1,31 +1,18 @@
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.project.androidLibrary)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.maven.publish)
 }
 
 android {
-    compileSdk = libs.versions.compileSdkVersion.get().toInt()
     defaultConfig {
-        minSdk = libs.versions.minSdkVersion.get().toInt()
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
     namespace = "com.pouyaheydari.appupdater.compose"
-
     testOptions.unitTests.isIncludeAndroidResources = true
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlin {
-        jvmToolchain(17)
-    }
     buildFeatures {
         compose = true
     }
