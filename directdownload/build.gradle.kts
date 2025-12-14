@@ -15,8 +15,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+    kotlin {
+        jvmToolchain(17)
     }
     namespace = "com.pouyaheydari.appupdater.directdownload"
 }
@@ -31,8 +31,8 @@ dependencies {
     testImplementation(libs.junit4)
     testImplementation(libs.mockito)
     testImplementation(libs.mockito.kotlin)
-    testImplementation (libs.kotlinx.coroutines.test)
-    testImplementation (libs.roboelectric)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.roboelectric)
 
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.rules)
