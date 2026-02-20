@@ -23,7 +23,7 @@ mockitoKotlin = "6.1.0"
 roboelectric = "4.16"
 turbine = "1.2.1"
 uiautomator = "2.3.0"
-mavenPublish = "0.35.0"
+mavenPublish = "0.36.0"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
