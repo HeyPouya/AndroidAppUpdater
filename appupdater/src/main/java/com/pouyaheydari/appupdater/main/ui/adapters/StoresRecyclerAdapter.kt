@@ -17,16 +17,19 @@ internal class StoresRecyclerAdapter(
     private val theme: UserSelectedTheme,
     private val typeface: Typeface?,
     private val listener: (StoreListItem) -> Unit,
-) : RecyclerView.Adapter<StoresRecyclerAdapter.SoresViewHolder>() {
+) : RecyclerView.Adapter<StoresRecyclerAdapter.StoresViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        DownloadStoresItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            .run { SoresViewHolder(this) }
+        DownloadStoresItemBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
+            .run { StoresViewHolder(this) }
 
     override fun getItemCount(): Int = list.size
 
-    override fun onBindViewHolder(holder: SoresViewHolder, position: Int) = holder.onBind(list[position])
+    override fun onBindViewHolder(holder: StoresViewHolder, position: Int) = holder.onBind(list[position])
 
-    inner class SoresViewHolder(private val binding: DownloadStoresItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class StoresViewHolder(
+        private val binding: DownloadStoresItemBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: StoreListItem) {
             val txtStoreTitle = binding.txtStoreTitle
             val imgStore = binding.imgStore

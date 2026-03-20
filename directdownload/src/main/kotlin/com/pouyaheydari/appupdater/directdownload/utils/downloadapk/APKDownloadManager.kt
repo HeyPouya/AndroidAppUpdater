@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.directdownload.utils.donwloadapk
+package com.pouyaheydari.appupdater.directdownload.utils.downloadapk
 
 import android.app.DownloadManager
 import android.content.Context
@@ -35,7 +35,7 @@ class APKDownloadManager(
             uri = url.toUri(),
             context = context,
             notificationTitle = notificationTitle,
-            notificationDescription = notificationDescription
+            notificationDescription = notificationDescription,
         )
         setRequestIdUseCase(downloadManager.enqueue(downloadManagerRequest))
     }

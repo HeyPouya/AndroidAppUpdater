@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.directdownload.utils.donwloadapk
+package com.pouyaheydari.appupdater.directdownload.utils.downloadapk
 
 import android.app.Activity
 import android.app.DownloadManager
@@ -14,7 +14,7 @@ fun checkPermissionsAndDownloadApk(
     downloadManager: DownloadManager,
     downloadAPKPermission: DownloadAPKPermission = DownloadAPKPermissionFactory().getDownloadAPKPermissionHandler(androidSdkVersion),
     apkDownloadManager: APKDownloadManager = APKDownloadManager(),
-    onDownloadingApkStarted: () -> Unit
+    onDownloadingApkStarted: () -> Unit,
 ) {
     if (downloadAPKPermission.resolvePermissions(activity)) {
         apkDownloadManager.deleteExistingAPKAndDownloadNewAPK(
@@ -22,7 +22,7 @@ fun checkPermissionsAndDownloadApk(
             context = activity,
             notificationTitle = notificationTitle,
             notificationDescription = notificationDescription,
-            downloadManager = downloadManager
+            downloadManager = downloadManager,
         )
         onDownloadingApkStarted()
     }

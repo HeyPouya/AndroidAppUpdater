@@ -8,7 +8,7 @@ import com.pouyaheydari.appupdater.directdownload.data.UpdateInProgressRepositor
 import com.pouyaheydari.appupdater.directdownload.domain.DownloadState
 import com.pouyaheydari.appupdater.directdownload.domain.GetRequestIdUseCase
 import com.pouyaheydari.appupdater.directdownload.domain.SetDownloadStateUseCase
-import com.pouyaheydari.appupdater.directdownload.utils.donwloadapk.APKFileProviderImpl
+import com.pouyaheydari.appupdater.directdownload.utils.downloadapk.APKFileProviderImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,6 +1,15 @@
 package com.pouyaheydari.appupdater.store.domain.stores
 
-enum class AppStoreType(internal val userReadableName: String) {
+/**
+ * Enum of all supported app stores.
+ *
+ * Each entry carries a [userReadableName] that can be displayed in the UI.
+ * Use [StoreFactory][com.pouyaheydari.appupdater.store.domain.StoreFactory] to obtain
+ * an [AppStore] instance from a given type.
+ */
+enum class AppStoreType(
+    internal val userReadableName: String,
+) {
     GOOGLE_PLAY("Google Play"),
     CAFE_BAZAAR("Cafe Bazaar"),
     MYKET("Myket"),

@@ -5,7 +5,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class DownloadAPKPermissionFactoryTest {
-
     private val factory = DownloadAPKPermissionFactory()
 
     @Test
@@ -21,7 +20,7 @@ class DownloadAPKPermissionFactoryTest {
     }
 
     @Test
-    fun `getDownloadAPKPermissionHandler should return DownloadAPKPermissionForOAndBellow for Android O and below`() {
+    fun `getDownloadAPKPermissionHandler should return DownloadAPKPermissionForOAndBelow for Android O and below`() {
         // Arrange
         val androidSdkVersion = Build.VERSION_CODES.O
 
@@ -29,6 +28,6 @@ class DownloadAPKPermissionFactoryTest {
         val result = factory.getDownloadAPKPermissionHandler(androidSdkVersion)
 
         // Assert
-        assertTrue(result is DownloadAPKPermissionForOAndBellow)
+        assertTrue(result is DownloadAPKPermissionForOAndBelow)
     }
 }

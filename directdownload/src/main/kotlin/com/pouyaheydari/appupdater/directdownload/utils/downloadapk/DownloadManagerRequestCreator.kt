@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.directdownload.utils.donwloadapk
+package com.pouyaheydari.appupdater.directdownload.utils.downloadapk
 
 import android.app.DownloadManager
 import android.app.DownloadManager.Request.NETWORK_MOBILE
@@ -12,13 +12,12 @@ import com.pouyaheydari.appupdater.core.utils.ANDROID_APP_UPDATER_DEBUG_TAG
 import com.pouyaheydari.appupdater.core.utils.APK_NAME
 
 class DownloadManagerRequestCreator {
-
     fun create(
         uri: Uri,
         context: Context,
         notificationTitle: String,
         notificationDescription: String,
-        downloadManagerRequest: DownloadManager.Request = DownloadManager.Request(uri)
+        downloadManagerRequest: DownloadManager.Request = DownloadManager.Request(uri),
     ): DownloadManager.Request = downloadManagerRequest.apply {
         setTitle(notificationTitle)
         setDescription(notificationDescription)

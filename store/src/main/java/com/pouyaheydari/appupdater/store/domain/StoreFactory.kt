@@ -35,7 +35,21 @@ import com.pouyaheydari.appupdater.store.domain.stores.TencentAppStore
 import com.pouyaheydari.appupdater.store.domain.stores.VAppStore
 import com.pouyaheydari.appupdater.store.domain.stores.ZTEAppCenter
 
+/**
+ * Factory that creates [AppStore] instances from [AppStoreType] and a package name.
+ *
+ * Example usage:
+ * ```
+ * val store = StoreFactory.getStore(AppStoreType.GOOGLE_PLAY, "com.example.app")
+ * ```
+ */
 object StoreFactory {
+    /**
+     * Returns an [AppStore] for the given [storeType] configured with [packageName].
+     *
+     * @param storeType the type of store to create
+     * @param packageName the application package name to open in that store
+     */
     fun getStore(storeType: AppStoreType, packageName: String): AppStore = when (storeType) {
         GOOGLE_PLAY -> GooglePlayStore(packageName)
         CAFE_BAZAAR -> CafeBazaarStore(packageName)

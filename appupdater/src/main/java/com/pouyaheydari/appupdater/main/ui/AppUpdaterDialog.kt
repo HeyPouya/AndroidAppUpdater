@@ -18,7 +18,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
-import com.pouyaheydari.appupdater.directdownload.utils.donwloadapk.checkPermissionsAndDownloadApk
+import com.pouyaheydari.appupdater.directdownload.utils.downloadapk.checkPermissionsAndDownloadApk
 import com.pouyaheydari.appupdater.directdownload.utils.installapk.installAPK
 import com.pouyaheydari.appupdater.main.R
 import com.pouyaheydari.appupdater.main.data.mapper.mapToSelectedTheme
@@ -62,7 +62,9 @@ class AppUpdaterDialog : DialogFragment() {
         // Getting data passed to the library
         val data = arguments?.parcelable(UPDATE_DIALOG_KEY) ?: UpdaterFragmentModel.EMPTY
         if (data == UpdaterFragmentModel.EMPTY || (data.storeList.isEmpty() && data.directDownloadList.isEmpty())) {
-            throw IllegalArgumentException("Invalid data provided to the updater dialog. Either 'storeList' or 'directDownloadList' must be non-empty. For more details, refer to the documentation at $UPDATE_DIALOG_README_URL")
+            throw IllegalArgumentException(
+                "Invalid data provided to the updater dialog. Either 'storeList' or 'directDownloadList' must be non-empty. For more details, refer to the documentation at $UPDATE_DIALOG_README_URL",
+            )
         }
         setDialogBackground(mapToSelectedTheme(data.theme, requireContext()))
         isCancelable = data.isForceUpdate
@@ -95,7 +97,19 @@ class AppUpdaterDialog : DialogFragment() {
     }
 
     private fun subscribeToViewModel(theme: UserSelectedTheme) {
-        viewModel.screenState.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+        // Observe persistent UI state (survives config changes)
+        viewModel.screenState
+            .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+            .onEach { uiState ->
+                when (uiState) {
+                    DialogScreenUiState.Idle -> hideUpdateInProgressDialog()
+                    DialogScreenUiState.UpdateInProgress -> showUpdateInProgressDialog(theme)
+                }
+            }.launchIn(lifecycleScope)
+
+        // Observe one-shot side-effects (consumed exactly once, no replay on config change)
+        viewModel.sideEffect
+            .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
             .onEach {
                 when (it) {
                     is DialogScreenStates.DownloadApk -> {
@@ -105,7 +119,7 @@ class AppUpdaterDialog : DialogFragment() {
                             androidSdkVersion = Build.VERSION.SDK_INT,
                             notificationTitle = requireContext().getString(com.pouyaheydari.appupdater.directdownload.R.string.appupdater_download_notification_title),
                             notificationDescription = requireContext().getString(com.pouyaheydari.appupdater.directdownload.R.string.appupdater_download_notification_desc),
-                            downloadManager = requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                            downloadManager = requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager,
                         ) {
                             viewModel.handleIntent(DialogScreenIntents.OnApkDownloadStarted)
                         }
@@ -121,10 +135,13 @@ class AppUpdaterDialog : DialogFragment() {
                         viewModel.handleIntent(DialogScreenIntents.OnErrorCallbackExecuted)
                     }
 
-                    DialogScreenStates.HideUpdateInProgress -> hideUpdateInProgressDialog()
-                    DialogScreenStates.ShowUpdateInProgress -> showUpdateInProgressDialog(theme)
-                    DialogScreenStates.Empty -> hideUpdateInProgressDialog()
                     is DialogScreenStates.InstallApk -> installDownloadedApk(it)
+
+                    // Persistent states are handled by screenState collector above
+                    DialogScreenStates.HideUpdateInProgress,
+                    DialogScreenStates.ShowUpdateInProgress,
+                    DialogScreenStates.Empty,
+                    -> { /* handled by screenState */ }
                 }
             }.launchIn(lifecycleScope)
     }
@@ -265,7 +282,7 @@ class AppUpdaterDialog : DialogFragment() {
                 storeList,
                 directDownloadList,
                 !isForceUpdate,
-                theme
+                theme,
             )
 
             TypefaceHolder.typeface = typeface

@@ -1,10 +1,9 @@
-package com.pouyaheydari.appupdater.main.dsl
+package com.pouyaheydari.appupdater.compose.dsl
 
 import android.graphics.Typeface
+import com.pouyaheydari.appupdater.compose.ui.models.UpdaterDialogData
 import com.pouyaheydari.appupdater.core.model.Theme
 import com.pouyaheydari.appupdater.directdownload.data.DirectDownloadListItem
-import com.pouyaheydari.appupdater.main.ui.AppUpdaterDialog
-import com.pouyaheydari.appupdater.main.ui.model.UpdaterDialogData
 import com.pouyaheydari.appupdater.store.domain.StoreListItem
 import com.pouyaheydari.appupdater.store.domain.stores.AppStore
 
@@ -33,23 +32,25 @@ class DirectDownloadListItemBuilder {
  * Mutable builder for [UpdaterDialogData] used in DSL context.
  */
 class UpdaterDialogDataBuilder {
-    var title: String = ""
-    var description: String = ""
+    var dialogTitle: String = ""
+    var dialogDescription: String = ""
+    var dividerText: String = ""
     var storeList: List<StoreListItem> = listOf()
     var directDownloadList: List<DirectDownloadListItem> = listOf()
-    var isForceUpdate: Boolean = false
+    var onDismissRequested: () -> Unit = {}
+    var errorWhileOpeningStoreCallback: (String) -> Unit = {}
     var typeface: Typeface? = null
-    var errorWhileOpeningStoreCallback: ((String) -> Unit)? = null
     var theme: Theme = Theme.SYSTEM_DEFAULT
 
     fun build(): UpdaterDialogData = UpdaterDialogData(
-        title = title,
-        description = description,
+        dialogTitle = dialogTitle,
+        dialogDescription = dialogDescription,
+        dividerText = dividerText,
         storeList = storeList,
         directDownloadList = directDownloadList,
-        isForceUpdate = isForceUpdate,
-        typeface = typeface,
+        onDismissRequested = onDismissRequested,
         errorWhileOpeningStoreCallback = errorWhileOpeningStoreCallback,
+        typeface = typeface,
         theme = theme,
     )
 }
@@ -84,16 +85,22 @@ inline fun directDownload(block: DirectDownloadListItemBuilder.() -> Unit): Dire
     DirectDownloadListItemBuilder().apply(block).build()
 
 /**
- * DSL builder for constructing and obtaining an [AppUpdaterDialog] instance.
+ * DSL builder for constructing an [UpdaterDialogData] for the Compose updater.
  *
  * Example usage:
  * ```
- * val dialog = updateDialogBuilder {
- *     title = "New Update Available"
- *     description = "Version 2.0 is ready"
- *     storeList = listOf(...)
+ * val dialogData = updaterDialogData {
+ *     dialogTitle = "New Update Available"
+ *     dialogDescription = "Version 2.0 is ready"
+ *     storeList = listOf(
+ *         store {
+ *             store = StoreFactory.getStore(AppStoreType.GOOGLE_PLAY, "com.example.app")
+ *             title = "Google Play"
+ *         }
+ *     )
+ *     theme = Theme.SYSTEM_DEFAULT
  * }
  * ```
  */
-inline fun updateDialogBuilder(block: UpdaterDialogDataBuilder.() -> Unit): AppUpdaterDialog =
-    AppUpdaterDialog.getInstance(UpdaterDialogDataBuilder().apply(block).build())
+inline fun updaterDialogData(block: UpdaterDialogDataBuilder.() -> Unit): UpdaterDialogData =
+    UpdaterDialogDataBuilder().apply(block).build()

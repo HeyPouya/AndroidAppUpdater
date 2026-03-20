@@ -1,116 +1,96 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/icon.png" width="250">
+  <img src="https://raw.githubusercontent.com/HeyPouya/AndroidAppUpdater/master/pics/icon.png" width="250">
 </p>
 
-# Android App Updater
-
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Easy%20App%20Updater-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7388)[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7e8f094fd77044b5b26bc6c157bfbbc3)](https://app.codacy.com/gh/SirLordPouya/AndroidAppUpdater/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)[![](https://jitpack.io/v/SirLordPouya/AndroidAppUpdater.svg)](https://jitpack.io/#SirLordPouya/AndroidAppUpdater)[![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
-
-**Android App Updater** is a powerful and flexible library to display an update dialog in your Android app. It supports multiple app stores and direct APK download links. Use it easily with **DialogFragment** or **Jetpack Compose**.
+<h1 align="center">Android App Updater</h1>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/SirLordPouya/AndroidAppUpdater/master/pics/header.png" width="800">
+  A flexible, lightweight Android library to prompt users to update your app — via <strong>16 app stores</strong> or <strong>direct APK download</strong>.
 </p>
 
-## 🚀 Installation
+<p align="center">
+  <a href="https://jitpack.io/#HeyPouya/AndroidAppUpdater"><img src="https://jitpack.io/v/HeyPouya/AndroidAppUpdater.svg" alt="JitPack"></a>
+  <a href="https://android-arsenal.com/details/1/7388"><img src="https://img.shields.io/badge/Android%20Arsenal-Easy%20App%20Updater-brightgreen.svg?style=flat" alt="Android Arsenal"></a>
+  <a href="https://android-arsenal.com/api?level=23"><img src="https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat" alt="API 23+"></a>
+  <a href="https://app.codacy.com/gh/HeyPouya/AndroidAppUpdater/dashboard"><img src="https://app.codacy.com/project/badge/Grade/7e8f094fd77044b5b26bc6c157bfbbc3" alt="Codacy Badge"></a>
+  <a href="/LICENSE.md"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
+</p>
 
-### Step 1: Add JitPack Repository
+<p align="center">
+  <img src="https://raw.githubusercontent.com/HeyPouya/AndroidAppUpdater/master/pics/header.png" width="800">
+</p>
 
-Add the following to your project’s **build.gradle.kts**:
+---
+
+## Features
+
+- Works with **Jetpack Compose** and **XML Views (DialogFragment)**
+- Supports **16 app stores** out of the box (Google Play, Huawei, Samsung, Amazon, and more)
+- **Direct APK download** with built-in download management and installation
+- **Light, Dark, and System Default** themes
+- **Force update** mode (non-dismissable dialog)
+- **Custom typeface** support
+- **DSL builders** for clean, expressive configuration
+- Built-in store icons for all supported stores
+- Handles APK installation across all API levels (M through latest)
+- Customizable string resources for localization
+
+---
+
+## Installation
+
+### Step 1 — Add the JitPack repository
+
+In your **settings.gradle.kts**:
 
 ```kotlin
-allprojects {
+dependencyResolutionManagement {
     repositories {
         maven("https://jitpack.io")
     }
 }
 ```
 
-Or to your project’s **settings.gradle.kts**:
+### Step 2 — Add the dependency
+
+Pick the module that matches your UI toolkit:
+
 ```kotlin
-dependencyResolutionManagement {
-    repositories {
-        maven ( url =  "https://jitpack.io" )
-    }
+dependencies {
+    // Jetpack Compose
+    implementation("com.github.HeyPouya.AndroidAppUpdater:compose:latest_version")
+
+    // XML Views / DialogFragment
+    implementation("com.github.HeyPouya.AndroidAppUpdater:main:latest_version")
 }
 ```
 
-### Step 2: Add Dependencies
+> Replace `latest_version` with the latest release tag from [JitPack](https://jitpack.io/#HeyPouya/AndroidAppUpdater).
+
+---
+
+## Quick Start
+
+### 1. Define your store list
 
 ```kotlin
-// For DialogFragment integration
-implementation("com.github.SirLordPouya.AndroidAppUpdater:main:latest_version")
-
-// For Jetpack Compose integration
-implementation("com.github.SirLordPouya.AndroidAppUpdater:compose:latest_version")
-```
-
-## 🎯 Supported App Stores
-
-| Store                | Enum                              |
-|----------------------|-----------------------------------|
-| Google Play          | AppStoreType.GOOGLE_PLAY          |
-| Huawei App Gallery   | AppStoreType.HUAWEI_APP_GALLERY   |
-| Samsung Galaxy Store | AppStoreType.SAMSUNG_GALAXY_STORE |
-| Amazon App Store     | AppStoreType.AMAZON_APP_STORE     |
-| Xiaomi GetApp Market | AppStoreType.MI_GET_APP_STORE     |
-| Oppo App Market      | AppStoreType.OPPO_APP_MARKET      |
-| F-Droid              | AppStoreType.FDROID               |
-| Aptoide              | AppStoreType.APTOIDE              |
-| OneStore             | AppStoreType.ONE_STORE_APP_MARKET |
-| Vivo V-AppStore      | AppStoreType.V_APP_STORE          |
-| 9-Apps Market        | AppStoreType.NINE_APPS_STORE      |
-| ZTE App Center       | AppStoreType.ZTE_APP_CENTER       |
-| Lenovo App Center    | AppStoreType.LENOVO_APP_CENTER    |
-| Tencent App Store    | AppStoreType.TENCENT_APPS_STORE   |
-| Cafe Bazaar          | AppStoreType.CAFE_BAZAAR          |
-| Myket                | AppStoreType.MYKET                |
-
-## 📌 Usage
-
-### Define App Stores
-
-```kotlin
-val storesList = listOf(
+val stores = listOf(
     StoreListItem(
-        store = StoreFactory.getStore(AppStoreType.GOOGLE_PLAY, "YOUR_APP_PACKAGE"),
+        store = StoreFactory.getStore(AppStoreType.GOOGLE_PLAY, "com.your.package"),
         title = "Google Play",
         icon = R.drawable.appupdater_ic_google_play
+    ),
+    StoreListItem(
+        store = StoreFactory.getStore(AppStoreType.HUAWEI_APP_GALLERY, "com.your.package"),
+        title = "Huawei AppGallery",
+        icon = R.drawable.appupdater_ic_app_gallery
     )
 )
 ```
 
-### Default Store Icons
+### 2. (Optional) Define direct download links
 
-All supported store icons are available in the library. You can use them directly:
-
-| Market Name          | Icon Resource                              |
-|----------------------|--------------------------------------------|
-| Google Play          | R.drawable.appupdater_ic_google_play       |
-| Huawei App Gallery   | R.drawable.appupdater_ic_app_gallery       |
-| Samsung Galaxy Store | R.drawable.appupdater_ic_galaxy_store      |
-| Amazon App Store     | R.drawable.appupdater_ic_amazon_app_store  |
-| Xiaomi GetApp Store  | R.drawable.appupdater_ic_get_app_store     |
-| Oppo App Market      | R.drawable.appupdater_ic_oppo_app_market   |
-| F-Droid App Store    | R.drawable.appupdater_ic_fdroid            |
-| Aptoide App Store    | R.drawable.appupdater_ic_aptoide           |
-| OneStore App Market  | R.drawable.appupdater_ic_one_store         |
-| Vivo V-AppStore      | R.drawable.appupdater_ic_v_app_store       |
-| 9-Apps Market        | R.drawable.appupdater_ic_nine_apps         |
-| ZTE App Center       | R.drawable.appupdater_ic_zte_app_center    |
-| Lenovo App Center    | R.drawable.appupdater_ic_lenovo_app_center |
-| Tencent App Store    | R.drawable.appupdater_ic_tencent_app_store |
-| Cafe Bazaar Store    | R.drawable.appupdater_ic_bazar             |
-| Myket App Store      | R.drawable.appupdater_ic_myket             |
-
-👉 **Note**: Make sure to import:
-```kotlin
-import com.pouyaheydari.appupdater.R.*
-```
-
-### Add a Direct Download Link
-
-Add the required permissions to your `AndroidManifest.xml`:
+Add these permissions to your `AndroidManifest.xml`:
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
@@ -118,77 +98,282 @@ Add the required permissions to your `AndroidManifest.xml`:
 <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 ```
 
-Then create the download link:
+Then create the list:
 
 ```kotlin
-val directDownloadLinksList = listOf(
+val directLinks = listOf(
     DirectDownloadListItem(
         title = "Direct Download",
-        url = "https://example.com/app.apk"
+        url = "https://example.com/your-app.apk"
     )
 )
 ```
 
-### Show the Update Dialog
+### 3. Show the dialog
 
-#### ✅ With Jetpack Compose
+#### Jetpack Compose
 
 ```kotlin
-var shouldShowDialog by remember { mutableStateOf(true) }
+var showDialog by remember { mutableStateOf(true) }
 
-if (shouldShowDialog) {
+if (showDialog) {
     AndroidAppUpdater(
         dialogData = UpdaterDialogData(
-            dialogTitle = "New Update Available",
-            dialogDescription = "We've fixed bugs and improved performance!",
-            dividerText = "Or",
-            storeList = storesList,
-            directDownloadList = directDownloadLinksList,
-            onDismissRequested = { shouldShowDialog = false },
-            errorWhileOpeningStoreCallback = { storeName -> /* Handle error */ },
-            theme = Theme.LIGHT
+            dialogTitle = "New Update Available!",
+            dialogDescription = "We've added new features and fixed bugs.",
+            dividerText = "or",
+            storeList = stores,
+            directDownloadList = directLinks,
+            onDismissRequested = { showDialog = false },
+            theme = Theme.SYSTEM_DEFAULT
         )
     )
 }
 ```
 
-#### ✅ With Fragments
+#### DialogFragment (XML Views)
 
 ```kotlin
-val data = UpdaterDialogData(
-    title = "New Update Available",
-    description = "We've fixed bugs and improved performance!",
-    storeList = storesList,
-    directDownloadList = directDownloadLinksList,
-    isForceUpdate = false,
-    errorWhileOpeningStoreCallback = { storeName -> /* Handle error */ },
-    theme = Theme.SYSTEM_DEFAULT,
-)
-
-AppUpdaterDialog.getInstance(data).show(supportFragmentManager, "UPDATE_DIALOG")
+AppUpdaterDialog.getInstance(
+    UpdaterDialogData(
+        title = "New Update Available!",
+        description = "We've added new features and fixed bugs.",
+        storeList = stores,
+        directDownloadList = directLinks,
+        isForceUpdate = false,
+        theme = Theme.LIGHT
+    )
+).show(supportFragmentManager, "updater")
 ```
 
-## 🎨 Customization
+---
 
-You can override default texts in `strings.xml`:
+## DSL Builders
+
+Both Compose and Fragment APIs offer Kotlin DSL builders for a more expressive syntax.
+
+#### Fragment DSL
+
+```kotlin
+updateDialogBuilder {
+    title = "New Update Available!"
+    description = "We've added new features and fixed bugs."
+    isForceUpdate = false
+    theme = Theme.DARK
+    storeList = listOf(
+        store {
+            store = StoreFactory.getStore(AppStoreType.GOOGLE_PLAY, "com.your.package")
+            title = "Google Play"
+            icon = R.drawable.appupdater_ic_google_play
+        }
+    )
+    directDownloadList = listOf(
+        directDownload {
+            title = "Direct Download"
+            url = "https://example.com/your-app.apk"
+        }
+    )
+    typeface = Typeface.createFromAsset(assets, "fonts/custom.ttf")
+    errorWhileOpeningStoreCallback = { storeName ->
+        Toast.makeText(this@MainActivity, "$storeName is not installed", Toast.LENGTH_SHORT).show()
+    }
+}.show(supportFragmentManager, "updater")
+```
+
+#### Compose DSL
+
+```kotlin
+val dialogData = updaterDialogData {
+    dialogTitle = "New Update Available!"
+    dialogDescription = "We've added new features and fixed bugs."
+    dividerText = "or"
+    theme = Theme.SYSTEM_DEFAULT
+    storeList = listOf(
+        store {
+            store = StoreFactory.getStore(AppStoreType.GOOGLE_PLAY, "com.your.package")
+            title = "Google Play"
+            icon = R.drawable.appupdater_ic_google_play
+        }
+    )
+    directDownloadList = listOf(
+        directDownload {
+            title = "Direct Download"
+            url = "https://example.com/your-app.apk"
+        }
+    )
+    onDismissRequested = { /* handle dismiss */ }
+    errorWhileOpeningStoreCallback = { storeName -> /* handle error */ }
+}
+
+AndroidAppUpdater(dialogData)
+```
+
+---
+
+## Configuration Reference
+
+### Fragment `UpdaterDialogData`
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `title` | `String` | `""` | Title shown at the top of the dialog |
+| `description` | `String` | `""` | Description text below the title |
+| `storeList` | `List<StoreListItem>` | `[]` | App stores to show as update options |
+| `directDownloadList` | `List<DirectDownloadListItem>` | `[]` | Direct APK download links |
+| `isForceUpdate` | `Boolean` | `false` | If `true`, the dialog cannot be dismissed |
+| `typeface` | `Typeface?` | `null` | Custom typeface for dialog text |
+| `theme` | `Theme` | `SYSTEM_DEFAULT` | `LIGHT`, `DARK`, or `SYSTEM_DEFAULT` |
+| `errorWhileOpeningStoreCallback` | `((String) -> Unit)?` | `null` | Called with store name if opening fails |
+
+### Compose `UpdaterDialogData`
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `dialogTitle` | `String` | `""` | Title shown at the top of the dialog |
+| `dialogDescription` | `String` | `""` | Description text below the title |
+| `dividerText` | `String` | `""` | Text on the divider between stores and downloads |
+| `storeList` | `List<StoreListItem>` | `[]` | App stores to show as update options |
+| `directDownloadList` | `List<DirectDownloadListItem>` | `[]` | Direct APK download links |
+| `onDismissRequested` | `() -> Unit` | `{}` | Called when the user dismisses the dialog |
+| `typeface` | `Typeface?` | `null` | Custom typeface for dialog text |
+| `theme` | `Theme` | `SYSTEM_DEFAULT` | `LIGHT`, `DARK`, or `SYSTEM_DEFAULT` |
+| `errorWhileOpeningStoreCallback` | `(String) -> Unit` | `{}` | Called with store name if opening fails |
+
+---
+
+## Supported Stores
+
+| Store | Enum Value | Built-in Icon |
+|-------|-----------|---------------|
+| Google Play | `GOOGLE_PLAY` | `appupdater_ic_google_play` |
+| Cafe Bazaar | `CAFE_BAZAAR` | `appupdater_ic_bazar` |
+| Myket | `MYKET` | `appupdater_ic_myket` |
+| Huawei AppGallery | `HUAWEI_APP_GALLERY` | `appupdater_ic_app_gallery` |
+| Samsung Galaxy Store | `SAMSUNG_GALAXY_STORE` | `appupdater_ic_galaxy_store` |
+| Amazon App Store | `AMAZON_APP_STORE` | `appupdater_ic_amazon_app_store` |
+| Aptoide | `APTOIDE` | `appupdater_ic_aptoide` |
+| F-Droid | `FDROID` | `appupdater_ic_fdroid` |
+| Xiaomi GetApps | `MI_GET_APP_STORE` | `appupdater_ic_get_app_store` |
+| OneStore | `ONE_STORE_APP_MARKET` | `appupdater_ic_one_store` |
+| Oppo App Market | `OPPO_APP_MARKET` | `appupdater_ic_oppo_app_market` |
+| Vivo V-AppStore | `V_APP_STORE` | `appupdater_ic_v_app_store` |
+| 9Apps | `NINE_APPS_STORE` | `appupdater_ic_nine_apps` |
+| Tencent App Store | `TENCENT_APPS_STORE` | `appupdater_ic_tencent_app_store` |
+| ZTE App Center | `ZTE_APP_CENTER` | `appupdater_ic_zte_app_center` |
+| Lenovo App Center | `LENOVO_APP_CENTER` | `appupdater_ic_lenovo_app_center` |
+
+All icons are bundled with the library. Use them via `R.drawable.appupdater_ic_*`.
+
+---
+
+## Customization
+
+### Themes
+
+Pass one of the `Theme` enum values to control the dialog appearance:
+
+```kotlin
+Theme.LIGHT          // Light background, dark text
+Theme.DARK           // Dark background, light text
+Theme.SYSTEM_DEFAULT // Follows the device's current theme
+```
+
+### Custom Typeface
+
+```kotlin
+val typeface = Typeface.createFromAsset(assets, "fonts/your_font.ttf")
+
+// Pass it to either API:
+UpdaterDialogData(
+    // ...
+    typeface = typeface
+)
+```
+
+### String Resources
+
+Override these in your `strings.xml` to localize or customize dialog text:
 
 ```xml
-<resources>
-    <string name="appupdater_please_wait">Please wait</string>
-    <string name="appupdater_downloading_new_version">Downloading new version...</string>
-    <string name="appupdater_download_notification_title">Downloading...</string>
-    <string name="appupdater_download_notification_description">Downloading new version</string>
-    <string name="appupdater_please_install">Please install</string>
-    <string name="appupdater_or">or</string>
-    <string name="appupdater_download_from_store">Download from store</string>
-</resources>
+<string name="appupdater_please_wait">Please wait</string>
+<string name="appupdater_downloading_new_version">Downloading new version...</string>
+<string name="appupdater_download_notification_title">Downloading...</string>
+<string name="appupdater_download_notification_desc">Downloading new version</string>
+<string name="appupdater_please_install">Please install</string>
+<string name="appupdater_or">or</string>
+<string name="appupdater_download_from_store">Download from store</string>
+<string name="appupdater_couldnt_find_downloaded_file">Couldn't find downloaded file</string>
 ```
 
-## 📝 License
+---
+
+## Architecture
+
+The library is split into focused modules:
 
 ```
-Android App Updater is released under the Apache License 2.0. See LICENSE for details.
-Copyright (c) 2018 Pouya Heydari
+AndroidAppUpdater/
+├── core/             # Theme enum and shared constants (pure Kotlin)
+├── store/            # Store implementations, StoreFactory, icons
+├── directdownload/   # APK download via DownloadManager + installation
+├── appupdater/       # Fragment/XML UI (published as "main")
+├── compose/          # Jetpack Compose UI
+└── app/              # Sample/demo application
 ```
 
-<p align="center">Library icon and design by <a href="https://dribbble.com/Amirgk" title="Amir Gerdakane">Amir Gerdakane</a></p>
+| Module | Artifact | Description |
+|--------|----------|-------------|
+| `:core` | `core` | Theme enum and constants — no Android dependency |
+| `:store` | `store` | All 16 store implementations with built-in icons |
+| `:directdownload` | `directdownload` | Download manager, permissions, APK installation |
+| `:appupdater` | `main` | DialogFragment-based update dialog |
+| `:compose` | `compose` | Jetpack Compose update dialog |
+
+---
+
+## Requirements
+
+| Requirement | Value |
+|------------|-------|
+| Min SDK | 23 (Android 6.0) |
+| Compile SDK | 36 |
+| Kotlin | 2.3+ |
+| Java | 17 |
+
+---
+
+## Sample App
+
+The `:app` module contains a fully working demo with examples for:
+
+- **Kotlin API** — Direct constructor usage
+- **DSL API** — Builder-style configuration
+- **Compose** — Composable dialog integration
+
+Clone the repo and run the `app` module to see the library in action.
+
+---
+
+## License
+
+```
+Copyright 2018 Pouya Heydari
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
+
+---
+
+<p align="center">
+  Library icon and design by <a href="https://dribbble.com/Amirgk">Amir Gerdakane</a>
+</p>

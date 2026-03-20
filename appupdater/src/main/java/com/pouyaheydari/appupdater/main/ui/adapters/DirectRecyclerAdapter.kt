@@ -11,16 +11,19 @@ internal class DirectRecyclerAdapter(
     private val list: List<DirectDownloadListItem>,
     private val typeface: Typeface?,
     private val listener: (DirectDownloadListItem) -> Unit,
-) : RecyclerView.Adapter<DirectRecyclerAdapter.SoresViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoresViewHolder =
-        DownloadDirectItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            .run { SoresViewHolder(this) }
+) : RecyclerView.Adapter<DirectRecyclerAdapter.DirectDownloadViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DirectDownloadViewHolder =
+        DownloadDirectItemBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
+            .run { DirectDownloadViewHolder(this) }
 
     override fun getItemCount(): Int = list.size
 
-    override fun onBindViewHolder(holder: SoresViewHolder, position: Int) = holder.onBind(list[position])
+    override fun onBindViewHolder(holder: DirectDownloadViewHolder, position: Int) = holder.onBind(list[position])
 
-    inner class SoresViewHolder(private val binding: DownloadDirectItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class DirectDownloadViewHolder(
+        private val binding: DownloadDirectItemBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: DirectDownloadListItem) {
             val txtDirect = binding.txtDirect
             txtDirect.text = item.title
