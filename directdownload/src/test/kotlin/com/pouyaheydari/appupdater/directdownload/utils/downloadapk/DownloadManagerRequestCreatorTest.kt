@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.directdownload.utils.donwloadapk
+package com.pouyaheydari.appupdater.directdownload.utils.downloadapk
 
 import android.app.DownloadManager
 import android.content.Context
@@ -15,7 +15,6 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class DownloadManagerRequestCreatorTest {
-
     private val context: Context = mock()
     private val downloadManagerRequestCreator: DownloadManagerRequestCreator = DownloadManagerRequestCreator()
 

@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.directdownload.utils.donwloadapk
+package com.pouyaheydari.appupdater.directdownload.utils.downloadapk
 
 import android.content.Context
 import android.os.Environment
@@ -14,7 +14,6 @@ import java.io.File
 
 @RunWith(MockitoJUnitRunner::class)
 class APKFileProviderImplTest {
-
     private val context: Context = mock()
     private lateinit var apkFileProvider: APKFileProviderImpl
 

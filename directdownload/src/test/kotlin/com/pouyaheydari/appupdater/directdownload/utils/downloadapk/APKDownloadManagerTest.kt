@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.directdownload.utils.donwloadapk
+package com.pouyaheydari.appupdater.directdownload.utils.downloadapk
 
 import android.app.DownloadManager
 import android.content.Context
@@ -16,7 +16,6 @@ import java.io.File
 
 @RunWith(RobolectricTestRunner::class)
 class APKDownloadManagerTest {
-
     private val downloadManager: DownloadManager = mock()
     private val context: Context = mock()
     private val downloadManagerRequestCreator: DownloadManagerRequestCreator = mock()
@@ -31,7 +30,7 @@ class APKDownloadManagerTest {
         apkDownloadManager = APKDownloadManager(
             downloadManagerRequestCreator,
             setRequestIdUseCase,
-            apkFileProvider
+            apkFileProvider,
         )
     }
 
@@ -51,7 +50,7 @@ class APKDownloadManagerTest {
             url,
             context,
             notificationTitle,
-            notificationDescription
+            notificationDescription,
         )
 
         verify(apkFileProvider).getFile(context)
@@ -72,7 +71,11 @@ class APKDownloadManagerTest {
         whenever(downloadManager.enqueue(any())).thenReturn(5678L)
 
         apkDownloadManager.deleteExistingAPKAndDownloadNewAPK(
-            downloadManager, url, context, notificationTitle, notificationDescription
+            downloadManager,
+            url,
+            context,
+            notificationTitle,
+            notificationDescription,
         )
 
         verify(apkFileProvider).getFile(context)

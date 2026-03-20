@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 internal class AndroidAppUpdaterViewModel(
     viewModelData: UpdaterViewModelData,
     private val getDownloadStateUseCase: GetDownloadStateUseCase,
-    private val setDownloadStateUseCase: SetDownloadStateUseCase
+    private val setDownloadStateUseCase: SetDownloadStateUseCase,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(DialogScreenState())
     val uiState: StateFlow<DialogScreenState> = _uiState.asStateFlow()
@@ -90,6 +90,9 @@ internal class AndroidAppUpdaterViewModel(
 
                     is DownloadState.Downloading ->
                         _uiState.update { it.copy(downloadState = it.downloadState.copy(shouldShowUpdateInProgress = true)) }
+
+                    is DownloadState.Failed ->
+                        _uiState.update { it.copy(downloadState = it.downloadState.copy(shouldShowUpdateInProgress = false)) }
                 }
             }
         }

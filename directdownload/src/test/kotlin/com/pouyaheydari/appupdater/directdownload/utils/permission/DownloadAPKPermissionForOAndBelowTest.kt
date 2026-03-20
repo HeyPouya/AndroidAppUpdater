@@ -15,10 +15,9 @@ import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class DownloadAPKPermissionForOAndBellowTest {
-
+class DownloadAPKPermissionForOAndBelowTest {
     private val mockActivity: Activity = mock()
-    private val permissionHandler = DownloadAPKPermissionForOAndBellow()
+    private val permissionHandler = DownloadAPKPermissionForOAndBelow()
 
     @Test
     fun `resolvePermissions should return true when permission is granted`() {
@@ -49,7 +48,7 @@ class DownloadAPKPermissionForOAndBellowTest {
                 ActivityCompat.requestPermissions(
                     mockActivity,
                     arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    2000
+                    2000,
                 )
             }
         }

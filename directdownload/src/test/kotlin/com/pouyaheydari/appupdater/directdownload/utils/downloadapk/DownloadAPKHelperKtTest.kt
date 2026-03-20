@@ -1,4 +1,4 @@
-package com.pouyaheydari.appupdater.directdownload.utils.donwloadapk
+package com.pouyaheydari.appupdater.directdownload.utils.downloadapk
 
 import android.app.Activity
 import android.app.DownloadManager
@@ -12,7 +12,6 @@ import org.mockito.kotlin.anyOrNull
 import org.mockito.kotlin.whenever
 
 class DownloadAPKHelperTest {
-
     private val url = "https://example.com/app.apk"
     private val notificationTitle = "New Update"
     private val notificationDescription = "Downloading latest version"
@@ -36,7 +35,7 @@ class DownloadAPKHelperTest {
             downloadManager,
             downloadAPKPermission,
             apkDownloadManager,
-            onDownloadingApkStarted
+            onDownloadingApkStarted,
         )
 
         verify(apkDownloadManager).deleteExistingAPKAndDownloadNewAPK(
@@ -62,7 +61,7 @@ class DownloadAPKHelperTest {
             downloadManager,
             downloadAPKPermission,
             apkDownloadManager,
-            onDownloadingApkStarted
+            onDownloadingApkStarted,
         )
 
         verify(apkDownloadManager, never()).deleteExistingAPKAndDownloadNewAPK(
@@ -70,7 +69,7 @@ class DownloadAPKHelperTest {
             anyString(),
             anyOrNull(),
             anyString(),
-            anyOrNull()
+            anyOrNull(),
         )
         verify(onDownloadingApkStarted, never()).invoke()
     }

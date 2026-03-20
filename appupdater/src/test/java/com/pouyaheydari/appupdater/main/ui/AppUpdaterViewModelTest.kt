@@ -24,7 +24,6 @@ import org.mockito.kotlin.whenever
 import java.io.File
 
 class AppUpdaterViewModelTest {
-
     private lateinit var viewModel: AppUpdaterViewModel
     private val isUpdateInProgressUseCase: GetDownloadStateUseCase = mock()
     private val setDownloadStateUseCase: SetDownloadStateUseCase = mock()
@@ -38,24 +37,22 @@ class AppUpdaterViewModelTest {
     }
 
     @Test
-    fun `handleIntent should update screen state for OnDirectLinkClicked`() = runTest {
+    fun `handleIntent should emit side effect for OnDirectLinkClicked`() = runTest {
         val testUrl = "https://example.com/app.apk"
         val testItem = DirectDownloadListItem(title = "Test", url = testUrl)
 
-        viewModel.screenState.test {
+        viewModel.sideEffect.test {
             viewModel.handleIntent(DialogScreenIntents.OnDirectLinkClicked(testItem))
-            assertEquals(DialogScreenStates.HideUpdateInProgress, awaitItem())
             assertEquals(DialogScreenStates.DownloadApk(testUrl), awaitItem())
         }
     }
 
     @Test
-    fun `handleIntent should update screen state for OnStoreClicked`() = runTest {
+    fun `handleIntent should emit side effect for OnStoreClicked`() = runTest {
         val testItem = StoreListItem(store = StoreFactory.getStore(AppStoreType.GOOGLE_PLAY, "package"), title = "Google Play", icon = 0)
 
-        viewModel.screenState.test {
+        viewModel.sideEffect.test {
             viewModel.handleIntent(DialogScreenIntents.OnStoreClicked(testItem))
-            assertEquals(DialogScreenStates.HideUpdateInProgress, awaitItem())
             assertEquals(DialogScreenStates.OpenStore(testItem.store), awaitItem())
         }
     }
@@ -65,10 +62,9 @@ class AppUpdaterViewModelTest {
         val file: File = mock()
         whenever(isUpdateInProgressUseCase()).thenReturn(flowOf(DownloadState.Downloading, DownloadState.Downloaded(file)))
 
-        viewModel.screenState.test {
+        viewModel.sideEffect.test {
             viewModel.handleIntent(DialogScreenIntents.OnApkDownloadStarted)
             verify(setDownloadStateUseCase).invoke(DownloadState.Downloading)
-            assertEquals(DialogScreenStates.HideUpdateInProgress, awaitItem())
             assertEquals(DialogScreenStates.InstallApk(file), awaitItem())
         }
     }

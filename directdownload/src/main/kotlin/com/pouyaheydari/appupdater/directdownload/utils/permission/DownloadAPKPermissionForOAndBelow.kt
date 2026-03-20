@@ -10,16 +10,13 @@ import androidx.core.content.ContextCompat
 
 private const val PERMISSION_REQUEST_CODE = 2000
 
-internal class DownloadAPKPermissionForOAndBellow : DownloadAPKPermission {
-
+internal class DownloadAPKPermissionForOAndBelow : DownloadAPKPermission {
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun resolvePermissions(activity: Activity): Boolean {
-        return if (isExternalStoragePermissionGranted(activity)) {
-            true
-        } else {
-            getWriteToStoragePermission(activity)
-            false
-        }
+    override fun resolvePermissions(activity: Activity): Boolean = if (isExternalStoragePermissionGranted(activity)) {
+        true
+    } else {
+        getWriteToStoragePermission(activity)
+        false
     }
 
     private fun isExternalStoragePermissionGranted(activity: Activity) =

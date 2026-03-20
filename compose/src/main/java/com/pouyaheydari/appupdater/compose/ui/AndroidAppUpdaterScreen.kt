@@ -26,7 +26,7 @@ import com.pouyaheydari.appupdater.compose.ui.utils.previewDirectDownloadListDat
 import com.pouyaheydari.appupdater.compose.ui.utils.previewStoreListData
 import com.pouyaheydari.appupdater.core.model.Theme
 import com.pouyaheydari.appupdater.core.utils.ANDROID_APP_UPDATER_DEBUG_TAG
-import com.pouyaheydari.appupdater.directdownload.utils.donwloadapk.checkPermissionsAndDownloadApk
+import com.pouyaheydari.appupdater.directdownload.utils.downloadapk.checkPermissionsAndDownloadApk
 import com.pouyaheydari.appupdater.directdownload.utils.installapk.installAPK
 import com.pouyaheydari.appupdater.store.domain.AppStoreCallback
 import com.pouyaheydari.appupdater.store.domain.showAppInSelectedStore
@@ -35,9 +35,10 @@ import java.io.File
 import com.pouyaheydari.appupdater.directdownload.R as directDownloadR
 
 /**
- * Use this composable to show the updater dialog.
+ * Entry-point composable for showing the Android App Updater dialog.
  *
- * @param dialogData is th
+ * @param dialogData configuration for the updater dialog including title, description,
+ *   store list, direct download links, theme, and callbacks
  */
 @Composable
 fun AndroidAppUpdater(dialogData: UpdaterDialogData) {
@@ -143,7 +144,7 @@ private fun setupDirectApkDownload(
             url = url,
             notificationTitle = notificationTitle,
             notificationDescription = notificationDescription,
-            onDownloadingApkStarted = onDownloadingApkStarted
+            onDownloadingApkStarted = onDownloadingApkStarted,
         )
         onDownloadApkRequested()
     }
@@ -154,7 +155,7 @@ private fun getApkIfActivityIsNotNull(
     url: String,
     notificationTitle: String,
     notificationDescription: String,
-    onDownloadingApkStarted: () -> Unit
+    onDownloadingApkStarted: () -> Unit,
 ) {
     if (activity == null) {
         Log.e(ANDROID_APP_UPDATER_DEBUG_TAG, "Provided activity is null. Skipping downloading the apk")
@@ -166,7 +167,7 @@ private fun getApkIfActivityIsNotNull(
             notificationTitle = notificationTitle,
             notificationDescription = notificationDescription,
             downloadManager = activity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager,
-            onDownloadingApkStarted = onDownloadingApkStarted
+            onDownloadingApkStarted = onDownloadingApkStarted,
         )
     }
 }
