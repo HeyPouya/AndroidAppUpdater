@@ -7,16 +7,20 @@ import com.pouyaheydari.appupdater.main.ui.AppUpdaterDialog
 import com.pouyaheydari.appupdater.main.ui.model.UpdaterDialogData
 import com.pouyaheydari.appupdater.store.domain.StoreListItem
 import com.pouyaheydari.appupdater.store.domain.stores.AppStore
+import com.pouyaheydari.appupdater.store.R as storeR
 
 /**
  * Mutable builder for [StoreListItem] used in DSL context.
  */
 class StoreListItemBuilder {
-    lateinit var store: AppStore
+    var store: AppStore? = null
     var title: String = ""
-    var icon: Int = 0
+    var icon: Int = storeR.drawable.appupdater_ic_cloud
 
-    fun build(): StoreListItem = StoreListItem(store = store, title = title, icon = icon)
+    fun build(): StoreListItem {
+        val store = requireNotNull(store) { "StoreListItemBuilder requires 'store' to be set." }
+        return StoreListItem(store = store, title = title, icon = icon)
+    }
 }
 
 /**
@@ -26,7 +30,10 @@ class DirectDownloadListItemBuilder {
     var title: String = ""
     var url: String = ""
 
-    fun build(): DirectDownloadListItem = DirectDownloadListItem(title = title, url = url)
+    fun build(): DirectDownloadListItem {
+        require(url.isNotBlank()) { "DirectDownloadListItemBuilder requires 'url' to be set." }
+        return DirectDownloadListItem(title = title, url = url)
+    }
 }
 
 /**

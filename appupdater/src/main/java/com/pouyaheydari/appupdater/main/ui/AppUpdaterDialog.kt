@@ -136,12 +136,6 @@ class AppUpdaterDialog : DialogFragment() {
                     }
 
                     is DialogScreenStates.InstallApk -> installDownloadedApk(it)
-
-                    // Persistent states are handled by screenState collector above
-                    DialogScreenStates.HideUpdateInProgress,
-                    DialogScreenStates.ShowUpdateInProgress,
-                    DialogScreenStates.Empty,
-                    -> { /* handled by screenState */ }
                 }
             }.launchIn(lifecycleScope)
     }
