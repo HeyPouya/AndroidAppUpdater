@@ -24,7 +24,7 @@ internal object StoreIntentBuilder {
          * @throws IllegalArgumentException if [storePackageName] is blank
          */
         fun withPackage(storePackageName: String): Builder {
-            require(storePackageName.isNotBlank()) { "Store's package name most not be empty" }
+            require(storePackageName.isNotBlank()) { "Store's package name must not be empty" }
             this.storePackageName = storePackageName
             return this
         }

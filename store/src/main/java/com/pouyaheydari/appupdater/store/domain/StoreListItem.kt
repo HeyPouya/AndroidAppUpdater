@@ -1,6 +1,7 @@
 package com.pouyaheydari.appupdater.store.domain
 
 import android.os.Parcelable
+import com.pouyaheydari.appupdater.store.R
 import com.pouyaheydari.appupdater.store.domain.stores.AppStore
 import kotlinx.parcelize.Parcelize
 
@@ -15,5 +16,5 @@ import kotlinx.parcelize.Parcelize
 data class StoreListItem(
     val store: AppStore,
     val title: String = "",
-    val icon: Int = 0,
+    val icon: Int = R.drawable.appupdater_ic_cloud,
 ) : Parcelable
