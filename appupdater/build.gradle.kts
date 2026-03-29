@@ -1,4 +1,6 @@
 import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.SourcesJar
 
 plugins {
     alias(libs.plugins.project.androidLibrary)
@@ -13,10 +15,10 @@ android {
 mavenPublishing {
     configure(
         AndroidSingleVariantLibrary(
+            javadocJar = JavadocJar.Empty(),
+            sourcesJar = SourcesJar.Sources(),
             variant = "release",
-            sourcesJar = true,
-            publishJavadocJar = false,
-        )
+        ),
     )
 }
 
