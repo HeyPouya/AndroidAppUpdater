@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://jitpack.io/#HeyPouya/AndroidAppUpdater"><img src="https://jitpack.io/v/HeyPouya/AndroidAppUpdater.svg" alt="JitPack"></a>
+  <a href="https://central.sonatype.com/search?q=com.pouyaheydari.updater"><img src="https://img.shields.io/maven-central/v/com.pouyaheydari.updater/compose" alt="Maven Central"></a>
   <a href="https://android-arsenal.com/details/1/7388"><img src="https://img.shields.io/badge/Android%20Arsenal-Easy%20App%20Updater-brightgreen.svg?style=flat" alt="Android Arsenal"></a>
   <a href="https://android-arsenal.com/api?level=23"><img src="https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat" alt="API 23+"></a>
   <a href="https://app.codacy.com/gh/HeyPouya/AndroidAppUpdater/dashboard"><img src="https://app.codacy.com/project/badge/Grade/7e8f094fd77044b5b26bc6c157bfbbc3" alt="Codacy Badge"></a>
@@ -39,33 +39,19 @@
 
 ## Installation
 
-### Step 1 — Add the JitPack repository
-
-In your **settings.gradle.kts**:
-
-```kotlin
-dependencyResolutionManagement {
-    repositories {
-        maven("https://jitpack.io")
-    }
-}
-```
-
-### Step 2 — Add the dependency
-
-Pick the module that matches your UI toolkit:
+Add the dependency for the module that matches your UI toolkit:
 
 ```kotlin
 dependencies {
     // Jetpack Compose
-    implementation("com.github.HeyPouya.AndroidAppUpdater:compose:latest_version")
+    implementation("com.pouyaheydari.updater:compose:latest_version")
 
     // XML Views / DialogFragment
-    implementation("com.github.HeyPouya.AndroidAppUpdater:main:latest_version")
+    implementation("com.pouyaheydari.updater:main:latest_version")
 }
 ```
 
-> Replace `latest_version` with the latest release tag from [JitPack](https://jitpack.io/#HeyPouya/AndroidAppUpdater).
+> Replace `latest_version` with the latest version from [Maven Central](https://central.sonatype.com/search?q=com.pouyaheydari.updater).
 
 ---
 
@@ -214,53 +200,53 @@ AndroidAppUpdater(dialogData)
 
 ### Fragment `UpdaterDialogData`
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `title` | `String` | `""` | Title shown at the top of the dialog |
-| `description` | `String` | `""` | Description text below the title |
-| `storeList` | `List<StoreListItem>` | `[]` | App stores to show as update options |
-| `directDownloadList` | `List<DirectDownloadListItem>` | `[]` | Direct APK download links |
-| `isForceUpdate` | `Boolean` | `false` | If `true`, the dialog cannot be dismissed |
-| `typeface` | `Typeface?` | `null` | Custom typeface for dialog text |
-| `theme` | `Theme` | `SYSTEM_DEFAULT` | `LIGHT`, `DARK`, or `SYSTEM_DEFAULT` |
-| `errorWhileOpeningStoreCallback` | `((String) -> Unit)?` | `null` | Called with store name if opening fails |
+| Parameter                        | Type                           | Default          | Description                               |
+|----------------------------------|--------------------------------|------------------|-------------------------------------------|
+| `title`                          | `String`                       | `""`             | Title shown at the top of the dialog      |
+| `description`                    | `String`                       | `""`             | Description text below the title          |
+| `storeList`                      | `List<StoreListItem>`          | `[]`             | App stores to show as update options      |
+| `directDownloadList`             | `List<DirectDownloadListItem>` | `[]`             | Direct APK download links                 |
+| `isForceUpdate`                  | `Boolean`                      | `false`          | If `true`, the dialog cannot be dismissed |
+| `typeface`                       | `Typeface?`                    | `null`           | Custom typeface for dialog text           |
+| `theme`                          | `Theme`                        | `SYSTEM_DEFAULT` | `LIGHT`, `DARK`, or `SYSTEM_DEFAULT`      |
+| `errorWhileOpeningStoreCallback` | `((String) -> Unit)?`          | `null`           | Called with store name if opening fails   |
 
 ### Compose `UpdaterDialogData`
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `dialogTitle` | `String` | `""` | Title shown at the top of the dialog |
-| `dialogDescription` | `String` | `""` | Description text below the title |
-| `dividerText` | `String` | `""` | Text on the divider between stores and downloads |
-| `storeList` | `List<StoreListItem>` | `[]` | App stores to show as update options |
-| `directDownloadList` | `List<DirectDownloadListItem>` | `[]` | Direct APK download links |
-| `onDismissRequested` | `() -> Unit` | `{}` | Called when the user dismisses the dialog |
-| `typeface` | `Typeface?` | `null` | Custom typeface for dialog text |
-| `theme` | `Theme` | `SYSTEM_DEFAULT` | `LIGHT`, `DARK`, or `SYSTEM_DEFAULT` |
-| `errorWhileOpeningStoreCallback` | `(String) -> Unit` | `{}` | Called with store name if opening fails |
+| Parameter                        | Type                           | Default          | Description                                      |
+|----------------------------------|--------------------------------|------------------|--------------------------------------------------|
+| `dialogTitle`                    | `String`                       | `""`             | Title shown at the top of the dialog             |
+| `dialogDescription`              | `String`                       | `""`             | Description text below the title                 |
+| `dividerText`                    | `String`                       | `""`             | Text on the divider between stores and downloads |
+| `storeList`                      | `List<StoreListItem>`          | `[]`             | App stores to show as update options             |
+| `directDownloadList`             | `List<DirectDownloadListItem>` | `[]`             | Direct APK download links                        |
+| `onDismissRequested`             | `() -> Unit`                   | `{}`             | Called when the user dismisses the dialog        |
+| `typeface`                       | `Typeface?`                    | `null`           | Custom typeface for dialog text                  |
+| `theme`                          | `Theme`                        | `SYSTEM_DEFAULT` | `LIGHT`, `DARK`, or `SYSTEM_DEFAULT`             |
+| `errorWhileOpeningStoreCallback` | `(String) -> Unit`             | `{}`             | Called with store name if opening fails          |
 
 ---
 
 ## Supported Stores
 
-| Store | Enum Value | Built-in Icon |
-|-------|-----------|---------------|
-| Google Play | `GOOGLE_PLAY` | `appupdater_ic_google_play` |
-| Cafe Bazaar | `CAFE_BAZAAR` | `appupdater_ic_bazar` |
-| Myket | `MYKET` | `appupdater_ic_myket` |
-| Huawei AppGallery | `HUAWEI_APP_GALLERY` | `appupdater_ic_app_gallery` |
-| Samsung Galaxy Store | `SAMSUNG_GALAXY_STORE` | `appupdater_ic_galaxy_store` |
-| Amazon App Store | `AMAZON_APP_STORE` | `appupdater_ic_amazon_app_store` |
-| Aptoide | `APTOIDE` | `appupdater_ic_aptoide` |
-| F-Droid | `FDROID` | `appupdater_ic_fdroid` |
-| Xiaomi GetApps | `MI_GET_APP_STORE` | `appupdater_ic_get_app_store` |
-| OneStore | `ONE_STORE_APP_MARKET` | `appupdater_ic_one_store` |
-| Oppo App Market | `OPPO_APP_MARKET` | `appupdater_ic_oppo_app_market` |
-| Vivo V-AppStore | `V_APP_STORE` | `appupdater_ic_v_app_store` |
-| 9Apps | `NINE_APPS_STORE` | `appupdater_ic_nine_apps` |
-| Tencent App Store | `TENCENT_APPS_STORE` | `appupdater_ic_tencent_app_store` |
-| ZTE App Center | `ZTE_APP_CENTER` | `appupdater_ic_zte_app_center` |
-| Lenovo App Center | `LENOVO_APP_CENTER` | `appupdater_ic_lenovo_app_center` |
+| Store                | Enum Value             | Built-in Icon                     |
+|----------------------|------------------------|-----------------------------------|
+| Google Play          | `GOOGLE_PLAY`          | `appupdater_ic_google_play`       |
+| Cafe Bazaar          | `CAFE_BAZAAR`          | `appupdater_ic_bazar`             |
+| Myket                | `MYKET`                | `appupdater_ic_myket`             |
+| Huawei AppGallery    | `HUAWEI_APP_GALLERY`   | `appupdater_ic_app_gallery`       |
+| Samsung Galaxy Store | `SAMSUNG_GALAXY_STORE` | `appupdater_ic_galaxy_store`      |
+| Amazon App Store     | `AMAZON_APP_STORE`     | `appupdater_ic_amazon_app_store`  |
+| Aptoide              | `APTOIDE`              | `appupdater_ic_aptoide`           |
+| F-Droid              | `FDROID`               | `appupdater_ic_fdroid`            |
+| Xiaomi GetApps       | `MI_GET_APP_STORE`     | `appupdater_ic_get_app_store`     |
+| OneStore             | `ONE_STORE_APP_MARKET` | `appupdater_ic_one_store`         |
+| Oppo App Market      | `OPPO_APP_MARKET`      | `appupdater_ic_oppo_app_market`   |
+| Vivo V-AppStore      | `V_APP_STORE`          | `appupdater_ic_v_app_store`       |
+| 9Apps                | `NINE_APPS_STORE`      | `appupdater_ic_nine_apps`         |
+| Tencent App Store    | `TENCENT_APPS_STORE`   | `appupdater_ic_tencent_app_store` |
+| ZTE App Center       | `ZTE_APP_CENTER`       | `appupdater_ic_zte_app_center`    |
+| Lenovo App Center    | `LENOVO_APP_CENTER`    | `appupdater_ic_lenovo_app_center` |
 
 All icons are bundled with the library. Use them via `R.drawable.appupdater_ic_*`.
 
@@ -321,24 +307,24 @@ AndroidAppUpdater/
 └── app/              # Sample/demo application
 ```
 
-| Module | Artifact | Description |
-|--------|----------|-------------|
-| `:core` | `core` | Theme enum and constants — no Android dependency |
-| `:store` | `store` | All 16 store implementations with built-in icons |
-| `:directdownload` | `directdownload` | Download manager, permissions, APK installation |
-| `:appupdater` | `main` | DialogFragment-based update dialog |
-| `:compose` | `compose` | Jetpack Compose update dialog |
+| Module            | Artifact                                  | Description                                      |
+|-------------------|-------------------------------------------|--------------------------------------------------|
+| `:core`           | `com.pouyaheydari.updater:core`           | Theme enum and constants — no Android dependency |
+| `:store`          | `com.pouyaheydari.updater:store`          | All 16 store implementations with built-in icons |
+| `:directdownload` | `com.pouyaheydari.updater:directdownload` | Download manager, permissions, APK installation  |
+| `:appupdater`     | `com.pouyaheydari.updater:main`           | DialogFragment-based update dialog               |
+| `:compose`        | `com.pouyaheydari.updater:compose`        | Jetpack Compose update dialog                    |
 
 ---
 
 ## Requirements
 
-| Requirement | Value |
-|------------|-------|
-| Min SDK | 23 (Android 6.0) |
-| Compile SDK | 36 |
-| Kotlin | 2.3+ |
-| Java | 17 |
+| Requirement | Value            |
+|-------------|------------------|
+| Min SDK     | 23 (Android 6.0) |
+| Compile SDK | 36               |
+| Kotlin      | 2.3+             |
+| Java        | 17               |
 
 ---
 
