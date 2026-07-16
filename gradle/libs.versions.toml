@@ -22,7 +22,7 @@ mockito = "5.23.0"
 mockitoKotlin = "6.3.0"
 roboelectric = "4.16.1"
 turbine = "1.2.1"
-uiautomator = "2.3.0"
+uiautomator = "2.4.0"
 mavenPublish = "0.36.0"
 
 [libraries]
